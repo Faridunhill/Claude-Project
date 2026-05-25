@@ -1,9 +1,31 @@
-import { NextStudio } from 'next-sanity/studio'
-import config from '@/sanity.config'
+'use client'
 
-export { metadata, viewport } from 'next-sanity/studio'
+import dynamic from 'next/dynamic'
 
 const isConfigured = !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+
+// Only loaded client-side, never during SSR — prevents build errors when
+// NEXT_PUBLIC_SANITY_PROJECT_ID is not set
+const Studio = dynamic(() => import('@/components/studio/SanityStudio'), {
+  ssr: false,
+  loading: () => (
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: '#101010',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#c9a84c',
+        fontFamily: 'Georgia, serif',
+        zIndex: 9999,
+      }}
+    >
+      Loading Studio…
+    </div>
+  ),
+})
 
 export default function StudioPage() {
   if (!isConfigured) {
@@ -30,8 +52,8 @@ export default function StudioPage() {
             Faridunhill CMS
           </h1>
           <p style={{ color: '#a08060', marginBottom: '2rem', lineHeight: 1.7 }}>
-            Sanity is not yet configured. Add the following environment
-            variables in your Vercel project settings, then redeploy.
+            Sanity is not yet configured. Add these environment variables in your
+            Vercel project settings, then redeploy.
           </p>
           <div
             style={{
@@ -42,28 +64,20 @@ export default function StudioPage() {
               textAlign: 'left',
               fontFamily: 'monospace',
               fontSize: '0.85rem',
-              lineHeight: 2,
+              lineHeight: 2.2,
               color: '#c9a84c',
               marginBottom: '2rem',
             }}
           >
-            <div>NEXT_PUBLIC_SANITY_PROJECT_ID=<span style={{ color: '#888' }}>your_project_id</span></div>
-            <div>NEXT_PUBLIC_SANITY_DATASET=<span style={{ color: '#888' }}>production</span></div>
-            <div>SANITY_API_TOKEN=<span style={{ color: '#888' }}>your_api_token</span></div>
+            <div>NEXT_PUBLIC_SANITY_PROJECT_ID=<span style={{ color: '#666' }}>your_project_id</span></div>
+            <div>NEXT_PUBLIC_SANITY_DATASET=<span style={{ color: '#666' }}>production</span></div>
+            <div>SANITY_API_TOKEN=<span style={{ color: '#666' }}>your_api_token</span></div>
           </div>
-          <ol
-            style={{
-              textAlign: 'left',
-              color: '#888',
-              fontSize: '0.9rem',
-              lineHeight: 2,
-              paddingLeft: '1.25rem',
-            }}
-          >
+          <ol style={{ textAlign: 'left', color: '#888', fontSize: '0.9rem', lineHeight: 2.2, paddingLeft: '1.25rem' }}>
             <li>Go to <strong style={{ color: '#c9a84c' }}>sanity.io</strong> → create a free account &amp; project</li>
             <li>Copy your <strong style={{ color: '#c9a84c' }}>Project ID</strong> from the Manage dashboard</li>
-            <li>Create an <strong style={{ color: '#c9a84c' }}>API token</strong> (Editor role) under API → Tokens</li>
-            <li>Add all three env vars in <strong style={{ color: '#c9a84c' }}>Vercel → Settings → Environment Variables</strong></li>
+            <li>Create an <strong style={{ color: '#c9a84c' }}>API token</strong> with Editor role under API → Tokens</li>
+            <li>Add all three vars in <strong style={{ color: '#c9a84c' }}>Vercel → Settings → Environment Variables</strong></li>
             <li>Redeploy — then return to <strong style={{ color: '#c9a84c' }}>/studio</strong></li>
           </ol>
         </div>
@@ -71,5 +85,5 @@ export default function StudioPage() {
     )
   }
 
-  return <NextStudio config={config} />
+  return <Studio />
 }
