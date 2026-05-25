@@ -1,14 +1,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Logo from '@/components/ui/Logo'
 
 const STORAGE_KEY = 'fh-age-verified'
 
 export default function AgeGate() {
+  const pathname = usePathname()
   const [show, setShow] = useState(false)
 
   useEffect(() => {
+    if (pathname?.startsWith('/studio')) return
     try {
       if (!sessionStorage.getItem(STORAGE_KEY)) {
         setShow(true)
@@ -17,7 +20,7 @@ export default function AgeGate() {
       // sessionStorage unavailable (private browsing edge case) — show gate
       setShow(true)
     }
-  }, [])
+  }, [pathname])
 
   function handleConfirm() {
     try {

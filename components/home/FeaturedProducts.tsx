@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { getFeaturedProducts } from '@/lib/products'
 import AddToCartButton from '@/components/ui/AddToCartButton'
 
-export default function FeaturedProducts() {
-  const products = getFeaturedProducts().slice(0, 8)
+export default async function FeaturedProducts() {
+  const products = (await getFeaturedProducts()).slice(0, 8)
 
   return (
     <section className="bg-leather-texture py-24">

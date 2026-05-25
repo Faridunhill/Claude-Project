@@ -9,8 +9,8 @@ export const metadata: Metadata = {
     'Pipe culture, tobacco reviews, collector\'s notes, and the literature of the slow smoke. Published daily by the editors of Faridunhill.',
 }
 
-export default function BlogIndexPage() {
-  const posts = getAllPosts()
+export default async function BlogIndexPage() {
+  const posts = await getAllPosts()
   const [featured, ...rest] = posts
 
   return (

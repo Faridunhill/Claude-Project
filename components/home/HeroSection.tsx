@@ -34,7 +34,7 @@ export default function HeroSection() {
             {/* Pre-headline ornament */}
             <div className="flex items-center gap-3 mb-8">
               <span className="h-px w-12 bg-gold/60" />
-              <span className="font-fell italic text-gold text-sm tracking-widest">Est. 2015 · London</span>
+              <span className="font-fell italic text-gold text-sm tracking-widest">Fine Pipes &amp; Tobaccos</span>
               <span className="h-px w-12 bg-gold/60" />
             </div>
 

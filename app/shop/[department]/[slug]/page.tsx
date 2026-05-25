@@ -10,7 +10,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = getProductBySlug(params.slug)
+  const product = await getProductBySlug(params.slug)
   if (!product) return {}
   return {
     title: product.name,
@@ -24,7 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  return getAllProducts().map((p) => ({
+  const products = await getAllProducts()
+  return products.map((p) => ({
     department: p.department,
     slug: p.slug,
   }))
@@ -52,11 +53,11 @@ function StarRating({ rating, count }: { rating: number; count: number }) {
   )
 }
 
-export default function ProductPage({ params }: Props) {
-  const product = getProductBySlug(params.slug)
+export default async function ProductPage({ params }: Props) {
+  const product = await getProductBySlug(params.slug)
   if (!product || product.department !== params.department) notFound()
 
-  const related = getRelatedProducts(product, 4)
+  const related = await getRelatedProducts(product, 4)
   const deptMeta = departmentMeta[product.department]
 
   const jsonLd = {

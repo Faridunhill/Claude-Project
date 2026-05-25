@@ -2,8 +2,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getRecentPosts } from '@/lib/mdx'
 
-export default function BlogPreview() {
-  const posts = getRecentPosts(3)
+export default async function BlogPreview() {
+  const posts = await getRecentPosts(3)
 
   return (
     <section className="bg-wood-texture py-24">

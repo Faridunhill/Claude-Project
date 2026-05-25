@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { sanityClient, hasSanity } from '@/lib/sanity'
 
 const BLOG_DIR = path.join(process.cwd(), 'content/blog')
 
@@ -20,7 +21,40 @@ export interface Post extends PostMeta {
   content: string
 }
 
-export function getAllPostSlugs(): string[] {
+const POSTS_QUERY = `*[_type == "post"] | order(publishedAt desc) {
+  "slug": slug.current,
+  title,
+  author,
+  "date": publishedAt,
+  category,
+  excerpt,
+  "image": mainImage.asset->url,
+  tags,
+  "content": body
+}`
+
+function calcReadingTime(text: string): string {
+  const minutes = Math.ceil(text.split(/\s+/).length / 238)
+  return `${minutes} min read`
+}
+
+async function fetchSanityPosts(): Promise<Post[] | null> {
+  if (!hasSanity || !sanityClient) return null
+  try {
+    const docs = await sanityClient.fetch<Post[]>(POSTS_QUERY)
+    if (docs && docs.length > 0) {
+      return docs.map((doc) => ({
+        ...doc,
+        readingTime: calcReadingTime(doc.content || ''),
+      }))
+    }
+  } catch (err) {
+    console.error('Sanity post fetch failed, using MDX fallback:', err)
+  }
+  return null
+}
+
+function getMdxSlugs(): string[] {
   if (!fs.existsSync(BLOG_DIR)) return []
   return fs
     .readdirSync(BLOG_DIR)
@@ -28,7 +62,7 @@ export function getAllPostSlugs(): string[] {
     .map((f) => f.replace(/\.(mdx|md)$/, ''))
 }
 
-export function getPostBySlug(slug: string): Post | null {
+function getMdxPost(slug: string): Post | null {
   const mdxPath = path.join(BLOG_DIR, `${slug}.mdx`)
   const mdPath = path.join(BLOG_DIR, `${slug}.md`)
   const filePath = fs.existsSync(mdxPath) ? mdxPath : fs.existsSync(mdPath) ? mdPath : null
@@ -36,8 +70,6 @@ export function getPostBySlug(slug: string): Post | null {
 
   const raw = fs.readFileSync(filePath, 'utf8')
   const { data, content } = matter(raw)
-  const wordCount = content.split(/\s+/).length
-  const minutes = Math.ceil(wordCount / 238)
 
   return {
     slug,
@@ -48,18 +80,41 @@ export function getPostBySlug(slug: string): Post | null {
     excerpt: data.excerpt || '',
     image: data.image || 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=85',
     tags: data.tags || [],
-    readingTime: `${minutes} min read`,
+    readingTime: calcReadingTime(content),
     content,
   }
 }
 
-export function getAllPosts(): PostMeta[] {
-  return getAllPostSlugs()
-    .map((slug) => getPostBySlug(slug))
+export async function getAllPostSlugs(): Promise<string[]> {
+  if (hasSanity && sanityClient) {
+    try {
+      const slugs = await sanityClient.fetch<string[]>(
+        `*[_type == "post"]{ "slug": slug.current }.slug`
+      )
+      if (slugs && slugs.length > 0) return slugs
+    } catch {}
+  }
+  return getMdxSlugs()
+}
+
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  const sanityPosts = await fetchSanityPosts()
+  if (sanityPosts) {
+    return sanityPosts.find((p) => p.slug === slug) ?? null
+  }
+  return getMdxPost(slug)
+}
+
+export async function getAllPosts(): Promise<PostMeta[]> {
+  const sanityPosts = await fetchSanityPosts()
+  if (sanityPosts) return sanityPosts
+
+  return getMdxSlugs()
+    .map(getMdxPost)
     .filter((p): p is Post => p !== null)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
-export function getRecentPosts(limit = 3): PostMeta[] {
-  return getAllPosts().slice(0, limit)
+export async function getRecentPosts(limit = 3): Promise<PostMeta[]> {
+  return (await getAllPosts()).slice(0, limit)
 }

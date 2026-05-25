@@ -1,3 +1,4 @@
+import { sanityClient, hasSanity } from '@/lib/sanity'
 import pipesData from '@/data/products/pipes.json'
 import tobaccoData from '@/data/products/tobacco.json'
 import cigarsData from '@/data/products/cigars.json'
@@ -33,7 +34,7 @@ export interface Product {
   contents?: string[]
 }
 
-const allProducts: Product[] = [
+const jsonProducts: Product[] = [
   ...pipesData,
   ...tobaccoData,
   ...cigarsData,
@@ -45,24 +46,99 @@ const allProducts: Product[] = [
   ...lightersData,
 ] as Product[]
 
-export function getAllProducts(): Product[] {
-  return allProducts
+const PRODUCTS_QUERY = `*[_type == "product"] {
+  "id": _id,
+  name,
+  brand,
+  "slug": slug.current,
+  department,
+  category,
+  price,
+  originalPrice,
+  sku,
+  "images": images[].asset->url,
+  featured,
+  inStock,
+  rating,
+  reviewCount,
+  description,
+  tags,
+  "specs": specs[]{key, value},
+  size,
+  vitola,
+  origin,
+  wrapper,
+  contents
+}`
+
+interface SanityProduct {
+  id: string
+  name: string
+  brand: string
+  slug: string
+  department: string
+  category: string
+  price: number
+  originalPrice?: number
+  sku: string
+  images: string[]
+  featured: boolean
+  inStock: boolean
+  rating: number
+  reviewCount: number
+  description: string
+  tags: string[]
+  specs?: Array<{ key: string; value: string }>
+  size?: string
+  vitola?: string
+  origin?: string
+  wrapper?: string
+  contents?: string[]
 }
 
-export function getFeaturedProducts(): Product[] {
-  return allProducts.filter((p) => p.featured && p.inStock)
+function mapSanityProduct(doc: SanityProduct): Product {
+  return {
+    ...doc,
+    originalPrice: doc.originalPrice ?? null,
+    specs: doc.specs
+      ? Object.fromEntries(doc.specs.map((s) => [s.key, s.value]))
+      : undefined,
+  }
 }
 
-export function getProductsByDepartment(department: string): Product[] {
-  return allProducts.filter((p) => p.department === department)
+async function fetchFromSanity(): Promise<Product[] | null> {
+  if (!hasSanity || !sanityClient) return null
+  try {
+    const docs = await sanityClient.fetch<SanityProduct[]>(PRODUCTS_QUERY)
+    if (docs && docs.length > 0) return docs.map(mapSanityProduct)
+  } catch (err) {
+    console.error('Sanity product fetch failed, using JSON fallback:', err)
+  }
+  return null
 }
 
-export function getProductBySlug(slug: string): Product | undefined {
-  return allProducts.find((p) => p.slug === slug)
+export async function getAllProducts(): Promise<Product[]> {
+  return (await fetchFromSanity()) ?? jsonProducts
 }
 
-export function getRelatedProducts(product: Product, limit = 4): Product[] {
-  return allProducts
+export async function getFeaturedProducts(): Promise<Product[]> {
+  const products = (await fetchFromSanity()) ?? jsonProducts
+  return products.filter((p) => p.featured && p.inStock)
+}
+
+export async function getProductsByDepartment(department: string): Promise<Product[]> {
+  const products = (await fetchFromSanity()) ?? jsonProducts
+  return products.filter((p) => p.department === department)
+}
+
+export async function getProductBySlug(slug: string): Promise<Product | undefined> {
+  const products = (await fetchFromSanity()) ?? jsonProducts
+  return products.find((p) => p.slug === slug)
+}
+
+export async function getRelatedProducts(product: Product, limit = 4): Promise<Product[]> {
+  const products = (await fetchFromSanity()) ?? jsonProducts
+  return products
     .filter(
       (p) =>
         p.id !== product.id &&

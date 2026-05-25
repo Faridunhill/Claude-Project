@@ -22,11 +22,11 @@ export async function generateStaticParams() {
   return Object.keys(departmentMeta).map((d) => ({ department: d }))
 }
 
-export default function DepartmentPage({ params }: Props) {
+export default async function DepartmentPage({ params }: Props) {
   const meta = departmentMeta[params.department]
   if (!meta) notFound()
 
-  const products = getProductsByDepartment(params.department)
+  const products = await getProductsByDepartment(params.department)
 
   return (
     <div className="min-h-screen bg-mahogany">

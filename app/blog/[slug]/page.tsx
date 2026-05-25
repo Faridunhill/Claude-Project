@@ -10,11 +10,12 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }))
+  const slugs = await getAllPostSlugs()
+  return slugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getPostBySlug(params.slug)
+  const post = await getPostBySlug(params.slug)
   if (!post) return {}
   return {
     title: post.title,
@@ -36,11 +37,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = getPostBySlug(params.slug)
+export default async function BlogPostPage({ params }: Props) {
+  const post = await getPostBySlug(params.slug)
   if (!post) notFound()
 
-  const allPosts = getAllPosts()
+  const allPosts = await getAllPosts()
   const related = allPosts.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 3)
 
   const jsonLd = {

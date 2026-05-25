@@ -18,6 +18,7 @@ export default function Logo({ size = 'md', variant = 'light' }: LogoProps) {
   const gold = variant === 'light' ? '#C9A84C' : '#A8873A'
   const text = variant === 'light' ? '#F5EDD6' : '#2C1810'
   const subtext = variant === 'light' ? '#C9A84C' : '#8B6B4A'
+  const dark = '#1A0E09'
 
   return (
     <Link href="/" aria-label="Faridunhill — Return to homepage">
@@ -37,55 +38,73 @@ export default function Logo({ size = 'md', variant = 'light' }: LogoProps) {
         <rect x="4" y="4" width="272" height="88" rx="2" stroke={gold} strokeWidth="0.3" strokeOpacity="0.2" />
 
         {/* Corner flourishes */}
-        <text x="6" y="16" fill={gold} fontSize="10" fontFamily="serif" opacity="0.7">✦</text>
-        <text x="262" y="16" fill={gold} fontSize="10" fontFamily="serif" opacity="0.7">✦</text>
-        <text x="6" y="90" fill={gold} fontSize="10" fontFamily="serif" opacity="0.7">✦</text>
-        <text x="262" y="90" fill={gold} fontSize="10" fontFamily="serif" opacity="0.7">✦</text>
+        <text x="7" y="18" fill={gold} fontSize="9" fontFamily="serif" opacity="0.7">✦</text>
+        <text x="262" y="18" fill={gold} fontSize="9" fontFamily="serif" opacity="0.7">✦</text>
+        <text x="7" y="90" fill={gold} fontSize="9" fontFamily="serif" opacity="0.7">✦</text>
+        <text x="262" y="90" fill={gold} fontSize="9" fontFamily="serif" opacity="0.7">✦</text>
 
-        {/* Crossed pipes illustration */}
-        <g transform="translate(16, 20)">
-          {/* Pipe 1 — angled left */}
-          <g transform="rotate(-20, 28, 28)">
-            {/* Bowl */}
-            <rect x="8" y="18" width="14" height="18" rx="2" fill={gold} opacity="0.9" />
-            <rect x="9" y="19" width="12" height="14" rx="1" fill="#2C1810" opacity="0.6" />
-            {/* Shank */}
-            <rect x="22" y="24" width="24" height="5" rx="2.5" fill={gold} opacity="0.85" />
-            {/* Mouthpiece */}
-            <ellipse cx="47" cy="26.5" rx="3" ry="2" fill={gold} opacity="0.7" />
-            {/* Bowl top rim */}
-            <rect x="6" y="16" width="18" height="4" rx="2" fill={gold} opacity="0.7" />
-            {/* Smoke wisp */}
-            <path d="M15 16 Q13 10 15 6 Q17 2 15 0" stroke={gold} strokeWidth="1" fill="none" opacity="0.4" strokeLinecap="round" />
-          </g>
+        {/* ── TOBACCO PIPE ILLUSTRATION ── */}
+        <g transform="translate(14, 8)">
+          {/* Bowl outer shell */}
+          <path
+            d="M 0 22 L 0 64 Q 0 72 8 72 L 32 72 Q 40 72 40 64 L 40 22 Z"
+            fill={gold}
+            opacity="0.9"
+          />
+          {/* Bowl inner chamber */}
+          <path
+            d="M 4 24 L 4 62 Q 4 68 10 68 L 30 68 Q 36 68 36 62 L 36 24 Z"
+            fill={dark}
+            opacity="0.9"
+          />
+          {/* Top rim */}
+          <rect x="-2" y="16" width="44" height="8" rx="4" fill={gold} opacity="0.95" />
 
-          {/* Pipe 2 — angled right */}
-          <g transform="rotate(20, 28, 28)">
-            <rect x="8" y="18" width="14" height="18" rx="2" fill={gold} opacity="0.7" />
-            <rect x="9" y="19" width="12" height="14" rx="1" fill="#2C1810" opacity="0.6" />
-            <rect x="22" y="24" width="24" height="5" rx="2.5" fill={gold} opacity="0.65" />
-            <ellipse cx="47" cy="26.5" rx="3" ry="2" fill={gold} opacity="0.5" />
-            <rect x="6" y="16" width="18" height="4" rx="2" fill={gold} opacity="0.55" />
-          </g>
+          {/* Shank (horizontal tube from right side of bowl) */}
+          <rect x="40" y="46" width="68" height="10" rx="5" fill={gold} opacity="0.9" />
+
+          {/* Mouthpiece / bit (tapered end) */}
+          <path d="M 108 46 L 124 51 L 108 56 Z" fill={gold} opacity="0.85" />
+
+          {/* Smoke wisp 1 — curves left then right */}
+          <path
+            d="M 10 16 C 2 8 18 4 10 -2"
+            stroke={gold}
+            strokeWidth="1.4"
+            fill="none"
+            opacity="0.55"
+            strokeLinecap="round"
+          />
+          {/* Smoke wisp 2 — curves right then left */}
+          <path
+            d="M 20 16 C 28 8 12 4 20 -2"
+            stroke={gold}
+            strokeWidth="1.4"
+            fill="none"
+            opacity="0.42"
+            strokeLinecap="round"
+          />
+          {/* Smoke wisp 3 — gentle right curve */}
+          <path
+            d="M 30 16 C 36 10 26 6 32 0"
+            stroke={gold}
+            strokeWidth="1"
+            fill="none"
+            opacity="0.3"
+            strokeLinecap="round"
+          />
         </g>
 
-        {/* Ribbon / banner */}
-        <path
-          d="M72 42 L76 38 L272 38 L268 42 L272 46 L76 46 L72 42 Z"
-          fill={gold}
-          opacity="0.15"
-          stroke={gold}
-          strokeWidth="0.5"
-          strokeOpacity="0.5"
-        />
+        {/* Vertical divider between icon and text */}
+        <line x1="152" y1="16" x2="152" y2="80" stroke={gold} strokeWidth="0.5" strokeOpacity="0.25" />
 
-        {/* Main logotype */}
+        {/* Main logotype — centered in right panel (x 152–278 → center 215) */}
         <text
-          x="175"
+          x="215"
           y="52"
           textAnchor="middle"
           fill={text}
-          fontSize="22"
+          fontSize="21"
           fontFamily="'Playfair Display', 'Georgia', serif"
           fontWeight="700"
           letterSpacing="3"
@@ -93,25 +112,25 @@ export default function Logo({ size = 'md', variant = 'light' }: LogoProps) {
           FARIDUNHILL
         </text>
 
-        {/* Subtitle line */}
+        {/* Subtitle */}
         <text
-          x="175"
+          x="215"
           y="66"
           textAnchor="middle"
           fill={subtext}
-          fontSize="7.5"
+          fontSize="7"
           fontFamily="'IM Fell English', 'Georgia', serif"
           letterSpacing="4"
           fontStyle="italic"
         >
-          FINE TOBACCONISTS · EST. 2015
+          FINE TOBACCONISTS
         </text>
 
         {/* Decorative rule below subtitle */}
-        <line x1="100" y1="72" x2="250" y2="72" stroke={gold} strokeWidth="0.5" opacity="0.4" />
-        <circle cx="175" cy="72" r="2" fill={gold} opacity="0.4" />
-        <circle cx="145" cy="72" r="1" fill={gold} opacity="0.3" />
-        <circle cx="205" cy="72" r="1" fill={gold} opacity="0.3" />
+        <line x1="162" y1="72" x2="268" y2="72" stroke={gold} strokeWidth="0.5" opacity="0.4" />
+        <circle cx="215" cy="72" r="2" fill={gold} opacity="0.4" />
+        <circle cx="190" cy="72" r="1" fill={gold} opacity="0.3" />
+        <circle cx="240" cy="72" r="1" fill={gold} opacity="0.3" />
       </svg>
     </Link>
   )
