@@ -1,0 +1,173 @@
+[
+  {
+    "id": "pipe-001",
+    "name": "Dunhill Shell Briar Billiard",
+    "brand": "Dunhill",
+    "slug": "dunhill-shell-briar-billiard",
+    "department": "tobacco-pipes",
+    "category": "Briar Pipes",
+    "price": 385.00,
+    "originalPrice": null,
+    "sku": "FH-PIPE-001",
+    "images": [
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85"
+    ],
+    "featured": true,
+    "inStock": true,
+    "rating": 4.9,
+    "reviewCount": 34,
+    "description": "The Shell Briar finish is perhaps Dunhill's greatest contribution to the art of the pipe. Sandblasted to reveal the grain beneath — every ring of the briar laid bare — this billiard shape has been the companion of thinkers, writers, and statesmen for over a century. The vulcanite stem fits the teeth as naturally as a word fits a sentence. Smoke it slowly; it rewards patience above all things.",
+    "specs": {
+      "shape": "Billiard",
+      "material": "Briar",
+      "finish": "Shell (Sandblast)",
+      "stem": "Vulcanite",
+      "length": "5.75 inches",
+      "bowlDepth": "1.5 inches",
+      "weight": "1.8 oz"
+    },
+    "tags": ["briar", "billiard", "dunhill", "english", "premium"]
+  },
+  {
+    "id": "pipe-002",
+    "name": "Savinelli Autograph Freehand",
+    "brand": "Savinelli",
+    "slug": "savinelli-autograph-freehand",
+    "department": "tobacco-pipes",
+    "category": "Briar Pipes",
+    "price": 520.00,
+    "originalPrice": null,
+    "sku": "FH-PIPE-002",
+    "images": [
+      "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=800&q=85"
+    ],
+    "featured": true,
+    "inStock": true,
+    "rating": 4.8,
+    "reviewCount": 18,
+    "description": "Savinelli's Autograph series represents the peak of Italian pipe-making craft — each pipe carved by hand by a single artisan who signs the shank. The freehand shape is a collaboration between man and material: the carver follows the grain, and the pipe tells him where to go. No two are alike. Finished in a deep chestnut stain that only deepens with age.",
+    "specs": {
+      "shape": "Freehand",
+      "material": "Briar",
+      "finish": "Smooth Chestnut",
+      "stem": "Acrylic",
+      "length": "Variable",
+      "bowlDepth": "1.6 inches",
+      "weight": "2.1 oz"
+    },
+    "tags": ["briar", "freehand", "savinelli", "italian", "artisan", "premium"]
+  },
+  {
+    "id": "pipe-003",
+    "name": "Missouri Meerschaum Country Gentleman",
+    "brand": "Missouri Meerschaum",
+    "slug": "missouri-meerschaum-country-gentleman",
+    "department": "tobacco-pipes",
+    "category": "Corncob",
+    "price": 12.95,
+    "originalPrice": null,
+    "sku": "FH-PIPE-003",
+    "images": [
+      "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=800&q=85"
+    ],
+    "featured": false,
+    "inStock": true,
+    "rating": 4.7,
+    "reviewCount": 142,
+    "description": "Mark Twain smoked one. Einstein smoked one. The Missouri Meerschaum corncob pipe is the great democratiser of the tobacco world — it smokes sweet and cool from the very first bowl, it needs no break-in, and it improves with every smoke. The Country Gentleman's long shank keeps the smoke cool. Do not let its modest price fool you; this is one of the finest smoking instruments made.",
+    "specs": {
+      "shape": "Billiard",
+      "material": "Corncob",
+      "finish": "Natural",
+      "stem": "Hardwood",
+      "length": "6.5 inches",
+      "weight": "0.9 oz"
+    },
+    "tags": ["corncob", "beginner", "american", "classic", "value"]
+  },
+  {
+    "id": "pipe-004",
+    "name": "White Meerschaum Sultan Hand-Carved",
+    "brand": "Faridunhill House",
+    "slug": "white-meerschaum-sultan-carved",
+    "department": "tobacco-pipes",
+    "category": "Meerschaum",
+    "price": 245.00,
+    "originalPrice": 290.00,
+    "sku": "FH-PIPE-004",
+    "images": [
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85"
+    ],
+    "featured": true,
+    "inStock": true,
+    "rating": 4.9,
+    "reviewCount": 27,
+    "description": "Carved from a single block of white Turkish meerschaum by craftsmen in Eskişehir — the only city on earth where this mineral is still worked by hand. The Sultan shape flares from a narrow base into a wide, generous bowl, carved with a relief of vines and leaves that will slowly disappear beneath a patina of amber gold as the pipe colours with use. Each one is unique; the carver signs the bottom.",
+    "specs": {
+      "shape": "Sultan",
+      "material": "Block Meerschaum",
+      "finish": "Hand-Carved Relief",
+      "stem": "Amber Acrylic",
+      "length": "5.5 inches",
+      "bowlDepth": "1.7 inches",
+      "weight": "1.5 oz"
+    },
+    "tags": ["meerschaum", "carved", "turkish", "artisan", "collectible"]
+  },
+  {
+    "id": "pipe-005",
+    "name": "Château Latoque Estate Billiard",
+    "brand": "Estate Collection",
+    "slug": "chateau-latoque-estate-billiard",
+    "department": "tobacco-pipes",
+    "category": "Estate Pipes",
+    "price": 175.00,
+    "originalPrice": null,
+    "sku": "FH-PIPE-005",
+    "images": [
+      "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=800&q=85"
+    ],
+    "featured": false,
+    "inStock": true,
+    "rating": 4.6,
+    "reviewCount": 11,
+    "description": "From our estate collection — this French billiard was made in Saint-Claude, likely in the late 1970s, judging by the stamping and stem style. Fully reconditioned by our restoration specialist: bowl reamed, stem polished, shank cleaned and deodorised. It smokes ghost-free. The burl grain across the bowl is exceptional. Estate pipes carry history; this one has earned its patina.",
+    "specs": {
+      "shape": "Billiard",
+      "material": "Briar",
+      "finish": "Smooth, Restored",
+      "stem": "Vulcanite, Polished",
+      "era": "c. 1975–1982",
+      "origin": "Saint-Claude, France"
+    },
+    "tags": ["estate", "briar", "french", "vintage", "restored"]
+  },
+  {
+    "id": "pipe-006",
+    "name": "Peterson System Standard Churchwarden",
+    "brand": "Peterson",
+    "slug": "peterson-system-standard-churchwarden",
+    "department": "tobacco-pipes",
+    "category": "Churchwarden",
+    "price": 145.00,
+    "originalPrice": null,
+    "sku": "FH-PIPE-006",
+    "images": [
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85"
+    ],
+    "featured": true,
+    "inStock": true,
+    "rating": 4.8,
+    "reviewCount": 56,
+    "description": "The churchwarden's long stem cools the smoke to the temperature of a gentle summer evening and keeps the bowl at a comfortable distance from the eye — useful, some say, for stargazing or reading. Peterson's System design adds their patented moisture reservoir in the shank, making this among the driest-smoking long pipes available. The P-Lip mouthpiece is an acquired taste that quickly becomes a preference.",
+    "specs": {
+      "shape": "Churchwarden",
+      "material": "Briar",
+      "finish": "Smooth Russet",
+      "stem": "Vulcanite P-Lip",
+      "length": "12 inches",
+      "system": "Peterson System (reservoir)"
+    },
+    "tags": ["churchwarden", "peterson", "irish", "long", "system"]
+  }
+]

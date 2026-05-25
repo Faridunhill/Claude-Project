@@ -1,0 +1,98 @@
+[
+  {
+    "id": "cig-001",
+    "name": "Arturo Fuente Hemingway Short Story",
+    "brand": "Arturo Fuente",
+    "slug": "arturo-fuente-hemingway-short-story",
+    "department": "cigars",
+    "category": "Premium Hand-Rolled",
+    "price": 16.50,
+    "originalPrice": null,
+    "sku": "FH-CIG-001",
+    "images": [
+      "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800&q=85"
+    ],
+    "featured": true,
+    "inStock": true,
+    "rating": 4.9,
+    "reviewCount": 78,
+    "vitola": "Perfecto",
+    "size": "4 inches × 49 ring gauge",
+    "origin": "Dominican Republic",
+    "wrapper": "Cameroon",
+    "description": "The Short Story is the smallest of the Hemingway series, but what it lacks in length it more than compensates in concentration of flavour. The tapered perfecto shape means every draw is slightly different — the closed foot opens slowly as the smoke develops, moving through cedar, cream, and a gentle earthiness. Arturo Fuente's Cameroon wrapper is among the most sought-after in the world.",
+    "tags": ["fuente", "hemingway", "dominican", "cameroon", "perfecto", "premium"]
+  },
+  {
+    "id": "cig-002",
+    "name": "Padron 1964 Anniversary Robusto Natural",
+    "brand": "Padron",
+    "slug": "padron-1964-anniversary-robusto",
+    "department": "cigars",
+    "category": "Premium Hand-Rolled",
+    "price": 22.00,
+    "originalPrice": null,
+    "sku": "FH-CIG-002",
+    "images": [
+      "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800&q=85"
+    ],
+    "featured": true,
+    "inStock": true,
+    "rating": 4.95,
+    "reviewCount": 112,
+    "vitola": "Robusto",
+    "size": "5 inches × 50 ring gauge",
+    "origin": "Nicaragua",
+    "wrapper": "Sun-Grown Natural",
+    "description": "The 1964 Anniversary series was created to honour Padron's founding year, and it has spent the decades since earning every accolade the cigar world has to offer. The Nicaraguan puro construction — all-Nicaraguan filler, binder, and wrapper — produces a richness and consistency that is almost uncanny: chocolate, espresso, nuts, and earth in a balance that holds from first light to final inch.",
+    "tags": ["padron", "nicaraguan", "puro", "robusto", "full-body", "award-winning"]
+  },
+  {
+    "id": "cig-003",
+    "name": "Cohiba Siglo II (Box of 25)",
+    "brand": "Cohiba",
+    "slug": "cohiba-siglo-ii-box-25",
+    "department": "cigars",
+    "category": "Premium Hand-Rolled",
+    "price": 485.00,
+    "originalPrice": null,
+    "sku": "FH-CIG-003",
+    "images": [
+      "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800&q=85"
+    ],
+    "featured": false,
+    "inStock": true,
+    "rating": 4.9,
+    "reviewCount": 29,
+    "vitola": "Corona",
+    "size": "5 inches × 42 ring gauge",
+    "origin": "Cuba",
+    "wrapper": "Cuban Colorado",
+    "description": "Cohiba was originally created for Fidel Castro's personal use in 1966, and the Siglo series — introduced for the quincentenary of Columbus's Americas landing — represents the brand at its most refined. The Siglo II is the ideal format: a slim corona that smokes for a pleasant hour, with the creamy, cedar-forward character of the best Vuelta Abajo leaf. Sold by the box; a purchase for the serious collector.",
+    "tags": ["cohiba", "cuban", "habano", "corona", "collectible", "premium", "box"]
+  },
+  {
+    "id": "cig-004",
+    "name": "Rocky Patel Vintage 1990 Toro Sampler (5-pack)",
+    "brand": "Rocky Patel",
+    "slug": "rocky-patel-vintage-1990-sampler",
+    "department": "cigars",
+    "category": "Samplers",
+    "price": 58.00,
+    "originalPrice": 72.00,
+    "sku": "FH-CIG-004",
+    "images": [
+      "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800&q=85"
+    ],
+    "featured": true,
+    "inStock": true,
+    "rating": 4.7,
+    "reviewCount": 44,
+    "vitola": "Toro",
+    "size": "6 inches × 52 ring gauge",
+    "origin": "Honduras",
+    "wrapper": "Ecuadorian Connecticut",
+    "description": "Rocky Patel's Vintage 1990 uses aged Honduran and Nicaraguan filler leaf and a silky Ecuadorian Connecticut wrapper to produce a medium-bodied smoke that is smooth enough for the newcomer but complex enough for the veteran. Five cigars in a cedar-lined sampler box make this an excellent introduction or gift. The mild-to-medium body makes it an ideal companion from mid-afternoon onwards.",
+    "tags": ["rocky patel", "sampler", "honduran", "medium-body", "gift", "connecticut"]
+  }
+]

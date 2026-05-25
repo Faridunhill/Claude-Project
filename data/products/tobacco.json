@@ -1,0 +1,107 @@
+[
+  {
+    "id": "tob-001",
+    "name": "Samuel Gawith Full Virginia Flake",
+    "brand": "Samuel Gawith",
+    "slug": "samuel-gawith-full-virginia-flake",
+    "department": "pipe-tobacco",
+    "category": "Virginia Blends",
+    "price": 18.95,
+    "originalPrice": null,
+    "sku": "FH-TOB-001",
+    "images": [
+      "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800&q=85"
+    ],
+    "featured": true,
+    "inStock": true,
+    "rating": 4.9,
+    "reviewCount": 189,
+    "size": "1.75 oz",
+    "description": "Samuel Gawith have been making tobacco in Kendal since 1792, and Full Virginia Flake is their masterwork — pressed bright Virginia leaf, slow-aged and sliced into slabs that you can fold and stuff or rub out to your preference. It smokes slowly, sweetly, and with the quiet authority of a very old idea executed with perfect craft. One of the great Virginia flakes in the world.",
+    "tags": ["virginia", "flake", "english", "natural", "classic", "award-winning"]
+  },
+  {
+    "id": "tob-002",
+    "name": "Dunhill My Mixture 965",
+    "brand": "Dunhill",
+    "slug": "dunhill-my-mixture-965",
+    "department": "pipe-tobacco",
+    "category": "Latakia",
+    "price": 22.50,
+    "originalPrice": null,
+    "sku": "FH-TOB-002",
+    "images": [
+      "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800&q=85"
+    ],
+    "featured": true,
+    "inStock": true,
+    "rating": 4.8,
+    "reviewCount": 97,
+    "size": "1.75 oz",
+    "description": "The classic English mixture — Virginia, Latakia, and Turkish leaf in Dunhill's landmark proportion. The number 965 refers to its original Dunhill catalogue designation, which tells you something about how long this blend has been satisfying smokers. Rich, campfire-smoky, with a Virginia sweetness that grounds the Latakia's leather-and-wood depth. An evening blend for serious reflection.",
+    "tags": ["latakia", "english", "dunhill", "oriental", "premium"]
+  },
+  {
+    "id": "tob-003",
+    "name": "Cornell & Diehl Autumn Evening",
+    "brand": "Cornell & Diehl",
+    "slug": "cornell-diehl-autumn-evening",
+    "department": "pipe-tobacco",
+    "category": "Aromatic",
+    "price": 14.95,
+    "originalPrice": null,
+    "sku": "FH-TOB-003",
+    "images": [
+      "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800&q=85"
+    ],
+    "featured": false,
+    "inStock": true,
+    "rating": 4.7,
+    "reviewCount": 244,
+    "size": "2 oz",
+    "description": "The aromatic that won over non-aromatic smokers. Cornell & Diehl base their Autumn Evening on a Burley and Black Cavendish blend, top-dressed with a maple, caramel, and vanilla casing that perfumes a room without cloying the smoker. It smokes cool and dry right from the tin. If you have ever dismissed aromatics, smoke this one first.",
+    "tags": ["aromatic", "burley", "cavendish", "maple", "beginner-friendly"]
+  },
+  {
+    "id": "tob-004",
+    "name": "McClelland Grand Orientals: Firdausi",
+    "brand": "McClelland",
+    "slug": "mcclelland-firdausi",
+    "department": "pipe-tobacco",
+    "category": "Latakia",
+    "price": 28.00,
+    "originalPrice": null,
+    "sku": "FH-TOB-004",
+    "images": [
+      "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800&q=85"
+    ],
+    "featured": false,
+    "inStock": false,
+    "rating": 4.95,
+    "reviewCount": 62,
+    "size": "2 oz",
+    "description": "McClelland stopped production in 2018, and tins of Firdausi now trade among collectors like fine Burgundy. Our remaining stock is limited and will not be replenished. Named for the Persian poet, this Syrian Latakia and Orientals blend is heavy, complex, and meditative — it demands to be smoked slowly, in silence, with no particular destination in mind.",
+    "tags": ["latakia", "oriental", "collectible", "limited", "mcclelland", "discontinued"]
+  },
+  {
+    "id": "tob-005",
+    "name": "Bulk Virginia Flake — 1 lb",
+    "brand": "Faridunhill House Blend",
+    "slug": "bulk-virginia-flake-1lb",
+    "department": "pipe-tobacco",
+    "category": "Bulk Tobacco",
+    "price": 42.00,
+    "originalPrice": null,
+    "sku": "FH-TOB-005",
+    "images": [
+      "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800&q=85"
+    ],
+    "featured": false,
+    "inStock": true,
+    "rating": 4.8,
+    "reviewCount": 33,
+    "size": "1 lb",
+    "description": "Our house-pressed Virginia flake, made from bright Southeastern leaf with a touch of Burley for body and a slow curing that develops natural sugars without added flavouring. Sold in full-pound bags for the committed Virginia smoker who prefers to cellar rather than purchase tin by tin. A reliable everyday smoke.",
+    "tags": ["virginia", "flake", "bulk", "house blend", "natural", "value"]
+  }
+]

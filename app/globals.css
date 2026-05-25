@@ -1,0 +1,339 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=IM+Fell+English:ital@0;1&display=swap');
+
+:root {
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-lora: 'Lora', Georgia, serif;
+  --font-fell: 'IM Fell English', Georgia, serif;
+
+  --color-mahogany: #2C1810;
+  --color-mahogany-light: #3D2317;
+  --color-leather: #8B6B4A;
+  --color-leather-tan: #C4956A;
+  --color-gold: #C9A84C;
+  --color-gold-pale: #E8D5A3;
+  --color-parchment: #F5EDD6;
+  --color-parchment-dark: #E8DCC0;
+  --color-hunter: #2D4A2D;
+  --color-ivory: #FAF6EC;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--color-mahogany);
+  color: var(--color-parchment);
+  font-family: var(--font-lora);
+}
+
+/* ─── Victorian Ornamental Divider ─── */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #C9A84C 30%,
+    #C9A84C 70%,
+    transparent
+  );
+}
+
+.ornament-divider-symbol {
+  color: #C9A84C;
+  font-family: var(--font-fell);
+  font-size: 1.25rem;
+}
+
+/* ─── Parchment Background Texture ─── */
+.bg-parchment-texture {
+  background-color: #F5EDD6;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(139, 107, 74, 0.04) 2px,
+      rgba(139, 107, 74, 0.04) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 4px,
+      rgba(139, 107, 74, 0.02) 4px,
+      rgba(139, 107, 74, 0.02) 8px
+    );
+}
+
+/* ─── Dark Wood Texture ─── */
+.bg-wood-texture {
+  background-color: #2C1810;
+  background-image:
+    repeating-linear-gradient(
+      87deg,
+      transparent,
+      transparent 2px,
+      rgba(201, 168, 76, 0.03) 2px,
+      rgba(201, 168, 76, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      177deg,
+      transparent,
+      transparent 6px,
+      rgba(255,255,255, 0.01) 6px,
+      rgba(255,255,255, 0.01) 12px
+    );
+}
+
+/* ─── Leather Texture ─── */
+.bg-leather-texture {
+  background-color: #1A0E09;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(139,107,74,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,107,74,0.06) 0%, transparent 50%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 3px,
+      rgba(139,107,74,0.02) 3px,
+      rgba(139,107,74,0.02) 6px
+    );
+}
+
+/* ─── Gold Border Ornament ─── */
+.gold-frame {
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  box-shadow:
+    inset 0 0 0 3px rgba(201, 168, 76, 0.1),
+    0 0 24px rgba(201, 168, 76, 0.08);
+}
+
+/* ─── Victorian Corner Ornament ─── */
+.victorian-frame {
+  position: relative;
+}
+
+.victorian-frame::before,
+.victorian-frame::after {
+  content: '✦';
+  position: absolute;
+  color: #C9A84C;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.victorian-frame::before {
+  top: 8px;
+  left: 8px;
+}
+
+.victorian-frame::after {
+  bottom: 8px;
+  right: 8px;
+}
+
+/* ─── Typography Utilities ─── */
+.heading-display {
+  font-family: var(--font-playfair);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.heading-serif {
+  font-family: var(--font-playfair);
+  font-weight: 600;
+}
+
+.body-serif {
+  font-family: var(--font-lora);
+  line-height: 1.8;
+}
+
+.accent-fell {
+  font-family: var(--font-fell);
+  font-style: italic;
+}
+
+/* ─── Button Styles ─── */
+.btn-gold {
+  background: linear-gradient(135deg, #C9A84C 0%, #A8873A 100%);
+  color: #1A0E09;
+  font-family: var(--font-playfair);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border: 1px solid #A8873A;
+  box-shadow: 0 2px 8px rgba(201, 168, 76, 0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  transition: all 0.2s ease;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #D4B86A 0%, #C9A84C 100%);
+  box-shadow: 0 4px 16px rgba(201, 168, 76, 0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+  transform: translateY(-1px);
+}
+
+.btn-burgundy {
+  background: linear-gradient(135deg, #6B1E2E 0%, #4A1420 100%);
+  color: #E8D5A3;
+  font-family: var(--font-playfair);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  box-shadow: 0 2px 8px rgba(107, 30, 46, 0.4), inset 0 1px 0 rgba(201, 168, 76, 0.15);
+  transition: all 0.2s ease;
+}
+
+.btn-burgundy:hover {
+  background: linear-gradient(135deg, #7D2336 0%, #6B1E2E 100%);
+  box-shadow: 0 4px 16px rgba(107, 30, 46, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #C9A84C;
+  font-family: var(--font-playfair);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(201, 168, 76, 0.5);
+  transition: all 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(201, 168, 76, 0.1);
+  border-color: #C9A84C;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1A0E09;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3D2317;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C9A84C;
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: rgba(201, 168, 76, 0.3);
+  color: #F5EDD6;
+}
+
+/* ─── Links ─── */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─── Prose overrides for blog ─── */
+.prose-victorian {
+  color: #2C1810;
+  font-family: var(--font-lora);
+  line-height: 1.9;
+}
+
+.prose-victorian h1,
+.prose-victorian h2,
+.prose-victorian h3,
+.prose-victorian h4 {
+  font-family: var(--font-playfair);
+  color: #2C1810;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose-victorian p {
+  margin-bottom: 1.5rem;
+}
+
+.prose-victorian blockquote {
+  border-left: 3px solid #C9A84C;
+  padding-left: 1.5rem;
+  font-family: var(--font-fell);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #8B6B4A;
+}
+
+/* ─── Cart Drawer ─── */
+.cart-drawer {
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-drawer.open {
+  transform: translateX(0);
+}
+
+/* ─── Mega Menu ─── */
+.mega-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.25s ease;
+}
+
+.mega-menu.open,
+.nav-item:hover .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ─── Product card hover ─── */
+.product-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(201, 168, 76, 0.2);
+}
+
+/* ─── Animated underline for nav links ─── */
+.nav-link-underline {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #C9A84C;
+  transition: width 0.25s ease;
+}
+
+.nav-link-underline:hover::after {
+  width: 100%;
+}
