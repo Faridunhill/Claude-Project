@@ -3,6 +3,10 @@ import tobaccoData from '@/data/products/tobacco.json'
 import cigarsData from '@/data/products/cigars.json'
 import leatherData from '@/data/products/leather-bags.json'
 import giftData from '@/data/products/gift-sets.json'
+import pipeAccData from '@/data/products/pipe-accessories.json'
+import cigarAccData from '@/data/products/cigar-accessories.json'
+import vapingData from '@/data/products/vaping.json'
+import lightersData from '@/data/products/lighters.json'
 
 export interface Product {
   id: string
@@ -35,6 +39,10 @@ const allProducts: Product[] = [
   ...cigarsData,
   ...leatherData,
   ...giftData,
+  ...pipeAccData,
+  ...cigarAccData,
+  ...vapingData,
+  ...lightersData,
 ] as Product[]
 
 export function getAllProducts(): Product[] {
