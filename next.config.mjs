@@ -1,15 +1,6 @@
-import createMDX from '@next/mdx'
-
-const withMDX = createMDX({
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-  },
-})
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   images: {
     remotePatterns: [
       {
@@ -22,6 +13,21 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    outputFileTracingExcludes: {
+      '*': [
+        'node_modules/@swc/core-linux-x64-gnu',
+        'node_modules/@swc/core-linux-x64-musl',
+        'node_modules/@esbuild/**/*',
+        'node_modules/webpack/**/*',
+        'node_modules/rollup/**/*',
+        'node_modules/terser/**/*',
+        'node_modules/@mdx-js/**/*',
+        'node_modules/next/dist/compiled/@next/react-dev-overlay/**/*',
+        'node_modules/next/dist/compiled/webpack/**/*',
+      ],
+    },
+  },
 }
 
-export default withMDX(nextConfig)
+export default nextConfig
