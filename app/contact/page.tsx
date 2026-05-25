@@ -5,6 +5,7 @@ import { useState } from 'react'
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -13,8 +14,24 @@ export default function ContactPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setStatus('loading')
-    /* In production, wire this to an email API (Resend, SendGrid, etc.) */
-    setTimeout(() => setStatus('success'), 1200)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      const data = await res.json()
+      if (res.ok) {
+        setStatus('success')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        setStatus('error')
+        setErrorMsg(data.error || 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setStatus('error')
+      setErrorMsg('Unable to send message. Please try again later.')
+    }
   }
 
   return (
@@ -155,6 +172,9 @@ export default function ContactPage() {
               >
                 {status === 'loading' ? 'Sending...' : 'Send Message'}
               </button>
+              {status === 'error' && (
+                <p className="text-red-400 font-lora text-sm text-center">{errorMsg}</p>
+              )}
             </form>
           )}
         </div>

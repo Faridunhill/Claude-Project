@@ -4,6 +4,7 @@ import './globals.css'
 import Navigation from '@/components/layout/Navigation'
 import Footer from '@/components/layout/Footer'
 import CartProvider from '@/context/CartContext'
+import AgeGate from '@/components/ui/AgeGate'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -98,6 +99,7 @@ export default function RootLayout({
     >
       <body className="bg-mahogany text-parchment font-lora antialiased">
         <CartProvider>
+          <AgeGate />
           <Navigation />
           <main>{children}</main>
           <Footer />
