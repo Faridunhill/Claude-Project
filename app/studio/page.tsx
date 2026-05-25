@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic'
 
 export default function StudioPage() {
-  const configured = !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 
   return (
     <div
@@ -26,13 +26,13 @@ export default function StudioPage() {
           Faridunhill CMS
         </h1>
 
-        {configured ? (
+        {projectId ? (
           <>
             <p style={{ color: '#a08060', marginBottom: '2rem', lineHeight: 1.7 }}>
-              Sanity is configured. Open your Sanity Studio dashboard below.
+              Sanity is configured. Open your dashboard below.
             </p>
             <a
-              href={`https://manage.sanity.io/projects/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/studio`}
+              href={`https://manage.sanity.io/projects/${projectId}/studio`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -54,8 +54,8 @@ export default function StudioPage() {
         ) : (
           <>
             <p style={{ color: '#a08060', marginBottom: '2rem', lineHeight: 1.7 }}>
-              Sanity is not yet configured. Add these environment variables in
-              Vercel → Settings → Environment Variables, then redeploy.
+              Sanity is not yet configured. Add these three environment variables
+              in Vercel → Settings → Environment Variables, then redeploy.
             </p>
             <div
               style={{
@@ -80,7 +80,7 @@ export default function StudioPage() {
               <li>Copy your <strong style={{ color: '#c9a84c' }}>Project ID</strong> from the Manage dashboard</li>
               <li>Create an <strong style={{ color: '#c9a84c' }}>API token</strong> (Editor role) under API → Tokens</li>
               <li>Add all three vars in <strong style={{ color: '#c9a84c' }}>Vercel → Settings → Environment Variables</strong></li>
-              <li>Redeploy — your dashboard will appear at this URL</li>
+              <li>Redeploy — your CMS will be ready at this URL</li>
             </ol>
             <a
               href="https://sanity.io"
@@ -99,7 +99,7 @@ export default function StudioPage() {
                 fontSize: '0.85rem',
               }}
             >
-              Create Sanity Account →
+              Create Free Sanity Account →
             </a>
           </>
         )}
