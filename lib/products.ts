@@ -21,7 +21,12 @@ export interface Product {
   reviewCount: number
   description: string
   tags: string[]
-  [key: string]: unknown
+  specs?: Record<string, string>
+  size?: string
+  vitola?: string
+  origin?: string
+  wrapper?: string
+  contents?: string[]
 }
 
 const allProducts: Product[] = [

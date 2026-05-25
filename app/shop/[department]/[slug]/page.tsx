@@ -35,12 +35,19 @@ function StarRating({ rating, count }: { rating: number; count: number }) {
     <div className="flex items-center gap-2">
       <div className="flex gap-0.5">
         {Array.from({ length: 5 }).map((_, i) => (
-          <svg key={i} className={`w-4 h-4 ${i < Math.floor(rating) ? 'text-gold' : 'text-parchment/20'}`} fill="currentColor" viewBox="0 0 20 20">
+          <svg
+            key={i}
+            className={`w-4 h-4 ${i < Math.floor(rating) ? 'text-gold' : 'text-parchment/20'}`}
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
           </svg>
         ))}
       </div>
-      <span className="font-lora text-parchment/50 text-sm">{rating} ({count} reviews)</span>
+      <span className="font-lora text-parchment/50 text-sm">
+        {rating} ({count} reviews)
+      </span>
     </div>
   )
 }
@@ -90,7 +97,9 @@ export default function ProductPage({ params }: Props) {
           <span>/</span>
           <Link href="/shop" className="hover:text-gold transition-colors">Shop</Link>
           <span>/</span>
-          <Link href={`/shop/${product.department}`} className="hover:text-gold transition-colors">{deptMeta?.name}</Link>
+          <Link href={`/shop/${product.department}`} className="hover:text-gold transition-colors">
+            {deptMeta?.name}
+          </Link>
           <span>/</span>
           <span className="text-parchment/60 line-clamp-1">{product.name}</span>
         </nav>
@@ -110,12 +119,17 @@ export default function ProductPage({ params }: Props) {
               />
               <div className="absolute top-3 right-3 text-gold/30 text-sm">✦</div>
             </div>
-            {/* Thumbnail row */}
             {product.images.length > 1 && (
               <div className="flex gap-3 mt-3">
-                {product.images.map((img: string, i: number) => (
+                {product.images.map((img, i) => (
                   <div key={i} className="relative w-20 h-20 rounded-sm overflow-hidden border border-gold/20">
-                    <Image src={img} alt={`${product.name} view ${i + 1}`} fill className="object-cover" sizes="80px" />
+                    <Image
+                      src={img}
+                      alt={`${product.name} view ${i + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="80px"
+                    />
                   </div>
                 ))}
               </div>
@@ -124,7 +138,9 @@ export default function ProductPage({ params }: Props) {
 
           {/* Details */}
           <div>
-            <p className="font-lora text-gold/70 text-xs uppercase tracking-widest mb-2">{product.brand}</p>
+            <p className="font-lora text-gold/70 text-xs uppercase tracking-widest mb-2">
+              {product.brand}
+            </p>
             <h1 className="font-playfair font-bold text-parchment text-3xl lg:text-4xl leading-tight mb-4">
               {product.name}
             </h1>
@@ -132,9 +148,13 @@ export default function ProductPage({ params }: Props) {
             <StarRating rating={product.rating} count={product.reviewCount} />
 
             <div className="flex items-center gap-4 mt-5 mb-6">
-              <span className="font-playfair font-bold text-gold text-3xl">${product.price.toFixed(2)}</span>
-              {product.originalPrice && (
-                <span className="font-lora text-parchment/40 text-lg line-through">${(product.originalPrice as number).toFixed(2)}</span>
+              <span className="font-playfair font-bold text-gold text-3xl">
+                ${product.price.toFixed(2)}
+              </span>
+              {product.originalPrice !== null && product.originalPrice !== undefined && (
+                <span className="font-lora text-parchment/40 text-lg line-through">
+                  ${product.originalPrice.toFixed(2)}
+                </span>
               )}
               {product.inStock ? (
                 <span className="font-lora text-sm text-hunter-light">● In Stock</span>
@@ -143,22 +163,19 @@ export default function ProductPage({ params }: Props) {
               )}
             </div>
 
-            {/* Divider */}
             <div className="h-px bg-gold/15 mb-6" />
 
-            {/* Description */}
-            <div className="font-lora text-parchment/80 leading-[1.9] text-[1.02rem] mb-8">
+            <p className="font-lora text-parchment/80 leading-[1.9] text-[1.02rem] mb-8">
               {product.description}
-            </div>
+            </p>
 
-            {/* Specs */}
             {product.specs && (
               <div className="bg-mahogany-light rounded-sm p-5 border border-gold/15 mb-8">
                 <h3 className="font-playfair font-semibold text-parchment text-sm uppercase tracking-widest mb-4">
                   Specifications
                 </h3>
                 <dl className="space-y-2">
-                  {Object.entries(product.specs as Record<string, string>).map(([key, value]) => (
+                  {Object.entries(product.specs).map(([key, value]) => (
                     <div key={key} className="flex gap-3">
                       <dt className="font-lora text-parchment/45 text-sm w-28 flex-shrink-0 capitalize">
                         {key.replace(/([A-Z])/g, ' $1')}
@@ -170,21 +187,21 @@ export default function ProductPage({ params }: Props) {
               </div>
             )}
 
-            {/* Add to cart */}
             <div className="flex gap-3">
               <AddToCartButton product={product} className="flex-1 py-4 text-sm" />
             </div>
 
-            {/* Shipping note */}
             <p className="font-lora text-parchment/35 text-xs mt-4 leading-relaxed">
               Free shipping on orders over $75. Age verification (21+) required for tobacco products.
               Estimated delivery 3–7 business days within the continental US.
             </p>
 
-            {/* Tags */}
             <div className="flex flex-wrap gap-2 mt-6">
-              {product.tags.map((tag: string) => (
-                <span key={tag} className="px-3 py-1 border border-gold/15 rounded-sm font-lora text-parchment/40 text-xs">
+              {product.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 border border-gold/15 rounded-sm font-lora text-parchment/40 text-xs"
+                >
                   {tag}
                 </span>
               ))}
@@ -219,7 +236,9 @@ export default function ProductPage({ params }: Props) {
                     <p className="font-playfair font-semibold text-parchment text-sm line-clamp-2 group-hover:text-gold transition-colors">
                       {rel.name}
                     </p>
-                    <p className="font-playfair font-bold text-gold mt-2">${rel.price.toFixed(2)}</p>
+                    <p className="font-playfair font-bold text-gold mt-2">
+                      ${rel.price.toFixed(2)}
+                    </p>
                   </div>
                 </Link>
               ))}
