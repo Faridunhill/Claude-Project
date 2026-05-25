@@ -59,7 +59,7 @@ const departments = [
     name: 'Gift Sets & Samplers',
     slug: 'gift-sets',
     subcategories: ['Beginner Sets', 'Collector Gift Boxes', 'Tobacco Samplers'],
-    desc: 'The perfect introduction to a gentleman's pursuit.',
+    desc: "The perfect introduction to a gentleman's pursuit.",
   },
   {
     name: 'Sale & Clearance',
