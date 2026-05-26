@@ -43,8 +43,8 @@ export default config({
           defaultValue: 'tobacco-pipes',
         }),
         category: fields.text({ label: 'Category' }),
-        price: fields.number({ label: 'Price (£)', validation: { isRequired: true, min: 0 } }),
-        originalPrice: fields.number({ label: 'Original Price (£) — leave blank if not on sale' }),
+        price: fields.text({ label: 'Price (£) — e.g. 19.99', validation: { isRequired: true } }),
+        originalPrice: fields.text({ label: 'Original Price (£) — leave blank if not on sale' }),
         sku: fields.text({ label: 'SKU' }),
         images: fields.array(
           fields.text({ label: 'Image URL' }),
@@ -52,8 +52,8 @@ export default config({
         ),
         featured: fields.checkbox({ label: 'Featured on homepage', defaultValue: false }),
         inStock: fields.checkbox({ label: 'In Stock', defaultValue: true }),
-        rating: fields.number({ label: 'Rating (0–5)', defaultValue: 4.5 }),
-        reviewCount: fields.number({ label: 'Review Count', defaultValue: 0 }),
+        rating: fields.text({ label: 'Rating (0–5) — e.g. 4.5', defaultValue: '4.5' }),
+        reviewCount: fields.integer({ label: 'Review Count', defaultValue: 0 }),
         description: fields.text({ label: 'Description', multiline: true }),
         tags: fields.array(
           fields.text({ label: 'Tag' }),

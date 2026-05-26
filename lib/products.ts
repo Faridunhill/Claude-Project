@@ -47,10 +47,8 @@ const jsonProducts: Product[] = [
   ...lightersData,
 ] as Product[]
 
-let _reader: ReturnType<typeof createReader<typeof keystatic>> | null = null
 function getReader() {
-  if (!_reader) _reader = createReader(process.cwd(), keystatic)
-  return _reader
+  return createReader(process.cwd(), keystatic)
 }
 
 async function fetchFromKeystatic(): Promise<Product[] | null> {
@@ -65,14 +63,14 @@ async function fetchFromKeystatic(): Promise<Product[] | null> {
       slug: e.slug,
       department: e.entry.department,
       category: e.entry.category ?? '',
-      price: e.entry.price ?? 0,
-      originalPrice: e.entry.originalPrice ?? null,
+      price: parseFloat((e.entry.price as string) ?? '0') || 0,
+      originalPrice: e.entry.originalPrice ? parseFloat(e.entry.originalPrice as string) || null : null,
       sku: e.entry.sku ?? '',
       images: (e.entry.images as string[]) ?? [],
       featured: e.entry.featured ?? false,
       inStock: e.entry.inStock ?? true,
-      rating: e.entry.rating ?? 4.5,
-      reviewCount: e.entry.reviewCount ?? 0,
+      rating: parseFloat((e.entry.rating as string) ?? '4.5') || 4.5,
+      reviewCount: (e.entry.reviewCount as number) ?? 0,
       description: e.entry.description ?? '',
       tags: (e.entry.tags as string[]) ?? [],
       specs: e.entry.specs?.length

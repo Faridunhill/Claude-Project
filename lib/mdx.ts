@@ -27,10 +27,8 @@ function calcReadingTime(text: string): string {
   return `${minutes} min read`
 }
 
-let _reader: ReturnType<typeof createReader<typeof keystatic>> | null = null
 function getReader() {
-  if (!_reader) _reader = createReader(process.cwd(), keystatic)
-  return _reader
+  return createReader(process.cwd(), keystatic)
 }
 
 async function fetchKeystaticPosts(): Promise<Post[] | null> {
