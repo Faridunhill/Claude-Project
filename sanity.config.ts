@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'faridunhill',
   title: 'Faridunhill CMS',
   basePath: '/studio',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'z16xm7xb',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'zl6xm7xb',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [structureTool(), visionTool()],
   schema: {

@@ -1,32 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  async redirects() {
-    return [
-      {
-        source: '/studio',
-        destination: 'https://faridunhill.sanity.studio',
-        permanent: false,
-      },
-    ]
-  },
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'plus.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-      },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'plus.unsplash.com' },
+      { protocol: 'https', hostname: 'cdn.sanity.io' },
     ],
   },
   experimental: {
+    serverComponentsExternalPackages: ['sanity', 'next-sanity', '@sanity/client', '@sanity/vision'],
     outputFileTracingExcludes: {
       '*': [
         'node_modules/@swc/core-linux-x64-gnu',
