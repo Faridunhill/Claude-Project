@@ -6,12 +6,12 @@ async function getHandler() {
   return makeRouteHandler({ config })
 }
 
-export async function GET(request: Request, context: { params: { params: string[] } }) {
+export async function GET(request: Request) {
   const handler = await getHandler()
-  return handler.GET(request, context)
+  return handler.GET(request)
 }
 
-export async function POST(request: Request, context: { params: { params: string[] } }) {
+export async function POST(request: Request) {
   const handler = await getHandler()
-  return handler.POST(request, context)
+  return handler.POST(request)
 }
