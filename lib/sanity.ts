@@ -1,9 +1,25 @@
-// Sanity client — only active when NEXT_PUBLIC_SANITY_PROJECT_ID is set.
-// Packages are installed separately; this file gracefully handles their absence.
+import { createClient } from '@sanity/client'
+import imageUrlBuilder from '@sanity/image-url'
 
-export const hasSanity = false  // disabled until next-sanity packages are installed
-export const sanityClient = null
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 
-export function urlFor(_source: unknown) {
-  throw new Error('Sanity image builder not configured')
+export const hasSanity = Boolean(projectId)
+
+export const sanityClient = hasSanity
+  ? createClient({
+      projectId: projectId!,
+      dataset,
+      apiVersion: '2024-01-01',
+      useCdn: true,
+    })
+  : null
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const builder = sanityClient ? imageUrlBuilder(sanityClient) : null
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function urlFor(source: any) {
+  if (!builder) throw new Error('Sanity image builder not configured')
+  return builder.image(source)
 }
