@@ -18,7 +18,10 @@
     "reading-time": "^1.5.0",
     "clsx": "^2.1.1",
     "@sanity/client": "^6.22.0",
-    "@sanity/image-url": "^1.0.2"
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/vision": "^3.0.0",
+    "next-sanity": "^8.0.0",
+    "sanity": "^3.0.0"
   },
   "devDependencies": {
     "typescript": "^5",
