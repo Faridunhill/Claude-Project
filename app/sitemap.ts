@@ -4,9 +4,9 @@ import { getAllPostSlugs } from '@/lib/mdx'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://faridunhill.com'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const products = getAllProducts()
-  const blogSlugs = getAllPostSlugs()
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const products = await getAllProducts()
+  const blogSlugs = await getAllPostSlugs()
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: 'daily', priority: 1 },
