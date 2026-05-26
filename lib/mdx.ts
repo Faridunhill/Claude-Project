@@ -38,7 +38,7 @@ async function fetchKeystaticPosts(): Promise<Post[] | null> {
     if (!entries.length) return null
     return entries.map((e) => ({
       slug: e.slug,
-      title: e.entry.title,
+      title: e.entry.title ?? '',
       author: e.entry.author ?? 'The Faridunhill Editors',
       date: e.entry.publishedAt ?? '',
       category: e.entry.category ?? 'Pipe Culture',

@@ -58,10 +58,10 @@ async function fetchFromKeystatic(): Promise<Product[] | null> {
     if (!entries.length) return null
     return entries.map((e) => ({
       id: e.slug,
-      name: e.entry.name,
+      name: e.entry.name ?? '',
       brand: e.entry.brand ?? '',
       slug: e.slug,
-      department: e.entry.department,
+      department: e.entry.department ?? 'tobacco-pipes',
       category: e.entry.category ?? '',
       price: parseFloat((e.entry.price as string) ?? '0') || 0,
       originalPrice: e.entry.originalPrice ? parseFloat(e.entry.originalPrice as string) || null : null,
