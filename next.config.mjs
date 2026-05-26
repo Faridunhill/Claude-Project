@@ -1,5 +1,3 @@
-import withKeystatic from '@keystatic/next/config'
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
@@ -27,4 +25,4 @@ const nextConfig = {
   },
 }
 
-export default withKeystatic(nextConfig)
+export default nextConfig
