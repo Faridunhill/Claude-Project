@@ -1,7 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { sanityClient, hasSanity } from '@/lib/sanity'
+import { createReader } from '@keystatic/core/reader'
+import keystatic from '@/keystatic.config'
 
 const BLOG_DIR = path.join(process.cwd(), 'content/blog')
 
@@ -21,37 +22,40 @@ export interface Post extends PostMeta {
   content: string
 }
 
-const POSTS_QUERY = `*[_type == "post"] | order(publishedAt desc) {
-  "slug": slug.current,
-  title,
-  author,
-  "date": publishedAt,
-  category,
-  excerpt,
-  "image": mainImage.asset->url,
-  tags,
-  "content": body
-}`
-
 function calcReadingTime(text: string): string {
   const minutes = Math.ceil(text.split(/\s+/).length / 238)
   return `${minutes} min read`
 }
 
-async function fetchSanityPosts(): Promise<Post[] | null> {
-  if (!hasSanity || !sanityClient) return null
+let _reader: ReturnType<typeof createReader<typeof keystatic>> | null = null
+function getReader() {
+  if (!_reader) _reader = createReader(process.cwd(), keystatic)
+  return _reader
+}
+
+async function fetchKeystaticPosts(): Promise<Post[] | null> {
   try {
-    const docs = await sanityClient.fetch<Post[]>(POSTS_QUERY)
-    if (docs && docs.length > 0) {
-      return docs.map((doc) => ({
-        ...doc,
-        readingTime: calcReadingTime(doc.content || ''),
-      }))
-    }
+    const reader = getReader()
+    const entries = await reader.collections.posts.all()
+    if (!entries.length) return null
+    return entries.map((e) => ({
+      slug: e.slug,
+      title: e.entry.title,
+      author: e.entry.author ?? 'The Faridunhill Editors',
+      date: e.entry.publishedAt ?? '',
+      category: e.entry.category ?? 'Pipe Culture',
+      excerpt: e.entry.excerpt ?? '',
+      image:
+        e.entry.image ||
+        'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=85',
+      tags: (e.entry.tags as string[]) ?? [],
+      readingTime: calcReadingTime(e.entry.content ?? ''),
+      content: e.entry.content ?? '',
+    }))
   } catch (err) {
-    console.error('Sanity post fetch failed, using MDX fallback:', err)
+    console.error('Keystatic post read failed, using MDX fallback:', err)
+    return null
   }
-  return null
 }
 
 function getMdxSlugs(): string[] {
@@ -85,34 +89,26 @@ function getMdxPost(slug: string): Post | null {
   }
 }
 
-export async function getAllPostSlugs(): Promise<string[]> {
-  if (hasSanity && sanityClient) {
-    try {
-      const slugs = await sanityClient.fetch<string[]>(
-        `*[_type == "post"]{ "slug": slug.current }.slug`
-      )
-      if (slugs && slugs.length > 0) return slugs
-    } catch {}
-  }
-  return getMdxSlugs()
-}
-
-export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const sanityPosts = await fetchSanityPosts()
-  if (sanityPosts) {
-    return sanityPosts.find((p) => p.slug === slug) ?? null
-  }
-  return getMdxPost(slug)
-}
-
 export async function getAllPosts(): Promise<PostMeta[]> {
-  const sanityPosts = await fetchSanityPosts()
-  if (sanityPosts) return sanityPosts
+  const keystaticPosts = await fetchKeystaticPosts()
+  if (keystaticPosts) return keystaticPosts.sort((a, b) => (b.date > a.date ? 1 : -1))
 
   return getMdxSlugs()
     .map(getMdxPost)
     .filter((p): p is Post => p !== null)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+}
+
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  const keystaticPosts = await fetchKeystaticPosts()
+  if (keystaticPosts) return keystaticPosts.find((p) => p.slug === slug) ?? null
+  return getMdxPost(slug)
+}
+
+export async function getAllPostSlugs(): Promise<string[]> {
+  const keystaticPosts = await fetchKeystaticPosts()
+  if (keystaticPosts) return keystaticPosts.map((p) => p.slug)
+  return getMdxSlugs()
 }
 
 export async function getRecentPosts(limit = 3): Promise<PostMeta[]> {

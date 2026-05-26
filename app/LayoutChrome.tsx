@@ -7,7 +7,7 @@ import type { ReactNode } from 'react'
 
 export default function LayoutChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname()
-  if (pathname?.startsWith('/studio')) return <>{children}</>
+  if (pathname?.startsWith('/keystatic')) return <>{children}</>
   return (
     <>
       <Navigation />

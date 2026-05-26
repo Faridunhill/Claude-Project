@@ -9,7 +9,6 @@ const nextConfig = {
     ],
   },
   experimental: {
-    serverComponentsExternalPackages: ['sanity', 'next-sanity', '@sanity/client', '@sanity/vision'],
     outputFileTracingExcludes: {
       '*': [
         'node_modules/@swc/core-linux-x64-gnu',

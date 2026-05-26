@@ -1,4 +1,5 @@
-import { sanityClient, hasSanity } from '@/lib/sanity'
+import { createReader } from '@keystatic/core/reader'
+import keystatic from '@/keystatic.config'
 import pipesData from '@/data/products/pipes.json'
 import tobaccoData from '@/data/products/tobacco.json'
 import cigarsData from '@/data/products/cigars.json'
@@ -46,98 +47,74 @@ const jsonProducts: Product[] = [
   ...lightersData,
 ] as Product[]
 
-const PRODUCTS_QUERY = `*[_type == "product"] {
-  "id": _id,
-  name,
-  brand,
-  "slug": slug.current,
-  department,
-  category,
-  price,
-  originalPrice,
-  sku,
-  "images": images[].asset->url,
-  featured,
-  inStock,
-  rating,
-  reviewCount,
-  description,
-  tags,
-  "specs": specs[]{key, value},
-  size,
-  vitola,
-  origin,
-  wrapper,
-  contents
-}`
-
-interface SanityProduct {
-  id: string
-  name: string
-  brand: string
-  slug: string
-  department: string
-  category: string
-  price: number
-  originalPrice?: number
-  sku: string
-  images: string[]
-  featured: boolean
-  inStock: boolean
-  rating: number
-  reviewCount: number
-  description: string
-  tags: string[]
-  specs?: Array<{ key: string; value: string }>
-  size?: string
-  vitola?: string
-  origin?: string
-  wrapper?: string
-  contents?: string[]
+let _reader: ReturnType<typeof createReader<typeof keystatic>> | null = null
+function getReader() {
+  if (!_reader) _reader = createReader(process.cwd(), keystatic)
+  return _reader
 }
 
-function mapSanityProduct(doc: SanityProduct): Product {
-  return {
-    ...doc,
-    originalPrice: doc.originalPrice ?? null,
-    specs: doc.specs
-      ? Object.fromEntries(doc.specs.map((s) => [s.key, s.value]))
-      : undefined,
-  }
-}
-
-async function fetchFromSanity(): Promise<Product[] | null> {
-  if (!hasSanity || !sanityClient) return null
+async function fetchFromKeystatic(): Promise<Product[] | null> {
   try {
-    const docs = await sanityClient.fetch<SanityProduct[]>(PRODUCTS_QUERY)
-    if (docs && docs.length > 0) return docs.map(mapSanityProduct)
+    const reader = getReader()
+    const entries = await reader.collections.products.all()
+    if (!entries.length) return null
+    return entries.map((e) => ({
+      id: e.slug,
+      name: e.entry.name,
+      brand: e.entry.brand ?? '',
+      slug: e.slug,
+      department: e.entry.department,
+      category: e.entry.category ?? '',
+      price: e.entry.price ?? 0,
+      originalPrice: e.entry.originalPrice ?? null,
+      sku: e.entry.sku ?? '',
+      images: (e.entry.images as string[]) ?? [],
+      featured: e.entry.featured ?? false,
+      inStock: e.entry.inStock ?? true,
+      rating: e.entry.rating ?? 4.5,
+      reviewCount: e.entry.reviewCount ?? 0,
+      description: e.entry.description ?? '',
+      tags: (e.entry.tags as string[]) ?? [],
+      specs: e.entry.specs?.length
+        ? Object.fromEntries(
+            (e.entry.specs as Array<{ key: string; value: string }>).map((s) => [s.key, s.value])
+          )
+        : undefined,
+      size: e.entry.size ?? undefined,
+      vitola: e.entry.vitola ?? undefined,
+      origin: e.entry.origin ?? undefined,
+      wrapper: e.entry.wrapper ?? undefined,
+      contents: (e.entry.contents as string[])?.length
+        ? (e.entry.contents as string[])
+        : undefined,
+    }))
   } catch (err) {
-    console.error('Sanity product fetch failed, using JSON fallback:', err)
+    console.error('Keystatic product read failed, using JSON fallback:', err)
+    return null
   }
-  return null
 }
 
 export async function getAllProducts(): Promise<Product[]> {
-  return (await fetchFromSanity()) ?? jsonProducts
+  return (await fetchFromKeystatic()) ?? jsonProducts
 }
 
 export async function getFeaturedProducts(): Promise<Product[]> {
-  const products = (await fetchFromSanity()) ?? jsonProducts
+  const products = (await fetchFromKeystatic()) ?? jsonProducts
   return products.filter((p) => p.featured && p.inStock)
 }
 
 export async function getProductsByDepartment(department: string): Promise<Product[]> {
-  const products = (await fetchFromSanity()) ?? jsonProducts
+  const products = (await fetchFromKeystatic()) ?? jsonProducts
   return products.filter((p) => p.department === department)
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {
-  const products = (await fetchFromSanity()) ?? jsonProducts
+  const products = (await fetchFromKeystatic()) ?? jsonProducts
   return products.find((p) => p.slug === slug)
 }
 
 export async function getRelatedProducts(product: Product, limit = 4): Promise<Product[]> {
-  const products = (await fetchFromSanity()) ?? jsonProducts
+  const products = (await fetchFromKeystatic()) ?? jsonProducts
   return products
     .filter(
       (p) =>
