@@ -7,11 +7,27 @@ async function getHandler() {
 }
 
 export async function GET(request: Request) {
-  const handler = await getHandler()
-  return handler.GET(request)
+  try {
+    const handler = await getHandler()
+    return handler.GET(request)
+  } catch (err) {
+    console.error('[Keystatic] GET error:', err)
+    return new Response(
+      JSON.stringify({ error: String(err) }),
+      { status: 500, headers: { 'content-type': 'application/json' } }
+    )
+  }
 }
 
 export async function POST(request: Request) {
-  const handler = await getHandler()
-  return handler.POST(request)
+  try {
+    const handler = await getHandler()
+    return handler.POST(request)
+  } catch (err) {
+    console.error('[Keystatic] POST error:', err)
+    return new Response(
+      JSON.stringify({ error: String(err) }),
+      { status: 500, headers: { 'content-type': 'application/json' } }
+    )
+  }
 }
