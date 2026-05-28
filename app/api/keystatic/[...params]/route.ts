@@ -31,6 +31,21 @@ export async function GET(request: Request) {
   const url = new URL(request.url)
   const isCallback = url.pathname.includes('/oauth/callback')
   const isLogin = url.pathname.endsWith('/github/login')
+  const isDebug = url.pathname.endsWith('/debug')
+
+  // Temporary debug endpoint — remove after auth is working
+  if (isDebug) {
+    return new Response(JSON.stringify({
+      hasClientId: !!process.env.KEYSTATIC_GITHUB_CLIENT_ID,
+      clientIdLen: process.env.KEYSTATIC_GITHUB_CLIENT_ID?.length ?? 0,
+      clientIdPrefix: process.env.KEYSTATIC_GITHUB_CLIENT_ID?.slice(0, 6) ?? '',
+      hasClientSecret: !!process.env.KEYSTATIC_GITHUB_CLIENT_SECRET,
+      clientSecretLen: process.env.KEYSTATIC_GITHUB_CLIENT_SECRET?.length ?? 0,
+      hasSecret: !!process.env.KEYSTATIC_SECRET,
+      secretLen: process.env.KEYSTATIC_SECRET?.length ?? 0,
+      nodeVersion: process.version,
+    }, null, 2), { headers: { 'content-type': 'application/json' } })
+  }
   if (isCallback) {
     console.log('[Keystatic] CALLBACK URL:', request.url)
     console.log('[Keystatic] CALLBACK hasCode:', url.searchParams.has('code'), 'hasState:', url.searchParams.has('state'), 'stateLen:', url.searchParams.get('state')?.length ?? 0)
