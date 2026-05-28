@@ -6,6 +6,15 @@ async function getHandler() {
   return makeRouteHandler({ config })
 }
 
+function cleanRequest(request: Request): Request {
+  const url = new URL(request.url)
+  // Strip Next.js internal routing params that can confuse Keystatic
+  url.searchParams.delete('nxtPparams')
+  url.searchParams.delete('nxtPslug')
+  if (url.toString() === request.url) return request
+  return new Request(url.toString(), request)
+}
+
 function logEnvState() {
   console.log('[Keystatic] ENV:', JSON.stringify({
     hasClientId: !!process.env.KEYSTATIC_GITHUB_CLIENT_ID,
@@ -21,15 +30,17 @@ function logEnvState() {
 export async function GET(request: Request) {
   const url = new URL(request.url)
   const isCallback = url.pathname.includes('/oauth/callback')
+  const isLogin = url.pathname.endsWith('/github/login')
   if (isCallback) {
     console.log('[Keystatic] CALLBACK URL:', request.url)
     console.log('[Keystatic] CALLBACK hasCode:', url.searchParams.has('code'), 'hasState:', url.searchParams.has('state'), 'stateLen:', url.searchParams.get('state')?.length ?? 0)
     logEnvState()
   }
+  if (isLogin) logEnvState()
   try {
     const handler = await getHandler()
-    const res = await handler.GET(request)
-    if (url.pathname.endsWith('/github/login') && (res.status === 302 || res.status === 307)) {
+    const res = await handler.GET(cleanRequest(request))
+    if (isLogin && (res.status === 302 || res.status === 307)) {
       const location = res.headers.get('location') ?? ''
       try {
         const ghUrl = new URL(location)
@@ -53,7 +64,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const handler = await getHandler()
-    const res = await handler.POST(request)
+    const res = await handler.POST(cleanRequest(request))
     if (!res.ok) {
       const body = await res.clone().text()
       console.error('[Keystatic] POST non-ok response', res.status, body)
