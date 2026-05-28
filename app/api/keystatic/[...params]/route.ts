@@ -35,7 +35,7 @@ export async function GET(request: Request) {
 
   // Temporary debug endpoint — remove after auth is working
   if (isDebug) {
-    return new Response(JSON.stringify({
+    const envInfo = {
       hasClientId: !!process.env.KEYSTATIC_GITHUB_CLIENT_ID,
       clientIdLen: process.env.KEYSTATIC_GITHUB_CLIENT_ID?.length ?? 0,
       clientIdPrefix: process.env.KEYSTATIC_GITHUB_CLIENT_ID?.slice(0, 6) ?? '',
@@ -44,7 +44,27 @@ export async function GET(request: Request) {
       hasSecret: !!process.env.KEYSTATIC_SECRET,
       secretLen: process.env.KEYSTATIC_SECRET?.length ?? 0,
       nodeVersion: process.version,
-    }, null, 2), { headers: { 'content-type': 'application/json' } })
+    }
+    // Simulate a login request to capture what GitHub URL Keystatic generates
+    let loginDebug: Record<string, unknown> = {}
+    try {
+      const handler = await getHandler()
+      const loginReq = new Request(`${url.origin}/api/keystatic/github/login`, { method: 'GET', headers: request.headers })
+      const loginRes = await handler.GET(loginReq)
+      const location = loginRes.headers.get('location') ?? ''
+      try {
+        const ghUrl = new URL(location)
+        loginDebug = {
+          redirectStatus: loginRes.status,
+          githubClientId: ghUrl.searchParams.get('client_id'),
+          redirectUri: ghUrl.searchParams.get('redirect_uri'),
+          hasState: ghUrl.searchParams.has('state'),
+          stateLen: ghUrl.searchParams.get('state')?.length ?? 0,
+          scope: ghUrl.searchParams.get('scope'),
+        }
+      } catch { loginDebug = { redirectStatus: loginRes.status, location } }
+    } catch (e) { loginDebug = { error: String(e) } }
+    return new Response(JSON.stringify({ envInfo, loginDebug }, null, 2), { headers: { 'content-type': 'application/json' } })
   }
   if (isCallback) {
     console.log('[Keystatic] CALLBACK URL:', request.url)
