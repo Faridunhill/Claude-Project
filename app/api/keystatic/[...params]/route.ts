@@ -1,4 +1,4 @@
-import { createHmac, randomBytes } from 'crypto'
+import { createHmac, randomBytes, timingSafeEqual } from 'crypto'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,6 +12,11 @@ function cleanRequest(request: Request): Request {
   const url = new URL(request.url)
   url.searchParams.delete('nxtPparams')
   url.searchParams.delete('nxtPslug')
+  // Strip our custom state before Keystatic sees it — it can't verify
+  // our format and would fail at state verification before token exchange.
+  if (url.pathname.includes('/oauth/callback')) {
+    url.searchParams.delete('state')
+  }
   if (url.toString() === request.url) return request
   return new Request(url.toString(), request)
 }
@@ -45,9 +50,20 @@ function patchLoginRedirect(res: Response): Response {
   return new Response(null, { status: res.status, headers })
 }
 
+function verifyState(state: string): boolean {
+  try {
+    const [nonce, sig] = state.split('.')
+    if (!nonce || !sig) return false
+    const secret = process.env.KEYSTATIC_SECRET ?? ''
+    const expected = createHmac('sha256', secret).update(nonce).digest('hex')
+    return timingSafeEqual(Buffer.from(sig, 'hex'), Buffer.from(expected, 'hex'))
+  } catch { return false }
+}
+
 export async function GET(request: Request) {
   const url = new URL(request.url)
   const isLogin = url.pathname.endsWith('/github/login')
+  const isCallback = url.pathname.includes('/oauth/callback')
   const isDebug = url.pathname.endsWith('/debug')
 
   if (isDebug) {
@@ -81,6 +97,11 @@ export async function GET(request: Request) {
       } catch { loginDebug = { redirectStatus: patched.status, location } }
     } catch (e) { loginDebug = { error: String(e) } }
     return new Response(JSON.stringify({ envInfo, loginDebug }, null, 2), { headers: { 'content-type': 'application/json' } })
+  }
+
+  if (isCallback) {
+    const state = url.searchParams.get('state')
+    console.log('[Keystatic] CALLBACK hasCode:', url.searchParams.has('code'), 'hasState:', !!state, 'stateValid:', state ? verifyState(state) : 'n/a')
   }
 
   try {
