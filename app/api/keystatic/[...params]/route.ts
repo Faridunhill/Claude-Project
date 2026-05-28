@@ -29,6 +29,13 @@ export async function GET(request: Request) {
   try {
     const handler = await getHandler()
     const res = await handler.GET(request)
+    if (url.pathname.endsWith('/github/login') && (res.status === 302 || res.status === 307)) {
+      const location = res.headers.get('location') ?? ''
+      try {
+        const ghUrl = new URL(location)
+        console.log('[Keystatic] LOGIN→GitHub hasState:', ghUrl.searchParams.has('state'), 'stateLen:', ghUrl.searchParams.get('state')?.length ?? 0, 'clientId:', ghUrl.searchParams.get('client_id'))
+      } catch { console.log('[Keystatic] LOGIN location:', location) }
+    }
     if (!res.ok) {
       const body = await res.clone().text()
       console.error('[Keystatic] GET non-ok response', res.status, body)
