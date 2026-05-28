@@ -6,8 +6,26 @@ async function getHandler() {
   return makeRouteHandler({ config })
 }
 
+function logEnvState() {
+  console.log('[Keystatic] ENV:', JSON.stringify({
+    hasClientId: !!process.env.KEYSTATIC_GITHUB_CLIENT_ID,
+    clientIdLen: process.env.KEYSTATIC_GITHUB_CLIENT_ID?.length ?? 0,
+    clientIdPrefix: process.env.KEYSTATIC_GITHUB_CLIENT_ID?.slice(0, 6) ?? '',
+    hasClientSecret: !!process.env.KEYSTATIC_GITHUB_CLIENT_SECRET,
+    clientSecretLen: process.env.KEYSTATIC_GITHUB_CLIENT_SECRET?.length ?? 0,
+    hasSecret: !!process.env.KEYSTATIC_SECRET,
+    secretLen: process.env.KEYSTATIC_SECRET?.length ?? 0,
+  }))
+}
+
 export async function GET(request: Request) {
-  console.log('[Keystatic] GET', request.url)
+  const url = new URL(request.url)
+  const isCallback = url.pathname.includes('/oauth/callback')
+  if (isCallback) {
+    console.log('[Keystatic] CALLBACK URL:', request.url)
+    console.log('[Keystatic] CALLBACK hasCode:', url.searchParams.has('code'), 'hasState:', url.searchParams.has('state'), 'stateLen:', url.searchParams.get('state')?.length ?? 0)
+    logEnvState()
+  }
   try {
     const handler = await getHandler()
     const res = await handler.GET(request)
@@ -26,7 +44,6 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  console.log('[Keystatic] POST', request.url)
   try {
     const handler = await getHandler()
     const res = await handler.POST(request)
