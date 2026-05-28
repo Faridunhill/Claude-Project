@@ -7,9 +7,15 @@ async function getHandler() {
 }
 
 export async function GET(request: Request) {
+  console.log('[Keystatic] GET', request.url)
   try {
     const handler = await getHandler()
-    return handler.GET(request)
+    const res = await handler.GET(request)
+    if (!res.ok) {
+      const body = await res.clone().text()
+      console.error('[Keystatic] GET non-ok response', res.status, body)
+    }
+    return res
   } catch (err) {
     console.error('[Keystatic] GET error:', err)
     return new Response(
@@ -20,9 +26,15 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  console.log('[Keystatic] POST', request.url)
   try {
     const handler = await getHandler()
-    return handler.POST(request)
+    const res = await handler.POST(request)
+    if (!res.ok) {
+      const body = await res.clone().text()
+      console.error('[Keystatic] POST non-ok response', res.status, body)
+    }
+    return res
   } catch (err) {
     console.error('[Keystatic] POST error:', err)
     return new Response(
