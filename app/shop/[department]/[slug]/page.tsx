@@ -193,7 +193,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
 
             <p className="font-lora text-parchment/35 text-xs mt-4 leading-relaxed">
-              Free shipping on orders over $75. Age verification (21+) required for tobacco products.
+              Free shipping on orders over £75. Age verification (21+) required for tobacco products.
               Estimated delivery 3–7 business days within the continental US.
             </p>
 

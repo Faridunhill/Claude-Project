@@ -118,7 +118,7 @@ export default function Footer() {
               {[
                 '🔒 Secure Checkout via Stripe',
                 '✦ Age Verification Required',
-                '📦 Free Shipping Over $75',
+                '📦 Free Shipping Over £75',
               ].map((badge) => (
                 <div key={badge} className="flex items-center gap-2 text-xs font-lora text-parchment/40">
                   <span>{badge}</span>

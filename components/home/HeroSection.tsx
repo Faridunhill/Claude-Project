@@ -75,7 +75,7 @@ export default function HeroSection() {
               {[
                 { label: '30+ Years', sub: 'Collector Expertise' },
                 { label: '2,400+', sub: 'Products Curated' },
-                { label: 'Free Ship', sub: 'Orders over $75' },
+                { label: 'Free Ship', sub: 'Orders over £75' },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
                   <p className="font-playfair font-bold text-gold text-lg">{stat.label}</p>

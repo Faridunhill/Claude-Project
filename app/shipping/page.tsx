@@ -34,10 +34,10 @@ export default function ShippingPage() {
         </Section>
 
         <Section title="Domestic Shipping (United States)">
-          <p><strong className="text-parchment">Free shipping</strong> is provided on all orders of $75 or more shipped within the continental United States.</p>
-          <p>Orders below $75 are charged a flat shipping rate of $8.95 for standard shipping. Expedited options are available at checkout:</p>
+          <p><strong className="text-parchment">Free shipping</strong> is provided on all orders of £75 or more shipped within the continental United States.</p>
+          <p>Orders below £75 are charged a flat shipping rate of £8.95 for standard shipping. Expedited options are available at checkout:</p>
           <ul className="list-none space-y-2 pl-4 border-l border-gold/20">
-            <li><span className="text-gold">Standard (3–7 business days):</span> $8.95, free over $75</li>
+            <li><span className="text-gold">Standard (3–7 business days):</span> £8.95, free over £75</li>
             <li><span className="text-gold">Expedited (2–3 business days):</span> $19.95</li>
             <li><span className="text-gold">Overnight (next business day):</span> $39.95</li>
           </ul>
