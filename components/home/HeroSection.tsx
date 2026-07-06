@@ -48,7 +48,7 @@ export default function HeroSection() {
             {/* Subheading */}
             <p className="font-lora text-parchment/75 leading-relaxed mb-10"
               style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.2rem)' }}>
-              Purveyors of Fine Pipes, Tobaccos &amp; Gentleman's Accessories Since 2015.
+              Purveyors of Fine Pipes, Tobaccos &amp; Gentleman's Accessories Since 2007.
               <br className="hidden sm:block" />
               Rooted in thirty years of collector knowledge and old-world craftsmanship.
             </p>

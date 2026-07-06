@@ -22,7 +22,7 @@ export default function CinematicHero() {
           FARIDUNHILL
         </h1>
         <p className="fade-up-2 font-lora text-parchment/60 text-sm md:text-base tracking-[0.2em] uppercase mt-6">
-          Est. 2015 · Hand-Selected Collection
+          Est. 2007 · Hand-Selected Collection
         </p>
         <Link
           href="/shop"

@@ -17,7 +17,7 @@ export default async function BlogIndexPage() {
     <div className="min-h-screen bg-mahogany">
       {/* Header */}
       <div className="bg-mahogany-dark border-b border-gold/15 py-14 text-center">
-        <span className="font-fell italic text-gold/70 text-sm tracking-widest">~ Est. 2015 ~</span>
+        <span className="font-fell italic text-gold/70 text-sm tracking-widest">~ Est. 2007 ~</span>
         <h1 className="font-playfair font-bold text-parchment text-5xl lg:text-6xl mt-3">
           The Faridunhill Journal
         </h1>
