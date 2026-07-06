@@ -88,7 +88,7 @@ export default function ContactPage() {
             <p className="font-fell italic text-parchment/60 text-lg leading-relaxed">
               &ldquo;There is no question too simple, and no pipe too obscure. Ask us anything.&rdquo;
             </p>
-            <footer className="font-lora text-gold/50 text-xs mt-2 uppercase tracking-wider">— F. Dunhill, Founder</footer>
+            <footer className="font-lora text-gold/50 text-xs mt-2 uppercase tracking-wider">— Farid, Founder</footer>
           </blockquote>
         </div>
 
