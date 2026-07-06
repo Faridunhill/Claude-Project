@@ -24,7 +24,7 @@ export default config({
       path: 'content/products/*',
       format: { data: 'yaml' },
       schema: {
-        name: fields.text({ label: 'Name', validation: { isRequired: true } }),
+        name: fields.slug({ name: { label: 'Name', validation: { isRequired: true } } }),
         brand: fields.text({ label: 'Brand' }),
         department: fields.select({
           label: 'Department',
