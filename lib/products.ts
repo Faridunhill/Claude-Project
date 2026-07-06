@@ -93,26 +93,32 @@ async function fetchFromKeystatic(): Promise<Product[] | null> {
 }
 
 export async function getAllProducts(): Promise<Product[]> {
-  return (await fetchFromKeystatic()) ?? jsonProducts
+  const keystaticProducts = await fetchFromKeystatic()
+  if (!keystaticProducts) return jsonProducts
+  // Merge, not replace: JSON seed is the base catalog; Keystatic (hub-published)
+  // entries augment it and override any seed product that shares a slug.
+  const bySlug = new Map<string, Product>(jsonProducts.map((p) => [p.slug, p]))
+  for (const p of keystaticProducts) bySlug.set(p.slug, p)
+  return Array.from(bySlug.values())
 }
 
 export async function getFeaturedProducts(): Promise<Product[]> {
-  const products = (await fetchFromKeystatic()) ?? jsonProducts
+  const products = await getAllProducts()
   return products.filter((p) => p.featured && p.inStock)
 }
 
 export async function getProductsByDepartment(department: string): Promise<Product[]> {
-  const products = (await fetchFromKeystatic()) ?? jsonProducts
+  const products = await getAllProducts()
   return products.filter((p) => p.department === department)
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {
-  const products = (await fetchFromKeystatic()) ?? jsonProducts
+  const products = await getAllProducts()
   return products.find((p) => p.slug === slug)
 }
 
 export async function getRelatedProducts(product: Product, limit = 4): Promise<Product[]> {
-  const products = (await fetchFromKeystatic()) ?? jsonProducts
+  const products = await getAllProducts()
   return products
     .filter(
       (p) =>
