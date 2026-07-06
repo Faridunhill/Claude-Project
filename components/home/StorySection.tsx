@@ -74,7 +74,7 @@ export default function StorySection() {
             Yours in smoke,
           </p>
           <p className="font-playfair font-bold text-mahogany text-2xl mt-2">
-            F. Dunhill
+            Farid
           </p>
           <p className="font-lora text-leather/70 text-sm mt-1 tracking-wide">
             Founder &amp; Head Tobacconist
