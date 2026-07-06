@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     template: '%s | Faridunhill',
   },
   description:
-    'Purveyors of fine tobacco pipes, premium pipe tobacco, hand-rolled cigars, vaping products, and gentleman\'s accessories. Rooted in 30 years of collector knowledge and old-world craftsmanship.',
+    'Purveyors of fine estate pipes, hand-carved meerschaums, rare collectibles, leather goods, and gentleman\'s smoking accessories. Rooted in 30 years of collector knowledge and old-world craftsmanship.',
   keywords: [
     'tobacco pipes',
     'pipe tobacco',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     siteName: 'Faridunhill',
     title: 'Faridunhill — Fine Pipes, Tobaccos & Gentleman\'s Accessories',
     description:
-      'Purveyors of fine tobacco pipes, premium pipe tobacco, hand-rolled cigars, and gentleman\'s accessories. Rooted in old-world craftsmanship.',
+      'Purveyors of fine estate pipes, meerschaums, rare collectibles, and gentleman\'s smoking accessories. Rooted in old-world craftsmanship.',
     images: [
       {
         url: '/images/og-default.jpg',

@@ -5,19 +5,17 @@ import { departmentMeta } from '@/lib/products'
 
 export const metadata: Metadata = {
   title: 'Shop All Departments',
-  description: 'Browse all departments at Faridunhill — tobacco pipes, pipe tobacco, cigars, leather bags, accessories, and more.',
+  description: 'Browse all departments at Faridunhill — estate pipes, meerschaums, rare collectibles, leather bags, smoking accessories, and lighters.',
 }
 
 const deptImages: Record<string, string> = {
-  'tobacco-pipes': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
-  'pipe-tobacco': 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600&q=80',
-  'cigars': 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&q=80',
-  'pipe-accessories': 'https://images.unsplash.com/photo-1585155770447-2f66e2a397b5?w=600&q=80',
-  'cigar-accessories': 'https://images.unsplash.com/photo-1585155770447-2f66e2a397b5?w=600&q=80',
-  'leather-bags': 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80',
-  'vaping': 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&q=80',
-  'lighters': 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80',
-  'gift-sets': 'https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600&q=80',
+  'estate-pipes': 'https://i.etsystatic.com/34479460/r/il/d22f04/7660094618/il_fullxfull.7660094618_qvl4.jpg',
+  'new-pipes': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+  'meerschaum': 'https://i.etsystatic.com/34479460/r/il/9ed80b/7771380885/il_fullxfull.7771380885_is59.jpg',
+  'rare-collectible': 'https://i.etsystatic.com/34479460/r/il/df7987/7663292576/il_fullxfull.7663292576_kbvp.jpg',
+  'leather-bags': 'https://i.etsystatic.com/34479460/r/il/010080/4097242757/il_fullxfull.4097242757_k0j5.jpg',
+  'cigar-smoking-accessories': 'https://i.etsystatic.com/34479460/r/il/a3dec9/7743422566/il_fullxfull.7743422566_29ep.jpg',
+  'lighters': 'https://i.etsystatic.com/34479460/r/il/c54c6c/7778612773/il_fullxfull.7778612773_o35w.jpg',
   'sale': 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80',
 }
 
