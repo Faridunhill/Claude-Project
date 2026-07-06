@@ -337,3 +337,35 @@ a {
 .nav-link-underline:hover::after {
   width: 100%;
 }
+
+/* ─── Cinematic homepage ─── */
+@keyframes kenBurns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.12) translate(-1.5%, 1%); }
+}
+
+.ken-burns {
+  animation: kenBurns 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up { animation: fadeUp 1.1s ease-out both; }
+.fade-up-1 { animation: fadeUp 1.1s ease-out 0.25s both; }
+.fade-up-2 { animation: fadeUp 1.1s ease-out 0.5s both; }
+.fade-up-3 { animation: fadeUp 1.1s ease-out 0.75s both; }
+
+@keyframes scrollCue {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+.scroll-cue { animation: scrollCue 2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns, .scroll-cue, .fade-up, .fade-up-1, .fade-up-2, .fade-up-3 { animation: none; }
+}

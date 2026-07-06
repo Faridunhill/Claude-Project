@@ -1,44 +1,44 @@
 import type { Metadata } from 'next'
-import HeroSection from '@/components/home/HeroSection'
-import StorySection from '@/components/home/StorySection'
+import CinematicHero from '@/components/home/CinematicHero'
+import PhilosophyReveal from '@/components/home/PhilosophyReveal'
+import NumberedShowcase from '@/components/home/NumberedShowcase'
 import DepartmentShowcase from '@/components/home/DepartmentShowcase'
-import FeaturedProducts from '@/components/home/FeaturedProducts'
-import PhotoGallery from '@/components/home/PhotoGallery'
-import BlogPreview from '@/components/home/BlogPreview'
+import RitualSection from '@/components/home/RitualSection'
+import BeliefColumns from '@/components/home/BeliefColumns'
 import CustomerReviews from '@/components/home/CustomerReviews'
 import NewsletterSection from '@/components/home/NewsletterSection'
 
 export const metadata: Metadata = {
-  title: 'Faridunhill — Fine Pipes, Tobaccos & Gentleman\'s Accessories',
+  title: 'Faridunhill — The Art of the Pipe',
   description:
-    'Purveyors of fine tobacco pipes, premium pipe tobacco, hand-rolled cigars, and gentleman\'s accessories. Rooted in 30 years of collector knowledge and old-world craftsmanship. Free shipping over $75.',
+    "Purveyors of fine estate pipes, hand-carved meerschaums, rare collectibles, leather goods, and gentleman's smoking accessories. Rooted in 30 years of collector knowledge and old-world craftsmanship.",
 }
 
 export default function HomePage() {
   return (
     <>
-      {/* Section 1: Full-screen hero */}
-      <HeroSection />
+      {/* Section 1: Cinematic full-screen hero */}
+      <CinematicHero />
 
-      {/* Section 2: Brand story, editorial copy */}
-      <StorySection />
+      {/* Section 2: Scroll-revealed philosophy quote */}
+      <PhilosophyReveal />
 
-      {/* Section 3: Department showcase grid */}
+      {/* Section 3: Numbered flagship showcase (real catalog) */}
+      <NumberedShowcase />
+
+      {/* Section 4: Department showcase grid */}
       <DepartmentShowcase />
 
-      {/* Section 4: Featured products horizontal scroll */}
-      <FeaturedProducts />
+      {/* Section 5: The Ritual */}
+      <RitualSection />
 
-      {/* Section 5: Lifestyle photo story */}
-      <PhotoGallery />
-
-      {/* Section 6: Journal / blog preview */}
-      <BlogPreview />
+      {/* Section 6: Belief / Curation / Source story columns */}
+      <BeliefColumns />
 
       {/* Section 7: Customer reviews */}
       <CustomerReviews />
 
-      {/* Section 8: Newsletter & phone collection */}
+      {/* Section 8: Newsletter — The Inner Circle */}
       <NewsletterSection />
     </>
   )
