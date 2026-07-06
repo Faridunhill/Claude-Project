@@ -2,12 +2,13 @@ import Link from 'next/link'
 import Logo from '@/components/ui/Logo'
 
 const shopLinks = [
-  { label: 'Tobacco Pipes', href: '/shop/tobacco-pipes' },
-  { label: 'Pipe Tobacco', href: '/shop/pipe-tobacco' },
-  { label: 'Cigars', href: '/shop/cigars' },
-  { label: 'Pipe Accessories', href: '/shop/pipe-accessories' },
+  { label: 'Estate Pipes', href: '/shop/estate-pipes' },
+  { label: 'New Pipes', href: '/shop/new-pipes' },
+  { label: 'Meerschaum', href: '/shop/meerschaum' },
+  { label: 'Rare & Collectible', href: '/shop/rare-collectible' },
   { label: 'Leather Bags & Cases', href: '/shop/leather-bags' },
-  { label: 'Gift Sets', href: '/shop/gift-sets' },
+  { label: 'Cigar & Smoking Accessories', href: '/shop/cigar-smoking-accessories' },
+  { label: 'Lighters & Matches', href: '/shop/lighters' },
   { label: 'Sale & Clearance', href: '/shop/sale' },
 ]
 
