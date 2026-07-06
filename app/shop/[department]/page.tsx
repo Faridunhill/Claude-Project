@@ -104,9 +104,9 @@ export default async function DepartmentPage({ params }: Props) {
 
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
-                        <span className="font-playfair font-bold text-gold">${product.price.toFixed(2)}</span>
+                        <span className="font-playfair font-bold text-gold">£{product.price.toFixed(2)}</span>
                         {product.originalPrice && (
-                          <span className="font-lora text-parchment/35 text-xs line-through">${product.originalPrice.toFixed(2)}</span>
+                          <span className="font-lora text-parchment/35 text-xs line-through">£{product.originalPrice.toFixed(2)}</span>
                         )}
                       </div>
                       <span className="font-lora text-parchment/35 text-xs">★ {product.rating}</span>
