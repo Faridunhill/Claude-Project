@@ -97,7 +97,7 @@ export default function Navigation() {
       >
         {/* Top bar */}
         <div className="border-b border-gold/10 bg-mahogany-dark/80 text-center py-1.5 text-xs font-lora text-gold-pale/70 tracking-widest">
-          FREE SHIPPING ON ORDERS OVER $75 &nbsp;·&nbsp; AGE VERIFICATION REQUIRED &nbsp;·&nbsp; EST. 2015
+          FREE SHIPPING ON ORDERS OVER £75 &nbsp;·&nbsp; AGE VERIFICATION REQUIRED &nbsp;·&nbsp; EST. 2007
         </div>
 
         <div className="max-w-screen-xl mx-auto px-4 lg:px-8">

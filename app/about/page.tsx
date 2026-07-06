@@ -57,8 +57,8 @@ export default function AboutPage() {
                 patient, attentive smoking.
               </p>
               <p className="font-lora text-parchment/75 leading-[1.95] text-[1.02rem]">
-                Faridunhill opened as a public shop in 2015, because the knowledge had become too
-                good to keep private. We built it on a simple principle: every product we sell must
+                The faridunhill store first opened its doors on eBay in 2007, because the knowledge
+                had become too good to keep private. We built it on a simple principle: every product we sell must
                 be something we would be proud to smoke ourselves. Nothing else makes the cut.
               </p>
             </div>
