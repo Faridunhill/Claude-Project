@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
       image: string
     }) => ({
       price_data: {
-        currency: 'usd',
+        currency: 'gbp',
         product_data: {
           name: item.name,
           images: [item.image],

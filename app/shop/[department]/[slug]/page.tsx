@@ -71,7 +71,7 @@ export default async function ProductPage({ params }: Props) {
     offers: {
       '@type': 'Offer',
       price: product.price,
-      priceCurrency: 'USD',
+      priceCurrency: 'GBP',
       availability: product.inStock
         ? 'https://schema.org/InStock'
         : 'https://schema.org/OutOfStock',
@@ -150,11 +150,11 @@ export default async function ProductPage({ params }: Props) {
 
             <div className="flex items-center gap-4 mt-5 mb-6">
               <span className="font-playfair font-bold text-gold text-3xl">
-                ${product.price.toFixed(2)}
+                £{product.price.toFixed(2)}
               </span>
               {product.originalPrice !== null && product.originalPrice !== undefined && (
                 <span className="font-lora text-parchment/40 text-lg line-through">
-                  ${product.originalPrice.toFixed(2)}
+                  £{product.originalPrice.toFixed(2)}
                 </span>
               )}
               {product.inStock ? (
@@ -238,7 +238,7 @@ export default async function ProductPage({ params }: Props) {
                       {rel.name}
                     </p>
                     <p className="font-playfair font-bold text-gold mt-2">
-                      ${rel.price.toFixed(2)}
+                      £{rel.price.toFixed(2)}
                     </p>
                   </div>
                 </Link>

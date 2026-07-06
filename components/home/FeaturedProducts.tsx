@@ -85,11 +85,11 @@ export default async function FeaturedProducts() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="font-playfair font-bold text-gold text-base">
-                      ${product.price.toFixed(2)}
+                      £{product.price.toFixed(2)}
                     </span>
                     {product.originalPrice && (
                       <span className="font-lora text-parchment/40 text-xs line-through">
-                        ${product.originalPrice.toFixed(2)}
+                        £{product.originalPrice.toFixed(2)}
                       </span>
                     )}
                   </div>
