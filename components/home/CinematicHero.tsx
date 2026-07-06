@@ -1,17 +1,25 @@
 import Link from 'next/link'
 
+// The founder's treasures — full-quality photography from the live catalog.
+const HERO_IMAGES = [
+  'https://i.etsystatic.com/34479460/r/il/df7987/7663292576/il_fullxfull.7663292576_kbvp.jpg', // Rattray's Mary set
+  'https://i.etsystatic.com/34479460/r/il/d22f04/7660094618/il_fullxfull.7660094618_qvl4.jpg', // Jurgen Moritz freehand
+  'https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg', // Charatan Grosvenor
+  'https://i.etsystatic.com/34479460/r/il/13888d/7332132978/il_fullxfull.7332132978_b5zs.jpg', // Butz-Choquin Flamme
+]
+
 export default function CinematicHero() {
   return (
     <section className="relative h-screen min-h-[640px] overflow-hidden bg-[#060403]">
-      {/* Slow-drifting backdrop */}
-      <div
-        className="ken-burns absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://i.etsystatic.com/34479460/r/il/df7987/7663292576/il_fullxfull.7663292576_kbvp.jpg')",
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#060403]/70 via-[#060403]/40 to-[#060403]" />
+      {/* Slow crossfading treasures, each with a Ken Burns drift */}
+      {HERO_IMAGES.map((src, i) => (
+        <div
+          key={src}
+          className="hero-slide ken-burns absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url('${src}')`, animationDelay: `${i * 8}s, 0s` }}
+        />
+      ))}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#060403]/75 via-[#060403]/45 to-[#060403]" />
 
       {/* Copy */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">

@@ -369,3 +369,22 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .ken-burns, .scroll-cue, .fade-up, .fade-up-1, .fade-up-2, .fade-up-3 { animation: none; }
 }
+
+/* ─── Hero crossfade (4 slides x 8s) ─── */
+@keyframes heroFade {
+  0% { opacity: 0; }
+  6% { opacity: 1; }
+  25% { opacity: 1; }
+  31% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.hero-slide {
+  opacity: 0;
+  animation: heroFade 32s linear infinite, kenBurns 24s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide { animation: none; opacity: 0; }
+  .hero-slide:first-child { opacity: 1; }
+}
