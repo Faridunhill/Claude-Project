@@ -8,7 +8,7 @@ export default function CinematicHero() {
         className="ken-burns absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=85')",
+            "url('https://i.etsystatic.com/34479460/r/il/df7987/7663292576/il_fullxfull.7663292576_kbvp.jpg')",
         }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#060403]/70 via-[#060403]/40 to-[#060403]" />
