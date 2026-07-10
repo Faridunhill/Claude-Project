@@ -42,6 +42,35 @@ Three pieces. Together they are the product:
   beats the bought vision API on Ashcombe items (measured, not felt),
   it gets promoted to a tool the agent calls. Until then: experiment.
 
+## 3b. EYE DATA FLYWHEEL + HARD DRIVE EXPANSION (added after Farid's dating-report idea)
+
+**The idea:** faridunhill store gets a page where a collector uploads
+6 specific photos + item info → gets a free dating report → we keep the
+photos as labeled training data for the EYE. The collector's filled-in
+info IS the label. This proprietary photo archive is the defensible
+"secret" — models can be copied, the dataset cannot.
+
+**Data math:** ~30 MB per collector (6 phone photos).
+1,000 reports ≈ 30 GB · 10,000 ≈ 300 GB · 100,000 ≈ 3 TB.
+
+**Storage phases:**
+- Phase 0 (now, to ~1,000 reports): current drive. Clean folder
+  structure; each photo's metadata row goes to Supabase, photo stays local. $0.
+- Phase 1 (~1 TB): two mirrored 4 TB drives — one dying can't kill the
+  dataset. ~$200 once.
+- Phase 2 (~5 TB+ or daily training): small NAS, 10–20 TB, EYE machine
+  reads it over the network. ~$700–1,000 once.
+- Always: cloud cold backup of the archive (~$6/TB/month).
+
+**Three rules that matter more than hardware:**
+1. Standardize the 6 photos — fixed angles (front, back, clasp/nib,
+   engraving, close-up, in-hand). Consistent input = gold dataset.
+2. Never touch originals — raw uploads kept forever; resize/crop into a
+   separate processed folder.
+3. Consent checkbox on the upload form from photo #1: "my photos may be
+   used to improve our identification system." Without it the dataset is
+   legally unusable.
+
 ## 4. HOW FULL AUTOMATIC WORKS (SIMPLE)
 
 1. Agent reads store data: sales, stock, messages, photos.
