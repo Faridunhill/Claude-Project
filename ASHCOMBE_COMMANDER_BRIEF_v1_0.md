@@ -71,6 +71,17 @@ info IS the label. This proprietary photo archive is the defensible
    used to improve our identification system." Without it the dataset is
    legally unusable.
 
+**Compression (photos = 95% of our data):**
+- Originals: **JPEG XL lossless** — recompresses phone JPEGs ~20% smaller,
+  zero quality loss, fully reversible. Keeps the "never touch originals"
+  rule intact while shrinking the archive.
+- Training/processed copies: AVIF or JPEG XL high-quality lossy —
+  50–70% smaller, visually identical.
+- Never store originals lossy — dating lives in tiny details (engraving
+  wear, patina, hallmarks) and lossy compression smudges those first.
+- ZIP/RAR on photos: useless (~0–2%), skip it.
+- Net effect: roughly 2× more collectors per drive.
+
 ## 4. HOW FULL AUTOMATIC WORKS (SIMPLE)
 
 1. Agent reads store data: sales, stock, messages, photos.
