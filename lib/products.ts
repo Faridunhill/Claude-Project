@@ -49,7 +49,7 @@ async function fetchFromKeystatic(): Promise<Product[] | null> {
       images: (e.entry.images as string[]) ?? [],
       featured: e.entry.featured ?? false,
       inStock: e.entry.inStock ?? true,
-      rating: parseFloat((e.entry.rating as string) ?? '4.5') || 4.5,
+      rating: parseFloat((e.entry.rating as string) ?? '0') || 0,
       reviewCount: (e.entry.reviewCount as number) ?? 0,
       description: e.entry.description ?? '',
       tags: (e.entry.tags as string[]) ?? [],

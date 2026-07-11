@@ -50,9 +50,9 @@ export default config({
         ),
         featured: fields.checkbox({ label: 'Featured on homepage', defaultValue: false }),
         inStock: fields.checkbox({ label: 'In Stock', defaultValue: true }),
-        rating: fields.text({ label: 'Rating (0–5) — e.g. 4.5', defaultValue: '4.5' }),
-        reviewCount: fields.integer({ label: 'Review Count', defaultValue: 0 }),
-        description: fields.text({ label: 'Description', multiline: true }),
+        rating: fields.text({ label: 'Rating (0–5) — leave blank; only set from real customer reviews' }),
+        reviewCount: fields.integer({ label: 'Review Count — real reviews only', defaultValue: 0 }),
+        description: fields.text({ label: 'Description — DEPRECATED as hand-edited field: regenerated per-item by the expression layer (P2.6)', multiline: true }),
         tags: fields.array(
           fields.text({ label: 'Tag' }),
           { label: 'Tags', itemLabel: (props) => props.value || 'Tag' }

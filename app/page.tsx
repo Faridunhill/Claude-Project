@@ -5,7 +5,6 @@ import DepartmentShowcase from '@/components/home/DepartmentShowcase'
 import FeaturedProducts from '@/components/home/FeaturedProducts'
 import PhotoGallery from '@/components/home/PhotoGallery'
 import BlogPreview from '@/components/home/BlogPreview'
-import CustomerReviews from '@/components/home/CustomerReviews'
 import NewsletterSection from '@/components/home/NewsletterSection'
 
 export const metadata: Metadata = {
@@ -35,8 +34,9 @@ export default function HomePage() {
       {/* Section 6: Journal / blog preview */}
       <BlogPreview />
 
-      {/* Section 7: Customer reviews */}
-      <CustomerReviews />
+      {/* Customer reviews section removed: testimonials were fabricated
+          (fake names, fake "verified" flags, products not in catalog).
+          Restore only with real, verifiable customer reviews. */}
 
       {/* Section 8: Newsletter & phone collection */}
       <NewsletterSection />

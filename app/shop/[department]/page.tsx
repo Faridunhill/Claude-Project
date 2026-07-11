@@ -109,7 +109,9 @@ export default async function DepartmentPage({ params }: Props) {
                           <span className="font-lora text-parchment/35 text-xs line-through">£{product.originalPrice.toFixed(2)}</span>
                         )}
                       </div>
-                      <span className="font-lora text-parchment/35 text-xs">★ {product.rating}</span>
+                      {product.reviewCount > 0 && (
+                        <span className="font-lora text-parchment/35 text-xs">★ {product.rating}</span>
+                      )}
                     </div>
 
                     <AddToCartButton product={product} className="w-full" />

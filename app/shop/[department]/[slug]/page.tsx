@@ -77,11 +77,15 @@ export default async function ProductPage({ params }: Props) {
         : 'https://schema.org/OutOfStock',
       seller: { '@type': 'Organization', name: 'Faridunhill' },
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: product.rating,
-      reviewCount: product.reviewCount,
-    },
+    // aggregateRating is only emitted when real reviews exist — fake review
+    // markup with zero reviews is a search-engine policy violation
+    ...(product.reviewCount > 0 && {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: product.rating,
+        reviewCount: product.reviewCount,
+      },
+    }),
   }
 
   return (
@@ -146,7 +150,9 @@ export default async function ProductPage({ params }: Props) {
               {product.name}
             </h1>
 
-            <StarRating rating={product.rating} count={product.reviewCount} />
+            {product.reviewCount > 0 && (
+              <StarRating rating={product.rating} count={product.reviewCount} />
+            )}
 
             <div className="flex items-center gap-4 mt-5 mb-6">
               <span className="font-playfair font-bold text-gold text-3xl">
