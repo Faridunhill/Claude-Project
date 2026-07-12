@@ -1,0 +1,42 @@
+# ═══════════════════════════════════════════════════════════════════
+# STANDING WALLS — machines never cross; only Farid edits this file.
+# (Build Handoff §STANDING WALLS; Synthesis §8; Addendum V4)
+#
+# Every automation MUST read this file before spending money, changing
+# a price, or posting. On any ceiling breach: PAUSE the automation and
+# send ONE email. No silent retries, no silent throttling.
+# ═══════════════════════════════════════════════════════════════════
+
+version: 1
+currency: GBP
+
+pricing:
+  # floor_price lives per-item in the genome (human-set, never crossed).
+  # Repricing automation additionally never moves a price more than this
+  # per day, in percent:
+  max_daily_price_move_pct: 10
+
+promotion:
+  # Auto-enroll promoted listings: price >= threshold OR unsold >= days.
+  auto_enroll_min_price: 75.00
+  auto_enroll_stale_days: 60
+  # Hard caps (Synthesis §8):
+  max_ad_rate_pct: 5.0            # per item, never exceeded
+  monthly_ceiling: 100.00         # total promotion spend / month — TO BE
+                                  # CONFIRMED BY FARID before P2.7 goes live
+
+social:
+  max_posts_per_group_per_day: 1  # per-group frequency wall (SOCIAL-ENGINE-001)
+  meta_account_warning: pause_and_email   # any warning = channel pause,
+                                          # one email, no silent retries
+
+visual_generation:
+  # Addendum V4 — re-set these numbers the week a vendor is chosen.
+  max_cost_per_asset: 2.00
+  monthly_ceiling: 50.00
+  max_attempts_per_asset: 3       # generation + 2 retries, then human queue
+
+alerts:
+  on_ceiling_breach: pause_and_email
+  audit_skipped_days_pause: 21    # weekly audit skipped 21 days -> pause
+                                  # generation + email (Synthesis §7)
