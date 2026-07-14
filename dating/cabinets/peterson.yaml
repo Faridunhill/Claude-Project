@@ -78,35 +78,64 @@ drawers:
 
       made_in:                       # THE primary date anchor for Peterson
         fact: made-in (country line)
-        note: Peterson's country line tracks Irish political history almost year-for-year.
+        note: >-
+          Peterson's country line tracks Irish political history — but it is a RULE OF THUMB,
+          not exact: K&P never purged old stamps from the benches, so an old COM can appear on
+          a much later pipe (some 1980s Sherlock Holmes, and even some 2000 pipes, carry
+          pre-Republic stamps). WWII briar shortages make the 1940s dates especially fuzzy.
+        source: Era formats & windows per Leverette (Pipedia, 2006, rule of thumb).
         reads:
-          - value: no country line, or "MADE IN IRELAND" straight line (often with PETERSON'S PATENT)
-            era: c.1890–1922 — pre-independence / patent era
+          - value: no country line at all (the majority of the Patent Era)
+            era: c.1875–1915 — Patent Era
             confidence: medium
-          - value: IRISH FREE STATE  /  MADE IN IRISH FREE STATE
-            era: 1922–1938
+          - value: '"MADE IN IRELAND" in a block, with "Old Style" forked-tail P lettering'
+            era: c.1915/16–1922 (late Patent Era)
+            confidence: medium
+            note: The block "Made in Ireland" ALSO recurs c.1947–49 — split the two by the P lettering (see stem_logo) and the hallmark.
+          - value: IRISH FREE STATE / MADE IN IRISH FREE STATE (one or two lines, close to the stem)
+            era: 1922–1937
             confidence: high
-          - value: MADE IN EIRE  /  EIRE
-            era: 1938–1949
+          - value: 'MADE IN EIRE / EIRE (circle: "Made" & "Eire" around the ring, "in" in the centre)'
+            era: 1938–c.1940/41
             confidence: high
-          - value: MADE IN THE REPUBLIC OF IRELAND  /  MADE IN REP. OF IRELAND
+            note: Refinement per Leverette — the EIRE stamp itself is short-lived (~1938–41), NOT used all the way to 1949.
+          - value: MADE IN IRELAND, circle format (transitional — country still officially Éire)
+            era: c.1945–1947
+            confidence: medium
+          - value: MADE IN IRELAND, block format, one or two lines (transitional)
+            era: c.1947–1949
+            confidence: medium
+          - value: MADE IN THE REPUBLIC OF IRELAND / MADE IN REP. OF IRELAND (block, usually 3 lines, sometimes 2)
             era: 1949–present
             confidence: high
-          - value: ENGLAND / MADE IN ENGLAND / LONDON MADE  (a Dublin line AND an England line together)
-            means: >-
-              The London / England-associated Peterson production. Do not read as a single
-              era on its own — combine with the hallmark and logo to place it.
+          - value: English/London COM — "MADE IN ENGLAND" (block or circle) / "MADE IN LONDON" / "MADE IN LONDON ENGLAND" / "LONDON ENGLAND" / "GREAT BRITAIN"
+            era: c.1895–1959 (Peterson's London operation)
             confidence: medium
-          - value: MADE IN IRELAND in a circle or a 3-line block, with NO political wording
-            era: ambiguous — early OR modern general-market
-            confidence: low
-            disambiguate_with: [stem_logo, mouthpiece.material_and_lip, mouthpiece.tenon, shape_finish]
+            note: >-
+              English block ≈ contemporaneous with the Irish "Made in Ireland" block; English
+              circle ≈ contemporaneous with the Éire/Ireland circle. Check for LONDON (British)
+              hallmarks, NOT Hibernia — see hallmark.british_london_sterling.
 
       model:
         fact: model / line name
         reads:
           - value: SYSTEM / SYSTEM STANDARD / DE LUXE / PREMIER / SHERLOCK HOLMES / KAPET / ...
             means: Model line; narrows within the era. Combine with made_in + hallmark.
+        datable_series:                # series with known intro dates (Leverette, Pipedia 2006)
+          source: Leverette (Pipedia, 2006); confidence medium unless a hallmark confirms.
+          list:
+            Centennial Edition: 1975 (K&P's centennial)
+            Great Explorers Series: 2002
+            Harp Series: 2002
+            Mark Twain Numbered Edition: 1979 (numbered 1–400)
+            Mark Twain 2nd Numbered Edition: 1981 (numbered 1–1000)
+            Mark Twain Un-numbered Edition: 1983–c.1989
+            Emerald: c.1985–2003
+            Millennium Edition: 1988 (City of Dublin founding)
+            Sherlock Holmes Series: 1987–c.1989
+            Return of Sherlock Holmes Series: c.1991
+            Sherlock Holmes Meerschaums: 2006 (hallmark U = 2005 ✓ matches our table)
+            Ebony and Ivory: 2006 (hallmark V = 2006 ✓ matches our table)
 
       shape_number:
         fact: shape number
@@ -114,6 +143,14 @@ drawers:
         reads:
           - value: a shape number is present (e.g. 106)
             means: Look up the shape family; confirms shape, not date. See also band_flag if absent.
+          - value: System 300-series shape number
+            era: 1910–present (a floor, not a date)
+            confidence: medium
+            note: >-
+              Per Leverette — the 300-series shapes are Patent-Era shapes, but the NUMBERING
+              began when the original patent expired (~1910) and the 300-series is NOT in the
+              1905 catalogue. So a 300-number alone only says "1910 or later"; pin the year with
+              the COM stamp or hallmark.
           - value: no shape number where one is expected
             means: May be worn, or hidden under an added band — check band_flag.
 
@@ -132,12 +169,18 @@ drawers:
             means: >-
               Flag only. "Patent" as a WORD can be a line name, not proof of the patent era —
               require a NUMBER (see the patent drawer) before dating on it.
+          - value: '"A PETERSON PRODUCT" (usually stamped over the COM)'
+            era: c.1948–present
+            confidence: medium
+            note: >-
+              Per Leverette — used on the secondary lines (Shamrock, Killarney, etc.). It does not
+              date the pipe by itself; read the COM stamped with it to place it pre-Republic vs Republic.
 
       patent_no:
         fact: patent number (mirror of the patent drawer)
         reads:
           - value: a patent NUMBER is present
-            era: patent era — broadly pre-1949
+            era: Patent Era — System patent expired ~1910 → c.1875–1910 (see patent drawer)
             confidence: medium
           - value: PATENT APPLIED FOR / PAT. PENDING
             era: earliest System production
@@ -276,9 +319,28 @@ drawers:
         note: The chart confirms Harp Crowned (→2002) then ·925 (2003→) as the sterling mark.
         confidence: high
 
+      special_cases:                 # extra hallmark situations (Leverette, Pipedia 2006)
+        source: Leverette (Pipedia, 2006); confidence medium.
+        convention_925_1976:
+          mark: '"925" numeral between the pans of a balance-beam scale (may or may not sit beside Hibernia + harp)'
+          means: >-
+            International convention (Common Control) mark used on EXPORT pipes from 1976. Do NOT
+            confuse with the plain "·925" fineness (2003+). A pipe with this mark can only be dated
+            "1976–present" on the hallmark alone.
+        fourth_mark_1987:
+          mark: an extra (4th) commemorative mark for Dublin's millennium (city founded 988)
+          means: Added by the Dublin office in 1987 only — but most Peterson 1987/88 pipes do NOT carry it.
+        unmarked_sterling:
+          mark: a sterling band stamped only "STERLING" / "STERLING SILVER", no Dublin hallmark
+          means: Likely made for the US market (the US requires only a "sterling" word-stamp). Not datable by hallmark.
+
     # --- (Type 2) NICKEL-MOUNT MARKS — an ERA, never an exact year --------------
     nickel_marks:
       marks: shamrock + wolf hound + round tower (symbols of Ireland)
+      naming_conflict: >-
+        SOURCE DISAGREEMENT — PPN/Irwin (authoritative) calls them "wolf hound" + "round tower";
+        Leverette (Pipedia) calls the same two "prone fox" + "stone tower". Same three-mark set;
+        we follow PPN. Flag noted, not silently resolved.
       not_a_hallmark: Decorative — NOT Dublin assay marks. Never read them as sterling or as a year.
       appeared: c. 1922 (Irish Free State era) to c. 1963
       dating: >-
@@ -328,9 +390,23 @@ drawers:
   # DRAWER 3 — STEM LOGO / PATENT
   # ---------------------------------------------------------------------------
   stem_logo:
-    label: Stem logo
+    label: Stem logo & lettering
     small_drawers:
-      p_marker:
+      p_lettering:                   # the "P" of PETERSON in the stamp — a real dating clue
+        source: Leverette (Pipedia, 2006); confidence medium.
+        note: Splits the "Made in Ireland" block overlap (late Patent Era vs late 1940s).
+        reads:
+          - value: '"Old Style" forked-tail P'
+            era: start of Patent Era – early 1930s
+            confidence: medium
+          - value: script "P" (intermixed with a plain block "P")
+            era: early 1930s – present
+            confidence: medium
+          - value: forked-tail P with a SMALL difference in the fork
+            era: 1970s+ commemorative / "replica" / "retro" pipes
+            confidence: medium
+            note: These usually carry a hallmarked silver band — date them by the hallmark.
+      p_marker:                      # the "P" logo on the STEM itself (softer)
         reads:
           - value: hand-cut / inlaid "P" on the stem
             means: earlier work — corroborating only
@@ -344,8 +420,11 @@ drawers:
       number:
         reads:
           - value: a patent NUMBER present
-            era: patent era — broadly pre-1949
+            era: Patent Era — the System patent expired ~1910, so a number points to c.1875–1910
             confidence: medium
+            note: >-
+              Per Leverette. The word "Patent" / "The Patent" persisted as a line name AFTER the
+              patent lapsed — the NUMBER is the dating signal, not the word.
           - value: PATENT APPLIED FOR
             era: earliest System production
             confidence: medium
@@ -362,8 +441,12 @@ drawers:
             means: style clue; confirms the era alongside the marks
       material_and_lip:              # Q8
         reads:
-          - value: vulcanite, P-Lip
-            means: classic Peterson; spans the whole history — confirms the System / P-Lip family
+          - value: P-Lip (Peterson-Lip / "Steck" mouthpiece)
+            era: 1898–present (a floor — the P-Lip was introduced in 1898)
+            confidence: medium
+            note: A P-Lip means NOT EARLIER THAN 1898. Confirms the System / P-Lip family; spans the whole history after that.
+          - value: vulcanite
+            means: classic material; spans most of the history
           - value: acrylic, fishtail
             means: leans later / market variant
       tenon:                         # Q9
@@ -374,6 +457,19 @@ drawers:
             means: leans later / continental market
           - value: bone or aluminium tenon
             means: note as an era or repair clue
+      military_ferrule:              # for worn-away nomenclature (Leverette) — a HINT only
+        source: Leverette (Pipedia, 2006); a hint, never a precise date.
+        note: Use only when the shank stamps have worn away. Cross-check against any hallmark.
+        reads:
+          - value: army/military mount ferrule with an 'acorn-ish' bend (large radius)
+            era: Patent Era
+            confidence: low
+          - value: ferrule bend tightens to a smaller radius / more abrupt turn
+            era: Irish Free State Era (1922–37)
+            confidence: low
+          - value: sharp, abrupt modern bend
+            era: post-WWII to present
+            confidence: low
 
   # ---------------------------------------------------------------------------
   # DRAWER 5 — SHAPE & FINISH  (SUPPORT ONLY — never decides — Q10)
@@ -388,6 +484,21 @@ drawers:
             means: >-
               Reassurance only. Must AGREE with the marks. Disagreement = investigate
               (replaced stem / married parts / fake).
+      material_variant:              # non-briar bowls narrow the era (Leverette)
+        source: Leverette (Pipedia, 2006); confidence medium.
+        reads:
+          - value: CLAY bowl stamped "PETERSON PATENT" (silver or nickel band)
+            era: Patent Era
+            confidence: medium
+          - value: CLAY bowl stamped "PETERSON SYSTEM" (nickel band only)
+            era: WWII revival (production ended with the London shop, late 1950s/early 60s)
+            confidence: medium
+          - value: BOG OAK bowl (always metal-banded; amber early, else vulcanite stem)
+            era: Patent Era OR WWII revival — bog oak was DROPPED in the 1930s (Free State era) between the two
+            confidence: medium
+          - value: CHERRY WOOD bowl (smooth or bark-on; amber/vulcanite; ± meerschaum lining)
+            era: Patent Era
+            confidence: medium
 
 # =============================================================================
 # THE 10 DATING QUESTIONS — mapped to drawers
@@ -421,9 +532,12 @@ abstain:
 # ── SOURCES & DISCLAIMER ─────────────────────────────────────────────────────
 sources:
   - 'Mark Irwin & Gary Malmberg, "The Peterson Pipe: The Story of Kapp & Peterson" (2016)'
-  - 'Mark Irwin, "Peterson Pipe Notes" (petersonpipenotes.org)'
-  - 'Pipedia — Peterson dating & nomenclature'
+  - 'Mark Irwin, "Peterson Pipe Notes" — Hallmarks + PPN Hallmark Chart (petersonpipenotes.org, rev. 2022) — PRIMARY for the hallmark drawer'
+  - 'Mike Leverette, "A Peterson Dating Guide; A Rule of Thumb" (Pipedia, rev. 2006) — nomenclature eras, series, lettering, materials. Explicitly a RULE OF THUMB → medium confidence'
   - 'Dublin Assay Office date-letter tables (hallmark decoding)'
+source_precedence: >-
+  Where PPN/Irwin and Leverette disagree, PPN wins (more authoritative + recent). Leverette
+  conflicts are flagged in place, not silently resolved (e.g. nickel_marks.naming_conflict).
 disclaimer: >-
   Era boundaries encode collector consensus, not certainty. Marks decide; shape only reassures.
   A hallmark or patent number overrides a stamp-based estimate. This cabinet is a research aid,

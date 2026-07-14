@@ -49,6 +49,20 @@ Irwin's PPN Hallmark Chart (1890–2026) and the PPN "Hallmarks" article:
 
 Cross-checked against the article's worked examples (capital N = 1999, lowercase n = 1979).
 
+## Cross-checked against a second source
+
+The cabinet has been reconciled with **Leverette, "A Peterson Dating Guide; A Rule of Thumb"**
+(Pipedia, 2006). It **confirmed** the hallmark structure and independently validated two
+date-letter entries (SH Meerschaum 2006 = U/2005; Ebony & Ivory = V/2006). It also added the
+COM-stamp formats and sub-eras (incl. the shorter Éire window), datable series, the forked-tail
+vs script **P** lettering, the P-Lip 1898 floor, the 300-series rule, "A Peterson Product", the
+military-ferrule shape clue, and non-briar material windows.
+
+**Source precedence:** where PPN/Irwin and Leverette disagree, PPN wins (more authoritative +
+recent); Leverette conflicts are flagged in place (e.g. the nickel marks — "wolf hound / round
+tower" per PPN vs "prone fox / stone tower" per Leverette), never silently resolved. Leverette
+material is tagged **medium** confidence ("rule of thumb").
+
 ## Not built yet (on purpose)
 
 No app pages or CMS wiring — this is the structure/knowledge layer only, matching the
