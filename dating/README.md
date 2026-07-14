@@ -36,6 +36,15 @@ And carries the blueprint's fixed parts:
   combination (e.g. `Peterson · Dublin · England · shape 106 · no logo → an era`).
 - **Abstain over guess** — anything unverified is marked `confidence: verify`, not asserted.
 
+## Known gaps (on purpose)
+
+- **Hallmark date-letter table is partial.** The `hallmark` drawer carries the full
+  reading framework (fixed marks, the cycle/font/shield rule, Peterson quirks) but only
+  the **verified** letter→year anchors (1890–1898 high; a few moderate/low). The rest is
+  left blank with `full_table.status: verify` and a pointer to the primary chart
+  (`PPN-Hallmark-Chart.pdf`). The primary sources were blocked by network policy, so the
+  complete table must be transcribed from an unrestricted connection — not guessed.
+
 ## Not built yet (on purpose)
 
 No app pages or CMS wiring — this is the structure/knowledge layer only, matching the
