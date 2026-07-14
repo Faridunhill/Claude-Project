@@ -63,6 +63,25 @@ recent); Leverette conflicts are flagged in place (e.g. the nickel marks — "wo
 tower" per PPN vs "prone fox / stone tower" per Leverette), never silently resolved. Leverette
 material is tagged **medium** confidence ("rule of thumb").
 
+## Shape reference — populated (primary-sourced)
+
+A `shape_reference` appendix now maps **shape number → name → production span**, from Mark
+Irwin's PPN "Guide to System Shapes, 1896–2019" (Parts 1 & 2):
+
+- **300 System group** — complete: 301–317 with names and years (305/306 have two variants
+  each; 310/311/315/316 are unassigned gaps). E.g. `308 Large Chubby Billiard = 1896–1959`.
+- **House pipes / straights / peculiars** — the entries whose years were text-readable (31,
+  XXL Bent Billiard, Freehand, Darwin/B42, Mark Twain System…); a few remain `verify` (years
+  locked in page images).
+- **Shape families** (GQ Tobaccos retail chart) — groups numbers into billiard/pot, Dublin/
+  apple/prince/zulu, bent-non-system, Liverpool/lovat, bulldog/rhodesian, System. Grouping only,
+  **no dates**.
+
+**Dating rule:** a shape's span brackets the pipe — START = "not earlier than", END (if
+discontinued) = "not later than" — then the COM stamp / hallmark pins the exact year inside it.
+The `patent` drawer also now carries the real System patent dates (reservoir 1890, graduated
+bore 1891, P-Lip 1894 & 1898).
+
 ## Not built yet (on purpose)
 
 No app pages or CMS wiring — this is the structure/knowledge layer only, matching the
