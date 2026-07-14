@@ -1,101 +1,126 @@
-# Pipe Dating Directory — Blueprint
+# Smoking Pipes Dating Directory — Blueprint
 
-## The Collector's Identification System
+> Working record of the design brainstorm. Nothing here is built yet — this is the
+> agreed plan we return to and keep editing. The build starts one brand (cabinet)
+> at a time, Peterson first.
 
-A structured reference that lets a collector **date and identify an estate pipe
-from the physical evidence on the pipe itself** — the country stamp, the silver
-hallmark, the patent number, the logo form, the fitment.
+## Purpose
 
-### The one rule that governs every design decision
+Identify and date pipes with confidence. **Hard marks decide.** The AI's eye and the
+seller's own photos are *supporting* evidence — never the lead.
 
-There is a person we build for. Call him **the appraiser**. Someone hands him a
-pipe and he asks ten questions — _What does the shank stamp read? Is there a
-silver band? Does it carry a hallmark? Is there a patent number? What does the
-logo look like?_ — and then he spends real effort and real time going away and
-coming back with **part** of the dating evidence.
+## Evidence ladder (order of trust)
 
-That round-trip is the system's failure. Every time the appraiser has to work
-hard, dig through scattered notes, or come back with an incomplete answer, the
-system has failed him.
+1. **Nomenclature** (shank stamps) — the gold
+2. **Band hallmark**
+3. **Stem logo / patent number**
+4. **Stem & mouthpiece clues**
+5. **Shape / finish** — support only, never decides
 
-> **Success is measured by how easy the appraiser's job becomes.**
-> If he can answer his ten questions in a single pass, reading straight down one
-> cabinet, and walk away with a defensible date — the system has succeeded.
+## The 10 dating questions
 
-Everything below serves that one measure.
+- **Q1–Q5 date the pipe** (the marks)
+- **Q6–Q9 confirm the era** (stem & mouthpiece)
+- **Q10 reassures** (shape/finish matches the marks)
 
-## How a cabinet works
+1. What is stamped on the shank? (brand, model, words)
+2. Is there a country stamp? ("Made in ___")
+3. Is there a shape number?
+4. Is there a patent / patent-pending number?
+5. Is there a silver band / hallmark? What are the little marks?
+6. What is the stem logo — its shape and material?
+7. Saddle or tapered stem? Any drop to the shank?
+8. Vulcanite or acrylic mouthpiece? P-lip or fishtail?
+9. Tenon type? (9mm filter? bone / metal / aluminium tenon?)
+10. Does the finish & shape match the marks?
 
-A **cabinet** is one maker (Peterson, Dunhill, Barling, GBD, …). Inside it, the
-appraiser's ten questions become an ordered list of **markers** — each marker is
-one question, the place on the pipe to look, and a table of **readings** that map
-what he sees to a date range and a confidence level.
+**Two silent checks, always run:**
+- Do the clues agree? (disagreement = replaced stem / married parts / fake)
+- Provenance? (box, sock, sleeve, invoice)
 
-Markers are ordered by **decisiveness**, not by convenience:
+## Q1 = 9 small drawers (classified, never a pool)
 
-1. **Primary markers** move the date the most (country-of-manufacture stamp).
-2. **Precision markers** pin an exact year when present (silver hallmark).
-3. **Corroborating markers** narrow within an era (logo form, patent number,
-   fitment, finish).
+`brand · city · made-in · model · shape number · briar logo · special statement · patent no. · band-flag`
 
-The appraiser reads top to bottom. The first primary marker sets the broad era;
-a precision marker, if present, overrides it with an exact year; corroborating
-markers narrow and cross-check. He never has to leave the cabinet.
+**Band-flag logic:** if the model has no factory band but this one does → the band was
+*added* → almost always a **repair (a rescue)**, possibly hiding the shape number.
+Collectors never change the original shape; they only add a band to save a gem.
 
-### Evidence overrides estimate
+## Structure = cabinets, not a pool
 
-A stamp gives an era; a **hallmark or patent number gives a fact**. When physical
-evidence conflicts with a stamp-based estimate, the physical evidence wins, and
-the cabinet says so explicitly. We never present a guess with the confidence of a
-fact.
+- **Q1 (brand) picks the cabinet — and closes all the others.**
+- Every question after = **one reach into one drawer.** Same tiny effort whether the
+  directory holds 1 brand or 200. The "front-desk agent" never searches the pile.
 
-## Data model
+## Nesting = 3 levels
 
-One YAML file per cabinet in `content/dating/`, editable in the CMS as the
-**Dating Cabinets** collection. Shape:
-
-```yaml
-maker: <slug>              # url + filename, e.g. "peterson"
-displayName: <string>
-aka: [<string>, ...]        # alternate names / abbreviations
-country: <string>
-founded: <string>
-status: active | defunct
-summary: <string>           # what the maker is, in one paragraph
-howToUse: <string>          # how to read this specific cabinet
-markers:
-  - id: <slug>
-    label: <string>         # short name of the marker
-    question: <string>      # the appraiser's actual question
-    whereToLook: <string>   # where on the pipe to find it
-    priority: <int>         # 1 = read first
-    weight: primary | precision | corroborating
-    readings:
-      - reads: <string>     # what the evidence literally shows
-        indicates: <string> # human-readable date range
-        from: <int|null>    # numeric range for sorting/UI
-        to: <int|null>
-        confidence: high | medium | low
-        note: <string>      # caveats, disambiguation
-quickFlow: [<string>, ...]   # the ordered decision path, plain language
-sources: [<string>, ...]     # references the readings are drawn from
+```
+CABINET (brand)
+   └ DRAWER (evidence type: shank nomenclature · hallmark · stem · mouthpiece)
+        └ SMALL DRAWERS (single facts)
+             brand · city · made-in · model · shape no. · briar logo · patent · ...
 ```
 
-## Roadmap
+- Shank-nomenclature drawer = the most important drawer.
+- Each small drawer = one fact.
+- The facts **combine** to point at the date
+  (e.g. Peterson + "Dublin / England" line + shape 106 + no briar logo → an era).
 
-- [x] Blueprint + data model
-- [x] **Peterson cabinet** (first cabinet — the reference implementation)
-- [x] `/dating` directory index + `/dating/[maker]` cabinet page
-- [ ] Dunhill cabinet (date code / suffix system — highly precise, great fit)
-- [ ] Barling cabinet (family-era vs Transition vs Corporation)
-- [ ] GBD, Comoy's, Sasieni, Charatan
-- [ ] Cross-link cabinets from matching estate-pipe product pages
-- [ ] Optional guided wizard UI that walks the quickFlow question by question
+Example read: `Peterson · Dublin · England (underneath) · shape 106 · no logo`.
 
-## A note on accuracy
+## Recipes (per-brand dating playbooks)
 
-Year boundaries encode **collector consensus**, not certainty — the literature
-itself disagrees at the edges, and the cabinet records that with confidence
-levels and notes. The directory is built to be corrected and extended in the CMS
-as better evidence surfaces. It is a research aid, not an appraisal or a
-certificate of authenticity.
+The moment the brand is known, the agent loads **that brand's recipe** — the order and
+rules for dating it. No two brands are dated the same way.
+
+- **Premium makers — each gets its OWN recipe** (any pipe ~£100–120 and up):
+  - **Peterson** — hallmark-first (silver hallmark can give the exact year)
+  - **Dunhill** — patent number + date-code math
+  - **Stanwell** — shape-number chart first (e.g. `06 = sitter large brandy, vulcanite
+    saddle stem, by Eltang`; and backwards, that description → Stanwell 6)
+  - **Charatan · James Upshall · De Paja · …** — built one by one
+- **Regular Brands package** — one shared default recipe for ordinary brands.
+- **Rule:** a shape number gives the *shape*, not always the *model*
+  (06 could be Royal Prince *or* Danish Design) — never overclaim the model.
+
+## Trust rule
+
+The system may answer **"cannot date with confidence."** No guessing.
+**A blank beats a lie.** Abstaining when the evidence is thin is what makes it trusted.
+
+## The fingerprint (marks = the pipe's "face")
+
+A face is recognised by turning landmarks into numbers (eye spacing, nose length) and
+comparing. A pipe has **two** fingerprints:
+
+1. **Marks fingerprint (the true identity)** — stamps, hallmark, stem logo, patent.
+   We **READ** these (OCR), we don't measure them. A face has no writing, so machines
+   must measure geometry — a pipe *does* have writing, so reading beats measuring.
+2. **Shape fingerprint (support only)** — where there's no writing: bowl height ÷ width,
+   shank length, bend angle, stem taper. Turned into numbers and compared to known shapes.
+
+**Rule: read where there's text (marks); fingerprint where there isn't (shape).**
+
+## Backed by research (2025–2026 state of the art)
+
+- Build a **reference library and compare** — do NOT train a classifier on your own
+  photos (confirmed even by luxury-bag authentication, Entrupy).
+- **Embedding + nearest-neighbour** (the face-recognition mechanism) generalises to
+  items never seen before — fingerprint + compare.
+- **Fine-grained recognition:** attend to *parts*, suppress the background — look at the
+  stamp / stem / logo, not the whole cluttered photo.
+- **Read marks in two stages:** detect → rotate flat → recognise (engraved-mark pipeline).
+- **Explainable evidence trail** (visual-RAG): observe → record evidence → reason →
+  answer. This is exactly our ladder.
+- **Abstain rather than over-claim** (Entrupy returns "Unidentified", not a false verdict).
+
+## Open questions to resolve during structure design
+
+- Real OCR accuracy on worn, shallow, low-contrast stamps and small hallmarks on curved
+  metal — and whether any off-the-shelf reader is usable without a custom pipe-mark dataset.
+- How to formally enforce the hierarchy (a legible hallmark/shape number overrides a
+  high-similarity shape match) and how the system decides to abstain.
+- Minimum viable reference archive: how many known-dated, mark-verified reference pipes
+  per maker/shape are needed to be reliable, and how the references are provenance-verified.
+- Whether hallmark date-letter and patent/shape-number systems have enough structured,
+  machine-readable reference data to convert a read mark directly into a date range.
