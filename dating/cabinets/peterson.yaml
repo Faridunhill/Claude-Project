@@ -157,100 +157,163 @@ drawers:
   # DRAWER 2 — BAND HALLMARK  (Peterson's exact-year tool → recipe reads this FIRST)
   # ---------------------------------------------------------------------------
   hallmark:
-    label: Band hallmark (Dublin Assay Office)
+    label: Band hallmark (Irish sterling & gold; British/London sterling)
     role: Peterson's exact-year tool — the recipe reads this drawer FIRST.
-    where: On a STERLING silver band/ferrule at the shank–stem joint.
-    # Honesty note: the structure and anchors below came from search-engine SUMMARIES
-    # of the primary sources — a direct fetch was blocked by network policy — so even
-    # "high" anchors are one step removed. The FULL letter→year table must be
-    # transcribed from the primary chart before it is trusted. A blank beats a lie.
-    source_status: summaries_only (primary pages blocked; anchors partial)
-    primary_source: https://petersonpipenotes.org/wp-content/uploads/2021/12/PPN-Hallmark-Chart.pdf
+    where: On a silver/gold band/ferrule at the shank–stem joint (or a wind cap / rim cap).
+    source_status: >-
+      Transcribed from the PRIMARY sources supplied by the owner: Mark Irwin's PPN Hallmark
+      Chart (1890–2026) and the PPN "Hallmarks" article. High confidence throughout.
+      (Only Hibernia's pre-Peterson 1730/1807 history is background, not from PPN.)
+    primary_sources:
+      - Mark Irwin, "Kapp & Peterson's Irish Hallmarks" chart (PPN-Hallmark-Chart.pdf)
+      - Mark Irwin, "Hallmarks" — petersonpipenotes.org/hallmarks (rev. 08/25/2022)
+    context: >-
+      Peterson ranks just behind Dunhill as the world's most dateable production pipe. Even a
+      NICKEL mount can usually be placed within 5–10 years. Use a strong (headset) loupe.
 
-    # --- The FIXED marks (everything that is NOT the date letter) ---------------
+    # --- GATE: which of the FIVE K&P metal stamps is this? (classify BEFORE dating) ---
+    # Mistaking nickel faux-marks for a hallmark is the classic error — settle this FIRST.
+    stamp_types:
+      - id: 1
+        name: K&P maker's mark
+        note: Sponsor's mark. On MOST metal mounts and ALL nickel Systems — so it does NOT, alone, mean sterling.
+      - id: 2
+        name: Nickel-mount marks (shamrock · wolf hound · round tower)
+        note: NOT assay marks. Decorative symbols of Ireland → see nickel_marks. Give an era, never an exact year.
+      - id: 3
+        name: Irish sterling hallmarks (Dublin Assay Office)
+        note: The main event → fixed_marks + date_letter below. Exact year.
+      - id: 4
+        name: Irish gold hallmarks (Dublin Assay Office)
+        note: Rare; FOUR marks, the date letter is the 2nd → see gold_hallmark. Exact year.
+      - id: 5
+        name: British (London) sterling hallmarks
+        note: London-made Petersons (factory 1937–1962). London town mark, NOT Hibernia → see british_london_sterling.
+
+    # --- The FIXED marks of an IRISH STERLING hallmark (not the date letter) -----
     fixed_marks:
-      sterling_standard:
-        mark: crowned harp ("harp crowned")
-        means: Irish sterling (925) fineness mark.
-        note: On Peterson bands through 2002; from 2003 the fineness mark is "·925" instead.
-        confidence: high
+      count: Three marks on a sterling band/ferrule (sometimes only two on a spigot tenon-end or a silver rim cap).
       hibernia:
-        mark: seated female figure (Ireland), usually resting on a harp
-        means: The Dublin Assay Office town/office mark — confirms a Dublin assay.
-        note: Introduced 1730 (first as a duty device); a compulsory standing mark from 1807.
+        mark: Hibernia — seated female figure, one arm on the harp
+        means: The Dublin Assay Office mark; confirms the piece was assayed as sterling in IRELAND.
+        note: The key "is this Irish sterling?" mark. (Introduced 1730 / compulsory 1807 — background only.)
         confidence: high
-      duty_mark:
-        mark: sovereign's head
-        means: Duty-paid mark; Dublin used it 1807–1890 ONLY.
-        note: >-
-          Absent on essentially all hallmarked Peterson bands, because Peterson hallmarking
-          begins ~1891 — after the duty mark ended. Its PRESENCE would mean 1807–1890.
-        confidence: moderate
+      sterling_standard:
+        mark: crowned harp ("harp crowned"), later "·925"
+        means: Irish sterling fineness mark.
+        note: Crowned harp through 2002; "·925" from 2003.
+        confidence: high
       sponsor_mark:
-        mark: K&P (Kapp & Peterson) — plain capitals, or capitals within shields
-        means: The sponsor/maker punch registered at the Dublin Goldsmiths.
+        mark: K&P (Kapp & Peterson) — plain capitals, or capitals in shields (flat- or pointed-top)
+        means: The registered sponsor/maker punch (Company of Goldsmiths of Dublin, est. 1637).
         warning: >-
-          K&P appears on BOTH sterling and nickel mounts, so K&P alone does NOT mean sterling.
-          Require the Hibernia + harp/·925 pair to confirm a real, datable hallmark.
+          K&P appears on BOTH sterling and nickel, so K&P alone does NOT mean sterling. Confirm
+          with Hibernia + crowned-harp/·925 before reading a date letter.
         confidence: high
     mark_order: >-
-      Hibernia (office) → crowned harp or ·925 (fineness) → date letter (year), each in its
-      own shield; plus the separate K&P sponsor punch.
+      Hibernia (assayed-in-Ireland) → crowned harp or ·925 (fineness) → date letter (year),
+      each in its own shield; plus the separate K&P sponsor punch.
 
-    # --- How the DATE LETTER works (the reading rule) --------------------------
+    # --- The DATE LETTER — full table, transcribed from the PPN chart ----------
     date_letter:
-      how_it_works:
-        - Changes annually (Dublin changes the letter on 1 January).
-        - Cycles through the alphabet (~23–25 letters per cycle), then restarts.
-        - Letters are omitted (e.g. J, and often some of V/W/X/Y/Z); the omissions VARY by cycle.
-        - Each new cycle uses a DISTINCT letter case/font AND shield shape (Roman / italic / Gothic / script; oval / rectangle / shaped). Dublin used both Celtic and English letterforms.
-      reading_rule: >-
-        The SAME letter means different years in different cycles. Match the LETTERFORM + SHIELD
-        SHAPE to the correct cycle FIRST, then read the year. Never date on the bare letter.
+      source: >-
+        Transcribed directly from Mark Irwin's Peterson Pipe Notes chart
+        "Kapp & Peterson's Irish Hallmarks" (petersonpipenotes.org), supplied by the owner.
       confidence: high
+      how_it_works:
+        - Changes annually. THROUGH 1931 the change date was 1 JUNE; FROM 1932 it moved to 1 JANUARY.
+        - Cycles through the alphabet, then restarts with a NEW letterform + shield shape.
+        - Letters are omitted, and the omissions VARY by cycle (each cycle lists its "omits").
+        - The SAME letter recurs across cycles — match the letterform + shield to the cycle FIRST, then read the year. Never date on the bare letter.
+      pre_1932_caveat: >-
+        Because the letter changed on 1 June through 1931, a pre-1932 date letter spans
+        mid-year to mid-year — read those years as approximate to within a year.
 
-      # VERIFIED ANCHORS ONLY. The rest is deliberately left blank — see full_table.
-      verified_anchors:
-        - years: 1890=U · 1891=V · 1892=W · 1893=X · 1894=Y · 1895=Z
-          note: End of a cycle. From a verbatim line indexed from the PPN chart.
-          confidence: high
-        - years: 1896=A · 1897=B · 1898=C
-          note: Start of the next cycle (new font + shield).
-          confidence: high
-        - years: 1899=D
-          confidence: moderate
-        - years: 1969=B · 1970=C
-          note: Cycle resumes after the gap. Implies 1968=A, but 1968=A is inferred, not confirmed.
-          confidence: moderate
-        - years: 1998=M · 1999=N · 2000=O
-          note: Single unconfirmed summary reading — treat as a lead, not a fact.
-          confidence: low
+      gap:
+        years: 1939–1968
+        fact: >-
+          Peterson silver-mounted pipes carried hallmarks 1891–1938 and 1969–present. No Dublin
+          date letter was applied in the 1939–1968 gap; the K&P mark + a "STERLING"/"SILVER"
+          stamp stood in. Date gap-era bands by other evidence.
 
-      gap_1938_1968:
-        fact: No Dublin date letter was applied to Peterson bands from 1938 to 1968.
-        instead: The K&P maker's mark + a "STERLING"/"SILVER" stamp stood in for the date letter.
-        so: Bands in this window carry NO date letter — date them by other evidence.
-        confidence: moderate-high
+      # Each cycle: match the LETTERFORM + SHIELD (style) first, then read year → letter.
+      cycles:
+        - id: 1
+          span: "…–1895"
+          style: black-letter (Gothic) capitals in shaped shields
+          note: Only the tail of this cycle falls in the Peterson window.
+          letters: { 1890: 'U', 1891: 'V', 1892: 'W', 1893: 'X', 1894: 'Y', 1895: 'Z' }
+        - id: 2
+          span: "1896–1915"
+          style: black-letter (Gothic) capitals
+          omits: "J  (1904 I → 1905 K)"
+          letters: { 1896: 'A', 1897: 'B', 1898: 'C', 1899: 'D', 1900: 'E', 1901: 'F', 1902: 'G', 1903: 'H', 1904: 'I', 1905: 'K', 1906: 'L', 1907: 'M', 1908: 'N', 1909: 'O', 1910: 'P', 1911: 'Q', 1912: 'R', 1913: 'S', 1914: 'T', 1915: 'U' }
+        - id: 3
+          span: "1916–1938"
+          style: script / cursive capitals
+          omits: "K  (1925 J → 1926 L)"
+          note: "P covers 1930–1931 (the change date moved 1 June → 1 January in 1932)."
+          letters: { 1916: 'A', 1917: 'B', 1918: 'C', 1919: 'D', 1920: 'E', 1921: 'F', 1922: 'G', 1923: 'H', 1924: 'I', 1925: 'J', 1926: 'L', 1927: 'M', 1928: 'N', 1929: 'O', '1930-1931': 'P', 1932: 'Q', 1933: 'R', 1934: 'S', 1935: 'T', 1936: 'U', 1937: 'V', 1938: 'W' }
+        - id: 4
+          span: "1969–1985"
+          style: lowercase letters in shields
+          omits: "J, K  (1976 I → 1977 L);  Q  (1981 P → 1982 R)"
+          note: The cycle's A (1968) fell in the gap and was never applied; the first applied letter is B (1969).
+          letters: { 1969: 'B', 1970: 'C', 1971: 'D', 1972: 'E', 1973: 'F', 1974: 'G', 1975: 'H', 1976: 'I', 1977: 'L', 1978: 'M', 1979: 'N', 1980: 'O', 1981: 'P', 1982: 'R', 1983: 'S', 1984: 'T', 1985: 'U' }
+        - id: 5
+          span: "1986–2010"
+          style: italic capitals in single-line shields
+          omits: "P  (2000 O → 2001 Q)"
+          letters: { 1986: 'A', 1987: 'B', 1988: 'C', 1989: 'D', 1990: 'E', 1991: 'F', 1992: 'G', 1993: 'H', 1994: 'I', 1995: 'J', 1996: 'K', 1997: 'L', 1998: 'M', 1999: 'N', 2000: 'O', 2001: 'Q', 2002: 'R', 2003: 'S', 2004: 'T', 2005: 'U', 2006: 'V', 2007: 'W', 2008: 'X', 2009: 'Y', 2010: 'Z' }
+        - id: 6
+          span: "2011–present"
+          style: outline serif capitals in shields
+          letters: { 2011: 'A', 2012: 'B', 2013: 'C', 2014: 'D', 2015: 'E', 2016: 'F', 2017: 'G', 2018: 'H', 2019: 'I', 2020: 'J', 2021: 'K', 2022: 'L', 2023: 'M', 2024: 'N', 2025: 'O', 2026: 'P' }
 
       fineness_transition:
         crowned_harp: through 2002
         dot_925: from 2003
-        confidence: moderate
+        note: The chart confirms Harp Crowned (→2002) then ·925 (2003→) as the sterling mark.
+        confidence: high
 
-      full_table:
-        status: verify
-        action: >-
-          Transcribe the complete letter→year mapping, BY CYCLE (with each cycle's font +
-          shield shape), from primary_source over an unrestricted connection before trusting it.
-          Do not fill it in from memory.
+    # --- (Type 2) NICKEL-MOUNT MARKS — an ERA, never an exact year --------------
+    nickel_marks:
+      marks: shamrock + wolf hound + round tower (symbols of Ireland)
+      not_a_hallmark: Decorative — NOT Dublin assay marks. Never read them as sterling or as a year.
+      appeared: c. 1922 (Irish Free State era) to c. 1963
+      dating: >-
+        Gives a rough era, not a year — but a knowledgeable eye can still place a nickel Pete
+        within ~5–10 years from the mark iteration plus shape / line / finish.
+      revival: The three stamps resurfaced on copper-plated Christmas mounts 2019–2022 (not general production).
+      confidence: high
+
+    # --- (Type 4) IRISH GOLD HALLMARKS — rare; FOUR marks -----------------------
+    gold_hallmark:
+      note: Gold-band Petersons are rare — FOUR marks, not three.
+      marks:
+        - Hibernia (seated) — assayed in Ireland
+        - DATE LETTER — here it is the SECOND mark; read it on the SAME date_letter cycles above
+        - karat number — e.g. "9" (9 ct)
+        - purity decimal — e.g. "·375" (= 9/24, i.e. 9 ct); "·750" would be 18 ct
+      worked_example: 'italic capital "N" (cycle 5) = 1999;  lowercase "n" (cycle 4) = 1979'
+      confidence: high
+
+    # --- (Type 5) BRITISH / LONDON STERLING — different office, different table --
+    british_london_sterling:
+      note: Peterson's LONDON factory ran 1937–1962; these carry LONDON hallmarks, NOT Hibernia.
+      gate: If the town mark is London's (leopard's head) and there is NO Hibernia → use THIS table, not the Irish one.
+      caveat: Some years have no documented Peterson London mount; Irwin notes never having handled one.
+      style: London cycle; OMITS J (1944 I → 1945 K); letters go lowercase from 1956.
+      letters: { 1937: 'B', 1938: 'C', 1939: 'D', 1940: 'E', 1941: 'F', 1942: 'G', 1943: 'H', 1944: 'I', 1945: 'K', 1946: 'L', 1947: 'M', 1948: 'N', 1949: 'O', 1950: 'P', 1951: 'Q', 1952: 'R', 1953: 'S', 1954: 'T', 1955: 'U', 1956: 'a', 1957: 'b', 1958: 'c', 1959: 'd', 1960: 'e', 1961: 'f', 1962: 'g' }
+      confidence: high
 
     # --- Peterson-specific quirks ---------------------------------------------
     peterson_notes:
       began: Hallmarked sterling bands documented from 1891.
       nickel_bands:
         hallmarked: false
-        faux_marks: shamrock + wolfhound + round tower — DECORATIVE, denote nickel, CANNOT date the pipe.
-        discontinued: ~1963 (moderate confidence)
+        faux_marks: shamrock + wolf hound + round tower — see nickel_marks. Decorative; give an era, not a year.
+        appeared: c. 1922 – c. 1963 (revived 2019–2022 on copper Christmas mounts)
       quirks:
         - The hallmark dates the BAND's assay, not the pipe's manufacture. Bands were fitted the same year or up to ~1–3 years later → read the year as "NOT EARLIER THAN", not exact.
         - K&P alone is NOT proof of sterling (see sponsor_mark.warning).

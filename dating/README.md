@@ -36,14 +36,18 @@ And carries the blueprint's fixed parts:
   combination (e.g. `Peterson · Dublin · England · shape 106 · no logo → an era`).
 - **Abstain over guess** — anything unverified is marked `confidence: verify`, not asserted.
 
-## Known gaps (on purpose)
+## Hallmark drawer — complete (primary-sourced)
 
-- **Hallmark date-letter table is partial.** The `hallmark` drawer carries the full
-  reading framework (fixed marks, the cycle/font/shield rule, Peterson quirks) but only
-  the **verified** letter→year anchors (1890–1898 high; a few moderate/low). The rest is
-  left blank with `full_table.status: verify` and a pointer to the primary chart
-  (`PPN-Hallmark-Chart.pdf`). The primary sources were blocked by network policy, so the
-  complete table must be transcribed from an unrestricted connection — not guessed.
+The `hallmark` drawer is fully populated from the owner-supplied primary sources — Mark
+Irwin's PPN Hallmark Chart (1890–2026) and the PPN "Hallmarks" article:
+
+- A **five-way stamp gate** (K&P mark · nickel faux-marks · Irish sterling · Irish gold ·
+  British/London sterling) — classify before dating, so nickel marks are never read as a hallmark.
+- The **complete Irish date-letter table**, six cycles 1890→2026, each with its letterform +
+  shield style and its omitted letters, plus the 1939–1968 gap and the 1-June→1-January change.
+- **Nickel**, **Irish gold** (4 marks), and **British/London** (its own 1937–1962 table) systems.
+
+Cross-checked against the article's worked examples (capital N = 1999, lowercase n = 1979).
 
 ## Not built yet (on purpose)
 
