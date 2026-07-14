@@ -1,0 +1,181 @@
+maker: peterson
+displayName: Peterson (Kapp & Peterson)
+aka:
+- K&P
+- Peterson of Dublin
+- Kapp & Peterson
+country: Ireland
+founded: '1865'
+status: active
+summary: >-
+  Kapp & Peterson, founded in Dublin in 1865, is one of the most collected pipe
+  houses in the world and — because its country stamp tracks Irish political
+  history almost year for year — one of the easiest to date from the shank alone.
+  Read the country-of-manufacture stamp first for the era, then let a silver
+  hallmark, if one is present, pin the exact year.
+howToUse: >-
+  Read the markers top to bottom. The country-of-manufacture stamp sets the broad
+  era. If the pipe carries a hallmarked sterling band, the Dublin date letter
+  overrides every estimate with an exact year. Patent numbers, logo form, and
+  fitment then narrow and cross-check. A hallmark or patent number is a fact; a
+  stamp is an estimate — when they disagree, the physical evidence wins.
+markers:
+- id: com-stamp
+  label: Country-of-manufacture stamp
+  question: What does the country stamp on the shank read?
+  whereToLook: >-
+    Stamped along the shank, usually underneath, near the bowl/shank joint. The
+    political wording is the single most decisive dating clue on a Peterson.
+  priority: 1
+  weight: primary
+  readings:
+  - reads: '"Made in Ireland" in a straight line, or no country stamp at all (often with "Peterson''s Patent")'
+    indicates: c. 1890–1922 (Patent era, pre-independence)
+    from: 1890
+    to: 1922
+    confidence: medium
+    note: >-
+      A wide window. Look for a patent number and early logo forms to tighten it.
+      An unstamped country line is common on the earliest System pipes.
+  - reads: '"IRISH FREE STATE" / "MADE IN IRISH FREE STATE"'
+    indicates: 1922–1938
+    from: 1922
+    to: 1938
+    confidence: high
+    note: >-
+      Tracks the Irish Free State period (1922 treaty to the 1937 constitution).
+      One of the most reliable single-stamp date brackets in pipe collecting.
+  - reads: '"MADE IN EIRE" / "EIRE"'
+    indicates: c. 1938–1949
+    from: 1938
+    to: 1949
+    confidence: high
+    note: >-
+      Follows the 1937 constitution that renamed the state Éire, up to the 1949
+      declaration of the Republic.
+  - reads: '"MADE IN THE REPUBLIC OF IRELAND" / "MADE IN REP. OF IRELAND"'
+    indicates: 1949–present
+    from: 1949
+    to: null
+    confidence: high
+    note: >-
+      Set by the 1949 Republic of Ireland Act. Very long era — narrow it with the
+      logo form, fitment, and any silver hallmark.
+  - reads: '"MADE IN IRELAND" in a circle or a three-line block, with no Free State / Éire / Republic wording'
+    indicates: ambiguous — early (pre-1922) OR modern general-market
+    from: null
+    to: null
+    confidence: low
+    note: >-
+      This wording alone is not decisive. Disambiguate with the logo form, the
+      P-Lip vs fishtail, presence of a 9mm filter, and finish. A crisp modern
+      K&P shield points modern; worn early logos point pre-1922.
+- id: hallmark
+  label: Silver band hallmark (Dublin Assay Office)
+  question: Is there a sterling silver band, and does it carry Dublin hallmarks?
+  whereToLook: >-
+    On the sterling band (ferrule) where the stem meets the shank. Look for a row
+    of tiny punched marks. Nickel and "nickel silver" bands are NOT hallmarked
+    and cannot be dated this way.
+  priority: 2
+  weight: precision
+  readings:
+  - reads: 'Hibernia figure + crowned harp (sterling standard) + a single date letter'
+    indicates: exact year — read the date letter against the Dublin date-letter table
+    from: null
+    to: null
+    confidence: high
+    note: >-
+      The precision tool. Match the date letter's font, case, and shield shape to
+      the Dublin Assay Office date-letter chart to get the exact hallmarking year.
+      When a hallmark is present it overrides any stamp-based estimate.
+  - reads: 'Band present but plain / stamped ".925" or "STERLING" only, no Dublin date letter'
+    indicates: not independently datable by hallmark
+    from: null
+    to: null
+    confidence: low
+    note: >-
+      Fall back to the country stamp and logo form. A bare "STERLING" or "925"
+      mark carries no year.
+- id: patent
+  label: Patent stamp / System patent number
+  question: Is there a patent number or the word "PATENT" stamped on the pipe?
+  whereToLook: >-
+    On the shank, often near the country stamp. Common on System pipes (the pipe
+    with the moisture reservoir under the bowl and the P-Lip mouthpiece).
+  priority: 3
+  weight: corroborating
+  readings:
+  - reads: 'A patent NUMBER, or "PATENT APPLIED FOR"'
+    indicates: pushes the date into the Patent era, broadly pre-1949
+    from: 1890
+    to: 1949
+    confidence: medium
+    note: >-
+      A specific number ties to an original filing (1890s–1900s System patents)
+      and generally indicates an earlier pipe. Cross-check against the country
+      stamp.
+  - reads: 'The word "PATENT" as part of a line name, with no number'
+    indicates: not conclusive on its own
+    from: null
+    to: null
+    confidence: low
+    note: >-
+      "The Patent" persisted as a model name after the patents lapsed, so the word
+      alone does not date the pipe. Require a number for weight.
+- id: logo-form
+  label: K&P logo form and line stamp
+  question: What does the K&P logo look like, and what line name is stamped?
+  whereToLook: >-
+    The trademark on the shank/stem — the three "K&P" letters, the "Peterson''s"
+    script, and any line name (System Standard, De Luxe, Premier, etc.).
+  priority: 4
+  weight: corroborating
+  readings:
+  - reads: 'Three "K&P" letters each in its own shield/oval'
+    indicates: broadly mid-20th century to present
+    from: 1945
+    to: null
+    confidence: low
+    note: >-
+      The shape and depth of the shields shifted over the decades; use it to
+      narrow within the Republic era, alongside the hallmark and fitment.
+  - reads: 'Flowing "Peterson''s" script and early, worn lettering'
+    indicates: earlier production
+    from: 1890
+    to: 1945
+    confidence: low
+    note: Corroborating only — pair with the country stamp and any patent number.
+- id: fitment
+  label: Fitment, finish, and ownership era
+  question: P-Lip or fishtail? Any 9mm filter? Army mount? What finish?
+  whereToLook: The mouthpiece, the mortise/tenon fit, and the overall finish.
+  priority: 5
+  weight: corroborating
+  readings:
+  - reads: 'P-Lip mouthpiece, System reservoir'
+    indicates: classic Peterson System — spans the whole history
+    from: 1890
+    to: null
+    confidence: low
+    note: Confirms model family, not date. Combine with era markers.
+  - reads: '9mm filter fitment / modern acrylic stems / crisp contemporary stamping'
+    indicates: later 20th century to present
+    from: 1960
+    to: null
+    confidence: low
+    note: >-
+      Peterson was acquired by Laudisi Enterprises in 2018; the newest pipes keep
+      Dublin nomenclature but may show updated stamping. Treat very crisp, modern
+      stamping as a recency signal, not a precise date.
+quickFlow:
+- Read the country-of-manufacture stamp on the shank — this sets the broad era (Free State 1922–1938, Éire 1938–1949, Republic 1949+, or pre-1922 patent era).
+- Check for a sterling silver band. If it carries Dublin hallmarks, read the date letter for an exact year — this overrides every estimate.
+- Look for a patent number. A specific number pushes the pipe into the earlier patent era.
+- Examine the K&P logo/shield form and the line name to narrow within the era.
+- Note the fitment (P-Lip, filter, army mount) and finish as a final cross-check.
+sources:
+- 'Mark Irwin & Gary Malmberg, "The Peterson Pipe: The Story of Kapp & Peterson" (2016)'
+- 'Mark Irwin, "Peterson Pipe Notes" — dating guides (petersonpipenotes.org)'
+- 'Pipedia — Peterson dating and nomenclature articles'
+- 'Dublin Assay Office date-letter tables (for decoding sterling hallmarks)'
