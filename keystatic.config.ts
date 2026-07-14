@@ -14,7 +14,6 @@ export default config({
     navigation: {
       Products: ['products'],
       Blog: ['posts'],
-      'Dating Directory': ['cabinets'],
     },
   },
 
@@ -105,81 +104,6 @@ export default config({
           { label: 'Tags', itemLabel: (props) => props.value || 'Tag' }
         ),
         content: fields.text({ label: 'Content (Markdown)', multiline: true }),
-      },
-    }),
-
-    cabinets: collection({
-      label: 'Dating Cabinets',
-      slugField: 'maker',
-      path: 'content/dating/*',
-      format: { data: 'yaml' },
-      schema: {
-        maker: fields.slug({
-          name: { label: 'Maker slug (e.g. peterson)', validation: { isRequired: true } },
-        }),
-        displayName: fields.text({ label: 'Display name', validation: { isRequired: true } }),
-        aka: fields.array(fields.text({ label: 'Also known as' }), {
-          label: 'Also known as',
-          itemLabel: (props) => props.value || 'Name',
-        }),
-        country: fields.text({ label: 'Country' }),
-        founded: fields.text({ label: 'Founded (year)' }),
-        status: fields.select({
-          label: 'Status',
-          options: [
-            { label: 'Active', value: 'active' },
-            { label: 'Defunct', value: 'defunct' },
-          ],
-          defaultValue: 'active',
-        }),
-        summary: fields.text({ label: 'Summary', multiline: true }),
-        howToUse: fields.text({ label: 'How to use this cabinet', multiline: true }),
-        markers: fields.array(
-          fields.object({
-            id: fields.text({ label: 'Marker id (e.g. com-stamp)' }),
-            label: fields.text({ label: 'Marker label' }),
-            question: fields.text({ label: "Appraiser's question", multiline: true }),
-            whereToLook: fields.text({ label: 'Where to look', multiline: true }),
-            priority: fields.integer({ label: 'Priority (1 = read first)', defaultValue: 1 }),
-            weight: fields.select({
-              label: 'Weight',
-              options: [
-                { label: 'Primary (moves the date most)', value: 'primary' },
-                { label: 'Precision (pins an exact year)', value: 'precision' },
-                { label: 'Corroborating (narrows / cross-checks)', value: 'corroborating' },
-              ],
-              defaultValue: 'corroborating',
-            }),
-            readings: fields.array(
-              fields.object({
-                reads: fields.text({ label: 'What the evidence shows', multiline: true }),
-                indicates: fields.text({ label: 'Indicates (date range)' }),
-                from: fields.integer({ label: 'From year (optional)' }),
-                to: fields.integer({ label: 'To year (optional)' }),
-                confidence: fields.select({
-                  label: 'Confidence',
-                  options: [
-                    { label: 'High', value: 'high' },
-                    { label: 'Medium', value: 'medium' },
-                    { label: 'Low', value: 'low' },
-                  ],
-                  defaultValue: 'medium',
-                }),
-                note: fields.text({ label: 'Note', multiline: true }),
-              }),
-              { label: 'Readings', itemLabel: (props) => props.fields.indicates.value || 'Reading' }
-            ),
-          }),
-          { label: 'Markers', itemLabel: (props) => props.fields.label.value || 'Marker' }
-        ),
-        quickFlow: fields.array(fields.text({ label: 'Step', multiline: true }), {
-          label: 'Quick flow (ordered decision path)',
-          itemLabel: (props) => props.value || 'Step',
-        }),
-        sources: fields.array(fields.text({ label: 'Source' }), {
-          label: 'Sources',
-          itemLabel: (props) => props.value || 'Source',
-        }),
       },
     }),
   },
