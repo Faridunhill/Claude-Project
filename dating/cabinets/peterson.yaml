@@ -582,7 +582,7 @@ shape_reference:
       'Freehand': { name: 'Freehand (aka Plato / Bark-Top / Plateau)', from: 1975, to: Present }
       'Darwin / B42': { name: 'Darwin / B42 XL Apple', from: 2009, to: Present }
       'Mark Twain System': { runs: '1981, 1985, then 2010–Present' }
-      'Patent Commemorative': { name: 'Commemorative Patent System 1890–1990', made: 1990 }
+      'Patent Commemorative': { name: 'Commemorative Patent System 1890–1990 (Bent Oom Paul, XXL)', made: 1990 }
       '120': { name: 'Dublin System (straight)', years: verify }
       'House Pipe': { name: 'Hand-Made House Pipe', years: verify }
       'Pub Pipe': { name: 'Pub Pipe', years: 'c.2019 (verify)' }
