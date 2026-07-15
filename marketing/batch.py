@@ -215,8 +215,43 @@ def build_input(folder: Path) -> IntakeInput:
     )
 
 
+def _load_prices(root: Path) -> list[tuple[str, float]]:
+    """Optional `<root>/prices.txt` (or .csv): lines of `substring: price`.
+    A folder gets the price of the FIRST substring its name contains — so
+    short unique keys ('dunhill', '90s', '246') survive the long, typo-y
+    folder names without exact matching."""
+    for name in ("prices.txt", "prices.csv"):
+        f = root / name
+        if not f.is_file():
+            continue
+        rows: list[tuple[str, float]] = []
+        for line in f.read_text(encoding="utf-8", errors="ignore").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            sep = ":" if ":" in line else ("," if "," in line else None)
+            if not sep:
+                continue
+            key, _, val = line.partition(sep)
+            try:
+                rows.append((key.strip().lower(), float(val.strip().lstrip("$£€ "))))
+            except ValueError:
+                continue
+        return rows
+    return []
+
+
+def _match_price(folder_name: str, prices: list[tuple[str, float]]) -> Optional[float]:
+    low = folder_name.lower()
+    for sub, price in prices:
+        if sub in low:
+            return price
+    return None
+
+
 def run_batch(root: str | Path, out: str | Path, *, reference_year: Optional[int] = None) -> dict[str, Any]:
     source = FolderItemAssets(root)
+    prices = _load_prices(Path(root))
     out_dir = Path(out)
     out_dir.mkdir(parents=True, exist_ok=True)
     # The folders are the source of truth for this tool: every run rebuilds
@@ -232,6 +267,14 @@ def run_batch(root: str | Path, out: str | Path, *, reference_year: Optional[int
     for folder in source.folders():
         sku = folder.name
         intake = build_input(folder)
+        # fill the price from prices.txt if the folder/notes did not carry one
+        if not (intake.economics and intake.economics.get("list_price")):
+            matched = _match_price(sku, prices)
+            if matched is not None:
+                econ = dict(intake.economics or {})
+                econ["list_price"] = matched
+                econ.setdefault("currency", "USD")
+                intake.economics = econ
         try:
             result = ingest(intake, source, store)
         except BirthRecordExists:

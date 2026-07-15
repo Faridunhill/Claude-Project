@@ -82,7 +82,12 @@ stamping: DUNHILL CUMBERLAND 41031 MADE IN ENGLAND
 why: A Cumberland sandblast with its original sterling band.
 ```
 
-Re-running is safe: birth records are insert-only, outputs regenerate.
+Re-running is safe: the batch rebuilds from the folders each run.
+
+**Prices** — put an optional `prices.txt` in the root with `key: price`
+lines; a folder gets the price of the first key its name contains
+(`dunhill: 425`, `90s: 110`, `246: 125`). A `price:` line in a pipe's own
+notes always wins over this.
 
 ## Running tests
 

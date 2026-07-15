@@ -132,6 +132,23 @@ def test_ambiguous_grade_is_left_as_gap(tmp_path):
     assert "honest wear" in intake.human_facts["unique_physical.condition_notes"]
 
 
+def test_prices_txt_fills_missing_price_by_substring(tmp_path):
+    root = tmp_path / "FaridunhillPipes"
+    _make_pipe(root, "Dunhill Cumberland 41031, . no filter, silver band", ["a.HEIC"])
+    _make_pipe(root, "Peterson sterling silve XL 90S smooth bent billiard", ["b.HEIC"])
+    (root / "prices.txt").write_text("dunhill: 425\n90s: 110\n", encoding="utf-8")
+    out = tmp_path / "out"
+    run_batch(root, out, reference_year=2026)
+    import json as _j
+    rows = {r["sku"]: r for r in _j.loads((out / "report.json").read_text())}
+    dun = (out / "Dunhill Cumberland 41031, . no filter, silver band" / "post-tiktok.txt").read_text()
+    assert "$425" in dun
+    pet = (out / "Peterson sterling silve XL 90S smooth bent billiard" / "post-tiktok.txt").read_text()
+    assert "$110" in pet
+    # price no longer a gap for these
+    assert not any("list price" in g for g in rows["Dunhill Cumberland 41031, . no filter, silver band"]["gaps"])
+
+
 def test_run_batch_is_rerunnable(tmp_path):
     root = tmp_path / "FaridunhillPipes"
     _make_pipe(root, "GBD Cutty", ["hero.jpg"], notes="price: 145\n")
