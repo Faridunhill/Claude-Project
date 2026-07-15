@@ -219,7 +219,14 @@ def run_batch(root: str | Path, out: str | Path, *, reference_year: Optional[int
     source = FolderItemAssets(root)
     out_dir = Path(out)
     out_dir.mkdir(parents=True, exist_ok=True)
-    store = GenomeStore(out_dir / "genome.db")
+    # The folders are the source of truth for this tool: every run rebuilds
+    # from what is on disk NOW. Birth records are insert-only within a run,
+    # but a fresh run starts from a clean db so newly added photos/notes are
+    # always reflected (a stale record would silently keep old data).
+    db_path = out_dir / "genome.db"
+    if db_path.exists():
+        db_path.unlink()
+    store = GenomeStore(db_path)
 
     index_rows: list[dict[str, Any]] = []
     for folder in source.folders():
