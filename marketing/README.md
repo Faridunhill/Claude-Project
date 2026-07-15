@@ -8,7 +8,7 @@ Advisor F addendum verdicts + `BUILD_HANDOFF_MARKETING_P2`.
 | Layer | Where | Status |
 |---|---|---|
 | **GENOME** — immutable birth facts | `genome/` | **P2.2 — built** |
-| **EXPRESSION** — generated marketing, disposable, versioned | `expression/` (P2.6–P2.7) | queued |
+| **EXPRESSION** — generated marketing, disposable, versioned | `expression/` | **P2.6 — copy generator built** |
 | **PHENOTYPE** — five-event append-only ledger | `phenotype/` (P2.5) | queued |
 
 ## What is in `genome/`
@@ -60,7 +60,7 @@ python -m pytest marketing/tests/ -v
 ## Build queue position
 
 P2.1 ✅ (store hygiene) · P2.2 ✅ (genome) · P2.3 ✅ (intake pipeline) ·
-**P2.4 ✅ (QA gate)** · P2.5 five-event ledger · P2.6 copy generators (next) ·
+P2.4 ✅ (QA gate) · P2.5 five-event ledger · **P2.6 ✅ (copy generator)** ·
 P2.7 social engine · P2.8 encyclopedia flywheel · P2.9 visual generation
 (last, cohort-level only).
 
