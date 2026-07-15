@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -44,14 +45,67 @@ from .genome.store import BirthRecordExists, GenomeStore
 from .genome.vocab import ConditionGrade, EraBasis, FlawCode, ProductType
 
 _NOTES_FILES = ("pipe.yaml", "pipe.yml", "pipe.txt", "notes.txt", "notes.md", "info.txt")
+_STAMP_FILES = {"stamp.txt", "stamping.txt", "nomenclature.txt", "marks.txt"}
+
+_GRADE_WORDS = {
+    "mint": "mint", "excellent": "excellent", "very good": "very_good",
+    "good": "good", "fair": "fair", "project": "project",
+}
+_PRICE_RE = re.compile(r"[$£€]\s?(\d+(?:\.\d{1,2})?)")
+_PRICE_KW_RE = re.compile(r"\bprice\b[:\s]*[$£€]?\s?(\d+(?:\.\d{1,2})?)", re.I)
 
 
-def _read_notes(folder: Path) -> dict[str, str]:
+def _find_notes_file(folder: Path) -> Optional[Path]:
+    # 1) a conventional name; 2) else a <foldername>.txt; 3) else any .txt
+    #    that is not a stamping file.
     for name in _NOTES_FILES:
         f = folder / name
         if f.is_file():
-            return _parse_kv(f.read_text(encoding="utf-8", errors="ignore"))
-    return {}
+            return f
+    named = folder / f"{folder.name}.txt"
+    if named.is_file():
+        return named
+    for f in sorted(folder.glob("*.txt")):
+        if f.name.lower() not in _STAMP_FILES:
+            return f
+    return None
+
+
+def _read_notes(folder: Path) -> dict[str, str]:
+    f = _find_notes_file(folder)
+    if f is None:
+        return {}
+    raw = f.read_text(encoding="utf-8", errors="ignore")
+    kv = _parse_kv(raw)
+    kv["_raw"] = raw            # keep the whole text for free-form extraction
+    return kv
+
+
+def _extract_price(raw: str) -> Optional[float]:
+    m = _PRICE_KW_RE.search(raw) or _PRICE_RE.search(raw)
+    if m:
+        try:
+            return float(m.group(1))
+        except ValueError:
+            return None
+    return None
+
+
+def _extract_grade(raw: str) -> Optional[str]:
+    low = raw.lower()
+    found = {v for k, v in _GRADE_WORDS.items() if k in low}
+    # only trust an unambiguous single grade (e.g. skip "fair/good")
+    return next(iter(found)) if len(found) == 1 else None
+
+
+def _condition_notes(kv: dict[str, str], raw: str) -> Optional[str]:
+    """Prefer an explicit 'condition:' line's text; else the whole note
+    (so a human's real description always reaches the listing)."""
+    val = kv.get("condition")
+    if val and _extract_grade(val) is None and len(val) > 3:
+        return val.strip()
+    text = raw.strip()
+    return text or None
 
 
 def _parse_kv(text: str) -> dict[str, str]:
@@ -101,11 +155,23 @@ def build_input(folder: Path) -> IntakeInput:
         human_facts["model_line"] = model
     if notes.get("country"):
         human_facts["country_of_origin"] = notes["country"][:2].upper()
-    if notes.get("condition"):
-        try:
-            human_facts["unique_physical.condition_grade"] = ConditionGrade(notes["condition"].lower())
-        except ValueError:
-            pass
+    raw = notes.get("_raw", "")
+    # condition grade: a clean 'condition: good' wins; else an unambiguous
+    # grade word found anywhere in the note; else left as a gap.
+    grade_val = (notes.get("condition") or "").strip().lower()
+    grade = None
+    try:
+        grade = ConditionGrade(grade_val)
+    except ValueError:
+        picked = _extract_grade(raw)
+        if picked:
+            grade = ConditionGrade(picked)
+    if grade is not None:
+        human_facts["unique_physical.condition_grade"] = grade
+    # the human's real description always reaches the listing
+    cnotes = _condition_notes(notes, raw)
+    if cnotes:
+        human_facts["unique_physical.condition_notes"] = cnotes
     if notes.get("era"):
         era = _era_from_notes(notes["era"])
         if era:
@@ -122,11 +188,16 @@ def build_input(folder: Path) -> IntakeInput:
             human_facts["unique_physical.flaws"] = flaws
 
     economics: dict[str, Any] = {}
+    price = None
     if notes.get("price"):
         try:
-            economics["list_price"] = float(notes["price"].lstrip("$£€"))
+            price = float(notes["price"].lstrip("$£€ "))
         except ValueError:
-            pass
+            price = None
+    if price is None:
+        price = _extract_price(raw)
+    if price is not None:
+        economics["list_price"] = price
     if notes.get("floor"):
         try:
             economics["floor_price"] = float(notes["floor"].lstrip("$£€"))

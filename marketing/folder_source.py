@@ -28,7 +28,10 @@ from typing import Optional
 from .genome.adapter_itemassets import ItemAssets, ItemAssetsSource, MediaAsset
 from .genome.vocab import MediaRole
 
-_IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp", ".tif", ".tiff"}
+_IMAGE_EXTS = {
+    ".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp", ".tif", ".tiff",
+    ".heic", ".heif",   # iPhone default — common in on-disk pipe folders
+}
 
 # Longest-match brand table (multi-word brands must win over their first token).
 _KNOWN_BRANDS = [

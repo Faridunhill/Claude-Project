@@ -99,6 +99,39 @@ def test_run_batch_produces_all_outputs(tmp_path):
     assert "Dunhill" in listing
 
 
+def test_heic_photos_are_detected(tmp_path):
+    d = _make_pipe(tmp_path, "Dunhill 41031", ["IMG_7514.HEIC", "IMG_7515.HEIC"])
+    assets = FolderItemAssets(tmp_path).get("Dunhill 41031")
+    assert len(assets.media) == 2
+    assert assets.media[0].role is MediaRole.HERO
+
+
+def test_freeform_notes_named_after_folder_are_read(tmp_path):
+    name = "Dunhill Cumberland 41031, . no filter sandblast straight billiard, silver band"
+    d = _make_pipe(tmp_path, name, ["IMG_1.HEIC"])
+    # notes file named after the pipe, free-form text with a price + condition
+    (d / f"{name}.txt").write_text(
+        "4: Group 4 size. 03: Billiard shape.\n\n"
+        "Price $425.\n"
+        "Condition : pre smoked, good condition, small rim burn on one side.\n",
+        encoding="utf-8",
+    )
+    intake = build_input(d)
+    assert intake.economics["list_price"] == 425.0
+    assert intake.human_facts["unique_physical.condition_grade"].value == "good"
+    assert "rim burn" in intake.human_facts["unique_physical.condition_notes"]
+
+
+def test_ambiguous_grade_is_left_as_gap(tmp_path):
+    d = _make_pipe(tmp_path, "Amphora System", ["IMG_1.HEIC"])
+    (d / "Amphora System.txt").write_text("Condition: fair/good, honest wear.\n", encoding="utf-8")
+    intake = build_input(d)
+    # 'fair' and 'good' both present -> do not guess a grade
+    assert "unique_physical.condition_grade" not in intake.human_facts
+    # but the description text is still captured
+    assert "honest wear" in intake.human_facts["unique_physical.condition_notes"]
+
+
 def test_run_batch_is_rerunnable(tmp_path):
     root = tmp_path / "FaridunhillPipes"
     _make_pipe(root, "GBD Cutty", ["hero.jpg"], notes="price: 145\n")
