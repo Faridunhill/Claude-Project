@@ -60,9 +60,16 @@ python -m pytest marketing/tests/ -v
 ## Build queue position
 
 P2.1 ✅ (store hygiene) · P2.2 ✅ (genome) · P2.3 ✅ (intake pipeline) ·
-P2.4 ✅ (QA gate) · P2.5 five-event ledger · **P2.6 ✅ (copy generator)** ·
-P2.7 social engine · P2.8 encyclopedia flywheel · P2.9 visual generation
-(last, cohort-level only).
+P2.4 ✅ (QA gate) · P2.5 five-event ledger · P2.6 ✅ (copy generator) ·
+**P2.7 ✅ (social + reel generator)** · P2.8 encyclopedia flywheel ·
+P2.9 visual generation (last, cohort-level only).
+
+`expression/social.py` — per-channel posts (Instagram / TikTok / X /
+Reddit / email) + a 9:16 VideoReel storyboard built from the REAL genome
+photos. Same assert-vs-hedge lock as the listing; posting frequency is
+left to the scheduler (control.yaml social walls). PLACEMENT LAW: reels
+are social/email only, never a listing image; they carry no synthetic
+imagery by construction.
 
 `gate.py` — the four routing rules (confidence / corroboration / price /
 audit) over a genome's Tier A claims. Returns a `GateDecision`: PASS

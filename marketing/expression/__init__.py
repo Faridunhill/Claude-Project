@@ -15,5 +15,20 @@ Every generator obeys two laws:
 """
 
 from .listing import ListingDraft, generate_listing
+from .social import (
+    ReelShot,
+    SocialPost,
+    VideoReel,
+    generate_reel,
+    generate_social,
+)
 
-__all__ = ["ListingDraft", "generate_listing"]
+__all__ = [
+    "ListingDraft",
+    "generate_listing",
+    "ReelShot",
+    "SocialPost",
+    "VideoReel",
+    "generate_reel",
+    "generate_social",
+]
