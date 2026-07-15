@@ -149,6 +149,24 @@ def test_prices_txt_fills_missing_price_by_substring(tmp_path):
     assert not any("list price" in g for g in rows["Dunhill Cumberland 41031, . no filter, silver band"]["gaps"])
 
 
+def test_whys_txt_fills_hook_and_output_is_ascii_safe(tmp_path):
+    root = tmp_path / "FaridunhillPipes"
+    _make_pipe(root, "Dunhill Cumberland 41031 silver band", ["a.HEIC"])
+    (root / "prices.txt").write_text("dunhill: 425\n", encoding="utf-8")
+    # hook uses an em-dash; output must be normalised to a plain hyphen
+    (root / "whys.txt").write_text(
+        "dunhill: A Dunhill Cumberland sandblast with its sterling band — tactile.\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "out"
+    run_batch(root, out, reference_year=2026)
+    post = (out / "Dunhill Cumberland 41031 silver band" / "post-tiktok.txt").read_text(encoding="utf-8")
+    assert "A Dunhill Cumberland sandblast" in post   # hook present
+    assert "—" not in post and "–" not in post  # no em/en dashes survive
+    # hook no longer a gap
+    assert "why-special" not in post
+
+
 def test_run_batch_is_rerunnable(tmp_path):
     root = tmp_path / "FaridunhillPipes"
     _make_pipe(root, "GBD Cutty", ["hero.jpg"], notes="price: 145\n")

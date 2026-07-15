@@ -249,9 +249,52 @@ def _match_price(folder_name: str, prices: list[tuple[str, float]]) -> Optional[
     return None
 
 
+def _load_whys(root: Path) -> list[tuple[str, str]]:
+    """Optional `<root>/whys.txt`: `key: one-sentence hook`. Split on the
+    FIRST colon only, so the sentence may contain commas. First key a
+    folder name contains wins; a `why:` line in the pipe's own notes wins
+    over this."""
+    f = root / "whys.txt"
+    if not f.is_file():
+        return []
+    rows: list[tuple[str, str]] = []
+    for line in f.read_text(encoding="utf-8", errors="ignore").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or ":" not in line:
+            continue
+        key, _, val = line.partition(":")
+        if val.strip():
+            rows.append((key.strip().lower(), val.strip()))
+    return rows
+
+
+def _match_str(folder_name: str, rows: list[tuple[str, str]]) -> Optional[str]:
+    low = folder_name.lower()
+    for sub, val in rows:
+        if sub in low:
+            return val
+    return None
+
+
+# Make generated text safe to paste anywhere on Windows (some editors and the
+# old console mangle em/en dashes and smart quotes). Content is unchanged in
+# meaning; only the punctuation glyphs are normalised to ASCII.
+_ASCII_MAP = {
+    "—": "-", "–": "-", "‘": "'", "’": "'",
+    "“": '"', "”": '"', "…": "...", " ": " ",
+}
+
+
+def _ascii_safe(s: str) -> str:
+    for bad, good in _ASCII_MAP.items():
+        s = s.replace(bad, good)
+    return s
+
+
 def run_batch(root: str | Path, out: str | Path, *, reference_year: Optional[int] = None) -> dict[str, Any]:
     source = FolderItemAssets(root)
     prices = _load_prices(Path(root))
+    whys = _load_whys(Path(root))
     out_dir = Path(out)
     out_dir.mkdir(parents=True, exist_ok=True)
     # The folders are the source of truth for this tool: every run rebuilds
@@ -275,6 +318,11 @@ def run_batch(root: str | Path, out: str | Path, *, reference_year: Optional[int
                 econ["list_price"] = matched
                 econ.setdefault("currency", "USD")
                 intake.economics = econ
+        # fill the why-special hook from whys.txt if the notes did not carry one
+        if not intake.why_special:
+            hook = _match_str(sku, whys)
+            if hook:
+                intake.why_special = hook
         try:
             result = ingest(intake, source, store)
         except BirthRecordExists:
@@ -289,9 +337,9 @@ def run_batch(root: str | Path, out: str | Path, *, reference_year: Optional[int
 
         pdir = out_dir / sku
         pdir.mkdir(exist_ok=True)
-        (pdir / "listing.md").write_text(_listing_md(listing), encoding="utf-8")
-        (pdir / "post-instagram.txt").write_text(_post_txt(ig), encoding="utf-8")
-        (pdir / "post-tiktok.txt").write_text(_post_txt(tt), encoding="utf-8")
+        (pdir / "listing.md").write_text(_ascii_safe(_listing_md(listing)), encoding="utf-8")
+        (pdir / "post-instagram.txt").write_text(_ascii_safe(_post_txt(ig)), encoding="utf-8")
+        (pdir / "post-tiktok.txt").write_text(_ascii_safe(_post_txt(tt)), encoding="utf-8")
         (pdir / "reel.json").write_text(json.dumps(_reel_dict(reel), indent=2), encoding="utf-8")
 
         index_rows.append({
@@ -303,7 +351,7 @@ def run_batch(root: str | Path, out: str | Path, *, reference_year: Optional[int
             "gaps": listing.gaps,
         })
 
-    (out_dir / "INDEX.md").write_text(_index_md(index_rows), encoding="utf-8")
+    (out_dir / "INDEX.md").write_text(_ascii_safe(_index_md(index_rows)), encoding="utf-8")
     (out_dir / "report.json").write_text(json.dumps(index_rows, indent=2), encoding="utf-8")
     return {"count": len(index_rows), "out": str(out_dir), "rows": index_rows}
 
