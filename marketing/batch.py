@@ -382,8 +382,8 @@ def _post_txt(p) -> str:
 
 def _reel_dict(r) -> dict[str, Any]:
     return {
-        "sku": r.sku, "orientation": r.orientation, "duration_s": r.duration_s,
-        "pacing": r.pacing, "notes": r.notes,
+        "sku": r.sku, "orientation": r.orientation, "title": r.title,
+        "duration_s": r.duration_s, "pacing": r.pacing, "notes": r.notes,
         "shots": [asdict(s) for s in r.shots],
     }
 

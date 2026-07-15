@@ -64,6 +64,7 @@ class ReelShot:
 class VideoReel:
     sku: str
     orientation: str = "9:16"
+    title: str = ""                 # brand name only — the sole on-screen caption
     shots: list[ReelShot] = field(default_factory=list)
     duration_s: float = 0.0
     pacing: str = "slow, documentary — no on-screen smoking, no person"
@@ -185,13 +186,13 @@ def generate_reel(
     for m in sorted(genome.media, key=lambda m: m.seq):
         by_role.setdefault(m.role, []).append(m.url)
 
-    reel = VideoReel(sku=genome.sku)
-    # opening overlay: keep it short — brand + a brief shape cue (the full
-    # model line lives in the caption/listing, not burned onto the video).
-    title_overlay = brand_text or "Estate pipe"
+    # The video carries ONE caption: the brand name (+ model line if set).
+    # No era, price, or description burned onto the frames.
+    title = brand_text or "Estate pipe"
     if genome.model_line:
-        short = " ".join(genome.model_line.split()[:3]).rstrip(",.")
-        title_overlay = f"{title_overlay} · {short}"
+        title = f"{title} {genome.model_line}"
+    reel = VideoReel(sku=genome.sku, title=title)
+    title_overlay = title    # kept for the ReelShot storyboard record
 
     used_any_photo = False
     for role, secs, motion in _REEL_SEQUENCE:

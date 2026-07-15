@@ -111,29 +111,45 @@ def _wrap(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.FreeTypeFont, ma
     return lines[:3]
 
 
-def _overlay(frame: Image.Image, text: str) -> Image.Image:
-    """Draw a translucent band + wrapped caption at the bottom."""
-    if not text:
-        return frame
+_HEADER = "F A R I D U N H I L L"          # let-spaced wordmark, top of every frame
+_MARGIN = 26                                # gold border inset
+_BORDER_W = 4
+
+
+def _decorate(frame: Image.Image, title: str) -> Image.Image:
+    """FARIDUNHILL header (top) + brand name (bottom) + gold border.
+    `title` is the brand name only — no other writing on the video."""
     out = frame.convert("RGBA")
+
+    # top header strip + wordmark
+    top = Image.new("RGBA", (W, 156), (10, 8, 6, 165))
+    out.alpha_composite(top, (0, 0))
+    draw = ImageDraw.Draw(out)
+    hfont = _font(48)
+    hw = draw.textlength(_HEADER, font=hfont)
+    draw.text(((W - hw) / 2, 54), _HEADER, font=hfont, fill=_GOLD)
+
+    # bottom band + brand name (centred, up to 2 lines)
     band = Image.new("RGBA", (W, _BAND_H), (10, 8, 6, 205))
     out.alpha_composite(band, (0, H - _BAND_H))
     draw = ImageDraw.Draw(out)
-    font = _font(58)
-    lines = _wrap(draw, text, font, int(W * 0.86))
-    line_h = font.size + 16
+    tfont = _font(74)
+    lines = _wrap(draw, title, tfont, int(W * 0.84))[:2]
+    line_h = tfont.size + 18
     total = line_h * len(lines)
     y = H - _BAND_H + (_BAND_H - total) // 2
     for ln in lines:
-        w = draw.textlength(ln, font=font)
-        draw.text(((W - w) / 2, y), ln, font=font, fill=_CREAM)
+        w = draw.textlength(ln, font=tfont)
+        draw.text(((W - w) / 2, y), ln, font=tfont, fill=_CREAM)
         y += line_h
-    # thin gold rule above the band
-    draw.rectangle([int(W * 0.30), H - _BAND_H - 4, int(W * 0.70), H - _BAND_H - 1], fill=_GOLD)
+
+    # gold border framing the whole video
+    for k in range(_BORDER_W):
+        draw.rectangle([_MARGIN + k, _MARGIN + k, W - 1 - _MARGIN - k, H - 1 - _MARGIN - k], outline=_GOLD)
     return out.convert("RGB")
 
 
-def _shot_frames(img: Optional[Image.Image], seconds: float, overlay: str, motion: str) -> list[np.ndarray]:
+def _shot_frames(img: Optional[Image.Image], seconds: float, title: str, motion: str) -> list[np.ndarray]:
     n = max(1, int(seconds * FPS))
     frames: list[np.ndarray] = []
     top_area = H - _BAND_H                                    # region above the caption band
@@ -141,7 +157,7 @@ def _shot_frames(img: Optional[Image.Image], seconds: float, overlay: str, motio
     if img is None:
         blank = Image.new("RGB", (W, H), (10, 8, 6))         # photo pending
         for _ in range(n):
-            frames.append(np.asarray(_overlay(blank, overlay)))
+            frames.append(np.asarray(_decorate(blank, title)))
         return frames
 
     bg = _blur_bg(img)                                        # blurred backdrop (static)
@@ -158,7 +174,7 @@ def _shot_frames(img: Optional[Image.Image], seconds: float, overlay: str, motio
         fx = (W - fg.width) // 2
         fy = (top_area - fg.height) // 2
         frame.paste(fg, (max(0, fx), max(0, fy)))
-        frames.append(np.asarray(_overlay(frame, overlay)))
+        frames.append(np.asarray(_decorate(frame, title)))
     return frames
 
 
@@ -166,6 +182,7 @@ def render_reel(reel_json: Path, out_mp4: Path) -> bool:
     import imageio.v2 as imageio
 
     data = json.loads(reel_json.read_text(encoding="utf-8"))
+    title = data.get("title") or "Faridunhill"     # brand name only on the video
     writer = imageio.get_writer(
         out_mp4, fps=FPS, codec="libx264", quality=8,
         pixelformat="yuv420p", macro_block_size=8,
@@ -181,7 +198,7 @@ def render_reel(reel_json: Path, out_mp4: Path) -> bool:
                 except Exception:
                     img = None
             for frame in _shot_frames(img, float(shot.get("seconds", 2.0)),
-                                      shot.get("overlay", ""), shot.get("motion", "cut")):
+                                      title, shot.get("motion", "cut")):
                 writer.append_data(frame)
                 wrote_any = True
     finally:
