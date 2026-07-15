@@ -1,0 +1,618 @@
+# =============================================================================
+# PETERSON CABINET
+# Built from docs/pipe-dating-directory-blueprint.md — nothing invented beyond it.
+#
+# Structure follows the blueprint's 3 levels:
+#   CABINET (brand)
+#     └ DRAWER (evidence type)
+#         └ SMALL DRAWER (single fact)
+# Facts COMBINE to point at an era. Marks decide; shape only reassures.
+# Peterson's recipe is HALLMARK-FIRST (a Dublin hallmark can give the exact year).
+# When the marks are illegible or conflict: "cannot date with confidence."
+# A blank beats a lie.
+# =============================================================================
+
+cabinet: peterson
+brand: Peterson
+brand_full: Kapp & Peterson — "K&P" — Peterson of Dublin
+city: Dublin
+country: Ireland
+founded: 1865
+status: active            # acquired by Laudisi Enterprises in 2018; still producing
+
+# ── RECIPE — Peterson's per-brand playbook ──────────────────────────────────
+# The moment Q1 says "Peterson", the front-desk agent loads THIS recipe.
+recipe:
+  headline: Hallmark-first
+  why: >-
+    A Dublin silver hallmark carries a date LETTER that gives the EXACT year.
+    No other Peterson mark is that precise, so read the hallmark drawer first.
+  read_order:                     # order the agent reaches into the drawers
+    - hallmark                    # 1. exact year, if a hallmarked silver band is present
+    - shank_nomenclature          # 2. country line → era; plus brand/city/model/shape/patent
+    - patent                      # 3. a patent NUMBER pushes into the patent era
+    - stem_logo                   # 4. corroborate
+    - mouthpiece                  # 5. corroborate (P-Lip / material / tenon / filter)
+    - shape_finish                # 6. reassure only — never decides
+  overrides:
+    - A legible hallmark date-letter overrides every stamp-based estimate.
+    - A patent NUMBER outweighs a soft nomenclature guess.
+  model_rule: >-
+    A shape number gives the SHAPE, not always the MODEL. Never overclaim the model.
+
+# ── EVIDENCE LADDER — order of trust (from the blueprint) ────────────────────
+evidence_ladder:
+  - { tier: 1, name: Nomenclature (shank stamps), weight: decides }
+  - { tier: 2, name: Band hallmark,               weight: decides — exact year }
+  - { tier: 3, name: Stem logo / patent number,   weight: strong }
+  - { tier: 4, name: Stem & mouthpiece clues,     weight: confirms the era }
+  - { tier: 5, name: Shape / finish,              weight: support only — never decides }
+
+# =============================================================================
+# DRAWERS
+# =============================================================================
+drawers:
+
+  # ---------------------------------------------------------------------------
+  # DRAWER 1 — SHANK NOMENCLATURE  (the most important drawer)
+  # Holds the 9 small drawers of Q1. Facts here COMBINE to point at the era.
+  # Blueprint example read:
+  #   Peterson · Dublin · England (underneath) · shape 106 · no logo  → an era
+  # ---------------------------------------------------------------------------
+  shank_nomenclature:
+    label: Shank nomenclature
+    note: The most important drawer. Single facts here combine to point at the era.
+    small_drawers:
+
+      brand:
+        fact: brand
+        reads:
+          - value: PETERSON'S  /  K&P (three shields)  /  KAPP & PETERSON
+            means: Confirms the Peterson cabinet; closes all other cabinets.
+
+      city:
+        fact: city
+        reads:
+          - value: DUBLIN
+            means: The Dublin house line; present across most eras.
+
+      made_in:                       # THE primary date anchor for Peterson
+        fact: made-in (country line)
+        note: >-
+          Peterson's country line tracks Irish political history — but it is a RULE OF THUMB,
+          not exact: K&P never purged old stamps from the benches, so an old COM can appear on
+          a much later pipe (some 1980s Sherlock Holmes, and even some 2000 pipes, carry
+          pre-Republic stamps). WWII briar shortages make the 1940s dates especially fuzzy.
+        source: Era formats & windows per Leverette (Pipedia, 2006, rule of thumb).
+        reads:
+          - value: no country line at all (the majority of the Patent Era)
+            era: c.1875–1915 — Patent Era
+            confidence: medium
+          - value: '"MADE IN IRELAND" in a block, with "Old Style" forked-tail P lettering'
+            era: c.1915/16–1922 (late Patent Era)
+            confidence: medium
+            note: The block "Made in Ireland" ALSO recurs c.1947–49 — split the two by the P lettering (see stem_logo) and the hallmark.
+          - value: IRISH FREE STATE / MADE IN IRISH FREE STATE (one or two lines, close to the stem)
+            era: 1922–1937
+            confidence: high
+          - value: 'MADE IN EIRE / EIRE (circle: "Made" & "Eire" around the ring, "in" in the centre)'
+            era: 1938–c.1940/41
+            confidence: high
+            note: Refinement per Leverette — the EIRE stamp itself is short-lived (~1938–41), NOT used all the way to 1949.
+          - value: MADE IN IRELAND, circle format (transitional — country still officially Éire)
+            era: c.1945–1947
+            confidence: medium
+          - value: MADE IN IRELAND, block format, one or two lines (transitional)
+            era: c.1947–1949
+            confidence: medium
+          - value: MADE IN THE REPUBLIC OF IRELAND / MADE IN REP. OF IRELAND (block, usually 3 lines, sometimes 2)
+            era: 1949–present
+            confidence: high
+          - value: English/London COM — "MADE IN ENGLAND" (block or circle) / "MADE IN LONDON" / "MADE IN LONDON ENGLAND" / "LONDON ENGLAND" / "GREAT BRITAIN"
+            era: c.1895–1959 (Peterson's London operation)
+            confidence: medium
+            note: >-
+              English block ≈ contemporaneous with the Irish "Made in Ireland" block; English
+              circle ≈ contemporaneous with the Éire/Ireland circle. Check for LONDON (British)
+              hallmarks, NOT Hibernia — see hallmark.british_london_sterling.
+
+      model:
+        fact: model / line name
+        reads:
+          - value: SYSTEM / SYSTEM STANDARD / DE LUXE / PREMIER / SHERLOCK HOLMES / KAPET / ...
+            means: Model line; narrows within the era. Combine with made_in + hallmark.
+        datable_series:                # series with known intro dates (Leverette, Pipedia 2006)
+          source: Leverette (Pipedia, 2006); confidence medium unless a hallmark confirms.
+          list:
+            Centennial Edition: 1975 (K&P's centennial)
+            Great Explorers Series: 2002
+            Harp Series: 2002
+            Mark Twain Numbered Edition: 1979 (numbered 1–400)
+            Mark Twain 2nd Numbered Edition: 1981 (numbered 1–1000)
+            Mark Twain Un-numbered Edition: 1983–c.1989
+            Emerald: c.1985–2003
+            Millennium Edition: 1988 (City of Dublin founding)
+            Sherlock Holmes Series: 1987–c.1989
+            Return of Sherlock Holmes Series: c.1991
+            Sherlock Holmes Meerschaums: 2006 (hallmark U = 2005 ✓ matches our table)
+            Ebony and Ivory: 2006 (hallmark V = 2006 ✓ matches our table)
+
+      shape_number:
+        fact: shape number
+        note: Gives the SHAPE, not the model. Look the number up in shape_reference (appendix, bottom of file).
+        reads:
+          - value: a System shape number that is IN shape_reference
+            means: >-
+              Read its production SPAN — START = "not earlier than", END (if discontinued) =
+              "not later than". This can bracket a pipe tightly (e.g. 305(a) Bent Dublin = 1975–1984;
+              308 Large Chubby Billiard = 1896–1959). Then pin the exact year with the COM stamp / hallmark.
+            confidence: high
+          - value: a shape number NOT (yet) in shape_reference (many Part-2 / non-System shapes)
+            era: 1910 or later (a floor only)
+            confidence: medium
+            note: Per Leverette — the 300-style numbering began ~1910 (not in the 1905 catalogue). Date by COM/hallmark instead.
+          - value: no shape number where one is expected
+            means: May be worn, or hidden under an added band — check band_flag.
+
+      briar_logo:
+        fact: briar-side logo
+        reads:
+          - value: no briar logo
+            means: With early stamping, supports an earlier read (see the blueprint example).
+          - value: crisp modern logo
+            means: Supports later production.
+
+      special_statement:
+        fact: special words
+        reads:
+          - value: PATENT / PATENTED / THE SYSTEM / MADE BY HAND / ...
+            means: >-
+              Flag only. "Patent" as a WORD can be a line name, not proof of the patent era —
+              require a NUMBER (see the patent drawer) before dating on it.
+          - value: '"A PETERSON PRODUCT" (usually stamped over the COM)'
+            era: c.1948–present
+            confidence: medium
+            note: >-
+              Per Leverette — used on the secondary lines (Shamrock, Killarney, etc.). It does not
+              date the pipe by itself; read the COM stamped with it to place it pre-Republic vs Republic.
+
+      patent_no:
+        fact: patent number (mirror of the patent drawer)
+        reads:
+          - value: a patent NUMBER is present
+            era: Patent Era — System patent expired ~1910 → c.1875–1910 (see patent drawer)
+            confidence: medium
+          - value: PATENT APPLIED FOR / PAT. PENDING
+            era: earliest System production
+            confidence: medium
+          - value: (specific number → year)
+            means: LOOK UP against a verified patent table — not asserted here (abstain rather than guess).
+            confidence: verify
+
+      band_flag:                     # derived fact, per the blueprint's band-flag logic
+        fact: factory band vs added band
+        logic: >-
+          If this Peterson model has NO factory band but this example DOES → the band was ADDED
+          → almost always a repair (a rescue), and it may be HIDING the shape number. Note it, and
+          do not treat an added band's hallmark as the pipe's original manufacture date without care.
+
+  # ---------------------------------------------------------------------------
+  # DRAWER 2 — BAND HALLMARK  (Peterson's exact-year tool → recipe reads this FIRST)
+  # ---------------------------------------------------------------------------
+  hallmark:
+    label: Band hallmark (Irish sterling & gold; British/London sterling)
+    role: Peterson's exact-year tool — the recipe reads this drawer FIRST.
+    where: On a silver/gold band/ferrule at the shank–stem joint (or a wind cap / rim cap).
+    source_status: >-
+      Transcribed from the PRIMARY sources supplied by the owner: Mark Irwin's PPN Hallmark
+      Chart (1890–2026) and the PPN "Hallmarks" article. High confidence throughout.
+      (Only Hibernia's pre-Peterson 1730/1807 history is background, not from PPN.)
+    primary_sources:
+      - Mark Irwin, "Kapp & Peterson's Irish Hallmarks" chart (PPN-Hallmark-Chart.pdf)
+      - Mark Irwin, "Hallmarks" — petersonpipenotes.org/hallmarks (rev. 08/25/2022)
+    context: >-
+      Peterson ranks just behind Dunhill as the world's most dateable production pipe. Even a
+      NICKEL mount can usually be placed within 5–10 years. Use a strong (headset) loupe.
+
+    # --- GATE: which of the FIVE K&P metal stamps is this? (classify BEFORE dating) ---
+    # Mistaking nickel faux-marks for a hallmark is the classic error — settle this FIRST.
+    stamp_types:
+      - id: 1
+        name: K&P maker's mark
+        note: Sponsor's mark. On MOST metal mounts and ALL nickel Systems — so it does NOT, alone, mean sterling.
+      - id: 2
+        name: Nickel-mount marks (shamrock · wolf hound · round tower)
+        note: NOT assay marks. Decorative symbols of Ireland → see nickel_marks. Give an era, never an exact year.
+      - id: 3
+        name: Irish sterling hallmarks (Dublin Assay Office)
+        note: The main event → fixed_marks + date_letter below. Exact year.
+      - id: 4
+        name: Irish gold hallmarks (Dublin Assay Office)
+        note: Rare; FOUR marks, the date letter is the 2nd → see gold_hallmark. Exact year.
+      - id: 5
+        name: British (London) sterling hallmarks
+        note: London-made Petersons (factory 1937–1962). London town mark, NOT Hibernia → see british_london_sterling.
+
+    # --- The FIXED marks of an IRISH STERLING hallmark (not the date letter) -----
+    fixed_marks:
+      count: Three marks on a sterling band/ferrule (sometimes only two on a spigot tenon-end or a silver rim cap).
+      hibernia:
+        mark: Hibernia — seated female figure, one arm on the harp
+        means: The Dublin Assay Office mark; confirms the piece was assayed as sterling in IRELAND.
+        note: The key "is this Irish sterling?" mark. (Introduced 1730 / compulsory 1807 — background only.)
+        confidence: high
+      sterling_standard:
+        mark: crowned harp ("harp crowned"), later "·925"
+        means: Irish sterling fineness mark.
+        note: Crowned harp through 2002; "·925" from 2003.
+        confidence: high
+      sponsor_mark:
+        mark: K&P (Kapp & Peterson) — plain capitals, or capitals in shields (flat- or pointed-top)
+        means: The registered sponsor/maker punch (Company of Goldsmiths of Dublin, est. 1637).
+        warning: >-
+          K&P appears on BOTH sterling and nickel, so K&P alone does NOT mean sterling. Confirm
+          with Hibernia + crowned-harp/·925 before reading a date letter.
+        confidence: high
+    mark_order: >-
+      Hibernia (assayed-in-Ireland) → crowned harp or ·925 (fineness) → date letter (year),
+      each in its own shield; plus the separate K&P sponsor punch.
+
+    # --- The DATE LETTER — full table, transcribed from the PPN chart ----------
+    date_letter:
+      source: >-
+        Transcribed directly from Mark Irwin's Peterson Pipe Notes chart
+        "Kapp & Peterson's Irish Hallmarks" (petersonpipenotes.org), supplied by the owner.
+      confidence: high
+      how_it_works:
+        - Changes annually. THROUGH 1931 the change date was 1 JUNE; FROM 1932 it moved to 1 JANUARY.
+        - Cycles through the alphabet, then restarts with a NEW letterform + shield shape.
+        - Letters are omitted, and the omissions VARY by cycle (each cycle lists its "omits").
+        - The SAME letter recurs across cycles — match the letterform + shield to the cycle FIRST, then read the year. Never date on the bare letter.
+      pre_1932_caveat: >-
+        Because the letter changed on 1 June through 1931, a pre-1932 date letter spans
+        mid-year to mid-year — read those years as approximate to within a year.
+
+      gap:
+        years: 1939–1968
+        fact: >-
+          Peterson silver-mounted pipes carried hallmarks 1891–1938 and 1969–present. No Dublin
+          date letter was applied in the 1939–1968 gap; the K&P mark + a "STERLING"/"SILVER"
+          stamp stood in. Date gap-era bands by other evidence.
+
+      # Each cycle: match the LETTERFORM + SHIELD (style) first, then read year → letter.
+      cycles:
+        - id: 1
+          span: "…–1895"
+          style: black-letter (Gothic) capitals in shaped shields
+          note: Only the tail of this cycle falls in the Peterson window.
+          letters: { 1890: 'U', 1891: 'V', 1892: 'W', 1893: 'X', 1894: 'Y', 1895: 'Z' }
+        - id: 2
+          span: "1896–1915"
+          style: black-letter (Gothic) capitals
+          omits: "J  (1904 I → 1905 K)"
+          letters: { 1896: 'A', 1897: 'B', 1898: 'C', 1899: 'D', 1900: 'E', 1901: 'F', 1902: 'G', 1903: 'H', 1904: 'I', 1905: 'K', 1906: 'L', 1907: 'M', 1908: 'N', 1909: 'O', 1910: 'P', 1911: 'Q', 1912: 'R', 1913: 'S', 1914: 'T', 1915: 'U' }
+        - id: 3
+          span: "1916–1938"
+          style: script / cursive capitals
+          omits: "K  (1925 J → 1926 L)"
+          note: "P covers 1930–1931 (the change date moved 1 June → 1 January in 1932)."
+          letters: { 1916: 'A', 1917: 'B', 1918: 'C', 1919: 'D', 1920: 'E', 1921: 'F', 1922: 'G', 1923: 'H', 1924: 'I', 1925: 'J', 1926: 'L', 1927: 'M', 1928: 'N', 1929: 'O', '1930-1931': 'P', 1932: 'Q', 1933: 'R', 1934: 'S', 1935: 'T', 1936: 'U', 1937: 'V', 1938: 'W' }
+        - id: 4
+          span: "1969–1985"
+          style: lowercase letters in shields
+          omits: "J, K  (1976 I → 1977 L);  Q  (1981 P → 1982 R)"
+          note: The cycle's A (1968) fell in the gap and was never applied; the first applied letter is B (1969).
+          letters: { 1969: 'B', 1970: 'C', 1971: 'D', 1972: 'E', 1973: 'F', 1974: 'G', 1975: 'H', 1976: 'I', 1977: 'L', 1978: 'M', 1979: 'N', 1980: 'O', 1981: 'P', 1982: 'R', 1983: 'S', 1984: 'T', 1985: 'U' }
+        - id: 5
+          span: "1986–2010"
+          style: italic capitals in single-line shields
+          omits: "P  (2000 O → 2001 Q)"
+          letters: { 1986: 'A', 1987: 'B', 1988: 'C', 1989: 'D', 1990: 'E', 1991: 'F', 1992: 'G', 1993: 'H', 1994: 'I', 1995: 'J', 1996: 'K', 1997: 'L', 1998: 'M', 1999: 'N', 2000: 'O', 2001: 'Q', 2002: 'R', 2003: 'S', 2004: 'T', 2005: 'U', 2006: 'V', 2007: 'W', 2008: 'X', 2009: 'Y', 2010: 'Z' }
+        - id: 6
+          span: "2011–present"
+          style: outline serif capitals in shields
+          letters: { 2011: 'A', 2012: 'B', 2013: 'C', 2014: 'D', 2015: 'E', 2016: 'F', 2017: 'G', 2018: 'H', 2019: 'I', 2020: 'J', 2021: 'K', 2022: 'L', 2023: 'M', 2024: 'N', 2025: 'O', 2026: 'P' }
+
+      fineness_transition:
+        crowned_harp: through 2002
+        dot_925: from 2003
+        note: The chart confirms Harp Crowned (→2002) then ·925 (2003→) as the sterling mark.
+        confidence: high
+
+      special_cases:                 # extra hallmark situations (Leverette, Pipedia 2006)
+        source: Leverette (Pipedia, 2006); confidence medium.
+        convention_925_1976:
+          mark: '"925" numeral between the pans of a balance-beam scale (may or may not sit beside Hibernia + harp)'
+          means: >-
+            International convention (Common Control) mark used on EXPORT pipes from 1976. Do NOT
+            confuse with the plain "·925" fineness (2003+). A pipe with this mark can only be dated
+            "1976–present" on the hallmark alone.
+        fourth_mark_1987:
+          mark: an extra (4th) commemorative mark for Dublin's millennium (city founded 988)
+          means: Added by the Dublin office in 1987 only — but most Peterson 1987/88 pipes do NOT carry it.
+        unmarked_sterling:
+          mark: a sterling band stamped only "STERLING" / "STERLING SILVER", no Dublin hallmark
+          means: Likely made for the US market (the US requires only a "sterling" word-stamp). Not datable by hallmark.
+
+    # --- (Type 2) NICKEL-MOUNT MARKS — an ERA, never an exact year --------------
+    nickel_marks:
+      marks: shamrock + wolf hound + round tower (symbols of Ireland)
+      naming_conflict: >-
+        SOURCE DISAGREEMENT — PPN/Irwin (authoritative) calls them "wolf hound" + "round tower";
+        Leverette (Pipedia) calls the same two "prone fox" + "stone tower". Same three-mark set;
+        we follow PPN. Flag noted, not silently resolved.
+      not_a_hallmark: Decorative — NOT Dublin assay marks. Never read them as sterling or as a year.
+      appeared: c. 1922 (Irish Free State era) to c. 1963
+      dating: >-
+        Gives a rough era, not a year — but a knowledgeable eye can still place a nickel Pete
+        within ~5–10 years from the mark iteration plus shape / line / finish.
+      revival: The three stamps resurfaced on copper-plated Christmas mounts 2019–2022 (not general production).
+      confidence: high
+
+    # --- (Type 4) IRISH GOLD HALLMARKS — rare; FOUR marks -----------------------
+    gold_hallmark:
+      note: Gold-band Petersons are rare — FOUR marks, not three.
+      marks:
+        - Hibernia (seated) — assayed in Ireland
+        - DATE LETTER — here it is the SECOND mark; read it on the SAME date_letter cycles above
+        - karat number — e.g. "9" (9 ct)
+        - purity decimal — e.g. "·375" (= 9/24, i.e. 9 ct); "·750" would be 18 ct
+      worked_example: 'italic capital "N" (cycle 5) = 1999;  lowercase "n" (cycle 4) = 1979'
+      confidence: high
+
+    # --- (Type 5) BRITISH / LONDON STERLING — different office, different table --
+    british_london_sterling:
+      note: Peterson's LONDON factory ran 1937–1962; these carry LONDON hallmarks, NOT Hibernia.
+      gate: If the town mark is London's (leopard's head) and there is NO Hibernia → use THIS table, not the Irish one.
+      caveat: Some years have no documented Peterson London mount; Irwin notes never having handled one.
+      style: London cycle; OMITS J (1944 I → 1945 K); letters go lowercase from 1956.
+      letters: { 1937: 'B', 1938: 'C', 1939: 'D', 1940: 'E', 1941: 'F', 1942: 'G', 1943: 'H', 1944: 'I', 1945: 'K', 1946: 'L', 1947: 'M', 1948: 'N', 1949: 'O', 1950: 'P', 1951: 'Q', 1952: 'R', 1953: 'S', 1954: 'T', 1955: 'U', 1956: 'a', 1957: 'b', 1958: 'c', 1959: 'd', 1960: 'e', 1961: 'f', 1962: 'g' }
+      confidence: high
+
+    # --- Peterson-specific quirks ---------------------------------------------
+    peterson_notes:
+      began: Hallmarked sterling bands documented from 1891.
+      nickel_bands:
+        hallmarked: false
+        faux_marks: shamrock + wolf hound + round tower — see nickel_marks. Decorative; give an era, not a year.
+        appeared: c. 1922 – c. 1963 (revived 2019–2022 on copper Christmas mounts)
+      quirks:
+        - The hallmark dates the BAND's assay, not the pipe's manufacture. Bands were fitted the same year or up to ~1–3 years later → read the year as "NOT EARLIER THAN", not exact.
+        - K&P alone is NOT proof of sterling (see sponsor_mark.warning).
+        - Gap-era (1938–68) bands and ALL nickel bands have no usable date letter — fall back to the nomenclature and shape drawers.
+
+    # --- Abstain paths specific to this drawer ---------------------------------
+    abstain:
+      - Band is nickel / faux-marked → no year from here; use other drawers.
+      - Sterling but the date letter is illegible or its cycle can't be matched → "cannot date with confidence" from the hallmark drawer.
+
+  # ---------------------------------------------------------------------------
+  # DRAWER 3 — STEM LOGO / PATENT
+  # ---------------------------------------------------------------------------
+  stem_logo:
+    label: Stem logo & lettering
+    small_drawers:
+      p_lettering:                   # the "P" of PETERSON in the stamp — a real dating clue
+        source: Leverette (Pipedia, 2006); confidence medium.
+        note: Splits the "Made in Ireland" block overlap (late Patent Era vs late 1940s).
+        reads:
+          - value: '"Old Style" forked-tail P'
+            era: start of Patent Era – early 1930s
+            confidence: medium
+          - value: script "P" (intermixed with a plain block "P")
+            era: early 1930s – present
+            confidence: medium
+          - value: forked-tail P with a SMALL difference in the fork
+            era: 1970s+ commemorative / "replica" / "retro" pipes
+            confidence: medium
+            note: These usually carry a hallmarked silver band — date them by the hallmark.
+      p_marker:                      # the "P" logo on the STEM itself (softer)
+        reads:
+          - value: hand-cut / inlaid "P" on the stem
+            means: earlier work — corroborating only
+          - value: modern machine / laser-cut "P"
+            means: later production — corroborating only
+
+  patent:
+    label: Patent number
+    note: A NUMBER is what carries weight; the word alone does not (see special_statement).
+    small_drawers:
+      number:
+        reads:
+          - value: a patent NUMBER present
+            era: Patent Era — the System patent expired ~1910, so a number points to c.1875–1910
+            confidence: medium
+            note: >-
+              Per Leverette. The word "Patent" / "The Patent" persisted as a line name AFTER the
+              patent lapsed — the NUMBER is the dating signal, not the word.
+          - value: PATENT APPLIED FOR
+            era: earliest System production
+            confidence: medium
+      system_patents:            # the actual Charles Peterson System patents (dates behind "Patent Era")
+        source: Smokingpipes "The Peterson System Pipe" — confidence high.
+        reservoir_moisture_trap: patented 1890
+        graduated_bore_mouthpiece: patented 1891
+        p_lip_button: patented 1894 & 1898 (last System patent 1898)
+        note: >-
+          A patent NUMBER relates to this 1890–1898 filing window; "Patent"-marked System pipes
+          were produced into the early 1900s (patent lapsed ~1910).
+
+  # ---------------------------------------------------------------------------
+  # DRAWER 4 — STEM & MOUTHPIECE  (confirm the era — Q7–Q9)
+  # ---------------------------------------------------------------------------
+  mouthpiece:
+    label: Stem & mouthpiece
+    small_drawers:
+      stem_cut:                      # Q7
+        reads:
+          - value: tapered vs saddle; any drop to the shank
+            means: style clue; confirms the era alongside the marks
+      material_and_lip:              # Q8
+        reads:
+          - value: P-Lip (Peterson-Lip / "Steck" mouthpiece)
+            era: 1898–present (a floor — the P-Lip was introduced in 1898)
+            confidence: medium
+            note: A P-Lip means NOT EARLIER THAN 1898. Confirms the System / P-Lip family; spans the whole history after that.
+          - value: vulcanite
+            means: classic material; spans most of the history
+          - value: acrylic, fishtail
+            means: leans later / market variant
+      tenon:                         # Q9
+        reads:
+          - value: graduated metal tenon into a reservoir
+            means: System-pipe construction
+          - value: 9mm filter fitment
+            means: leans later / continental market
+          - value: bone or aluminium tenon
+            means: note as an era or repair clue
+      military_ferrule:              # for worn-away nomenclature (Leverette) — a HINT only
+        source: Leverette (Pipedia, 2006); a hint, never a precise date.
+        note: Use only when the shank stamps have worn away. Cross-check against any hallmark.
+        reads:
+          - value: army/military mount ferrule with an 'acorn-ish' bend (large radius)
+            era: Patent Era
+            confidence: low
+          - value: ferrule bend tightens to a smaller radius / more abrupt turn
+            era: Irish Free State Era (1922–37)
+            confidence: low
+          - value: sharp, abrupt modern bend
+            era: post-WWII to present
+            confidence: low
+
+  # ---------------------------------------------------------------------------
+  # DRAWER 5 — SHAPE & FINISH  (SUPPORT ONLY — never decides — Q10)
+  # ---------------------------------------------------------------------------
+  shape_finish:
+    label: Shape & finish
+    weight: support only
+    small_drawers:
+      finish:
+        reads:
+          - value: smooth / sandblast (e.g. rusticated, "Donegal rocky") / army mount
+            means: >-
+              Reassurance only. Must AGREE with the marks. Disagreement = investigate
+              (replaced stem / married parts / fake).
+      material_variant:              # non-briar bowls narrow the era (Leverette)
+        source: Leverette (Pipedia, 2006); confidence medium.
+        reads:
+          - value: CLAY bowl stamped "PETERSON PATENT" (silver or nickel band)
+            era: Patent Era
+            confidence: medium
+          - value: CLAY bowl stamped "PETERSON SYSTEM" (nickel band only)
+            era: WWII revival (production ended with the London shop, late 1950s/early 60s)
+            confidence: medium
+          - value: BOG OAK bowl (always metal-banded; amber early, else vulcanite stem)
+            era: Patent Era OR WWII revival — bog oak was DROPPED in the 1930s (Free State era) between the two
+            confidence: medium
+          - value: CHERRY WOOD bowl (smooth or bark-on; amber/vulcanite; ± meerschaum lining)
+            era: Patent Era
+            confidence: medium
+
+# =============================================================================
+# THE 10 DATING QUESTIONS — mapped to drawers
+#   Q1–Q5 date · Q6–Q9 confirm the era · Q10 reassures
+# =============================================================================
+questions:
+  - { q: 1,  role: date,    ask: "What is stamped on the shank? (brand, model, words)", drawer: "shank_nomenclature: brand, model, briar_logo, special_statement" }
+  - { q: 2,  role: date,    ask: 'Is there a country stamp? ("Made in ___")',            drawer: "shank_nomenclature.made_in" }
+  - { q: 3,  role: date,    ask: "Is there a shape number?",                              drawer: "shank_nomenclature.shape_number" }
+  - { q: 4,  role: date,    ask: "Is there a patent / patent-pending number?",            drawer: "patent  (+ shank_nomenclature.patent_no)" }
+  - { q: 5,  role: date,    ask: "Is there a silver band / hallmark? What are the little marks?", drawer: "hallmark" }
+  - { q: 6,  role: confirm, ask: "What is the stem logo — its shape and material?",       drawer: "stem_logo" }
+  - { q: 7,  role: confirm, ask: "Saddle or tapered stem? Any drop to the shank?",        drawer: "mouthpiece.stem_cut" }
+  - { q: 8,  role: confirm, ask: "Vulcanite or acrylic mouthpiece? P-Lip or fishtail?",   drawer: "mouthpiece.material_and_lip" }
+  - { q: 9,  role: confirm, ask: "Tenon type? (9mm filter? bone / metal / aluminium?)",   drawer: "mouthpiece.tenon" }
+  - { q: 10, role: reassure, ask: "Does the finish & shape match the marks?",             drawer: "shape_finish" }
+
+# ── SILENT CHECKS — always run ───────────────────────────────────────────────
+silent_checks:
+  - name: clues_agree
+    check: Do all drawers agree? Disagreement = replaced stem / married parts / fake.
+  - name: provenance
+    check: Any box, sock, sleeve, or invoice?
+
+# ── TRUST RULE ───────────────────────────────────────────────────────────────
+abstain:
+  when: Marks are illegible, absent, or conflict without resolution.
+  answer: "cannot date with confidence"
+  motto: A blank beats a lie.
+
+# =============================================================================
+# SHAPE REFERENCE (appendix)  —  number → shape name → production span
+# Transcribed from Mark Irwin's PPN "Guide to System Shapes, 1896–2019",
+# Part 1 (#146, the 300 group) and Part 2 (#147). High confidence for the
+# entries below; anything not machine-readable from the guide is marked 'verify'.
+# =============================================================================
+shape_reference:
+  source: PPN 146 & 147 (Mark Irwin, 2019), supplied by the owner.
+  how_to_date: >-
+    A shape's production SPAN brackets the pipe — START = "not earlier than", END (if
+    discontinued) = "not later than". Combine with the COM stamp / hallmark to pin the exact
+    year inside the span. A shape number gives the SHAPE, not the model.
+  caveats:
+    - '"Present" = still in production as of the 2019 guide.'
+    - Measurements/details vary (bowls turned in Dublin, in London, or outsourced).
+    - Names in [brackets] are collector nicknames.
+
+  system_300_group:
+    complete: true
+    gaps: [310, 311, 315, 316]     # unassigned numbers in the 300 group (no such shapes)
+    shapes:
+      301:      { name: 'Short Dutch Billiard [Bent Pot]', from: 1978, to: Present }
+      302:      { name: 'Extra-Large Apple',               from: 1978, to: Present }
+      303:      { name: 'Medium Apple',                    from: 1978, to: Present }
+      304:      { name: 'Medium Flat Bottom',              from: 1991, to: Present }
+      '305(a)': { name: 'Bent Dublin',                     from: 1975, to: 1984 }
+      '305(b)': { name: 'Calabash',                        from: 1986, to: Present }
+      '306(a)': { name: 'XL Oom Paul',                     from: 1896, to: 1937 }
+      '306(b)': { name: 'Large Flat-Bottom',               from: 1991, to: Present }
+      307:      { name: 'Extra-Large Billiard',            from: 1896, to: Present }
+      308:      { name: 'Large Chubby Billiard',           from: 1896, to: 1959 }
+      309:      { name: 'Large Bent Dutch ["The Thinking Man" / "The Basil Rathbone"]', from: 1896, to: 2013 }
+      312:      { name: 'Large Bent Billiard',             from: 1896, to: Present }
+      313:      { name: 'Medium Bent Dutch',               from: 1896, to: Present }
+      314:      { name: 'Medium Bent Billiard',            from: 1896, to: Present }
+      317:      { name: 'Small Bent Billiard',             from: 1896, to: Present }
+
+  house_straight_peculiar:         # Part 2 — partial; several entries are image-only in the guide
+    note: From PPN 147. Entries with 'verify' had their years locked in page images, not text.
+    shapes:
+      '31': { name: 'Straight Billiard (Small)', from: 1945, to: 2018 }
+      'XXL Bent Billiard': { name: 'XXL Bent Billiard (hand-made)', from: c.1988, to: Present }
+      'Freehand': { name: 'Freehand (aka Plato / Bark-Top / Plateau)', from: 1975, to: Present }
+      'Darwin / B42': { name: 'Darwin / B42 XL Apple', from: 2009, to: Present }
+      'Mark Twain System': { runs: '1981, 1985, then 2010–Present' }
+      'Patent Commemorative': { name: 'Commemorative Patent System 1890–1990 (Bent Oom Paul, XXL)', made: 1990 }
+      '120': { name: 'Dublin System (straight)', years: verify }
+      'House Pipe': { name: 'Hand-Made House Pipe', years: verify }
+      'Pub Pipe': { name: 'Pub Pipe', years: 'c.2019 (verify)' }
+
+  # Shape FAMILIES — which family a number belongs to. Helps confirm the SHAPE
+  # (never the date). From GQ Tobaccos' CURRENT retail chart → no production years.
+  families:
+    source: GQ Tobaccos shape chart (current retail). Grouping only — NO dates. Confidence medium.
+    billiard_and_pot: [06, 15, 101, 102, 105, 106, 107, 440, 606]
+    dublin_apple_prince_zulu: [86, 87, 268, 120, 407]
+    bent_non_system: ['01', X02, '03', '05', 65, 68, 69, X220, 221, 230, 338]
+    liverpool_lovat: [264, 53]
+    bulldog_rhodesian: [150, 80s, 999]
+    system_standard: [31, 301, 302, 303, 304, 305, 306, 307, 312, 313, 314, 317, B42/Darwin]
+    system_deluxe: [1s, 2s, 3s, 4s]
+    known_finishes: [Aran, 'Dublin Filter', 'Irish Army Mount', Killarney, 'Donegal Rocky']
+
+# ── SOURCES & DISCLAIMER ─────────────────────────────────────────────────────
+sources:
+  - 'Mark Irwin & Gary Malmberg, "The Peterson Pipe: The Story of Kapp & Peterson" (2016)'
+  - 'Mark Irwin, "Peterson Pipe Notes" — Hallmarks + PPN Hallmark Chart (petersonpipenotes.org, rev. 2022) — PRIMARY for the hallmark drawer'
+  - 'Mike Leverette, "A Peterson Dating Guide; A Rule of Thumb" (Pipedia, rev. 2006) — nomenclature eras, series, lettering, materials. Explicitly a RULE OF THUMB → medium confidence'
+  - 'Mark Irwin, "A Guide to System Shapes, 1896–2019" Parts 1 & 2 (PPN #146/#147) — PRIMARY for shape_reference'
+  - 'Smokingpipes.com — "The Peterson System Pipe" (System patent dates) & Peterson Shape Chart'
+  - 'GQ Tobaccos — Peterson Shape Chart (current retail shape FAMILIES; no dates)'
+  - 'Dublin Assay Office date-letter tables (hallmark decoding)'
+source_precedence: >-
+  Where PPN/Irwin and Leverette disagree, PPN wins (more authoritative + recent). Leverette
+  conflicts are flagged in place, not silently resolved (e.g. nickel_marks.naming_conflict).
+disclaimer: >-
+  Era boundaries encode collector consensus, not certainty. Marks decide; shape only reassures.
+  A hallmark or patent number overrides a stamp-based estimate. This cabinet is a research aid,
+  not an appraisal or a certificate of authenticity.
