@@ -50,6 +50,40 @@ This repository serves the pipe business only. The repeatable-physical
 and digital extensions exist in the shared *method* library, never here.
 No data, accounts, or credentials cross businesses.
 
+## Running the batch (local session, against your folders)
+
+One command turns `C:\FaridunhillPipes\<pipe>\` folders into marketing:
+
+```
+pip install pydantic
+python -m marketing "C:\FaridunhillPipes" --year 2026
+```
+
+For each pipe folder it writes, under `C:\FaridunhillPipes\_marketing\<pipe>\`:
+`listing.md`, `post-instagram.txt`, `post-tiktok.txt`, `reel.json` — plus a
+top-level `INDEX.md` (gate outcome + gaps per pipe). Photo roles are inferred
+from filenames (an explicit `hero.jpg` always wins); brand + model come from
+the folder name unless a notes file overrides them.
+
+Optional per-pipe notes file (`pipe.txt` / `pipe.yaml` / `notes.txt`) — all
+lines optional, `key: value`:
+
+```
+brand: Dunhill
+model: Cumberland 41031 Billiard Sandblast
+country: GB
+price: 425
+floor: 360
+currency: USD
+era: 1985-1990 hallmark       # min-max basis; basis decides assert vs hedge
+condition: excellent          # mint/excellent/very_good/good/fair/project
+flaws: rim_darkening, stem_oxidation
+stamping: DUNHILL CUMBERLAND 41031 MADE IN ENGLAND
+why: A Cumberland sandblast with its original sterling band.
+```
+
+Re-running is safe: birth records are insert-only, outputs regenerate.
+
 ## Running tests
 
 ```
