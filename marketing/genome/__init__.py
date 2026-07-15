@@ -27,11 +27,23 @@ from .corrections import (
     transition,
 )
 from .store import BirthRecordExists, GenomeStore
+from .intake import (
+    IntakeError,
+    IntakeInput,
+    IntakeResult,
+    build_genome,
+    ingest,
+)
 
 __all__ = [
     "SCHEMA_VERSION",
     "Attribution",
     "BirthRecordExists",
+    "IntakeError",
+    "IntakeInput",
+    "IntakeResult",
+    "build_genome",
+    "ingest",
     "Compliance",
     "Correction",
     "CorrectionReason",
