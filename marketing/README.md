@@ -89,6 +89,37 @@ lines; a folder gets the price of the first key its name contains
 (`dunhill: 425`, `90s: 110`, `246: 125`). A `price:` line in a pipe's own
 notes always wins over this.
 
+## Video + auto mode (drop a pipe in, get post + video out)
+
+Extra one-time install (bundles ffmpeg; no separate download):
+
+```
+pip install pillow pillow-heif imageio imageio-ffmpeg numpy
+```
+
+- **Render** the storyboards to real vertical videos + convert HEIC->JPG:
+  ```
+  python -m marketing.render "C:\FaridunhillPipes"
+  ```
+  Writes `reel.mp4` (1080x1920, real photos, Ken-Burns motion, text
+  overlays) and a `photos\` folder of upload-ready JPGs per pipe.
+
+- **Auto** — generate posts + video for every pipe and leave them in
+  `_marketing\`, re-rendering only what is new or changed:
+  ```
+  python -m marketing.auto "C:\FaridunhillPipes" --year 2026
+  ```
+  Add `--watch` to keep it running: drop a new pipe folder into
+  `C:\FaridunhillPipes` and its post + video appear a moment later. The
+  video step is incremental (per-pipe signature), so a new product does not
+  re-render the whole catalog.
+
+Posting is intentionally left to you — auto mode leaves finished files for
+review. Auto-posting to the platforms is a later, opt-in step (it needs
+account access and deserves a last human look before going public).
+Reels/posts are corpus surfaces (social/email); a rendered reel is never a
+listing image, and it contains only real photographs (no synthetic imagery).
+
 ## Running tests
 
 ```
