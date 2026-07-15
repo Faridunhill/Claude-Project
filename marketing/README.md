@@ -59,7 +59,13 @@ python -m pytest marketing/tests/ -v
 
 ## Build queue position
 
-P2.1 ✅ (store hygiene) · P2.2 ✅ (genome) · **P2.3 ✅ (intake pipeline)** ·
-P2.4 QA gate (next) · P2.5 five-event ledger · P2.6 copy generators ·
+P2.1 ✅ (store hygiene) · P2.2 ✅ (genome) · P2.3 ✅ (intake pipeline) ·
+**P2.4 ✅ (QA gate)** · P2.5 five-event ledger · P2.6 copy generators (next) ·
 P2.7 social engine · P2.8 encyclopedia flywheel · P2.9 visual generation
 (last, cohort-level only).
+
+`gate.py` — the four routing rules (confidence / corroboration / price /
+audit) over a genome's Tier A claims. Returns a `GateDecision`: PASS
+(assert), REVIEW (list, but hedge routed fields until a human verifies),
+or RESEARCH_LATER (withhold a high-value unverified attribution). Human
+facts are never gated. Reads the `field_provenance` intake records.

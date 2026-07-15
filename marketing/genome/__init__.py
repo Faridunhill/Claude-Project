@@ -34,6 +34,15 @@ from .intake import (
     build_genome,
     ingest,
 )
+from .gate import (
+    GateDecision,
+    GateOutcome,
+    RoutedField,
+    RoutingRule,
+    TIER_A_FIELDS,
+    TIER_B_FIELDS,
+    evaluate,
+)
 
 __all__ = [
     "SCHEMA_VERSION",
@@ -44,6 +53,13 @@ __all__ = [
     "IntakeResult",
     "build_genome",
     "ingest",
+    "GateDecision",
+    "GateOutcome",
+    "RoutedField",
+    "RoutingRule",
+    "TIER_A_FIELDS",
+    "TIER_B_FIELDS",
+    "evaluate",
     "Compliance",
     "Correction",
     "CorrectionReason",
