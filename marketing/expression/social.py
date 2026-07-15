@@ -186,10 +186,12 @@ def generate_reel(
         by_role.setdefault(m.role, []).append(m.url)
 
     reel = VideoReel(sku=genome.sku)
-    # opening overlay: what it is
-    title_overlay = (brand_text or "Estate pipe")
+    # opening overlay: keep it short — brand + a brief shape cue (the full
+    # model line lives in the caption/listing, not burned onto the video).
+    title_overlay = brand_text or "Estate pipe"
     if genome.model_line:
-        title_overlay += f" · {genome.model_line}"
+        short = " ".join(genome.model_line.split()[:3]).rstrip(",.")
+        title_overlay = f"{title_overlay} · {short}"
 
     used_any_photo = False
     for role, secs, motion in _REEL_SEQUENCE:

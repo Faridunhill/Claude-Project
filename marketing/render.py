@@ -28,7 +28,7 @@ from pathlib import Path
 from typing import Optional
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 
 try:  # HEIC/HEIF support (iPhone photos)
     import pillow_heif
@@ -76,6 +76,26 @@ def _cover(img: Image.Image, w: int, h: int) -> Image.Image:
     return resized.crop((left, top, left + w, top + h))
 
 
+def _fit(img: Image.Image, w: int, h: int) -> Image.Image:
+    """Resize so the WHOLE image fits inside w x h (no crop)."""
+    src_w, src_h = img.size
+    scale = min(w / src_w, h / src_h)
+    return img.resize((max(1, int(src_w * scale)), max(1, int(src_h * scale))), Image.LANCZOS)
+
+
+#: foreground pipe size as a fraction of the frame — whole pipe visible,
+#: with room left for the caption band.
+_FG_W = 0.90
+_FG_H = 0.60
+
+
+def _blur_bg(img: Image.Image) -> Image.Image:
+    """A darkened, blurred cover of the same photo — the backdrop the pipe
+    sits on (the design system's blur-frame, so the pipe reads smaller)."""
+    bg = _cover(img, W, H).filter(ImageFilter.GaussianBlur(48))
+    return ImageEnhance.Brightness(bg).enhance(0.45)
+
+
 def _wrap(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.FreeTypeFont, max_w: int) -> list[str]:
     words, lines, cur = text.split(), [], ""
     for word in words:
@@ -116,20 +136,28 @@ def _overlay(frame: Image.Image, text: str) -> Image.Image:
 def _shot_frames(img: Optional[Image.Image], seconds: float, overlay: str, motion: str) -> list[np.ndarray]:
     n = max(1, int(seconds * FPS))
     frames: list[np.ndarray] = []
+    top_area = H - _BAND_H                                    # region above the caption band
+
     if img is None:
-        base = Image.new("RGB", (W, H), (10, 8, 6))          # photo pending
-    else:
-        base = _cover(img, W, H)
+        blank = Image.new("RGB", (W, H), (10, 8, 6))         # photo pending
+        for _ in range(n):
+            frames.append(np.asarray(_overlay(blank, overlay)))
+        return frames
+
+    bg = _blur_bg(img)                                        # blurred backdrop (static)
+    fg_base = _fit(img, int(W * _FG_W), int(top_area * _FG_H))  # whole pipe, fitted
     for i in range(n):
         p = i / max(1, n - 1)
-        if motion == "ken_burns" and img is not None:
-            s = 1.0 + 0.08 * p
-            big = base.resize((int(W * s), int(H * s)), Image.LANCZOS)
-            left = (big.width - W) // 2
-            top = (big.height - H) // 2
-            frame = big.crop((left, top, left + W, top + H))
+        # gentle zoom on the pipe only (bg stays put); capped so it never clips
+        if motion == "ken_burns":
+            s = 1.0 + 0.05 * p
+            fg = fg_base.resize((int(fg_base.width * s), int(fg_base.height * s)), Image.LANCZOS)
         else:
-            frame = base
+            fg = fg_base
+        frame = bg.copy()
+        fx = (W - fg.width) // 2
+        fy = (top_area - fg.height) // 2
+        frame.paste(fg, (max(0, fx), max(0, fy)))
         frames.append(np.asarray(_overlay(frame, overlay)))
     return frames
 
