@@ -175,7 +175,8 @@ _ROLE_PRIORITY = [
 ]
 
 DEFAULT_REEL_SECONDS = 30.0
-_PER_SHOT = 2.5                     # seconds per photo (slow, documentary)
+_MAX_PHOTOS = 8                    # ~7-8 photos is enough to show every side
+_MIN_PACE, _MAX_PACE = 2.5, 4.0   # seconds per photo (slow, documentary)
 
 
 def generate_reel(
@@ -202,22 +203,24 @@ def generate_reel(
 
     if not ordered:
         # no photos yet — a single pending shot, storyboard only
-        reel.shots.append(ReelShot(None, _PER_SHOT, title, "ken_burns", "hero"))
-        reel.duration_s = _PER_SHOT
+        reel.shots.append(ReelShot(None, _MAX_PACE, title, "ken_burns", "hero"))
+        reel.duration_s = _MAX_PACE
         reel.notes.append("no real photos in the record yet — storyboard only; "
                           "render when photos arrive from C:\\FaridunhillPipes")
         reel.notes.append("PLACEMENT LAW: social/email only — a reel is never a listing image.")
         return reel
 
-    # fill the target duration: repeat the walk-around if there aren't
-    # enough photos, trim if there are more than needed.
-    n_shots = max(len(ordered), round(target_seconds / _PER_SHOT))
-    for i in range(n_shots):
-        url, role = ordered[i % len(ordered)]
+    # ~7-8 distinct photos are enough to walk every side; spread the target
+    # duration across them (slower per-photo when there are fewer photos).
+    distinct = ordered[:_MAX_PHOTOS]
+    n = len(distinct)
+    pace = min(_MAX_PACE, max(_MIN_PACE, target_seconds / n))
+    for i, (url, role) in enumerate(distinct):
         motion = "ken_burns" if i % 2 == 0 else "cut"
-        reel.shots.append(ReelShot(url, _PER_SHOT, title, motion, role))
+        reel.shots.append(ReelShot(url, round(pace, 2), title, motion, role))
 
-    reel.duration_s = round(sum(s.seconds for s in reel.shots), 1)
-    reel.notes.append(f"~{reel.duration_s:.0f}s from {len(ordered)} photo(s).")
+    reel.duration_s = round(n * pace, 1)
+    reel.notes.append(f"~{reel.duration_s:.0f}s from {n} photo(s); a motion-opener "
+                      "clip in the pipe folder plays first if present.")
     reel.notes.append("PLACEMENT LAW: social/email only — a reel is never a listing image.")
     return reel

@@ -149,6 +149,20 @@ def _decorate(frame: Image.Image, title: str) -> Image.Image:
     return out.convert("RGB")
 
 
+def _decorate_opener(frame: Image.Image) -> Image.Image:
+    """Opener treatment: FARIDUNHILL header + gold border, no bottom band."""
+    out = frame.convert("RGBA")
+    top = Image.new("RGBA", (W, 156), (10, 8, 6, 165))
+    out.alpha_composite(top, (0, 0))
+    draw = ImageDraw.Draw(out)
+    hfont = _font(48)
+    hw = draw.textlength(_HEADER, font=hfont)
+    draw.text(((W - hw) / 2, 54), _HEADER, font=hfont, fill=_GOLD)
+    for k in range(_BORDER_W):
+        draw.rectangle([_MARGIN + k, _MARGIN + k, W - 1 - _MARGIN - k, H - 1 - _MARGIN - k], outline=_GOLD)
+    return out.convert("RGB")
+
+
 def _shot_frames(img: Optional[Image.Image], seconds: float, title: str, motion: str) -> list[np.ndarray]:
     n = max(1, int(seconds * FPS))
     frames: list[np.ndarray] = []
@@ -178,7 +192,45 @@ def _shot_frames(img: Optional[Image.Image], seconds: float, title: str, motion:
     return frames
 
 
-def render_reel(reel_json: Path, out_mp4: Path) -> bool:
+_VIDEO_EXTS = {".mov", ".mp4", ".m4v", ".webm", ".avi"}
+_OPENER_MAX_S = 8.0                 # cap the motion opener length
+
+
+def _opener_frames(clip: Path, title: str) -> list[np.ndarray]:
+    """Frames of a motion-opener clip, fitted to the vertical frame with a
+    gold border + FARIDUNHILL header (no bottom band — let the clip breathe)."""
+    import imageio.v2 as imageio
+    frames: list[np.ndarray] = []
+    try:
+        r = imageio.get_reader(str(clip), "ffmpeg")
+    except Exception:
+        return frames
+    meta = r.get_meta_data()
+    src_fps = meta.get("fps") or FPS
+    step = max(1, round(src_fps / FPS))            # roughly resample to our FPS
+    limit = int(_OPENER_MAX_S * src_fps)
+    top_area = H - _BAND_H
+    try:
+        for i, fr in enumerate(r):
+            if i >= limit:
+                break
+            if i % step:
+                continue
+            img = Image.fromarray(fr).convert("RGB")
+            if img.size == (W, H):
+                frame = img
+            else:
+                bg = _blur_bg(img)
+                fg = _fit(img, int(W * 0.94), int(top_area * 0.74))
+                frame = bg.copy()
+                frame.paste(fg, ((W - fg.width) // 2, (top_area - fg.height) // 2))
+            frames.append(np.asarray(_decorate_opener(frame)))
+    finally:
+        r.close()
+    return frames
+
+
+def render_reel(reel_json: Path, out_mp4: Path, opener: Optional[Path] = None) -> bool:
     import imageio.v2 as imageio
 
     data = json.loads(reel_json.read_text(encoding="utf-8"))
@@ -189,6 +241,10 @@ def render_reel(reel_json: Path, out_mp4: Path) -> bool:
     )
     wrote_any = False
     try:
+        if opener is not None and opener.is_file():
+            for frame in _opener_frames(opener, title):
+                writer.append_data(frame)
+                wrote_any = True
         for shot in data.get("shots", []):
             url = shot.get("image_url")
             img = None
@@ -223,6 +279,14 @@ def convert_photos(source_folder: Path, out_dir: Path) -> int:
     return count
 
 
+def _find_opener(source_folder: Path) -> Optional[Path]:
+    """A motion-opener clip dropped into the pipe's own folder (any video
+    file). Matched per-pipe so a clip never opens the wrong pipe's reel."""
+    vids = sorted(p for p in source_folder.iterdir()
+                  if p.is_file() and p.suffix.lower() in _VIDEO_EXTS)
+    return vids[0] if vids else None
+
+
 def render_all(root: str | Path) -> dict[str, int]:
     root = Path(root)
     marketing = root / "_marketing"
@@ -233,9 +297,10 @@ def render_all(root: str | Path) -> dict[str, int]:
         reel_json = pipe_out / "reel.json"
         if not reel_json.is_file():
             continue
-        if render_reel(reel_json, pipe_out / "reel.mp4"):
-            reels += 1
         source = root / pipe_out.name
+        opener = _find_opener(source) if source.is_dir() else None
+        if render_reel(reel_json, pipe_out / "reel.mp4", opener=opener):
+            reels += 1
         if source.is_dir():
             photos += convert_photos(source, pipe_out / "photos")
     return {"reels": reels, "photos": photos, "out": str(marketing)}

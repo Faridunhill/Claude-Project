@@ -26,7 +26,7 @@ from pathlib import Path
 from typing import Optional
 
 from .batch import run_batch
-from .render import convert_photos, render_reel
+from .render import _find_opener, convert_photos, render_reel
 
 
 def _sig(folder: Path) -> str:
@@ -56,7 +56,7 @@ def process(root: str | Path, *, reference_year: Optional[int] = None, force: bo
         )
         if unchanged:
             continue
-        render_reel(reel_json, mp4)
+        render_reel(reel_json, mp4, opener=_find_opener(source))
         convert_photos(source, pipe_out / "photos")
         sig_file.write_text(sig, encoding="utf-8")
         rendered.append(pipe_out.name)

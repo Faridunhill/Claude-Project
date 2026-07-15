@@ -67,26 +67,33 @@ def test_compliance_note_present_for_tobacco_item():
 
 
 def test_reel_is_vertical_and_built_from_real_photos():
-    assets = ItemAssets(
-        sku="FH-1",
-        media=[
-            MediaAsset(url="hero.jpg", role=MediaRole.HERO, seq=0),
-            MediaAsset(url="stamp.jpg", role=MediaRole.STAMPING, seq=1),
-        ],
-    )
-    g = _genome(brand="Peterson", economics={"list_price": 110.0, "currency": "USD"}, assets=assets)
+    # 7 photos (all sides) -> a ~28-30s walk-around
+    media = [MediaAsset(url="hero.jpg", role=MediaRole.HERO, seq=0),
+             MediaAsset(url="stamp.jpg", role=MediaRole.STAMPING, seq=1)]
+    media += [MediaAsset(url=f"a{i}.jpg", role=MediaRole.ANGLE, seq=2 + i) for i in range(5)]
+    g = _genome(brand="Peterson", economics={"list_price": 110.0, "currency": "USD"},
+                assets=ItemAssets(sku="FH-1", media=media))
     d = evaluate(g, audit_sampler=_no_audit)
     reel = generate_reel(g, d, target_seconds=30.0)
     assert reel.orientation == "9:16"
     urls = [s.image_url for s in reel.shots if s.image_url]
-    assert "hero.jpg" in urls and "stamp.jpg" in urls
-    # ~30s reel, built by repeating the walk-around across the photos
-    assert 27 <= reel.duration_s <= 33
+    assert urls[0] == "hero.jpg" and "stamp.jpg" in urls   # hero leads, marks next
+    assert len(reel.shots) == 7                              # ~7 photos, all sides
+    assert 26 <= reel.duration_s <= 30
     # the only on-screen caption is the brand name (no price/CTA burned in)
     assert reel.title.startswith("Peterson")
     assert all(s.overlay == reel.title for s in reel.shots)
-    # placement law noted
     assert any("PLACEMENT LAW" in n for n in reel.notes)
+
+
+def test_reel_caps_photos_to_show_all_sides_not_all_photos():
+    # 15 photos -> still capped to a clean 8-photo walk-around
+    media = [MediaAsset(url=f"p{i}.jpg", role=MediaRole.ANGLE, seq=i) for i in range(15)]
+    media[0] = MediaAsset(url="hero.jpg", role=MediaRole.HERO, seq=0)
+    g = _genome(brand="Dunhill", assets=ItemAssets(sku="FH-1", media=media))
+    d = evaluate(g, audit_sampler=_no_audit)
+    reel = generate_reel(g, d)
+    assert len(reel.shots) == 8
 
 
 def test_reel_without_photos_is_storyboard_only():
