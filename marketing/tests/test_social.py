@@ -76,13 +76,15 @@ def test_reel_is_vertical_and_built_from_real_photos():
     )
     g = _genome(brand="Peterson", economics={"list_price": 110.0, "currency": "USD"}, assets=assets)
     d = evaluate(g, audit_sampler=_no_audit)
-    reel = generate_reel(g, d)
+    reel = generate_reel(g, d, target_seconds=30.0)
     assert reel.orientation == "9:16"
     urls = [s.image_url for s in reel.shots if s.image_url]
     assert "hero.jpg" in urls and "stamp.jpg" in urls
-    assert reel.duration_s > 0
-    # closing shot carries price + CTA
-    assert any("faridunhill.com" in s.overlay for s in reel.shots)
+    # ~30s reel, built by repeating the walk-around across the photos
+    assert 27 <= reel.duration_s <= 33
+    # the only on-screen caption is the brand name (no price/CTA burned in)
+    assert reel.title.startswith("Peterson")
+    assert all(s.overlay == reel.title for s in reel.shots)
     # placement law noted
     assert any("PLACEMENT LAW" in n for n in reel.notes)
 

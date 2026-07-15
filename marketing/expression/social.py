@@ -167,66 +167,57 @@ def generate_social(
 
 # --- video reel (storyboard over REAL photos) ------------------------------
 
-_REEL_SEQUENCE = [
-    (MediaRole.HERO, 2.5, "ken_burns"),
-    (MediaRole.ANGLE, 1.5, "cut"),
-    (MediaRole.STAMPING, 2.5, "ken_burns"),
-    (MediaRole.FLAW, 1.5, "cut"),
-    (MediaRole.SCALE, 1.5, "cut"),
+# Order photos are shown in: lead with the hero, then the marks, then the
+# rest of the walk-around, so a longer reel still tells a clean story.
+_ROLE_PRIORITY = [
+    MediaRole.HERO, MediaRole.STAMPING, MediaRole.ANGLE,
+    MediaRole.SCALE, MediaRole.FLAW, MediaRole.GROUP,
 ]
+
+DEFAULT_REEL_SECONDS = 30.0
+_PER_SHOT = 2.5                     # seconds per photo (slow, documentary)
 
 
 def generate_reel(
     genome: ProductGenome,
     decision: GateDecision,
+    *,
+    target_seconds: float = DEFAULT_REEL_SECONDS,
 ) -> VideoReel:
-    brand_text, asserted = _brand(genome, decision)
-    era_text = _era(genome, decision)
+    brand_text, _ = _brand(genome, decision)
+
+    # ordered photo list — every real photo, hero first, marks next
     by_role: dict[MediaRole, list[str]] = {}
     for m in sorted(genome.media, key=lambda m: m.seq):
         by_role.setdefault(m.role, []).append(m.url)
+    ordered: list[tuple[str, str]] = []           # (url, role)
+    for role in _ROLE_PRIORITY:
+        for url in by_role.get(role, []):
+            ordered.append((url, role.value))
 
-    # The video carries ONE caption: the brand name (+ model line if set).
-    # No era, price, or description burned onto the frames.
     title = brand_text or "Estate pipe"
     if genome.model_line:
         title = f"{title} {genome.model_line}"
     reel = VideoReel(sku=genome.sku, title=title)
-    title_overlay = title    # kept for the ReelShot storyboard record
 
-    used_any_photo = False
-    for role, secs, motion in _REEL_SEQUENCE:
-        urls = by_role.get(role)
-        if not urls:
-            if role is MediaRole.HERO:
-                # hero is mandatory; if absent, note the pending photo
-                reel.shots.append(ReelShot(None, secs, title_overlay, motion, role.value))
-            continue
-        used_any_photo = True
-        for i, url in enumerate(urls[:1 if role is not MediaRole.ANGLE else 2]):
-            if role is MediaRole.HERO:
-                overlay = title_overlay
-            elif role is MediaRole.STAMPING:
-                overlay = era_text or "the marks"
-            elif role is MediaRole.FLAW:
-                overlay = "honestly shown"
-            elif role is MediaRole.SCALE:
-                overlay = "true to size"
-            else:
-                overlay = ""
-            reel.shots.append(ReelShot(url, secs, overlay, motion, role.value))
-
-    # closing shot — price + CTA over the hero
-    price = genome.economics.list_price
-    hero = by_role.get(MediaRole.HERO, [None])[0]
-    cur = genome.economics.currency or "USD"
-    sym = "$" if cur == "USD" else ("£" if cur == "GBP" else "")
-    close = f"{sym}{price:.0f} · faridunhill.com" if price is not None else "faridunhill.com"
-    reel.shots.append(ReelShot(hero, 2.0, close, "ken_burns", "close"))
-
-    reel.duration_s = round(sum(s.seconds for s in reel.shots), 1)
-    if not used_any_photo:
+    if not ordered:
+        # no photos yet — a single pending shot, storyboard only
+        reel.shots.append(ReelShot(None, _PER_SHOT, title, "ken_burns", "hero"))
+        reel.duration_s = _PER_SHOT
         reel.notes.append("no real photos in the record yet — storyboard only; "
                           "render when photos arrive from C:\\FaridunhillPipes")
+        reel.notes.append("PLACEMENT LAW: social/email only — a reel is never a listing image.")
+        return reel
+
+    # fill the target duration: repeat the walk-around if there aren't
+    # enough photos, trim if there are more than needed.
+    n_shots = max(len(ordered), round(target_seconds / _PER_SHOT))
+    for i in range(n_shots):
+        url, role = ordered[i % len(ordered)]
+        motion = "ken_burns" if i % 2 == 0 else "cut"
+        reel.shots.append(ReelShot(url, _PER_SHOT, title, motion, role))
+
+    reel.duration_s = round(sum(s.seconds for s in reel.shots), 1)
+    reel.notes.append(f"~{reel.duration_s:.0f}s from {len(ordered)} photo(s).")
     reel.notes.append("PLACEMENT LAW: social/email only — a reel is never a listing image.")
     return reel
