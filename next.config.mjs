@@ -9,6 +9,11 @@ const nextConfig = {
       { protocol: 'https', hostname: 'cdn.sanity.io' },
     ],
   },
+  async redirects() {
+    return [
+      { source: '/pipe-passport', destination: '/encyclopedia/pipe-passport', permanent: true },
+    ]
+  },
   experimental: {
     outputFileTracingExcludes: {
       '*': [

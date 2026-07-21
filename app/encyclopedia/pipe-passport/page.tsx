@@ -1,12 +1,25 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 
 interface PhotoSlot {
   view: string
   label: string
   hint: string
   required: boolean
+}
+
+interface Assessment {
+  brand: string
+  model_or_line: string
+  shape: string
+  estimated_era: string
+  confidence: 'high' | 'medium' | 'low'
+  stamping_reading: string
+  dating_rationale: string
+  condition_notes: string
+  expert_summary: string
 }
 
 const PHOTO_SLOTS: PhotoSlot[] = [
@@ -52,8 +65,14 @@ function compressImage(file: File): Promise<string> {
 const steps = [
   { num: '1', title: 'Photograph', text: 'Take six photos of your pipe following our simple protocol — four angles plus close-ups of the stamping.' },
   { num: '2', title: 'Submit', text: 'Upload the photos with whatever you know: the stamping as you read it, brand guesses, measurements.' },
-  { num: '3', title: 'Receive Your Passport', text: 'Farid personally examines every submission and replies with an identification and dating assessment — free of charge.' },
+  { num: '3', title: 'Receive Your Passport', text: 'Our analysis engine — built on thirty-five years of reference knowledge — reads the stamping and issues your assessment in minutes, on screen and by email.' },
 ]
+
+const CONFIDENCE_LABELS: Record<string, string> = {
+  high: 'High Confidence',
+  medium: 'Medium Confidence',
+  low: 'Low Confidence — Preliminary',
+}
 
 export default function PipePassportPage() {
   const [formData, setFormData] = useState({ name: '', email: '', brandGuess: '', stampText: '', length: '', notes: '' })
@@ -61,6 +80,7 @@ export default function PipePassportPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const [referenceId, setReferenceId] = useState('')
+  const [assessment, setAssessment] = useState<Assessment | null>(null)
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -102,6 +122,7 @@ export default function PipePassportPage() {
       const data = await res.json()
       if (res.ok) {
         setReferenceId(data.referenceId ?? '')
+        setAssessment(data.assessment ?? null)
         setStatus('success')
       } else {
         setStatus('error')
@@ -118,19 +139,26 @@ export default function PipePassportPage() {
       {/* Hero */}
       <div className="bg-mahogany-dark border-b border-gold/15 py-14">
         <div className="max-w-screen-lg mx-auto px-6 lg:px-12 text-center">
+          <nav className="flex items-center justify-center gap-2 text-xs font-lora text-parchment/50 mb-5">
+            <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/encyclopedia" className="hover:text-gold transition-colors">Encyclopedia</Link>
+            <span>/</span>
+            <span className="text-parchment/70">Pipe Passport</span>
+          </nav>
           <span className="font-fell italic text-gold/70 text-sm tracking-widest">~ Free Identification &amp; Dating Assessment ~</span>
           <h1 className="font-playfair font-bold text-parchment text-4xl lg:text-5xl mt-3">The Pipe Passport</h1>
           <p className="font-lora text-parchment/70 leading-relaxed text-base max-w-2xl mx-auto mt-5">
             Found a pipe in an attic? Inherited a collection? Wondering whether that estate find is
-            really what the seller claimed? Send us six photographs and Farid — with thirty-five years
-            of collecting and over five thousand pipes sold — will identify it, date it, and tell you
-            what he sees. Free, for any collector.
+            really what the seller claimed? Send six photographs and our identification engine —
+            built on thirty-five years of collecting knowledge and over five thousand pipes sold —
+            reads the stamping, dates the pipe, and issues its passport. Free, automated, in minutes.
           </p>
         </div>
       </div>
 
-      {/* How it works */}
       <div className="max-w-screen-lg mx-auto px-6 lg:px-12 py-14">
+        {/* How it works */}
         <div className="grid md:grid-cols-3 gap-6 mb-14">
           {steps.map((step) => (
             <div key={step.num} className="bg-mahogany-light rounded-sm p-6 border border-gold/10">
@@ -143,18 +171,64 @@ export default function PipePassportPage() {
           ))}
         </div>
 
-        {/* Form */}
+        {/* Form / Result */}
         <div className="bg-mahogany-light rounded-sm gold-frame p-8 max-w-3xl mx-auto">
-          {status === 'success' ? (
-            <div className="text-center py-10">
-              <div className="text-gold text-4xl mb-4">✦</div>
-              <p className="font-playfair font-semibold text-parchment text-xl mb-2">Submission Received</p>
-              {referenceId && (
-                <p className="font-playfair text-gold text-lg tracking-widest mb-3">{referenceId}</p>
-              )}
+          {status === 'success' && assessment ? (
+            <div>
+              <div className="text-center mb-8 pb-6 border-b border-gold/15">
+                <div className="text-gold text-4xl mb-3">✦</div>
+                <p className="font-fell italic text-gold/70 text-sm tracking-widest">~ Faridunhill ~</p>
+                <h2 className="font-playfair font-bold text-parchment text-2xl">Pipe Passport</h2>
+                {referenceId && (
+                  <p className="font-playfair text-gold text-lg tracking-widest mt-2">{referenceId}</p>
+                )}
+                <p className="font-lora text-parchment/50 text-xs mt-2">
+                  {CONFIDENCE_LABELS[assessment.confidence] ?? assessment.confidence}
+                </p>
+              </div>
+
+              <p className="font-lora text-parchment/80 leading-relaxed mb-8 font-fell italic text-lg">
+                &ldquo;{assessment.expert_summary}&rdquo;
+              </p>
+
+              <div className="space-y-4">
+                {[
+                  ['Brand', assessment.brand],
+                  ['Model / Line', assessment.model_or_line],
+                  ['Shape', assessment.shape],
+                  ['Estimated Era', assessment.estimated_era],
+                  ['Stamping', assessment.stamping_reading],
+                  ['Dating Rationale', assessment.dating_rationale],
+                  ['Condition', assessment.condition_notes],
+                ].map(([label, value]) => (
+                  <div key={label} className="grid sm:grid-cols-4 gap-1 sm:gap-4 pb-4 border-b border-gold/10">
+                    <p className="font-playfair text-gold/70 text-xs uppercase tracking-widest pt-0.5">{label}</p>
+                    <p className="sm:col-span-3 font-lora text-parchment/85 text-sm leading-relaxed">{value}</p>
+                  </div>
+                ))}
+              </div>
+
+              <p className="font-lora text-parchment/50 text-sm mt-6 text-center">
+                A copy of this passport has been sent to your email. Keep the reference number —
+                it identifies this pipe in our records.
+              </p>
+
+              <div className="mt-8 text-center">
+                <Link
+                  href="/shop/estate-pipes"
+                  className="btn-gold inline-block px-8 py-3.5 rounded-sm font-playfair font-bold text-sm tracking-widest uppercase"
+                >
+                  Browse Our Estate Pipes
+                </Link>
+              </div>
+            </div>
+          ) : status === 'loading' ? (
+            <div className="text-center py-16">
+              <div className="text-gold text-4xl mb-5 animate-pulse">✦</div>
+              <p className="font-playfair font-semibold text-parchment text-xl mb-2">Examining Your Pipe...</p>
               <p className="font-lora text-parchment/60 text-sm max-w-md mx-auto">
-                That is your Pipe Passport reference — keep it. Farid will examine your pipe personally
-                and reply to your email with his assessment, usually within two to three business days.
+                Reading the stamping, weighing the shape and finish against reference knowledge.
+                This usually takes under a minute — please keep this page open.
               </p>
             </div>
           ) : (
@@ -294,10 +368,9 @@ export default function PipePassportPage() {
 
               <button
                 type="submit"
-                disabled={status === 'loading'}
-                className="btn-gold w-full py-4 rounded-sm font-playfair font-bold text-sm tracking-widest uppercase disabled:opacity-60"
+                className="btn-gold w-full py-4 rounded-sm font-playfair font-bold text-sm tracking-widest uppercase"
               >
-                {status === 'loading' ? 'Submitting...' : 'Request My Free Pipe Passport'}
+                Request My Free Pipe Passport
               </button>
               {errorMsg && <p className="text-red-400 font-lora text-sm text-center">{errorMsg}</p>}
             </form>

@@ -1,6 +1,11 @@
 # Pipe Passport — Identification System Design
 
-**Status:** Phase 1 (manual expert review) — implemented
+**Status:** Fully automated (AI vision assessment) — implemented.
+Superseded decision: the original Phase 1 below planned manual expert review
+by email; Farid requested full automation (no human in the loop), so the
+service now runs on the Claude API (vision + structured output) and delivers
+the assessment on-screen and by automated email. The Passport also moved
+inside the Pipe Encyclopedia at `/encyclopedia/pipe-passport`.
 **Owner:** Farid · Faridunhill
 **Last updated:** 2026-07-21
 

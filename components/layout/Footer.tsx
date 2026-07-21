@@ -13,7 +13,8 @@ const shopLinks = [
 ]
 
 const infoLinks = [
-  { label: 'Pipe Passport', href: '/pipe-passport' },
+  { label: 'Pipe Encyclopedia', href: '/encyclopedia' },
+  { label: 'Pipe Passport', href: '/encyclopedia/pipe-passport' },
   { label: 'About Us', href: '/about' },
   { label: 'The Journal', href: '/blog' },
   { label: 'Shipping Policy', href: '/shipping' },

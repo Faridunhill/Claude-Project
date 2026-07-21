@@ -161,7 +161,10 @@ export default function Navigation() {
                 )}
               </div>
 
-              <Link href="/pipe-passport" className="nav-link-underline text-gold/90 hover:text-gold font-lora text-sm tracking-wide transition-colors">
+              <Link href="/encyclopedia" className="nav-link-underline text-parchment/80 hover:text-gold font-lora text-sm tracking-wide transition-colors">
+                Encyclopedia
+              </Link>
+              <Link href="/encyclopedia/pipe-passport" className="nav-link-underline text-gold/90 hover:text-gold font-lora text-sm tracking-wide transition-colors">
                 Pipe Passport
               </Link>
               <Link href="/blog" className="nav-link-underline text-parchment/80 hover:text-gold font-lora text-sm tracking-wide transition-colors">
@@ -239,7 +242,14 @@ export default function Navigation() {
                 </Link>
               ))}
               <Link
-                href="/pipe-passport"
+                href="/encyclopedia"
+                className="block px-6 py-3.5 font-lora text-parchment/70 hover:text-gold hover:bg-gold/5 transition-colors text-sm"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Encyclopedia
+              </Link>
+              <Link
+                href="/encyclopedia/pipe-passport"
                 className="block px-6 py-3.5 font-lora text-gold/80 hover:text-gold hover:bg-gold/5 transition-colors text-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
