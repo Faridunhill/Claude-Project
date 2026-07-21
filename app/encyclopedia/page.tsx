@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     'Brand dating guides, nomenclature references, and collector fundamentals — built on thirty-five years of pipe knowledge. Home of the free Pipe Passport identification service.',
 }
 
+const PASSPORT_LIVE = process.env.NEXT_PUBLIC_PASSPORT_LIVE === 'true'
+
 export default function EncyclopediaPage() {
   const entries = getAllEntries()
 
@@ -31,40 +33,56 @@ export default function EncyclopediaPage() {
 
       <div className="max-w-screen-xl mx-auto px-6 lg:px-12 py-14">
         {/* Pipe Passport feature banner */}
-        <Link
-          href="/encyclopedia/pipe-passport"
-          className="group block rounded-sm gold-frame bg-mahogany-light overflow-hidden mb-14 product-card"
-        >
-          <div className="grid lg:grid-cols-5">
-            <div className="lg:col-span-3 p-8 lg:p-12 flex flex-col justify-center">
-              <span className="inline-block self-start bg-gold text-mahogany font-playfair font-bold text-[11px] uppercase tracking-widest px-3 py-1 rounded-sm mb-5">
-                New — Free for Collectors
-              </span>
-              <h2 className="font-playfair font-bold text-parchment text-3xl lg:text-4xl leading-tight group-hover:text-gold transition-colors mb-4">
-                The Pipe Passport
-              </h2>
-              <p className="font-lora text-parchment/65 leading-relaxed mb-6 max-w-xl">
-                Six photographs in — a full identification and dating assessment out, in minutes.
-                Our automated analysis reads the stamping, weighs the shape and finish against
-                reference knowledge, and issues your pipe its own passport with a unique reference
-                number. Free, instant, for any collector.
-              </p>
-              <span className="btn-gold self-start px-8 py-3.5 rounded-sm font-playfair font-bold text-sm tracking-widest uppercase">
-                Identify My Pipe →
-              </span>
+        {PASSPORT_LIVE ? (
+          <Link
+            href="/encyclopedia/pipe-passport"
+            className="group block rounded-sm gold-frame bg-mahogany-light overflow-hidden mb-14 product-card"
+          >
+            <div className="grid lg:grid-cols-5">
+              <div className="lg:col-span-3 p-8 lg:p-12 flex flex-col justify-center">
+                <span className="inline-block self-start bg-gold text-mahogany font-playfair font-bold text-[11px] uppercase tracking-widest px-3 py-1 rounded-sm mb-5">
+                  New — Free for Collectors
+                </span>
+                <h2 className="font-playfair font-bold text-parchment text-3xl lg:text-4xl leading-tight group-hover:text-gold transition-colors mb-4">
+                  The Pipe Passport
+                </h2>
+                <p className="font-lora text-parchment/65 leading-relaxed mb-6 max-w-xl">
+                  Six photographs in — a full identification and dating assessment out, in minutes.
+                  Our automated analysis reads the stamping, weighs the shape and finish against
+                  reference knowledge, and issues your pipe its own passport with a unique reference
+                  number. Free, instant, for any collector.
+                </p>
+                <span className="btn-gold self-start px-8 py-3.5 rounded-sm font-playfair font-bold text-sm tracking-widest uppercase">
+                  Identify My Pipe →
+                </span>
+              </div>
+              <div className="lg:col-span-2 relative min-h-[220px]">
+                <Image
+                  src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=85"
+                  alt="Estate pipe awaiting identification"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-mahogany-light/60 to-transparent" />
+              </div>
             </div>
-            <div className="lg:col-span-2 relative min-h-[220px]">
-              <Image
-                src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=85"
-                alt="Estate pipe awaiting identification"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-mahogany-light/60 to-transparent" />
-            </div>
+          </Link>
+        ) : (
+          <div className="rounded-sm gold-frame bg-mahogany-light overflow-hidden mb-14 p-8 lg:p-12 text-center">
+            <span className="inline-block bg-mahogany border border-gold/40 text-gold font-playfair font-bold text-[11px] uppercase tracking-widest px-3 py-1 rounded-sm mb-5">
+              Coming Soon
+            </span>
+            <h2 className="font-playfair font-bold text-parchment text-3xl lg:text-4xl leading-tight mb-4">
+              The Pipe Passport
+            </h2>
+            <p className="font-lora text-parchment/65 leading-relaxed max-w-2xl mx-auto">
+              A free, instant identification and dating assessment for any pipe — six photographs
+              in, a full passport out. Currently in private testing against our reference
+              collection. Join the newsletter below to be first through the door.
+            </p>
           </div>
-        </Link>
+        )}
 
         {/* Entries */}
         <h2 className="font-playfair font-bold text-parchment text-2xl mb-6">Reference Articles</h2>

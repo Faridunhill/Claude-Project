@@ -129,7 +129,21 @@ are reached organically once the visitor is in.
 | Encyclopedia organic search entrances | growing week-over-week |
 | Estate-pipe orders attributing to content (survey field) | tracked from day 1 |
 
-## 9. What we deliberately do not do
+## 9. Future monetization: the subscription bundle
+
+Once the free funnel proves traction (post-launch, metrics in §8 hit), the
+Encyclopedia and Pipe Passport convert to a **subscription bundle**:
+
+- **Free tier stays** — it is the funnel and must never disappear: a limited
+  number of passports per month plus the foundational Encyclopedia articles.
+- **Subscriber tier** — unlimited passports, the full Encyclopedia including
+  premium brand deep-dives sourced from the digitized catalogues, and
+  early access to rare listings.
+- Launch sequencing: free until the Passport has volume and the Encyclopedia
+  has enough premium-only content to be worth paying for — the digitization
+  plan (`docs/DIGITIZATION_PLAN.md`) feeds exactly that.
+
+## 10. What we deliberately do not do
 
 - No paid tobacco ads (banned; account risk).
 - No spam-posting the Passport link in forums — participation first.

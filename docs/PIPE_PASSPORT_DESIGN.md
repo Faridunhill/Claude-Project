@@ -126,3 +126,25 @@ and adopted for Phases 3–4.
 Phase 1 deliberately has **no database and no AI** — the deliverable is
 Farid's expert reply, and the pipeline is designed so nothing collected now
 is wasted later.
+
+## 7. Later decisions (2026-07-21)
+
+- **Automation:** the passport is fully automated (Claude vision + structured
+  output); no human replies. See status note at top.
+- **Beta gate:** the Passport launches only after Farid personally validates
+  ~100 test identifications. Until then `NEXT_PUBLIC_PASSPORT_LIVE=false`
+  keeps it unlisted (no nav/footer links, "coming soon" banners); the page
+  itself stays reachable by direct URL for testing, marked "Private Beta".
+  Every test assessment is BCC'd to the shop inbox, so counting and reviewing
+  the test set is just reading that folder.
+- **PDF passport:** collectors can download a branded A4 PDF passport
+  (parchment/gold design, watermark, embedded left-profile photo, reference
+  number) generated client-side — built for sharing in collector groups.
+- **Newsletter capture:** opt-in checkbox on the form feeds Mailchimp via the
+  existing `/api/newsletter` route.
+- **Future business model:** the Encyclopedia + Pipe Passport will move to a
+  **subscription bundle** once traction is proven — free tier remains as the
+  funnel (limited passports/month), subscribers get unlimited passports and
+  the full Encyclopedia (premium articles behind the paywall). Requires
+  accounts/auth + Stripe subscriptions — planned, not yet built.
+- **RAG digitization:** see `docs/DIGITIZATION_PLAN.md`.

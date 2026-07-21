@@ -12,9 +12,11 @@ const shopLinks = [
   { label: 'Sale & Clearance', href: '/shop/sale' },
 ]
 
+const PASSPORT_LIVE = process.env.NEXT_PUBLIC_PASSPORT_LIVE === 'true'
+
 const infoLinks = [
   { label: 'Pipe Encyclopedia', href: '/encyclopedia' },
-  { label: 'Pipe Passport', href: '/encyclopedia/pipe-passport' },
+  ...(PASSPORT_LIVE ? [{ label: 'Pipe Passport', href: '/encyclopedia/pipe-passport' }] : []),
   { label: 'About Us', href: '/about' },
   { label: 'The Journal', href: '/blog' },
   { label: 'Shipping Policy', href: '/shipping' },

@@ -6,6 +6,8 @@ import { useCart } from '@/context/CartContext'
 import Logo from '@/components/ui/Logo'
 import CartDrawer from '@/components/layout/CartDrawer'
 
+const PASSPORT_LIVE = process.env.NEXT_PUBLIC_PASSPORT_LIVE === 'true'
+
 const departments = [
   {
     name: 'Estate Pipes',
@@ -164,9 +166,11 @@ export default function Navigation() {
               <Link href="/encyclopedia" className="nav-link-underline text-parchment/80 hover:text-gold font-lora text-sm tracking-wide transition-colors">
                 Encyclopedia
               </Link>
-              <Link href="/encyclopedia/pipe-passport" className="nav-link-underline text-gold/90 hover:text-gold font-lora text-sm tracking-wide transition-colors">
-                Pipe Passport
-              </Link>
+              {PASSPORT_LIVE && (
+                <Link href="/encyclopedia/pipe-passport" className="nav-link-underline text-gold/90 hover:text-gold font-lora text-sm tracking-wide transition-colors">
+                  Pipe Passport
+                </Link>
+              )}
               <Link href="/blog" className="nav-link-underline text-parchment/80 hover:text-gold font-lora text-sm tracking-wide transition-colors">
                 The Journal
               </Link>
@@ -248,13 +252,15 @@ export default function Navigation() {
               >
                 Encyclopedia
               </Link>
-              <Link
-                href="/encyclopedia/pipe-passport"
-                className="block px-6 py-3.5 font-lora text-gold/80 hover:text-gold hover:bg-gold/5 transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Pipe Passport
-              </Link>
+              {PASSPORT_LIVE && (
+                <Link
+                  href="/encyclopedia/pipe-passport"
+                  className="block px-6 py-3.5 font-lora text-gold/80 hover:text-gold hover:bg-gold/5 transition-colors text-sm"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Pipe Passport
+                </Link>
+              )}
               <Link
                 href="/blog"
                 className="block px-6 py-3.5 font-lora text-parchment/70 hover:text-gold hover:bg-gold/5 transition-colors text-sm"

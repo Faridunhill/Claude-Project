@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { generatePassportPdf } from '@/lib/passport-pdf'
+
+const PASSPORT_LIVE = process.env.NEXT_PUBLIC_PASSPORT_LIVE === 'true'
 
 interface PhotoSlot {
   view: string
@@ -81,6 +84,7 @@ export default function PipePassportPage() {
   const [errorMsg, setErrorMsg] = useState('')
   const [referenceId, setReferenceId] = useState('')
   const [assessment, setAssessment] = useState<Assessment | null>(null)
+  const [subscribe, setSubscribe] = useState(false)
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -124,6 +128,13 @@ export default function PipePassportPage() {
         setReferenceId(data.referenceId ?? '')
         setAssessment(data.assessment ?? null)
         setStatus('success')
+        if (subscribe) {
+          fetch('/api/newsletter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: formData.email }),
+          }).catch(() => {})
+        }
       } else {
         setStatus('error')
         setErrorMsg(data.error || 'Something went wrong. Please try again.')
@@ -158,6 +169,19 @@ export default function PipePassportPage() {
       </div>
 
       <div className="max-w-screen-lg mx-auto px-6 lg:px-12 py-14">
+        {/* Private beta notice */}
+        {!PASSPORT_LIVE && (
+          <div className="max-w-3xl mx-auto mb-10 p-5 bg-mahogany-light rounded-sm border border-gold/40 text-center">
+            <p className="font-playfair font-bold text-gold text-sm uppercase tracking-widest mb-1.5">
+              Private Beta — Testing in Progress
+            </p>
+            <p className="font-lora text-parchment/60 text-sm leading-relaxed">
+              The Pipe Passport is being calibrated against our reference collection before its
+              public launch. Assessments issued during the beta are for evaluation and may be revised.
+            </p>
+          </div>
+        )}
+
         {/* How it works */}
         <div className="grid md:grid-cols-3 gap-6 mb-14">
           {steps.map((step) => (
@@ -213,14 +237,29 @@ export default function PipePassportPage() {
                 it identifies this pipe in our records.
               </p>
 
-              <div className="mt-8 text-center">
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                  type="button"
+                  onClick={() =>
+                    generatePassportPdf({
+                      referenceId,
+                      ownerName: formData.name,
+                      ...assessment,
+                      photoDataUrl: photos['left'],
+                    }).catch(() => setErrorMsg('Could not generate the PDF. Please try again.'))
+                  }
+                  className="btn-gold px-8 py-3.5 rounded-sm font-playfair font-bold text-sm tracking-widest uppercase"
+                >
+                  Download PDF Passport
+                </button>
                 <Link
                   href="/shop/estate-pipes"
-                  className="btn-gold inline-block px-8 py-3.5 rounded-sm font-playfair font-bold text-sm tracking-widest uppercase"
+                  className="btn-ghost px-8 py-3.5 rounded-sm font-playfair font-bold text-sm tracking-widest uppercase"
                 >
                   Browse Our Estate Pipes
                 </Link>
               </div>
+              {errorMsg && <p className="text-red-400 font-lora text-sm text-center mt-3">{errorMsg}</p>}
             </div>
           ) : status === 'loading' ? (
             <div className="text-center py-16">
@@ -365,6 +404,19 @@ export default function PipePassportPage() {
                   className="w-full bg-mahogany border border-gold/20 rounded-sm px-4 py-3 font-lora text-parchment text-sm placeholder-parchment/25 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/20 transition-colors resize-none"
                 />
               </div>
+
+              <label className="flex items-start gap-3 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={subscribe}
+                  onChange={(e) => setSubscribe(e.target.checked)}
+                  className="mt-1 h-4 w-4 accent-[#C9A84C] bg-mahogany border-gold/30"
+                />
+                <span className="font-lora text-parchment/60 text-sm leading-relaxed">
+                  Add me to the Faridunhill newsletter — identification guides, new estate arrivals,
+                  and subscriber-only markdowns. No spam, unsubscribe anytime.
+                </span>
+              </label>
 
               <button
                 type="submit"

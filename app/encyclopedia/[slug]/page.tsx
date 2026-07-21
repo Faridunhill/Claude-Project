@@ -4,6 +4,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getAllEntries, getAllEntrySlugs, getEntryBySlug } from '@/lib/encyclopedia'
 
+const PASSPORT_LIVE = process.env.NEXT_PUBLIC_PASSPORT_LIVE === 'true'
+
 interface Props {
   params: { slug: string }
 }
@@ -92,16 +94,25 @@ export default function EncyclopediaEntryPage({ params }: Props) {
         {/* Pipe Passport CTA */}
         <div className="mt-14 p-8 bg-mahogany-light rounded-sm gold-frame text-center">
           <p className="font-playfair font-bold text-parchment text-xl mb-2">Have a pipe you can&apos;t identify?</p>
-          <p className="font-lora text-parchment/60 text-sm mb-5 max-w-lg mx-auto">
-            Submit six photographs and receive a free identification and dating assessment —
-            your pipe&apos;s own passport, in minutes.
-          </p>
-          <Link
-            href="/encyclopedia/pipe-passport"
-            className="btn-gold inline-block px-8 py-3.5 rounded-sm font-playfair font-bold text-sm tracking-widest uppercase"
-          >
-            Get a Free Pipe Passport
-          </Link>
+          {PASSPORT_LIVE ? (
+            <>
+              <p className="font-lora text-parchment/60 text-sm mb-5 max-w-lg mx-auto">
+                Submit six photographs and receive a free identification and dating assessment —
+                your pipe&apos;s own passport, in minutes.
+              </p>
+              <Link
+                href="/encyclopedia/pipe-passport"
+                className="btn-gold inline-block px-8 py-3.5 rounded-sm font-playfair font-bold text-sm tracking-widest uppercase"
+              >
+                Get a Free Pipe Passport
+              </Link>
+            </>
+          ) : (
+            <p className="font-lora text-parchment/60 text-sm max-w-lg mx-auto">
+              The free Pipe Passport identification service is coming soon — currently in
+              private testing against our reference collection.
+            </p>
+          )}
         </div>
 
         {/* Related entries */}
