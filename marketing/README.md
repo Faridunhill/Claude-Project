@@ -50,7 +50,8 @@ python -m pytest marketing/tests/ -v
 
 ## Build queue position
 
-P2.1 ✅ (store hygiene) · **P2.2 ✅ (this)** · P2.3 intake pipeline ·
-P2.4 QA gate · P2.5 five-event ledger · P2.6 copy generators ·
-P2.7 social engine · P2.8 encyclopedia flywheel · P2.9 visual generation
-(last, cohort-level only).
+P2.1 ✅ (store hygiene) · P2.2 ✅ (genome layer) · P2.3 ✅ (intake
+pipeline — see `intake/` and `INTAKE_GUIDE.md`) · P2.4 QA gate ·
+P2.5 five-event ledger · P2.6 copy generators · P2.7 social engine ·
+P2.8 encyclopedia flywheel · P2.9 visual generation (last, cohort-level
+only).
