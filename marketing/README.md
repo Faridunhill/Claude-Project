@@ -50,8 +50,11 @@ python -m pytest marketing/tests/ -v
 
 ## Build queue position
 
-P2.1 ✅ (store hygiene) · P2.2 ✅ (genome layer) · P2.3 ✅ (intake
-pipeline — see `intake/` and `INTAKE_GUIDE.md`) · P2.4 QA gate ·
-P2.5 five-event ledger · P2.6 copy generators · P2.7 social engine ·
-P2.8 encyclopedia flywheel · P2.9 visual generation (last, cohort-level
-only).
+P2.1 ✅ store hygiene · P2.2 ✅ genome layer · P2.3 ✅ intake pipeline
+(`intake/`, `INTAKE_GUIDE.md`) · P2.4 ✅ QA gate (`qagate/`) ·
+P2.5 ✅ five-event ledger (`phenotype/`) · P2.6 ✅ copy generators
+(`expression/`) · P2.7 ✅ social engine (`social/`) · P2.8 ✅
+encyclopedia flywheel (`encyclopedia/` + store `/archive` and
+`/collections/[brand]` routes) · P2.9 visual generation — **BLOCKED on
+Farid: vendor selection + spend-number re-set** (then: manifest,
+style values, depicts-checker, template lint; cohort-level assets only).

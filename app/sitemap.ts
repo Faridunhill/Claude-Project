@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { getAllProducts, departmentMeta } from '@/lib/products'
 import { getAllPostSlugs } from '@/lib/mdx'
+import { getAllArchiveItems } from '@/lib/archive'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://faridunhill.com'
 
@@ -40,5 +41,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...departmentPages, ...productPages, ...blogPages]
+  // Encyclopedia: sold-archive pages are permanent SEO assets
+  const archiveItems = getAllArchiveItems()
+  const archivePages: MetadataRoute.Sitemap = [
+    ...(archiveItems.length
+      ? [{
+          url: `${BASE_URL}/archive`,
+          lastModified: new Date(),
+          changeFrequency: 'weekly' as const,
+          priority: 0.7,
+        }]
+      : []),
+    ...archiveItems.map((item) => ({
+      url: `${BASE_URL}/archive/${item.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly' as const,
+      priority: 0.6,
+    })),
+  ]
+
+  return [...staticPages, ...departmentPages, ...productPages, ...blogPages, ...archivePages]
 }
