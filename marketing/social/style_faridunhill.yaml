@@ -1,0 +1,22 @@
+# style.yaml — Faridunhill brand frame (THIS business only; never shared
+# across the firewall — other businesses get their own file with their
+# own values; only the SCHEMA of this file is shared method).
+version: 1
+brand_name: FARIDUNHILL
+overlay:
+  title_position: bottom        # item name overlay
+  brand_position: top_right     # FARIDUNHILL watermark
+  font: DejaVuSerif             # must exist on the render machine
+  title_color: "#F5EDE0"        # parchment
+  brand_color: "#C9A227"        # gold
+formats:
+  vertical: {width: 1080, height: 1920}   # reels / stories / tiktok
+  square: {width: 1080, height: 1080}     # feed
+motion:
+  seconds_per_photo: 2.0
+  zoom: 1.08                    # gentle Ken Burns
+music:
+  # House set rule (CHANNEL-MAP-001): Meta Sound Collection default.
+  # Files live on the PC; license source is logged per video.
+  house_set_dir: assets/music/meta-sound-collection
+  default_license_source: meta_sound_collection
