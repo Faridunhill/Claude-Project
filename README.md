@@ -117,6 +117,16 @@ Edit the JSON files in `/data/products/`. Each file corresponds to a department.
 }
 ```
 
+## Encyclopedia Builder
+
+The site includes an **Encyclopedia** (`/encyclopedia`) of short presenter-led learning videos,
+and a **Builder** (`/encyclopedia/builder`) that creates them: Claude writes the lesson script,
+ElevenLabs narrates it in your cloned voice, and HeyGen renders your avatar — cartoon-styled or
+built from a photo of your face — presenting it on camera. Entries live as MDX files in
+`content/encyclopedia/`.
+
+Full setup (voice cloning, avatar creation, API keys): see **[ENCYCLOPEDIA.md](./ENCYCLOPEDIA.md)**.
+
 ## Adding Blog Posts
 
 Create a new `.mdx` file in `/content/blog/` with this frontmatter:
