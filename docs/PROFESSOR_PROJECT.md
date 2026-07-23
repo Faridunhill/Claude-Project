@@ -117,4 +117,14 @@ Two-step "character bible" pipeline — no LoRA needed:
   recorded speech, produces a large quality jump over instant clones; available on paid tiers.
 
 ---
+
+## Verified status *(2026-07-23, from the faridunhill-live survey session — canonical updated copy on that repo, branch `claude/professor-project-status-hs1tao`)*
+
+- **Encyclopedia:** working prototype lives entirely in Claude-Project (`/encyclopedia/builder` + API routes, one entry, no video rendered). The live site has **no encyclopedia section yet** — "the encyclopedia standard" exists only as brand copy.
+- **Pipedia/pipephil mirrors (the ark):** in **neither repo** — no files, no index, no manifest. Presumed on Farid's PC/OneDrive (`PIPE_LIBRARY_SHARED_2026-07-18` on Desktop is the likely candidate). **The foundation layer is untracked — first priority is committing at least a manifest.**
+- **Face:** no image assets in git anywhere — no `source.jpg`, no takes, no `BIBLE.png`. The recent portrait work exists only in the generation tools / on Farid's machine. The character's identity is currently one uncommitted file that could be lost.
+- **Next four steps before the professor speaks:** commit `assets/professor/BIBLE.png` (+ source & takes) → create HeyGen Photo Avatar from it → link the approved ElevenLabs voice into HeyGen → render the ten-second test and record the verdict.
+- Housekeeping flagged: decide whether the Builder ports to faridunhill-live or stays a prototype; protect the unauthenticated Builder page; re-host rendered videos (HeyGen links expire).
+
+---
 *Add new ideas below with a date.*
