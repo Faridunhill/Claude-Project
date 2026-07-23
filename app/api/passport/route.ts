@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Anthropic from '@anthropic-ai/sdk'
+import {
+  analyzePipe,
+  REQUIRED_VIEWS,
+  VIEW_LABELS,
+  type PassportAssessment,
+} from '@/lib/passport-engine'
 
 export const maxDuration = 300
 
@@ -9,106 +14,10 @@ const ARCHIVE_EMAIL = 'vintagepipevault@gmail.com'
 // Client compresses to ~1600px JPEGs, so 6 photos stay well under this.
 const MAX_TOTAL_PHOTO_BYTES = 3.5 * 1024 * 1024
 
-const VIEW_LABELS: Record<string, string> = {
-  left: 'Left Profile',
-  right: 'Right Profile',
-  top: 'Top (Bowl Rim)',
-  bottom: 'Bottom (Heel)',
-  stampA: 'Stamping Close-up A',
-  stampB: 'Stamping Close-up B',
-}
-
-const REQUIRED_VIEWS = ['left', 'right', 'top', 'bottom', 'stampA']
-
 interface PassportPhoto {
   view: string
   data: string // data:image/jpeg;base64,...
 }
-
-export interface PassportAssessment {
-  brand: string
-  model_or_line: string
-  shape: string
-  estimated_era: string
-  confidence: 'high' | 'medium' | 'low'
-  stamping_reading: string
-  dating_rationale: string
-  condition_notes: string
-  expert_summary: string
-}
-
-const ASSESSMENT_SCHEMA = {
-  type: 'object' as const,
-  properties: {
-    brand: {
-      type: 'string',
-      description: 'Most likely maker/brand, or "Unattributed" if it cannot be determined',
-    },
-    model_or_line: {
-      type: 'string',
-      description: 'Model, line, or finish name if determinable (e.g. "Shell Briar"), else "Unknown"',
-    },
-    shape: {
-      type: 'string',
-      description: 'Shape name and, if readable, shape number (e.g. "Billiard, shape 120")',
-    },
-    estimated_era: {
-      type: 'string',
-      description: 'Estimated production period, as precise as the evidence allows (e.g. "1962", "late 1950s–1960s", "mid-20th century")',
-    },
-    confidence: {
-      type: 'string',
-      enum: ['high', 'medium', 'low'],
-      description: 'Overall confidence in the identification',
-    },
-    stamping_reading: {
-      type: 'string',
-      description: 'Transcription of all stamping visible in the photos, noting any illegible portions',
-    },
-    dating_rationale: {
-      type: 'string',
-      description: 'The specific evidence supporting the dating: stamp conventions, finish, stem logic, shape language',
-    },
-    condition_notes: {
-      type: 'string',
-      description: 'Observed condition: cake, rim, stem, fills, repairs, originality of parts',
-    },
-    expert_summary: {
-      type: 'string',
-      description: 'Two to four sentences summarizing the assessment in a warm, knowledgeable tobacconist voice, addressed to the owner',
-    },
-  },
-  required: [
-    'brand',
-    'model_or_line',
-    'shape',
-    'estimated_era',
-    'confidence',
-    'stamping_reading',
-    'dating_rationale',
-    'condition_notes',
-    'expert_summary',
-  ],
-  additionalProperties: false as const,
-}
-
-const SYSTEM_PROMPT = `You are the identification engine of the Faridunhill Pipe Passport — a free identification and dating assessment service for tobacco pipe collectors, backed by thirty-five years of dealer expertise.
-
-You receive six standardized photographs of one pipe (left profile, right profile, top/bowl rim, bottom/heel, and close-ups of the shank stamping) plus whatever the owner knows.
-
-Your method:
-1. Read the stamping first — transcribe every mark you can see, including partial letters. The nomenclature is the primary evidence.
-2. Cross-check against maker conventions: country-of-origin wording, date codes and suffixes, finish names, shape numbers, stem logos.
-3. Weigh shape language, finish, stem material and logic, and drilling style as secondary evidence.
-4. Use the owner's transcription and measurements as hints, but trust the photographs over the owner's guesses.
-5. Assess visible condition: chamber cake, rim char, stem oxidation and tooth marks, fills, whether the stem appears original.
-
-Rules:
-- Be honest about uncertainty. A wrong confident attribution damages collectors; "Unattributed, likely English, mid-century" is a respectable answer.
-- Never invent stamp text you cannot see. Mark illegible portions as illegible.
-- This is a professional opinion based on visual analysis — never phrase anything as a certificate or guarantee of authenticity.
-- Do not estimate monetary value.
-- Write the expert_summary warmly, as Faridunhill's head tobacconist addressing a fellow collector.`
 
 export async function POST(request: NextRequest) {
   try {
@@ -146,52 +55,16 @@ export async function POST(request: NextRequest) {
       .toUpperCase()
       .padStart(2, '0')}`
 
-    const client = new Anthropic()
-
-    const imageBlocks: Anthropic.ImageBlockParam[] = photoList.map((p) => ({
-      type: 'image',
-      source: {
-        type: 'base64',
-        media_type: 'image/jpeg',
-        data: p.data.replace(/^data:image\/\w+;base64,/, ''),
-      },
-    }))
-
-    const ownerContext = [
-      `Photo order: ${photoList.map((p) => VIEW_LABELS[p.view]).join(', ')}.`,
-      `Owner's brand guess: ${brandGuess || 'none given'}.`,
-      `Stamping as the owner reads it: ${stampText || 'none given'}.`,
-      `Length: ${length || 'not given'}.`,
-      `Owner's notes: ${notes || 'none'}.`,
-      'Identify and date this pipe.',
-    ].join('\n')
-
-    const response = await client.messages.create({
-      model: 'claude-opus-4-8',
-      max_tokens: 4096,
-      thinking: { type: 'adaptive' },
-      system: SYSTEM_PROMPT,
-      output_config: {
-        format: { type: 'json_schema', schema: ASSESSMENT_SCHEMA },
-      },
-      messages: [
-        {
-          role: 'user',
-          content: [...imageBlocks, { type: 'text', text: ownerContext }],
-        },
-      ],
-    })
-
-    if (response.stop_reason === 'refusal') {
-      console.error('Passport analysis refused')
+    let assessment: PassportAssessment
+    try {
+      assessment = await analyzePipe(
+        photoList.map((p) => ({ view: p.view, base64: p.data.replace(/^data:image\/\w+;base64,/, '') })),
+        { brandGuess, stampText, length, notes }
+      )
+    } catch (err) {
+      console.error('Passport analysis failed:', err)
       return NextResponse.json({ error: 'The analysis could not be completed. Please try again.' }, { status: 502 })
     }
-
-    const textBlock = response.content.find((b): b is Anthropic.TextBlock => b.type === 'text')
-    if (!textBlock) {
-      return NextResponse.json({ error: 'The analysis could not be completed. Please try again.' }, { status: 502 })
-    }
-    const assessment: PassportAssessment = JSON.parse(textBlock.text)
 
     // Email the passport to the collector (fire-and-forget: the on-screen result
     // is the deliverable; a failed email must not fail the request).
