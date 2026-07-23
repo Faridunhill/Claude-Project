@@ -85,4 +85,36 @@ collector trust (levels 1→2→3) → professional endorsements → traffic →
 - Where does the Book of Mistakes live first — encyclopedia wing, then printed book?
 
 ---
+
+## History & current status *(as told by Farid, 2026-07-23 — verify against Faridunhill-live repo files when connected)*
+
+### The Archive's origin — it is an ark
+- Pipedia and pipephil were the **first foundations** of the encyclopedia's data.
+- When pipephil announced it would close, **both were mirrored — and more** — so the knowledge
+  survives even if the sources disappear.
+
+### The Professor — hard requirement and current blockers
+- **Non-negotiable:** the professor has **Farid's cartoon face and Farid's voice.**
+- Face: **LoRA training tried twice** (plus injection and other approaches) — nothing worked.
+  This is the open hard point.
+- Voice: paid **ElevenLabs** account. **13 cloning attempts**; the best one is approved and in
+  use, but still hoping for better. "Soundbox" was the worst of the tools tried.
+
+### Candidate solution for the face (proposed, to validate)
+Two-step "character bible" pipeline — no LoRA needed:
+1. Generate **one canonical cartoon-professor portrait** from Farid's photo with an
+   identity-preserving editing model (iterate like the 13 voice takes until approved).
+2. That approved portrait becomes the permanent reference: HeyGen can animate an **illustrated
+   face as a talking photo** (cartoon face + ElevenLabs voice = talking professor, with accounts
+   already paid for); image-to-video models take the same portrait as character reference for
+   full-body/workshop shots.
+3. Only if consistency breaks later: train a LoRA **on ~30 generated images of the approved
+   cartoon character** (a character LoRA), never on "convert Farid → cartoon" directly — that's
+   why the earlier attempts likely failed.
+
+### Voice upgrade path
+- Move from Instant Voice Clone to **Professional Voice Clone (PVC)** — needs 30 min–3 h of clean
+  recorded speech, produces a large quality jump over instant clones; available on paid tiers.
+
+---
 *Add new ideas below with a date.*
