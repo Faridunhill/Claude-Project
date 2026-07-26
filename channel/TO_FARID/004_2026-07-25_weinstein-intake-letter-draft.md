@@ -2,12 +2,13 @@
 
 **Status:** ready for Farid to review, confirm the `[CONFIRM]` items, fill bracketed blanks, and send. NOT sent by me.
 
-**Important — cloud/PC split:** this cloud repo only holds the **faridunhill** business. Details of
-**groundtruthpropertyai.com** (real-estate AI) and **ashcorbe-co.com** (automated online-store module)
-live in the master system on Farid's PC and are **not synced here**, so Sections B and C below are built
-on the *typical* legal worries for that kind of site — Farid must confirm/correct them (or sync the real
-details into `channel/NEW_UPLOADS/` and I'll rewrite from fact). Note: the **luxury men's store is cancelled**
-and is not included.
+**Sourcing note:** Section A (faridunhill) and Section B (GroundTruth) are written from the actual
+repositories. Section B is now built from the **real** `groundtruth-website` repo (product, pricing,
+existing disclaimers, entity). **Section C (ashcorbe-co.com)** is still built on the *typical* worries for
+its type because that repo isn't in the session yet — Farid to confirm, or say the repo name and I'll clone
+it too. Note: the **luxury men's store is cancelled** and is not included.
+
+**Entity discovered:** all of this operates under **Faridunhill LLC (New Jersey)** — filled into the signature.
 
 **Send to:** Cher Sauer, Esq. (Of Counsel) — Law Offices of David A. Weinstein, P.C.
 4400 U.S. 9, Suite 1000, Freehold, NJ 07728 · (732) 792-3397 · via their website contact form or by email.
@@ -44,15 +45,17 @@ It has three parts: an **online store** (tobacco pipes, pipe tobacco, cigars, le
 
 ---
 
-### B. groundtruthpropertyai.com — real-estate AI  *(worries typical for this type — CONFIRM/correct)*
+### B. groundtruthpropertyai.com — paid property due-diligence reports (Tennessee relocation)
 
-**What I expect to worry about here:**
-1. **"Not an appraisal / not advice."** Any AI-generated property figure must be clearly informational — **not** a USPAP appraisal, and **not** financial, investment, tax, or legal advice.
-2. **AI output accuracy & reliance.** Strong no-warranty and limitation-of-liability language for decisions users make from AI estimates.
-3. **Fair-housing / anti-discrimination.** AI outputs must not produce or imply discrimination against protected classes (Fair Housing Act) — a real regulatory risk for property AI.
-4. **No brokerage relationship.** Disclaim that using the site does not create an agent/broker relationship *(unless we are licensed — CONFIRM)*.
-5. **Third-party data licensing** (MLS, public records, map/imagery providers) — that our data use complies with their terms.
-6. **AI disclosure** + privacy for any user or property data collected.
+GroundTruth Property AI sells **paid property research reports** ($99 / $299 / $499, plus a rush add-on) to **out-of-state buyers relocating to Tennessee** (buyers from ~24 origin states). Reports are AI-compiled from public records and third-party data and cover flood/environmental risk, property tax and full cost-of-ownership, schools and neighborhood quality (including a crime index), zoning and permit/regulatory history, structural risk flags, comparable sales with negotiation guidance, and investment/appreciation potential. Payments run through Stripe; there is a tax-savings calculator with email capture, and a **realtor referral program that pays realtors a 20% commission**. Operated by **Faridunhill LLC (New Jersey)**. The site already carries baseline disclaimers ("not legal, financial, real-estate, or engineering advice"; "not a licensed engineering firm"; "a verdict, not advice") that I want reviewed and hardened.
+
+**What I want protection from here:**
+1. **Unlicensed-practice / professional-advice exposure.** Reports give zoning, permit, structural, and valuation "verdicts" and lean on 30 years of civil-engineering credentials, while the company is **not** a licensed engineering or real-estate firm. I need our disclaimers to keep us clearly on the "informational — verify independently" side of the unauthorized practice of engineering, real estate, and appraisal, in both Tennessee and the buyer's home state.
+2. **Reliance / limitation of liability.** Buyers make a major purchase partly on our reports; I want strong no-warranty and liability-cap language, plus your guidance on **E&O insurance** (we are finalizing a policy now).
+3. **Fair Housing.** Reports include crime, school, and neighborhood "quality-of-life" data — I want to avoid any steering or discrimination exposure under the Fair Housing Act.
+4. **Referral commissions / RESPA.** We pay realtors a 20% referral commission — I want it structured to avoid anti-kickback / RESPA problems.
+5. **Data-source licensing.** Reports compile and resell data from FEMA, EPA, GreatSchools, Walk Score, comparable-sales, and other APIs — I want confirmation our commercial use complies with each provider's terms.
+6. **Multi-state operation & consumer terms.** We sell into ~24 states, from a NJ LLC, for Tennessee properties — I want a Terms of Service, refund policy, AI-content disclosure, and privacy policy (email + Stripe data) that hold up across states.
 
 ---
 
@@ -79,6 +82,5 @@ Terms of Use; Terms of Sale / SaaS Terms; Privacy & Cookie Policy; Returns/Shipp
 I have **prior draft disclaimer language** from an earlier effort I can share as a starting guide once we're engaged or under a confidentiality understanding; the business has changed since then, so treat it as reference only.
 
 Best regards,
-[Your full legal name]
-[Business entity / "sole proprietor," if applicable]
+[Your full legal name], for **Faridunhill LLC** (New Jersey)
 faridunhill.com · groundtruthpropertyai.com · ashcorbe-co.com · FARIDHD1969@aol.com · [phone]

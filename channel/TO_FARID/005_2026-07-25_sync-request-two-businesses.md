@@ -6,11 +6,10 @@ The cloud repo only holds **faridunhill**. To finish the portfolio attorney lett
 from fact instead of assumptions, please sync a short profile of each into `channel/NEW_UPLOADS/`
 (or just tell me in chat):
 
-**groundtruthpropertyai.com** (real-estate AI)
-- What it actually does (AI valuations? lead-gen? listings tool?)
-- Do we hold any real-estate license, or is it info-only?
-- Where property data comes from (MLS? public records? a provider?)
-- Do users create accounts / do we store their data?
+**groundtruthpropertyai.com** — ✅ RESOLVED (cloned `Faridunhill/groundtruth-website`, 2026-07-26).
+Known now: paid property due-diligence reports ($99–$499) for out-of-state buyers relocating to TN;
+AI-compiled from public records/APIs; Stripe; realtor 20% referral; operated by **Faridunhill LLC (NJ)**;
+baseline disclaimers already live; E&O insurance being finalized. Section B of the letter rewritten from fact.
 
 **ashcorbe-co.com** (automated online-store module)
 - Is it **software we license to others** (SaaS), or **a store that sells goods** to consumers?
