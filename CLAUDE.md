@@ -30,6 +30,18 @@ The empire runs on two halves that are the SAME agent. They sync through
   and let a local session answer, or read what's already synced into `docs/` and
   `content/`.
 
+## ★ THE THREE CLOUD REPOS (Claude GitHub App = "All repositories" → a fresh session reads+writes all 3)
+Don't wake blank about where things live. Latest live state is always in
+`channel/TO_AGENT/` — read the newest note first.
+- **Claude-Project** (this repo) — encyclopedia / Builder / Professor + the `channel/`.
+- **faridunhill-live** — ★THE LIVE STORE★ (faridunhill.com): Next.js + **Supabase**, real
+  `app/admin` with an Approve/Pending workflow; products in a Supabase `products` table
+  (`images TEXT[]`, index 0 = main photo). Normally private. **Store work happens HERE, not
+  in Claude-Project's `content/products` yaml (that's a parallel/older copy).**
+- **groundtruth-website** — GroundTruth Property AI landing (Faridunhill LLC, NJ).
+- If a repo isn't in your session scope yet, it just needs adding in a fresh session — the
+  App permission is already granted permanently; never tell Farid to re-grant it.
+
 ## Standing LAWS (identical on both fronts)
 1. **Honesty is the product.** Wide brackets over guesses; disputed facts carry
    BOTH sources; absence never dates; corrections stated plainly. Every published

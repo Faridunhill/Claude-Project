@@ -1,0 +1,348 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { X, Upload, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { slugify } from "@/lib/utils";
+
+interface ProductData {
+  id?: string;
+  name: string;
+  slug: string;
+  category: string;
+  price: number;
+  stock: number;
+  material: string;
+  short_description: string;
+  description: string;
+  images: string[];
+  featured: boolean;
+  tags: string;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+interface ProductModalProps {
+  product?: Partial<ProductData>;
+  onClose: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSave: (data: any) => Promise<void>;
+}
+
+const INITIAL_FORM: ProductData = {
+  name: "",
+  slug: "",
+  category: "Pipes",
+  price: 0,
+  stock: 0,
+  material: "",
+  short_description: "",
+  description: "",
+  images: [],
+  featured: false,
+  tags: "",
+};
+
+export function ProductModal({ product, onClose, onSave }: ProductModalProps) {
+  const [form, setForm] = useState<ProductData>({
+    ...INITIAL_FORM,
+    ...(product || {}),
+    tags: Array.isArray(product?.tags) ? (product.tags as string[]).join(", ") : (product?.tags || ""),
+  });
+  const [loading, setLoading] = useState(false);
+  const [shake, setShake] = useState(false);
+  const isEdit = !!product?.id;
+
+  useEffect(() => {
+    if (!isEdit) {
+      setForm((prev) => ({ ...prev, slug: slugify(prev.name) }));
+    }
+  }, [form.name, isEdit]);
+
+  function updateForm(field: keyof ProductData, value: string | number | boolean | string[]) {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!form.name || !form.price) {
+      setShake(true);
+      setTimeout(() => setShake(false), 600);
+      return;
+    }
+    setLoading(true);
+    try {
+      const tagsArr = typeof form.tags === "string"
+        ? form.tags.split(",").map((t: string) => t.trim()).filter(Boolean)
+        : form.tags;
+      await onSave({ ...form, tags: tagsArr });
+    } catch {
+      // error handled by parent
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleImageUrlAdd(e: React.KeyboardEvent<HTMLInputElement>) {
+    const input = e.currentTarget;
+    if (e.key === "Enter" && input.value.trim()) {
+      e.preventDefault();
+      setForm((prev) => ({ ...prev, images: [...prev.images, input.value.trim()] }));
+      input.value = "";
+    }
+  }
+
+  // Reorder photos: the array order IS the display order (index 0 = main photo).
+  function moveImage(from: number, to: number) {
+    setForm((prev) => {
+      if (to < 0 || to >= prev.images.length || from === to) return prev;
+      const next = [...prev.images];
+      const [moved] = next.splice(from, 1);
+      next.splice(to, 0, moved);
+      return { ...prev, images: next };
+    });
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-ink/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className={`bg-[#111] border border-cream/10 w-full max-w-2xl max-h-[90vh] overflow-y-auto ${shake ? "shake" : ""}`}
+      >
+        <div className="flex items-center justify-between p-6 border-b border-cream/10 sticky top-0 bg-[#111] z-10">
+          <h2 className="font-serif text-2xl text-cream">{isEdit ? "Edit Product" : "Add Product"}</h2>
+          <button onClick={onClose} className="text-cream/40 hover:text-gold transition-colors">
+            <X size={20} />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="p-6 space-y-5">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="admin-label">Product Name *</label>
+              <input
+                type="text"
+                value={form.name}
+                onChange={(e) => updateForm("name", e.target.value)}
+                required
+                className="input-gold text-sm"
+              />
+            </div>
+            <div>
+              <label className="admin-label">Slug</label>
+              <input
+                type="text"
+                value={form.slug}
+                onChange={(e) => updateForm("slug", e.target.value)}
+                className="input-gold text-sm"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <label className="admin-label">Category *</label>
+              <select
+                value={form.category}
+                onChange={(e) => updateForm("category", e.target.value)}
+                className="input-gold text-sm bg-[#111] cursor-pointer"
+              >
+                {["Estate Pipes", "New Pipes", "Meerschaum", "Rare & Collectible", "Leather Bags & Cases", "Cigar & Smoking Accessories", "Lighters & Matches", "Sale & Clearance"].map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="admin-label">Price ($) *</label>
+              <input
+                type="number"
+                min="0"
+                step="0.01"
+                value={form.price}
+                onChange={(e) => updateForm("price", parseFloat(e.target.value))}
+                required
+                className="input-gold text-sm"
+              />
+            </div>
+            <div>
+              <label className="admin-label">Stock</label>
+              <input
+                type="number"
+                min="0"
+                value={form.stock}
+                onChange={(e) => updateForm("stock", parseInt(e.target.value))}
+                className="input-gold text-sm"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="admin-label">Material</label>
+            <input
+              type="text"
+              value={form.material}
+              onChange={(e) => updateForm("material", e.target.value)}
+              placeholder="Briar, Meerschaum, Corncob..."
+              className="input-gold text-sm"
+            />
+          </div>
+
+          <div>
+            <label className="admin-label">Short Description (max 160 chars)</label>
+            <textarea
+              value={form.short_description}
+              onChange={(e) => updateForm("short_description", e.target.value)}
+              maxLength={160}
+              rows={2}
+              className="input-gold text-sm resize-none"
+            />
+          </div>
+
+          <div>
+            <label className="admin-label">Full Description (HTML supported)</label>
+            <textarea
+              value={form.description}
+              onChange={(e) => updateForm("description", e.target.value)}
+              rows={4}
+              className="input-gold text-sm resize-none font-mono"
+              placeholder="<p>Product description...</p>"
+            />
+          </div>
+
+          <div>
+            <label className="admin-label">
+              Photos — arrange the pose order (#1 is the main photo)
+            </label>
+            <input
+              type="url"
+              placeholder="https://... (press Enter to add)"
+              onKeyDown={handleImageUrlAdd}
+              className="input-gold text-sm mb-2"
+            />
+            {form.images.length > 0 && (
+              <>
+                <p className="text-cream/40 text-xs mb-2">
+                  Order below = order on the product page. Use ◀ ▶ to move a photo, ★ to make it the
+                  main photo. Min 4 / recommended 6.
+                </p>
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-1">
+                  {form.images.map((img, i) => (
+                    <div
+                      key={`${img}-${i}`}
+                      className={`relative aspect-square border ${
+                        i === 0 ? "border-gold" : "border-cream/10"
+                      }`}
+                    >
+                      <img src={img} alt={`Photo ${i + 1}`} className="w-full h-full object-cover" />
+
+                      {/* position badge */}
+                      <span
+                        className={`absolute top-1 left-1 min-w-5 h-5 px-1 rounded-full text-[11px] font-semibold flex items-center justify-center ${
+                          i === 0 ? "bg-gold text-ink" : "bg-ink/80 text-cream"
+                        }`}
+                      >
+                        {i === 0 ? "★1" : i + 1}
+                      </span>
+
+                      {/* delete */}
+                      <button
+                        type="button"
+                        aria-label="Remove photo"
+                        onClick={() =>
+                          setForm((p) => ({ ...p, images: p.images.filter((_, idx) => idx !== i) }))
+                        }
+                        className="absolute -top-2 -right-2 w-5 h-5 bg-burgundy rounded-full flex items-center justify-center text-white text-xs"
+                      >
+                        ×
+                      </button>
+
+                      {/* reorder controls */}
+                      <div className="absolute bottom-0 inset-x-0 flex items-stretch bg-ink/70">
+                        <button
+                          type="button"
+                          aria-label="Move earlier"
+                          disabled={i === 0}
+                          onClick={() => moveImage(i, i - 1)}
+                          className="flex-1 py-1 flex items-center justify-center text-cream hover:text-gold disabled:opacity-30"
+                        >
+                          <ChevronLeft size={14} />
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="Make main photo"
+                          disabled={i === 0}
+                          onClick={() => moveImage(i, 0)}
+                          className="flex-1 py-1 flex items-center justify-center text-cream hover:text-gold disabled:opacity-30 border-x border-cream/10"
+                        >
+                          <Star size={13} />
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="Move later"
+                          disabled={i === form.images.length - 1}
+                          onClick={() => moveImage(i, i + 1)}
+                          className="flex-1 py-1 flex items-center justify-center text-cream hover:text-gold disabled:opacity-30"
+                        >
+                          <ChevronRight size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
+          <div>
+            <label className="admin-label">Tags (comma-separated)</label>
+            <input
+              type="text"
+              value={form.tags}
+              onChange={(e) => updateForm("tags", e.target.value)}
+              placeholder="briar, handcrafted, italian"
+              className="input-gold text-sm"
+            />
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => updateForm("featured", !form.featured)}
+              className={`w-12 h-6 rounded-full transition-all duration-300 relative ${
+                form.featured ? "bg-gold" : "bg-cream/20"
+              }`}
+            >
+              <motion.div
+                animate={{ x: form.featured ? 24 : 4 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                className="absolute top-1 w-4 h-4 rounded-full bg-white"
+              />
+            </button>
+            <label className="text-cream/60 text-sm">Featured product</label>
+          </div>
+
+          <div className="flex gap-3 pt-4 border-t border-cream/10">
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn-gold flex-1"
+            >
+              {loading ? "Saving..." : isEdit ? "Save Changes" : "Create Product"}
+            </button>
+            <button type="button" onClick={onClose} className="btn-outline-gold px-6">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </motion.div>
+    </motion.div>
+  );
+}
