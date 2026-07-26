@@ -7,19 +7,23 @@ do NOT assert it as fact; ask.
 ## The pieces
 - **faridunhill-live** (GitHub, private) — the store website + **admin page** (`app/admin`, Supabase).
   Farid uploads/edits products here; admin has Approve/Pending/Delete. **[CONFIRMED]**
-- **ashcombe-co** — Farid's **"automated online-store module."** This is the engine that
-  **publishes a product out to the sales channels.** **[CONFIRMED it publishes to faridunhill + Etsy]**
-  Deploy seen as `ashcombe-co-production` (AWS us-east-1). **NOT one of the 3 GitHub repos** →
-  its code is on Farid's PC or a non-GitHub deploy. **[NEEDS FARID: where is ashcombe-co's code?]**
+- **ashcombe-co** — Farid's **"automated online-store module."** Deploy seen as
+  `ashcombe-co-production` (AWS us-east-1). **NOT one of the 3 GitHub repos.**
+  **[UNVERIFIED — DO NOT ASSERT]** Whether ashcombe-co is the thing that publishes to Etsy is a
+  GUESS a cloud session made; it was NOT confirmed by Farid. The publish could be direct from the
+  admin, via ashcombe-co, or another path. **Nobody has read the code that does it.**
+  **[NEEDS FARID: where is ashcombe-co's code, and does the admin publish directly or call it out?]**
 - **Claude-Project** (this repo) — encyclopedia/Builder + the `channel/`. Also holds a
   **per-channel listing-copy generator** (commit `7fab6ab`, own_store/etsy/ebay). **[CONFIRMED]**
 - **groundtruth-website** — separate business (property AI). Not part of the store.
 
-## The publish flow (as Farid described it) **[CONFIRMED by Farid 2026-07-26]**
-1. Farid uploads a product from the **faridunhill-live admin page**.
-2. "The system published to **faridunhill AND Etsy**." → the admin triggers **ashcombe-co**, which
-   pushes the listing to the channels. Etsy API keys already exist (held by ashcombe-co).
-3. Goal channels: **Faridunhill store + Etsy + eBay(upload)**.
+## The publish flow — what is actually CONFIRMED vs GUESSED
+**[CONFIRMED by Farid 2026-07-26]:** Farid uploads/approves a product from the **faridunhill-live
+admin page**, and "the system published to **faridunhill AND Etsy**." Etsy publishing already works.
+**[GUESS — NOT confirmed]:** that ashcombe-co is the engine, or that Etsy keys live there. Unknown.
+**Goal channels:** Faridunhill store + Etsy + eBay(upload).
+**To learn the truth (don't guess):** read the faridunhill-live admin Approve/Publish action code
+to see what it calls — that is the only way to know if it publishes directly or hands off elsewhere.
 
 ## What this means for the current job (arrange 30 pipes' photos, then finish listings)
 - **Do NOT search faridunhill-live for Etsy API code — it is not there. The Etsy code is in ashcombe-co.**
