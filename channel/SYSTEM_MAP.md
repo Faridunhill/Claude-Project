@@ -4,6 +4,15 @@ Purpose: stop cloud sessions guessing or searching blindly. If a fact here is ma
 **[CONFIRMED]** it came from Farid or a repo we read. **[NEEDS FARID]** = not yet verified —
 do NOT assert it as fact; ask.
 
+## ★ THE ENCYCLOPEDIA IS ALREADY BUILT AND LIVE — in faridunhill-live, NOT here
+The real, published encyclopedia lives in **faridunhill-live** (e.g. the Peterson & Dunhill dating
+guides). It already has the **trust-tier system**: per-era **HIGH / MEDIUM / LOW trust badges** with
+honest dating brackets, kept overlaps, and "sources disagree → keep the wide bracket" notes. It is
+excellent and DONE — do not propose building it.
+**Claude-Project's `content/encyclopedia/` has only a sample article** — it is NOT the real encyclopedia.
+**Rule:** never conclude an encyclopedia/store feature is missing by checking Claude-Project. The live
+product is in faridunhill-live. If you can't see it, say so and open faridunhill-live — don't guess.
+
 ## The pieces
 - **faridunhill-live** (GitHub, private) — the store website + **admin page** (`app/admin`, Supabase).
   Farid uploads/edits products here; admin has Approve/Pending/Delete. **[CONFIRMED]**
