@@ -46,7 +46,17 @@ export default config({
         sku: fields.text({ label: 'SKU' }),
         images: fields.array(
           fields.text({ label: 'Image URL' }),
-          { label: 'Images', itemLabel: (props) => props.value || 'Image' }
+          {
+            label: 'Images — drag the ⣿ handle to arrange (top = main photo)',
+            description:
+              'The order here IS the order shown on the product page. Drag each row by the handle on its left to set your pose sequence; the first image is the main photo. Min 4 / recommended 6 photos.',
+            itemLabel: (props) => {
+              const url = props.value || ''
+              if (!url) return 'Empty — paste an image URL'
+              const file = url.split('/').pop() || url
+              return `📷 ${file}`
+            },
+          }
         ),
         featured: fields.checkbox({ label: 'Featured on homepage', defaultValue: false }),
         inStock: fields.checkbox({ label: 'In Stock', defaultValue: true }),
