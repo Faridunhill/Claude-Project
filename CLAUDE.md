@@ -41,6 +41,10 @@ Don't wake blank about where things live. Latest live state is always in
 - **groundtruth-website** — GroundTruth Property AI landing (Faridunhill LLC, NJ).
 - If a repo isn't in your session scope yet, it just needs adding in a fresh session — the
   App permission is already granted permanently; never tell Farid to re-grant it.
+- **★ Before any store/listing/Etsy/eBay work, read `channel/SYSTEM_MAP.md`** — it records how the
+  publish flow works (admin → **ashcombe-co** engine → faridunhill + Etsy + eBay). ashcombe-co is
+  NOT in GitHub yet, so the cloud is blind to it: if you can't see part of the system, say "I can't
+  see it from here" and ask — never declare it missing.
 
 ## Standing LAWS (identical on both fronts)
 1. **Honesty is the product.** Wide brackets over guesses; disputed facts carry
