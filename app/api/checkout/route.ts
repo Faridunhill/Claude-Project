@@ -20,7 +20,10 @@ export async function POST(request: NextRequest) {
       image: string
     }) => ({
       price_data: {
-        currency: 'gbp',
+        // Base currency. The storefront may DISPLAY other currencies,
+        // but the charge is always USD and the UI says so. See
+        // lib/currency.ts.
+        currency: 'usd',
         product_data: {
           name: item.name,
           images: [item.image],

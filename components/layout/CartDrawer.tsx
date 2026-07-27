@@ -4,9 +4,13 @@ import { useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
+import Price from '@/components/ui/Price'
+import { BASE_CURRENCY } from '@/lib/currency'
+import { useCurrency } from '@/context/CurrencyContext'
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQty, subtotal, itemCount } = useCart()
+  const { currency } = useCurrency()
 
   useEffect(() => {
     if (isOpen) {
@@ -98,7 +102,7 @@ export default function CartDrawer() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-playfair font-semibold text-parchment text-sm leading-snug line-clamp-2">{item.name}</p>
-                  <p className="text-gold text-sm font-lora mt-1">£{item.price.toFixed(2)}</p>
+                  <Price amount={item.price} className="block text-gold text-sm font-lora mt-1" />
                   <div className="flex items-center gap-3 mt-2">
                     <div className="flex items-center border border-gold/30 rounded-sm overflow-hidden">
                       <button
@@ -135,9 +139,17 @@ export default function CartDrawer() {
           <div className="border-t border-gold/20 px-6 py-5 bg-mahogany-dark space-y-4">
             <div className="flex items-center justify-between">
               <span className="font-lora text-parchment/70 text-sm">Subtotal</span>
-              <span className="font-playfair font-bold text-gold text-lg">£{subtotal.toFixed(2)}</span>
+              <Price amount={subtotal} className="font-playfair font-bold text-gold text-lg" />
             </div>
-            <p className="text-xs text-parchment/40 font-lora">Shipping & taxes calculated at checkout. Age verification required.</p>
+            <p className="text-xs text-parchment/40 font-lora">
+              Shipping &amp; taxes calculated at checkout. Age verification required.
+              {currency !== BASE_CURRENCY && (
+                <>
+                  {' '}Prices shown in {currency} are indicative; you will be charged in{' '}
+                  {BASE_CURRENCY}.
+                </>
+              )}
+            </p>
             <button
               onClick={handleCheckout}
               className="btn-gold w-full py-3.5 rounded-sm font-playfair font-bold text-sm tracking-widest uppercase"

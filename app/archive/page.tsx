@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getAllArchiveItems } from '@/lib/archive'
+import { formatFixed } from '@/lib/currency'
 
 export const metadata: Metadata = {
   title: 'The Encyclopedia — Sold Archive | Faridunhill',
@@ -60,7 +61,7 @@ export default function ArchivePage() {
                   </h2>
                   {item.soldPrice !== null && (
                     <p className="font-lora text-parchment/40 text-xs mt-2">
-                      Realized £{item.soldPrice.toFixed(2)}
+                      Realized {formatFixed(item.soldPrice, item.soldCurrency)}
                     </p>
                   )}
                 </div>

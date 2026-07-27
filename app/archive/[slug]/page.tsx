@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { currencySymbol, getAllArchiveItems, getArchiveItem } from '@/lib/archive'
+import { getAllArchiveItems, getArchiveItem } from '@/lib/archive'
+import { formatFixed } from '@/lib/currency'
 
 interface Props {
   params: { slug: string }
@@ -96,13 +97,10 @@ export default function ArchiveItemPage({ params }: Props) {
             <div className="flex items-center gap-4 mb-8 font-lora text-sm">
               {item.soldPrice !== null && (
                 <span className="text-gold text-xl font-playfair font-bold">
-                  Realized {currencySymbol(item.soldCurrency)}
-                  {item.soldPrice.toFixed(2)}
-                  {item.soldCurrency !== 'GBP' && (
-                    <span className="text-parchment/40 text-sm font-lora font-normal ml-1.5">
-                      {item.soldCurrency}
-                    </span>
-                  )}
+                  Realized {formatFixed(item.soldPrice, item.soldCurrency)}
+                  <span className="text-parchment/40 text-sm font-lora font-normal ml-1.5">
+                    {item.soldCurrency}
+                  </span>
                 </span>
               )}
               {soldDate && (

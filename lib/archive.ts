@@ -20,15 +20,6 @@ export interface ArchiveItem {
   body: string
 }
 
-const CURRENCY_SYMBOLS: Record<string, string> = {
-  GBP: '£',
-  USD: '$',
-  EUR: '€',
-}
-
-export function currencySymbol(code: string): string {
-  return CURRENCY_SYMBOLS[code?.toUpperCase()] ?? ''
-}
 
 const ARCHIVE_DIR = path.join(process.cwd(), 'content', 'archive')
 

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
 import Logo from '@/components/ui/Logo'
 import CartDrawer from '@/components/layout/CartDrawer'
+import CurrencySelector from '@/components/ui/CurrencySelector'
 
 const departments = [
   {
@@ -194,6 +195,9 @@ export default function Navigation() {
                   </button>
                 )}
               </div>
+
+              {/* Currency */}
+              <CurrencySelector />
 
               {/* Cart */}
               <button

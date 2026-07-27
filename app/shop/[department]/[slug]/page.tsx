@@ -4,6 +4,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getAllProducts, getProductBySlug, getRelatedProducts, departmentMeta } from '@/lib/products'
 import AddToCartButton from '@/components/ui/AddToCartButton'
+import Price from '@/components/ui/Price'
+import { BASE_CURRENCY } from '@/lib/currency'
 
 interface Props {
   params: { department: string; slug: string }
@@ -71,7 +73,7 @@ export default async function ProductPage({ params }: Props) {
     offers: {
       '@type': 'Offer',
       price: product.price,
-      priceCurrency: 'GBP',
+      priceCurrency: BASE_CURRENCY,
       availability: product.inStock
         ? 'https://schema.org/InStock'
         : 'https://schema.org/OutOfStock',
@@ -155,13 +157,15 @@ export default async function ProductPage({ params }: Props) {
             )}
 
             <div className="flex items-center gap-4 mt-5 mb-6">
-              <span className="font-playfair font-bold text-gold text-3xl">
-                £{product.price.toFixed(2)}
-              </span>
+              <Price
+                amount={product.price}
+                className="font-playfair font-bold text-gold text-3xl"
+              />
               {product.originalPrice !== null && product.originalPrice !== undefined && (
-                <span className="font-lora text-parchment/40 text-lg line-through">
-                  £{product.originalPrice.toFixed(2)}
-                </span>
+                <Price
+                  amount={product.originalPrice}
+                  className="font-lora text-parchment/40 text-lg line-through"
+                />
               )}
               {product.inStock ? (
                 <span className="font-lora text-sm text-hunter-light">● In Stock</span>
@@ -199,7 +203,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
 
             <p className="font-lora text-parchment/35 text-xs mt-4 leading-relaxed">
-              Free shipping on orders over £75. Age verification (21+) required for tobacco products.
+              Free shipping on orders over $75. Age verification (21+) required for tobacco products.
               Estimated delivery 3–7 business days within the continental US.
             </p>
 
@@ -243,9 +247,10 @@ export default async function ProductPage({ params }: Props) {
                     <p className="font-playfair font-semibold text-parchment text-sm line-clamp-2 group-hover:text-gold transition-colors">
                       {rel.name}
                     </p>
-                    <p className="font-playfair font-bold text-gold mt-2">
-                      £{rel.price.toFixed(2)}
-                    </p>
+                    <Price
+                      amount={rel.price}
+                      className="block font-playfair font-bold text-gold mt-2"
+                    />
                   </div>
                 </Link>
               ))}

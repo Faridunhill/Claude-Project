@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Playfair_Display, Lora, IM_Fell_English } from 'next/font/google'
 import './globals.css'
 import CartProvider from '@/context/CartContext'
+import { CurrencyProvider } from '@/context/CurrencyContext'
 import AgeGate from '@/components/ui/AgeGate'
 import LayoutChrome from './LayoutChrome'
 
@@ -97,10 +98,12 @@ export default function RootLayout({
       className={`${playfair.variable} ${lora.variable} ${imFell.variable}`}
     >
       <body className="bg-mahogany text-parchment font-lora antialiased">
-        <CartProvider>
-          <AgeGate />
-          <LayoutChrome>{children}</LayoutChrome>
-        </CartProvider>
+        <CurrencyProvider>
+          <CartProvider>
+            <AgeGate />
+            <LayoutChrome>{children}</LayoutChrome>
+          </CartProvider>
+        </CurrencyProvider>
       </body>
     </html>
   )

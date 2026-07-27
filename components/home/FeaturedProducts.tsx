@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getFeaturedProducts } from '@/lib/products'
 import AddToCartButton from '@/components/ui/AddToCartButton'
+import Price from '@/components/ui/Price'
 
 export default async function FeaturedProducts() {
   const products = (await getFeaturedProducts()).slice(0, 8)
@@ -86,13 +87,15 @@ export default async function FeaturedProducts() {
                 {/* Price row */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="font-playfair font-bold text-gold text-base">
-                      £{product.price.toFixed(2)}
-                    </span>
+                    <Price
+                      amount={product.price}
+                      className="font-playfair font-bold text-gold text-base"
+                    />
                     {product.originalPrice && (
-                      <span className="font-lora text-parchment/40 text-xs line-through">
-                        £{product.originalPrice.toFixed(2)}
-                      </span>
+                      <Price
+                        amount={product.originalPrice}
+                        className="font-lora text-parchment/40 text-xs line-through"
+                      />
                     )}
                   </div>
                 </div>

@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getAllProducts } from '@/lib/products'
 import { getAllArchiveItems } from '@/lib/archive'
+import { formatFixed } from '@/lib/currency'
+import Price from '@/components/ui/Price'
 
 interface Props {
   params: { brand: string }
@@ -84,7 +86,7 @@ export default async function BrandHubPage({ params }: Props) {
                 </div>
                 <div className="p-3">
                   <h3 className="font-playfair text-parchment text-sm leading-snug line-clamp-2 mb-1">{p.name}</h3>
-                  <p className="font-lora text-gold text-sm font-bold">£{p.price.toFixed(2)}</p>
+                  <Price amount={p.price} className="block font-lora text-gold text-sm font-bold" />
                 </div>
               </Link>
             ))}
@@ -117,7 +119,7 @@ export default async function BrandHubPage({ params }: Props) {
                 <div className="p-3">
                   <h3 className="font-playfair text-parchment/80 text-sm leading-snug line-clamp-2 mb-1">{a.title}</h3>
                   {a.soldPrice !== null && (
-                    <p className="font-lora text-parchment/40 text-xs">Realized £{a.soldPrice.toFixed(2)}</p>
+                    <p className="font-lora text-parchment/40 text-xs">Realized {formatFixed(a.soldPrice, a.soldCurrency)}</p>
                   )}
                 </div>
               </Link>
