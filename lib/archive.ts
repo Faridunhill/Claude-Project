@@ -12,8 +12,22 @@ export interface ArchiveItem {
   soldAt: string
   soldChannel: string
   soldPrice: number | null
+  /** ISO 4217 code the sale actually settled in. Defaults to GBP (the
+   *  store currency), but private/offsite sales may settle in USD, so
+   *  the realized price is never relabelled into the wrong currency. */
+  soldCurrency: string
   images: string[]
   body: string
+}
+
+const CURRENCY_SYMBOLS: Record<string, string> = {
+  GBP: '£',
+  USD: '$',
+  EUR: '€',
+}
+
+export function currencySymbol(code: string): string {
+  return CURRENCY_SYMBOLS[code?.toUpperCase()] ?? ''
 }
 
 const ARCHIVE_DIR = path.join(process.cwd(), 'content', 'archive')
@@ -36,6 +50,7 @@ export function getAllArchiveItems(): ArchiveItem[] {
         soldAt: (data.soldAt as string) ?? '',
         soldChannel: (data.soldChannel as string) ?? '',
         soldPrice: typeof data.soldPrice === 'number' ? data.soldPrice : null,
+        soldCurrency: ((data.soldCurrency as string) ?? 'GBP').toUpperCase(),
         images: Array.isArray(data.images) ? (data.images as string[]) : [],
         body: content.trim(),
       }

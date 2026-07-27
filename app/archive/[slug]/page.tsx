@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { getAllArchiveItems, getArchiveItem } from '@/lib/archive'
+import { currencySymbol, getAllArchiveItems, getArchiveItem } from '@/lib/archive'
 
 interface Props {
   params: { slug: string }
@@ -37,7 +37,7 @@ export default function ArchiveItemPage({ params }: Props) {
     offers: {
       '@type': 'Offer',
       availability: 'https://schema.org/SoldOut',
-      priceCurrency: 'GBP',
+      priceCurrency: item.soldCurrency,
       ...(item.soldPrice !== null && { price: item.soldPrice }),
     },
   }
@@ -96,7 +96,13 @@ export default function ArchiveItemPage({ params }: Props) {
             <div className="flex items-center gap-4 mb-8 font-lora text-sm">
               {item.soldPrice !== null && (
                 <span className="text-gold text-xl font-playfair font-bold">
-                  Realized £{item.soldPrice.toFixed(2)}
+                  Realized {currencySymbol(item.soldCurrency)}
+                  {item.soldPrice.toFixed(2)}
+                  {item.soldCurrency !== 'GBP' && (
+                    <span className="text-parchment/40 text-sm font-lora font-normal ml-1.5">
+                      {item.soldCurrency}
+                    </span>
+                  )}
                 </span>
               )}
               {soldDate && (

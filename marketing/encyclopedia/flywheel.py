@@ -61,6 +61,11 @@ def build_archive_entry(
         f"soldAt: {sold.get('ts', '')!r}",
         f"soldChannel: {sold.get('channel', '')!r}",
         f"soldPrice: {sold.get('sold_price') if show_price else ''}",
+        # Offsite/private sales may settle in a different currency from
+        # the store's. Record what it ACTUALLY sold in — a realized price
+        # relabelled into the wrong currency corrupts the comparable-price
+        # database this archive exists to be.
+        f"soldCurrency: {sold.get('currency', 'GBP')!r}",
         f"generatorVersion: {FLYWHEEL_VERSION!r}",
         "images:",
         *[f"- {url!r}" for url in images],
