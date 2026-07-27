@@ -5,9 +5,11 @@
 # Every automation MUST read this file before spending money, changing
 # a price, or posting. On any ceiling breach: PAUSE the automation and
 # send ONE email. No silent retries, no silent throttling.
+#
+# Enforced in code by marketing/policy.py — these are not comments.
 # ═══════════════════════════════════════════════════════════════════
 
-version: 1
+version: 2
 currency: GBP
 
 pricing:
@@ -16,14 +18,38 @@ pricing:
   # per day, in percent:
   max_daily_price_move_pct: 10
 
-promotion:
-  # Auto-enroll promoted listings: price >= threshold OR unsold >= days.
-  auto_enroll_min_price: 75.00
-  auto_enroll_stale_days: 60
-  # Hard caps (Synthesis §8):
+# ─── POLICY-META-ADS-001 ───────────────────────────────────────────
+# Meta prohibits PAID advertising for tobacco products and smoking
+# paraphernalia. Estate pipes fall under it. This is NOT a budget of
+# zero that can be raised later — it is a capability that must not
+# exist. Boosting a post risks the ad account AND the Page itself.
+#
+# Confirmed by Farid 2026-07-27: "smoking pipes is not allowed in
+# boosting or meta paid ads, only posts in your groups/pages".
+#
+# ORGANIC posting (own Page, own IG, own groups) is unaffected and is
+# the entire distribution strategy. See social: below.
+meta_paid_ads:
+  enabled: false                  # HARD false. Do not flip without
+                                  # written confirmation that Meta
+                                  # policy has changed for this category.
+  monthly_ceiling: 0.00
+  reason: >
+    Meta prohibits paid promotion of tobacco products and smoking
+    paraphernalia (estate pipes included). Boosting risks the ad
+    account and the Page. Distribution is organic-only: own Page,
+    own Instagram, own groups.
+
+# ─── Marketplace promoted listings (Etsy / eBay — NOT Meta) ────────
+# A different platform with different rules from Meta. Left DISABLED
+# pending Farid's confirmation rather than silently inheriting the old
+# placeholder ceiling. Nothing spends while enabled is false.
+marketplace_promotion:
+  enabled: false                  # awaiting Farid: confirm platform + number
+  auto_enroll_min_price: 75.00    # price >= threshold ...
+  auto_enroll_stale_days: 60      # ... OR unsold >= days
   max_ad_rate_pct: 5.0            # per item, never exceeded
-  monthly_ceiling: 100.00         # total promotion spend / month — TO BE
-                                  # CONFIRMED BY FARID before P2.7 goes live
+  monthly_ceiling: 0.00           # stays 0 until Farid sets it
 
 social:
   max_posts_per_group_per_day: 1  # per-group frequency wall (SOCIAL-ENGINE-001)
@@ -31,9 +57,14 @@ social:
                                           # one email, no silent retries
 
 visual_generation:
-  # Addendum V4 — re-set these numbers the week a vendor is chosen.
-  max_cost_per_asset: 2.00
-  monthly_ceiling: 50.00
+  # Farid 2026-07-27: replace CapCut with the free in-house renderer.
+  # local_ffmpeg = real photos + motion + overlays + licensed house
+  # music, rendered on the PC. No AI imagery, no vendor, no per-asset
+  # cost. Paid vendors stay off until Farid turns them on.
+  vendor: local_ffmpeg
+  paid_vendors_enabled: false
+  max_cost_per_asset: 0.00
+  monthly_ceiling: 0.00
   max_attempts_per_asset: 3       # generation + 2 retries, then human queue
 
 alerts:

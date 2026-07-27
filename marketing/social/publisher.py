@@ -6,10 +6,13 @@ PREPARES (video + caption ready on the phone); a HUMAN taps post.
 No automation ever touches personal profiles or groups — Meta ToS,
 no violations, ever.
 
-Standing walls enforced here (control.yaml):
+Standing walls enforced here (control.yaml, via marketing/policy.py):
   * max_posts_per_group_per_day — the frequency wall, checked in code
   * any Meta account warning -> channel pause + one email, no silent
     retries (the pause flag is persisted; publishing refuses while set)
+  * NO PAID PROMOTION (POLICY-META-ADS-001) — Meta prohibits paid ads
+    for smoking paraphernalia. `request_boost()` is the single choke
+    point and refuses by design. Everything here is organic.
 
 Placements log: every published asset records (channel, url, ts) —
 the takedown/remediation index (addendum V2 consumer).
@@ -24,6 +27,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
+
+from ..policy import Walls, load_walls
 
 _SQL = """
 CREATE TABLE IF NOT EXISTS placements (
@@ -100,15 +105,36 @@ class SocialEngine:
         self,
         db_path: str | Path,
         publisher: Tier1Publisher,
-        max_posts_per_group_per_day: int = 1,
+        max_posts_per_group_per_day: Optional[int] = None,
+        walls: Optional[Walls] = None,
     ):
         self._conn = sqlite3.connect(str(db_path))
         self._conn.executescript(_SQL)
         self._conn.commit()
         self._publisher = publisher
-        self._group_wall = max_posts_per_group_per_day
+        self._walls = walls or load_walls()
+        # Explicit argument wins; otherwise the wall comes from control.yaml.
+        self._group_wall = (
+            max_posts_per_group_per_day
+            if max_posts_per_group_per_day is not None
+            else self._walls.max_posts_per_group_per_day
+        )
 
     # -- walls ---------------------------------------------------------
+
+    def request_boost(self, sku: str, target: str, budget: float) -> None:
+        """THE choke point for paid Meta promotion (POLICY-META-ADS-001).
+
+        Every paid path — boosting a post, running an ad set, paying for
+        reach — must call this first. While the wall stands it always
+        raises `PaidPromotionProhibited`, so a future automation cannot
+        spend here by accident: it gets a loud, documented refusal.
+
+        Meta prohibits paid advertising for smoking paraphernalia; a
+        boost risks the ad account and the Page. Organic posting via
+        `publish_tier1` / `queue_tier2` is the supported route.
+        """
+        self._walls.assert_meta_paid_promotion_allowed()
 
     def _check_pause(self, channel: str) -> None:
         row = self._conn.execute(

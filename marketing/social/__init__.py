@@ -1,5 +1,6 @@
 """Social engine (P2.7) — daily content per SOCIAL-ENGINE-001."""
 
+from ..policy import PaidPromotionProhibited, SpendCeiling, Walls, load_walls
 from .captions import CAPTION_GENERATOR_VERSION, Caption, generate_caption
 from .publisher import (
     ChannelPaused,
@@ -17,9 +18,13 @@ __all__ = [
     "ChannelPaused",
     "DryRunPublisher",
     "FrequencyWall",
+    "PaidPromotionProhibited",
     "PostRequest",
     "SocialEngine",
+    "SpendCeiling",
     "Tier1Publisher",
+    "Walls",
+    "load_walls",
     "VIDEO_GENERATOR_VERSION",
     "VideoResult",
     "VideoSpec",
