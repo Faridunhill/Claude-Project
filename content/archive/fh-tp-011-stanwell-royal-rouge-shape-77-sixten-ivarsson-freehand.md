@@ -4,7 +4,7 @@ sku: FH-TP-011
 brand: 'Stanwell'
 department: estate-pipes
 taxonomy: 'estate-pipes/danish/freehand'
-soldAt: '2026-07-27'
+soldAt: '2026-07-29'
 soldChannel: 'direct'
 soldPrice: 140.00
 soldCurrency: 'USD'

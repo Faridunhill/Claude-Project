@@ -4,7 +4,7 @@ sku: FH-TP-013
 brand: 'Stanwell'
 department: estate-pipes
 taxonomy: 'estate-pipes/danish/acorn'
-soldAt: '2026-07-27'
+soldAt: '2026-07-29'
 soldChannel: 'direct'
 soldPrice: 119.20
 soldCurrency: 'USD'

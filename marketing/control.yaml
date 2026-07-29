@@ -24,7 +24,7 @@ pricing:
 # zero that can be raised later — it is a capability that must not
 # exist. Boosting a post risks the ad account AND the Page itself.
 #
-# Confirmed by Farid 2026-07-27: "smoking pipes is not allowed in
+# Confirmed by Farid 2026-07-29: "smoking pipes is not allowed in
 # boosting or meta paid ads, only posts in your groups/pages".
 #
 # ORGANIC posting (own Page, own IG, own groups) is unaffected and is
@@ -57,7 +57,7 @@ social:
                                           # one email, no silent retries
 
 visual_generation:
-  # Farid 2026-07-27: replace CapCut with the free in-house renderer.
+  # Farid 2026-07-29: replace CapCut with the free in-house renderer.
   # local_ffmpeg = real photos + motion + overlays + licensed house
   # music, rendered on the PC. No AI imagery, no vendor, no per-asset
   # cost. Paid vendors stay off until Farid turns them on.

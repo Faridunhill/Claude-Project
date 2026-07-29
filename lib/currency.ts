@@ -30,7 +30,7 @@ export interface CurrencyDef {
  * generated, so a build-time fetch would freeze a rate into the HTML
  * with no way to tell how stale it is.
  */
-export const RATES_UPDATED = '2026-07-27'
+export const RATES_UPDATED = '2026-07-29'
 
 export const CURRENCIES: CurrencyDef[] = [
   { code: 'USD', symbol: '$', label: 'US Dollar', rate: 1 },
