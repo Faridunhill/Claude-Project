@@ -8,49 +8,45 @@ cites the law number — search the number to find its enforcement points.
 
 ---
 
-## LAW 11 — THE DESK DRIVE IS THE SYSTEM OF RECORD
+## LAW 11 — FARID KEEPS HIS OWN COPY
 
-**All information is accessed from the desk drive on the master system,
-even when a copy exists in GitHub.**
+**When Farid needs any information, he has his own copy of it on the desk
+drive. Nothing exists only in GitHub or only in the cloud.**
 
-Ratified by Farid, 2026-07-29.
+Ratified by Farid, 2026-07-29: *"I just when I need any information, I
+have my own copy, but everything as it is."*
 
 ### What it means
 
-1. **The desk drive is the authority.** GitHub holds mirrors. A mirror is
-   never the original, however recent it looks.
-2. **When the two disagree, the desk drive is right** and the GitHub copy
-   is stale. There is no case where a mirror overrules the master.
-3. **Corrections are made on the desk drive first,** then mirrored
-   outward. Never the reverse.
-4. **An agent that can only reach GitHub is working from a mirror** and
-   must say so plainly. It may not present a mirrored figure, count or
-   record as current fact.
-5. **The existence of a GitHub copy is never evidence that information is
-   current.** Age is a property of the master, not of the copy.
+1. **Every piece of information has a copy on the desk drive.** If it
+   exists anywhere, it exists there too.
+2. **Farid can reach any of it without depending on anything else** — not
+   GitHub, not a cloud service, not an agent, not a network connection.
+3. **Nothing is cloud-only.** Any work that would leave information
+   reachable *only* through GitHub or a hosted service is incomplete
+   until a copy is on the desk drive.
 
 ### Why
 
-Mirrors drift silently. Nothing about a stale copy announces that it is
-stale, so an agent reading one answers confidently and wrongly — and a
-confident wrong answer is worse than an absent one. This law removes the
-ambiguity by naming a single authority in advance.
+Independence. Accounts get locked, services change terms, repos get
+scoped away, sessions expire. None of that may ever stand between Farid
+and his own information.
 
-### What it does NOT say
+### What it does NOT change
 
-This law does **not** forbid copying information to GitHub. Mirroring is
-encouraged: a corpus that exists on exactly one drive is one hardware
-failure away from gone. LAW 11 governs *authority*, not *location* — back
-everything up, and still read from the master.
+**Everything else stays as it is.** This law adds a guarantee; it removes
+nothing. GitHub copies remain fine and keep working exactly as they do
+today — repos, branches, pushes, the encyclopedia, all unchanged. LAW 11
+is about what Farid *always has*, not about restricting where information
+may live or how anyone works with it.
 
-### Known consequence — the cabinets
+### Known gap — the cabinets
 
-The FaridOS dating cabinets (the test-suite-green engine on the master
-system) are the source of truth for every dating fact published in the
-encyclopedia. Entries derived from them may be mirrored to GitHub; the
-cabinet remains the authority. `faridunhill-live/lib/encyclopedia.ts`
-already states the narrower form of this rule: *"Do not add facts that
-are not in a cabinet."*
+The 55 FaridOS dating cabinets currently satisfy this law in one
+direction only: they exist on the desk drive and nowhere else. That meets
+LAW 11 as written, but leaves them one hardware failure from gone. A
+GitHub mirror would not conflict with this law — under it, the desk drive
+copy is the one that must always exist, and a backup is additional.
 
 ---
 
@@ -61,7 +57,7 @@ are not in a cabinet."*
 | **LAW 06** | ⚠️ **Collision — see below** | — |
 | **LAW 09** | All generated output is ASCII-safe | `marketing/expression/copy.py` |
 | **LAW 10** | Product rows are never hard-deleted; soft archive only | `faridunhill-live` |
-| **LAW 11** | The desk drive is the system of record | this file |
+| **LAW 11** | Farid keeps his own copy of all information on the desk drive | this file |
 
 ### ⚠️ LAW 06 is used twice, for two different laws
 

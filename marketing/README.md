@@ -67,11 +67,11 @@ charge raises `SpendCeiling`.
 The canonical register is `docs/LAWS.md`. Two bear directly on this
 system:
 
-**LAW 11 — the desk drive is the system of record.** All information is
-accessed from the master system, even when a copy exists in GitHub. This
-repository is a mirror. When it disagrees with the desk drive, the desk
-drive is right and this copy is stale. An agent that can only reach
-GitHub must say so rather than present a mirrored figure as current.
+**LAW 11 — Farid keeps his own copy.** When Farid needs any information,
+he has his own copy of it on the desk drive; nothing exists only in
+GitHub or only in the cloud. Work that would leave information reachable
+only through a hosted service is incomplete until a copy is on the desk
+drive. Everything else about how this repo works is unchanged.
 
 ## Firewall note (LAW 06)
 
