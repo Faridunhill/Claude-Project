@@ -1,0 +1,207 @@
+"""THE WELL — the business's private truth, walled.
+
+Finding M4: the eBay list is intelligence, not a mailing list — and *storing*
+it is a separate exposure from *mailing* it. So the Well never holds a name,
+an email or an address. It holds derived features keyed by a salted hash,
+which answers every strategic question the Digger will ask ("who bought
+twice", "which categories repeat") without holding a personal-data file.
+
+Whitelist, not blacklist: a column is dropped unless it is known to be safe.
+"""
+from __future__ import annotations
+
+import csv
+import hashlib
+import hmac
+import json
+import pathlib
+import re
+import secrets
+from collections import defaultdict
+
+from .ledger import LedgerError
+
+# --- what may be written -------------------------------------------------
+TRANSACTION_FIELDS = {
+    "item_id", "title", "brand", "shape", "category", "condition", "surface",
+    "listed_at", "sold_at", "days_to_sale", "price", "currency", "quantity",
+    "buyer_key",
+}
+BUYER_FIELDS = {"buyer_key", "purchases", "first_seen", "last_seen",
+                "categories", "total_value", "repeat"}
+
+# --- what must never appear ---------------------------------------------
+PII_PATTERNS = {
+    "email": re.compile(r"[\w.+-]+@[\w-]+\.\w{2,}"),
+    # deliberately narrow: an ISO date is not a phone number
+    "phone": re.compile(
+        r"(?<!\d)(?:\+\d[\d\s().-]{7,}\d"
+        r"|\(\d{3}\)\s*\d{3}[-.\s]?\d{4}"
+        r"|\d{3}[-.\s]\d{3}[-.\s]\d{4})(?!\d)"),
+    "street": re.compile(r"\b\d{1,6}\s+[A-Za-z][A-Za-z.'-]*\s+"
+                         r"(?:st|street|ave|avenue|rd|road|ln|lane|dr|drive|blvd|way|ct|court)\b", re.I),
+}
+PII_COLUMN_HINTS = ("name", "email", "e-mail", "address", "street", "city", "state",
+                    "zip", "postcode", "postal", "phone", "tel", "contact", "buyer")
+
+# --- default column aliases (eBay-ish exports; override with a mapping) ---
+ALIASES = {
+    "item_id": ("item number", "item id", "itemid", "listing id", "sku"),
+    "title": ("item title", "title", "listing title"),
+    "price": ("sold for", "sale price", "price", "total price", "sold price"),
+    "currency": ("currency", "currency code"),
+    "quantity": ("quantity", "qty"),
+    "sold_at": ("sale date", "sold date", "date sold", "paid on"),
+    "listed_at": ("start date", "listed date", "listing date"),
+    "category": ("category", "ebay category", "leaf category"),
+    "condition": ("condition",),
+    "_buyer_raw": ("buyer username", "buyer id", "buyer user id", "username", "buyer"),
+}
+
+
+def _norm(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", s.strip().lower()).strip()
+
+
+def propose_mapping(headers: list[str]) -> dict[str, str | None]:
+    """Wave-2 helper: given a real export's headers, propose the mapping.
+    Run this first — it writes nothing and reads no rows."""
+    seen = {_norm(h): h for h in headers}
+    out: dict[str, str | None] = {}
+    for field, names in ALIASES.items():
+        hit = next((seen[_norm(n)] for n in names if _norm(n) in seen), None)
+        if hit is None:  # substring fallback
+            hit = next((orig for norm, orig in seen.items()
+                        if any(_norm(n) in norm for n in names)), None)
+        out[field] = hit
+    return out
+
+
+def dropped_columns(headers: list[str], mapping: dict) -> list[str]:
+    used = {v for v in mapping.values() if v}
+    return [h for h in headers if h not in used]
+
+
+class Well:
+    def __init__(self, clone_root: str | pathlib.Path):
+        self.root = pathlib.Path(clone_root) / "well"
+        (self.root / "raw").mkdir(parents=True, exist_ok=True)
+        (self.root / "derived").mkdir(parents=True, exist_ok=True)
+        self.salt_path = self.root / ".salt"
+
+    # -- identity without identifiers ------------------------------------
+    def salt(self) -> bytes:
+        if not self.salt_path.exists():
+            self.salt_path.write_text(secrets.token_hex(32), encoding="utf-8")
+        return self.salt_path.read_text(encoding="utf-8").strip().encode()
+
+    def buyer_key(self, raw: str) -> str:
+        """Stable across exports, useless without the salt (T5)."""
+        return hmac.new(self.salt(), _norm(str(raw)).encode(), hashlib.sha256).hexdigest()[:16]
+
+    # -- the guard --------------------------------------------------------
+    @staticmethod
+    def assert_clean(row: dict) -> None:
+        for key, value in row.items():
+            if any(h in key.lower() for h in PII_COLUMN_HINTS) and key != "buyer_key":
+                raise LedgerError(f"refusing to write column {key!r} — M4: derived features only")
+            for label, pattern in PII_PATTERNS.items():
+                if isinstance(value, str) and pattern.search(value):
+                    raise LedgerError(
+                        f"refusing to write {label} found in {key!r} — the Well holds "
+                        "no personal data (M4)"
+                    )
+
+    # -- loading ----------------------------------------------------------
+    def load_csv(self, csv_path: str | pathlib.Path,
+                 mapping: dict | None = None) -> dict:
+        """Turn a sold-item export into derived features. Anything not
+        whitelisted is dropped on the floor, silently and on purpose."""
+        csv_path = pathlib.Path(csv_path)
+        with csv_path.open(encoding="utf-8-sig", newline="") as fh:
+            reader = csv.DictReader(fh)
+            headers = reader.fieldnames or []
+            mapping = mapping or propose_mapping(headers)
+            missing = [f for f in ("item_id", "price", "sold_at") if not mapping.get(f)]
+            if missing:
+                raise LedgerError(
+                    f"cannot map required fields {missing} from {headers!r} — "
+                    "run `inspect` and supply a mapping.json"
+                )
+            transactions, buyers = [], defaultdict(lambda: {
+                "purchases": 0, "total_value": 0.0, "categories": set(),
+                "first_seen": None, "last_seen": None})
+
+            for raw in reader:
+                row = {}
+                for field, column in mapping.items():
+                    if not column or field.startswith("_"):
+                        continue
+                    if field in TRANSACTION_FIELDS:
+                        row[field] = (raw.get(column) or "").strip()
+                buyer_col = mapping.get("_buyer_raw")
+                buyer_raw = (raw.get(buyer_col) or "").strip() if buyer_col else ""
+                row["buyer_key"] = self.buyer_key(buyer_raw) if buyer_raw else ""
+                row["price"] = _to_float(row.get("price"))
+                row["days_to_sale"] = _days(row.get("listed_at"), row.get("sold_at"))
+                self.assert_clean(row)
+                transactions.append(row)
+
+                if row["buyer_key"]:
+                    b = buyers[row["buyer_key"]]
+                    b["purchases"] += 1
+                    b["total_value"] += row["price"] or 0.0
+                    if row.get("category"):
+                        b["categories"].add(row["category"])
+                    for key, when in (("first_seen", min), ("last_seen", max)):
+                        sold = row.get("sold_at") or ""
+                        b[key] = sold if not b[key] else when(b[key], sold)
+
+        out_tx = self.root / "derived" / "transactions.jsonl"
+        with out_tx.open("w", encoding="utf-8") as fh:
+            for row in transactions:
+                fh.write(json.dumps(row, sort_keys=True) + "\n")
+
+        out_buyers = self.root / "derived" / "buyers.jsonl"
+        with out_buyers.open("w", encoding="utf-8") as fh:
+            for key, b in buyers.items():
+                rec = {"buyer_key": key, "purchases": b["purchases"],
+                       "total_value": round(b["total_value"], 2),
+                       "categories": sorted(b["categories"]),
+                       "first_seen": b["first_seen"], "last_seen": b["last_seen"],
+                       "repeat": b["purchases"] > 1}
+                self.assert_clean(rec)
+                fh.write(json.dumps(rec, sort_keys=True) + "\n")
+
+        return {"transactions": len(transactions), "buyers": len(buyers),
+                "repeat_buyers": sum(1 for b in buyers.values() if b["purchases"] > 1),
+                "dropped_columns": dropped_columns(headers, mapping)}
+
+    def transactions(self) -> list[dict]:
+        path = self.root / "derived" / "transactions.jsonl"
+        if not path.exists():
+            return []
+        return [json.loads(ln) for ln in path.read_text(encoding="utf-8").splitlines() if ln.strip()]
+
+
+def _to_float(value) -> float | None:
+    if value in (None, ""):
+        return None
+    try:
+        return float(re.sub(r"[^\d.\-]", "", str(value)) or 0)
+    except ValueError:
+        return None
+
+
+def _days(start: str | None, end: str | None) -> int | None:
+    from datetime import datetime
+    fmts = ("%Y-%m-%d", "%m/%d/%Y", "%d/%m/%Y", "%b-%d-%y", "%Y-%m-%dT%H:%M:%SZ")
+    def parse(v):
+        for f in fmts:
+            try:
+                return datetime.strptime(str(v)[:len("2026-07-31T00:00:00Z")], f)
+            except (ValueError, TypeError):
+                continue
+        return None
+    a, b = parse(start), parse(end)
+    return (b - a).days if a and b else None

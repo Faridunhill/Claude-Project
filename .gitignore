@@ -32,3 +32,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# marketing monster — the Well is private truth and never enters this repo
+/marketing_monster/clones/
+/marketing_monster/cookbook/
+**/.salt
