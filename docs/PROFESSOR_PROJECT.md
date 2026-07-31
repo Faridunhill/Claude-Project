@@ -241,6 +241,54 @@ across branches nobody merged. Only stage 3 waits on the character. Building the
 with placeholder art costs nothing, and means that on the day the design is approved,
 episodes start that week instead of starting from zero.
 
+### ★ "HOW DO YOU MONTAGE IT" — the answer is layers, not frames (Farid, 2026-07-31)
+
+A panel is **never a single generated picture.** It is a stack of transparent layers
+composited at render time. That is how the reference ad was made, and it is what the
+MoviePy composer on the `moneyprinterturbo-review` branch already does with captions.
+
+```
+5  brand frame + captions      ← FARIDUNHILL header, gold border, subtitle (built)
+4  annotations                 ← arrows, circles, labels, the animated airflow path
+3  the object                  ← a REAL photo cut out (transparent PNG), or a library prop
+2  the characters              ← Professor / Assistant poses from the library
+1  background plate            ← the workshop set, from the library
+```
+
+Nothing is hand-made per episode. The script (stage 2) emits a **panel list**, and the
+composer renders it:
+
+```yaml
+- panel: 3
+  background: workshop-bench-a
+  characters: [prof-explaining-3q, assistant-worried-front]
+  object:
+    type: photo                     # photo | prop
+    src: archive/FH-TP-058/stem-bitethrough-macro.jpg
+    citation: "Faridunhill archive · FH-TP-058"
+  overlays:
+    - {type: circle, at: [0.62, 0.41], label: "bite-through"}
+    - {type: flow, path: airway, animate: true}   # for cut-pipe sections
+  motion: {pan: [0.4, 0.5] → [0.55, 0.45], zoom: 1.0 → 1.12}
+  narration: "She bit through the button. It happens to every new smoker…"
+```
+
+This answers the three hard cases directly:
+
+- **Airflow through the cut pipe** — the real cross-section photograph on layer 3, an
+  animated glow travelling the airway on layer 4. **The pipe is never redrawn; the
+  arrow moves over the photograph.**
+- **A crack in the shank / a chip in the bowl** — the real defect photo on layer 3, a
+  circle and label on layer 4, and the camera pushes in. If the library lacks that
+  defect, layer 3 falls back to a drawn generic prop (KNOWLEDGE, per the brief §6.3b).
+- **The repair itself** — layer 2 process panels (reaming, sanding, buffing) recombined
+  from the library; the tool changes, the hands do not.
+
+**Consequence for the build:** stage 3 is not "generate 14 images per episode." It is
+"look up 14 asset ids and composite them." Deterministic, cheap, repeatable — and the
+same panel list can render a 60-second vertical short and a 8-minute horizontal episode
+without regenerating any art.
+
 **Revision to an earlier verdict of mine:** I proposed killing the MoneyPrinter-class
 video generator because it builds videos from **stock footage of other people's pipes.**
 That kill stands *for its footage source*. But its **composer** — captions, TTS, MoviePy

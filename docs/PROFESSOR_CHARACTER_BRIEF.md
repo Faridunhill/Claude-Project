@@ -366,6 +366,85 @@ Episode 5 reuses most of it. Episode 30 is nearly free. **That falling curve is 
 the word "engine" actually means** — and it is only possible because facts were moved
 out of the drawings and into the photographs.
 
+## 6.3b ★ CORRECTION — the rule in §6.1 was too broad (Farid, 2026-07-31)
+
+> *"Still we need to solve the pipe/tool anatomy. I want a pipe cut in two equal
+> halves, longitudinally, so I have seen the air flow, the inside chamber, the filter
+> inside the tenon. Also if I have the real stem photo, how do you get a hole in the
+> mouthpiece to fix, a crack on the shank, a chip in the bowl or stem? It is not
+> impossible — but how do you montage it?"*
+
+He found the case that breaks "never draw the pipes." You cannot photograph the inside
+of an intact pipe, and you cannot photograph damage you do not have. The rule needs a
+sharper edge — and the edge is not *object vs character*, it is **evidence vs
+knowledge**:
+
+| Category | Rule | Examples |
+|---|---|---|
+| **EVIDENCE** — anything that identifies or dates a specific object | **NEVER drawn. Photograph, or leave blank.** | Maker's marks, stamps, hallmarks, date codes, nomenclature lines, band assay marks, a named pipe's grain |
+| **KNOWLEDGE** — how pipes are built, how they fail, how they are repaired | **Free to draw.** It is craft teaching, not a claim about any object | Anatomy cutaways, airflow, generic damage types, tools, every repair step |
+| **Everything we already own a photo of** | **Use the photograph.** Better, ours, and free | The 2,000+ archive |
+
+A labelled cutaway is not a claim about anyone's pipe — it is the same class of thing as
+a diagram in a textbook. A bite-through drawn on a generic stem is a *type of damage*,
+not an assertion that a particular Dunhill was bitten. Neither can mislead a collector.
+A drawn date code can, which is why that one stays permanently forbidden.
+
+## 6.3c ★ THE CUT-PIPE SHOOT — the best asset in this project, and it costs almost nothing
+
+Farid wants the longitudinal section. **Do not draw it and do not model it. Cut real
+pipes in half and photograph them.**
+
+Four or five junk basket pipes — the ones with no resale value — a bandsaw or a hand
+saw with a jig, then sand the cut face smooth so the section reads clean. Proposed
+variants *(Farid corrects this list; he is the pipe expert, not me)*:
+
+1. **Non-filter straight** — chamber, wall thickness, draft hole, mortise, tenon,
+   the whole airway in one line.
+2. **9 mm filter pipe with the filter seated** — the shot that answers his exact
+   question, and the one nobody on the internet has.
+3. **A bent pipe** — the airway curve, which is where beginners' cleaners get stuck.
+4. **A stem alone, cut lengthwise** — airway taper, the button slot, the tenon bore.
+5. *(optional)* **A burnout or a heavily caked bowl** — wall thickness lost to neglect.
+   This one panel argues for careful reaming better than a thousand words.
+
+Why this is the right answer and not a compromise:
+- **It is real.** It stays evidence, so the honesty law is untouched and the level-3
+  collector can only respect it.
+- **Nobody has it.** Cross-sections of real pipes are rare, instantly shareable, and
+  they are encyclopedia illustrations, thumbnails, and forum currency at the same time.
+- **It is a permanent studio prop.** Cut once, photograph forever, from any angle, for
+  any episode. Later it is also the ideal photogrammetry subject for §6.4.
+- **The airflow "animation" is an overlay on the photo**, not a redraw — see §6.5b.
+
+## 6.3d ★ THE DEFECT LIBRARY — his restorations are already producing it, and throwing it away
+
+*"How do you get a hole in the mouthpiece, a crack on the shank, a chip in the bowl?"*
+
+**Farid buys damaged pipes for a living.** The damage is his inventory. Every
+restoration he has ever done passed exactly the footage this show needs through his
+hands — and it went out the door repaired and unphotographed.
+
+**Standing rule, effective the next pipe that arrives:** photograph the damage
+**before** the repair, macro, even light, with an object of known size in one frame
+(the same scale-card rule already proposed for dating). Then photograph each stage.
+Tag by defect type:
+
+> bite-through · tooth chatter · oxidised stem · rim char · rim dents · heavy cake ·
+> bowl chip · shank crack · tenon crack · loose/over-tight tenon · fills · burnout ·
+> ferrule dent · stem-shank misalignment · previous bad repair
+
+- **Free first task:** the 2,000+ photos already taken over ten years of listings almost
+  certainly contain most of these defects already. **Tagging the existing archive by
+  defect type costs nothing and may fill the library before a single new photo.**
+- Where a defect genuinely is not in the library, it is **KNOWLEDGE**, so it may be
+  drawn on a generic pipe (§6.3b) until a real one arrives.
+- Byproduct: before/after restoration galleries are among the most-shared content in
+  this hobby, and this rule produces them automatically.
+
+**This is the same lesson as the fingerprint photos: the capture can only happen while
+the object is in your hands, and every unphotographed restoration is gone forever.**
+
 ## 6.4 The scale-up, if the library ever binds
 
 If the flat library becomes limiting (an angle we never drew, a pose we never posed),
