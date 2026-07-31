@@ -230,7 +230,7 @@ tested with placeholder art starting today.
 |---|---|---|---|
 | 1 | **SUBJECT** | Picks the episode from the cabinets + encyclopedia: a dating fact, a correction, a common ruin. Framed as *the assistant's mistake*. **Law: every claim traces to a cabinet source, or the episode is not made** | 56 local cabinets, the ark manifest, 3 published essays |
 | 2 | **SCRIPT** | Claude writes a 60–90 s short or a 5–8 min episode as Professor/Assistant dialogue, **plus a panel breakdown** — one visual description per panel. Ends with him closing a book and naming it | Builder API route already writes narration + article |
-| 3 | **PANELS** | 8–14 images generated in the locked ink style from the locked character references | style lock + prompt written; character design pending |
+| 3 | **PANELS** | 8–14 panels per episode, assembled from a **fixed asset library** (characters + ~70–90 props/backgrounds, drawn once) and **cut with our own photographs wherever a fact appears** — see `PROFESSOR_CHARACTER_BRIEF.md` Part 6 | style lock + prompt written; 2,000+ photos owned; design pass pending |
 | 4 | **VOICE** | Professor = Farid's ElevenLabs clone. Assistant = a **separate licensed/synthetic voice** — never cloned from a real person without consent | paid ElevenLabs, approved profile, 34 h corpus for a PVC |
 | 5 | **ASSEMBLE** | Pan/zoom over panels, burned-in captions, FARIDUNHILL header + gold border, music bed | **both halves already built on branches:** the reel renderer (motion + brand frame) and the MoviePy composer (captions + TTS + assembly) |
 | 6 | **PUBLISH** | YouTube + shorts + social, and the same script becomes the encyclopedia entry **with its citations and changelog** | encyclopedia live; social engine + tiered publishing built (P2.7) |

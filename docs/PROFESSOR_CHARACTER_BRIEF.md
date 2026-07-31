@@ -300,5 +300,98 @@ especially **the same-person test**, which is the one that decides whether a ser
 possible at all.
 
 ---
+
+# PART 6 — ★ THE ASSET PROBLEM (Farid, 2026-07-31)
+
+> *"Don't think the character is the only problem. Imagine every episode needs the
+> pipe with anatomy, all the pipe details for the maintenance, plus tools — everything
+> on screen we need to invent it."*
+
+Correct, and it is the larger half. If every episode required inventing its pipe, its
+stamps, its tools and its workshop, the per-episode art cost would never fall and there
+would be no engine. Three rules fix it — and the first one is a law, not a technique.
+
+## 6.1 THE LAW: characters are DRAWN. Objects are PHOTOGRAPHED. Never the reverse.
+
+**We must not draw the pipes.** Not because it is hard — because it is dishonest.
+
+A drawn Dunhill stamp is an **invented** stamp. A drawn date code is an invented date
+code. A drawn hallmark, band, nomenclature line or grain pattern is a fabricated piece
+of evidence in a project whose entire product is *"every fact traces to a source."*
+The moment an illustrator draws a "1962 Shell" stamp, we are publishing a forgery of
+our own reference material — and the level-3 collector, the exact man whose endorsement
+we are hunting, is the one person on earth guaranteed to notice.
+
+So the objects are never invented. **We already own them:** 2,000+ photographs, 264
+catalogued items, the ark. The pipes are the one thing in this entire show that we
+never have to create.
+
+**This is not a compromise. It is an upgrade.** A collector wants to see the real rim
+burn, the real oxidised stem, the real stamp under raking light. A drawing of a stamp
+is worth nothing to him; a macro photograph of ours is the whole point.
+
+## 6.2 THE FORMAT THIS PRODUCES: the evidence cut
+
+Every episode alternates two registers:
+
+| Register | What it carries | Made of |
+|---|---|---|
+| **The story** | Professor and Assistant, her mistake, his correction, the workshop | Drawn ink panels |
+| **The evidence** | The actual pipe, the actual stamp, the actual damage, the actual repair | **Our own photographs**, captioned with the source |
+
+The photograph appears deliberately *as* a photograph — full-bleed with its citation, or
+pinned on the workbench inside the drawn scene. It never pretends to be part of the
+cartoon, and the cartoon never pretends to be evidence.
+
+**The format is the honesty law made visual.** Drawn assets carry only the *story*;
+they never carry a *fact*. That single rule removes anatomy accuracy from the
+illustrator's job entirely — because when precision matters, we cut to the real thing.
+
+## 6.3 THE MATH: the asset library is FIXED, not per-episode
+
+The fear is that every episode needs new art. It does not. Animation calls this a
+**prop bible**: draw it once, reuse it forever. Here is the entire list.
+
+| Asset group | How many, ONCE | Reused |
+|---|---|---|
+| Generic pipe shapes (billiard, bent, apple, dublin, pot, freehand, meerschaum, churchwarden) | **8**, three views each | Every episode. Generic only — a specific pipe is always a photograph |
+| Pipe anatomy cutaway (rim · chamber · bowl · shank · mortise · tenon · draft hole · stem · button · band) | **1–3** labelled diagrams | The single most-reused asset in the series; it is also an encyclopedia illustration |
+| Tools (reamer, tamper, pipe cleaners, micromesh/sandpaper, buffing wheel, retort, alcohol, wax, files, brushes, stand, pouch) | **~20** | Forever |
+| Process step panels (ream · clean the shank · de-oxidise · sand · buff · wax · polish), hands included | **~30** (3–5 per step) | Recombined across dozens of episodes with different pipes |
+| Workshop backgrounds (bench, shelf of finished pipes, the drawer of "patients", the lamp corner) | **~6** plates, 2–3 angles | Every episode |
+| The two characters (turnaround, expressions, hands, costume) | **1 design pass** | Every episode |
+
+**Total: roughly 70–90 drawn assets, commissioned once.** Episode 1 is expensive.
+Episode 5 reuses most of it. Episode 30 is nearly free. **That falling curve is what
+the word "engine" actually means** — and it is only possible because facts were moved
+out of the drawings and into the photographs.
+
+## 6.4 The scale-up, if the library ever binds
+
+If the flat library becomes limiting (an angle we never drew, a pose we never posed),
+the answer is **one 3D model per generic shape and per tool, toon-shaded to match the
+ink**. One model gives every angle forever. Photogrammetry from our own photographs of
+real pipes is the natural route, and it shares its capture protocol with the
+indentation-layer and scale-discipline work already proposed. **Not now** — it is the
+optimisation after the library proves itself, not the starting position.
+
+## 6.5 What this changes in the commission
+
+The designer job is **not** "two characters." It is:
+
+1. The two characters (Part 3).
+2. **The prop bible** — the ~70–90 assets in §6.3, in the same locked ink style.
+3. **The workshop set** as a consistent, repeatable place.
+4. The written **shape and colour rules** that let a future illustrator — or a model
+   referencing the sheets — add asset #91 without breaking the world.
+
+One commission, one style, one world. Scope it that way from the first conversation;
+adding the prop bible later costs more and risks a visible style seam.
+
+**And one instruction to put in the contract in bold:** *no maker's marks, stamps,
+hallmarks, date codes or brand nomenclature are ever to be drawn.* Where a panel needs
+one, it is left blank for a photograph to be cut in.
+
+---
 *Character bible rules (cap, glasses, unlit pipe, his-likeness law) are Farid's and
 are not negotiable by any designer, agency or model.*
