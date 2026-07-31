@@ -29,6 +29,27 @@ Advisor F addendum verdicts + `BUILD_HANDOFF_MARKETING_P2`.
   implementing one class here; nothing else changes. Until wired, it
   fails loudly (`NotConnected`) — never silently empty.
 
+## Channel exports (`channels/`)
+
+`channels/ebay_csv.py` — eBay File Exchange CSV. SYSTEM_MAP lists eBay as
+an **upload** channel, not an API one, so this builds the file:
+
+```
+python -m marketing.channels.ebay_csv \
+    --category <ebay-category-id> --location "NJ, USA" \
+    --out ebay-listings.csv
+```
+
+`--category` and `--location` are **required and never guessed** — a
+fabricated category ID uploads as a silent rejection. Sold items are
+excluded (never offer a sold piece) and every skip is printed, so
+nothing vanishes quietly.
+
+> ⚠️ This reads Claude-Project's `content/products/`. Per
+> `channel/SYSTEM_MAP.md` the **live** store is faridunhill-live
+> (Supabase). To export the live catalogue, add a loader returning
+> `CatalogItem`s — `build_rows` and `write_csv` do not change.
+
 ## Standing walls
 
 `control.yaml` — the numbers machines never cross (ad caps, visual-
