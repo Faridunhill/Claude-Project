@@ -390,32 +390,106 @@ a diagram in a textbook. A bite-through drawn on a generic stem is a *type of da
 not an assertion that a particular Dunhill was bitten. Neither can mislead a collector.
 A drawn date code can, which is why that one stays permanently forbidden.
 
-## 6.3c ★ THE CUT-PIPE SHOOT — the best asset in this project, and it costs almost nothing
+## 6.3c THE CROSS-SECTION — five routes, ranked *(Farid's ruling, 2026-07-31)*
 
-Farid wants the longitudinal section. **Do not draw it and do not model it. Cut real
-pipes in half and photograph them.**
+> *"Cut the pipe to show the air flow — it is not easy, for something you maybe use in
+> one episode or a couple. **The pipe anatomy is one episode's subject. The repair is
+> every day's subject.** It needs a specific saw. Let us find alternatives until we
+> solve it."*
 
-Four or five junk basket pipes — the ones with no resale value — a bandsaw or a hand
-saw with a jig, then sand the cut face smooth so the section reads clean. Proposed
-variants *(Farid corrects this list; he is the pipe expert, not me)*:
+**Ruling accepted, and it reorders the whole asset budget:** the defect/repair library
+(§6.3d) is the daily engine and gets built first. The cross-section is a *recurring
+insert* — it reappears whenever airflow, a stuck cleaner, moisture, filter seating or
+wall thickness comes up — but it does not justify buying a saw. **Sawing drops to
+route 5.** Ranked cheapest-and-best first:
 
-1. **Non-filter straight** — chamber, wall thickness, draft hole, mortise, tenon,
-   the whole airway in one line.
-2. **9 mm filter pipe with the filter seated** — the shot that answers his exact
-   question, and the one nobody on the internet has.
-3. **A bent pipe** — the airway curve, which is where beginners' cleaners get stuck.
-4. **A stem alone, cut lengthwise** — airway taper, the button slot, the tenon bore.
-5. *(optional)* **A burnout or a heavily caked bowl** — wall thickness lost to neglect.
-   This one panel argues for careful reaming better than a thousand words.
+### Route 1 — The vector master cutaway *(do this; it is already in the commission)*
+Anatomy is KNOWLEDGE (§6.3b), so it may be drawn. One master cutaway, drawn **over a
+photograph of a real pipe** so the proportions are honest, in our ink style, built in
+**toggleable layers**:
 
-Why this is the right answer and not a compromise:
-- **It is real.** It stays evidence, so the honesty law is untouched and the level-3
-  collector can only respect it.
-- **Nobody has it.** Cross-sections of real pipes are rare, instantly shareable, and
-  they are encyclopedia illustrations, thumbnails, and forum currency at the same time.
-- **It is a permanent studio prop.** Cut once, photograph forever, from any angle, for
-  any episode. Later it is also the ideal photogrammetry subject for §6.4.
-- **The airflow "animation" is an overlay on the photo**, not a redraw — see §6.5b.
+> airway path · chamber and wall thickness · mortise + tenon fit · **the filter
+> variants** (balsa, 9 mm charcoal, meerschaum, adapter, screw system) · cake build-up
+> stages · burnout · a bent version showing the curve
+
+One asset, drawn once, serving dozens of episodes at any zoom. **Zero saws, zero risk,
+and it is the answer to "I'm sure we can do better"** — the reference diagrams Farid
+sent are flat, single-purpose and unbranded; a layered master beats all of them.
+
+### Route 2 — X-ray a real, intact pipe *(cheap, novel, and it stays evidence)*
+A pipe can be X-rayed without being touched. Veterinary clinics and industrial NDT
+shops do it for a small fee. The image shows the **real drilled airway inside an intact
+pipe** — draft-hole alignment, how far the mortise runs, whether the drilling is
+centred. **Nobody in this hobby publishes that.** A CT scan goes further: one scan
+yields a full volume, so a section can be taken at *any* plane, plus a 3D model.
+An episode in itself: *"we X-rayed three pipes to see who drills straight."*
+
+### Route 3 — A single 3D anatomy model *(the professional answer, one-time)*
+One modelled pipe → infinite sections, any angle, exploded views, animated airflow,
+toon-shaded to match the ink. It also seeds the prop library scale-up (§6.4). Same
+budget line as the character commission; beats every reference diagram in existence.
+
+### Route 4 — Pipes that are already open
+Restorations arrive with **burnouts, split shanks, cracked stems** — internals already
+exposed, no tool required. These are free, they are real evidence, and they arrive on
+their own. **Standing rule: photograph the inside of anything that comes in broken.**
+
+### Route 5 — Actually cutting one *(last, and only if a pipe is already dead)*
+Recorded for completeness, with one note: it does not need a bandsaw. **Sanding one
+side away** on a disc/belt sander — equipment already in the workshop — reaches the
+chamber under full control, and vulcanite stems part easily with a razor saw. If a pipe
+is beyond saving anyway, the section costs nothing. Not a priority.
+
+**Not an option:** re-using the published diagrams. Farid's own references make this
+explicit — the four-page plates on Pipedia are the **A.S.P. Pipe Parts Charts by Bill
+Burney, © 2003–2011, "used by permission; all rights reserved."** Chacom's cutaway and
+the French plates are equally somebody's property. LAW 2 is absolute: we cite them, we
+never republish them.
+
+**But note how Pipedia got theirs: they ASKED.** "Buy, don't pirate" has a positive
+form — *ask permission*. One polite email to Bill Burney / A.S.P. explaining the
+encyclopedia, with full credit and a link, costs nothing and has two good outcomes:
+permission (we have a professional reference immediately, properly credited) or a no
+(we draw our own, exactly as planned, having lost a day). **Action: draft that letter.
+It also opens a relationship with a respected figure in the field, which is worth more
+than the diagram.**
+
+### 6.3c-ter — What those charts just handed us: the content map
+
+Burney's plates are a specification of what a complete anatomy asset must contain. Our
+layered master (route 1) should carry at least:
+
+- Stummel = bowl + shank · rim/head · heel · foot · chamber · air passage · draft hole
+  · mortise · countersink · shank face · band/ferrule · stem face · tenon · bevel ·
+  bit/button/lip
+- **Mortise–tenon fit: good vs poor**, with the gap that traps moisture — *repair
+  content, not anatomy content*
+- **Air passage drilled correctly vs drilled too high on the bowl wall** — why tobacco
+  below the hole will not burn
+- **Stem types:** saddle · tapered · combination · military/army · screw fitting with
+  evaporator
+- **Bit types:** standard · fishtail · P-lip · denture · wide comfort · single vs double
+  bore (bite-resistant)
+- **Filter systems** (from Farid's Chacom reference): balsa 6/9 mm · 9 mm charcoal ·
+  9 mm meerschaum · adapter · screw system
+- Turbulence/moisture behaviour where an obstruction sits in the airway
+
+**This changes the priority argument in Farid's favour and against my own framing:**
+half of that list is *repair* content — tenon fit, bad drilling, bite-resistant bits,
+filter seating. So the cutaway is **not** a one-episode asset. It is the diagram the
+daily repair episodes keep cutting back to. One asset, built once, earning every week.
+
+### 6.3c-bis — The idea hiding in those reference plates: the multilingual term map
+Farid's examples are French — *foyer · tête · tige · mortaise · tuyau · floc ·
+lentille · perçage* — while the English plate says *bowl · shank · mortise · stem ·
+bit · tenon · draft hole*. **Pipe anatomy has no single vocabulary; it has one per
+country**, and no reference consolidates them.
+
+A single labelled cutaway carrying **EN / FR / DE / IT** terms side by side would be a
+reference asset nobody currently owns, and it makes the encyclopedia findable by
+collectors searching in their own language — organic reach on ground no English-only
+competitor occupies. **The mapping must be built from the cabinets and cited, not
+assumed from a diagram.** Raised as an idea, not a decision.
 
 ## 6.3d ★ THE DEFECT LIBRARY — his restorations are already producing it, and throwing it away
 

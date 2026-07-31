@@ -369,3 +369,44 @@ a PDF generator, 10 encyclopedia articles, calibration folders.*
 *Nothing in this file is authorized. Nothing in this file has an owner.*
 *Kill/live verdicts belong to Farid alone. My proposals live in the brainstorm
 note, `channel/TO_FARID/006`, so they can never be mistaken for record.*
+
+---
+
+# H10. BORN IN THIS BRAINSTORM (2026-07-31) — not from any branch
+
+These did not exist in any file before this session. Recorded so they enter the drawer
+properly instead of living in a chat log.
+
+- **H10.1 The evidence cut** — the episode format where drawn ink panels carry the
+  *story* and our own captioned photographs carry every *fact*. The honesty law made
+  visual. It is also the answer to "how do you montage it."
+- **H10.2 EVIDENCE vs KNOWLEDGE** — the line that decides what may be drawn. Evidence
+  (stamps, hallmarks, date codes, nomenclature, a named pipe's grain) is never drawn.
+  Knowledge (anatomy, airflow, generic damage, tools, repair steps) is free to draw.
+  Applies far beyond video — it is a publishing rule for the whole encyclopedia.
+- **H10.3 The prop bible** — ~70–90 assets commissioned once so per-episode art cost
+  falls toward zero. The difference between a show and an engine.
+- **H10.4 The defect library + capture-before-repair rule** — photograph every damage
+  before fixing it, tagged by type. Farid's restorations already generate this and
+  currently throw it away. Covers ~80% of cases by his estimate.
+- **H10.5 Tag the existing 2,000+ photos by defect type** — the library may already
+  exist inside ten years of listing photography. Zero new shooting.
+- **H10.6 Crowdsourcing the rare 20%** — the defects Farid never sees arrive through
+  the Book of Mistakes ("send us the pipe you ruined") and Dating Desk submissions,
+  with consent. Two existing ideas that turn out to feed each other.
+- **H10.7 X-ray / CT a real intact pipe** — the airway, draft-hole alignment and
+  drilling quality of an *un-cut* pipe. Cheap at a vet or NDT shop, real evidence, and
+  nobody in the hobby publishes it. An episode in itself.
+- **H10.8 The layered vector cutaway master** — one anatomy asset with toggleable
+  layers (airflow, filter variants, cake stages, burnout, mortise/tenon fit good vs
+  bad, bad drilling, stem and bit types). Serves repair episodes weekly, not once.
+- **H10.9 The multilingual term map** — pipe anatomy has one vocabulary per country
+  (EN *bowl/shank/mortise/bit* · FR *foyer/tige/mortaise/tuyau/lentille*). No reference
+  consolidates them. Would open organic reach in languages no English-only competitor
+  occupies. Must be built from the cabinets and cited, never assumed from a diagram.
+- **H10.10 Ask Bill Burney / A.S.P. for permission** — Pipedia carries his Pipe Parts
+  Charts "by permission." So ask. Costs one letter; either we gain a credited
+  professional reference or we lose a day. Opens a relationship with a respected figure
+  either way. *"Buy, don't pirate" has a positive form: ask.*
+- **H10.11 Photograph anything that arrives broken** — burnouts, split shanks, cracked
+  stems are free cross-sections that require no tool and arrive on their own.
