@@ -127,4 +127,75 @@ Two-step "character bible" pipeline — no LoRA needed:
 - Housekeeping flagged: decide whether the Builder ports to faridunhill-live or stays a prototype; protect the unauthenticated Builder page; re-host rendered videos (HeyGen links expire).
 
 ---
+
+## 2026-07-31 — FARID'S FAILURE RECORD, AND THE DIAGNOSIS
+
+### What was actually spent (Farid, this date — record, not estimate)
+- **170 photos** of his face supplied.
+- **34 hours** of clean recorded voice.
+- **ElevenLabs paid account.** Voicebox downloaded. **Injection** attempted.
+  **LoRA trained twice.** Result across all of it: *"nothing worked. We failed too."*
+- Farid's order on the hands: **his hands come only AFTER the professor himself is
+  solved.** The hands are not the blocker; the character is.
+
+### The diagnosis: five different tools failed the same way
+Five independent tools do not fail identically by coincidence. When LoRA,
+injection, voicebox, and identity-editing all break on the same requirement, the
+fault is **not in the tooling — it is in the specification.**
+
+The specification that keeps failing is: **"a CARTOON that is unmistakably
+Farid."** Every tool was asked to destroy the exact information that carries a
+likeness (proportion, asymmetry, skin and eye detail) and preserve recognisability
+at the same time. That is a contradiction, not a difficulty. Specifically:
+- **LoRA on photos of a real man** teaches a model to draw a real man. It cannot
+  learn a style it was never shown. (Recorded in `PROFESSOR_FACE_PIPELINE.md` as
+  "the trap the first two attempts hit.")
+- **Injection / faceswap** needs a target video that already contains a face in
+  the right pose. It transplants; it cannot invent a character.
+- **Stylisation strength** is the whole dial: too little and it is a filtered
+  photo, too much and it is a stranger. The window where it is both is narrow
+  enough that hitting it is luck, and luck does not repeat — which is fatal,
+  because the character must be identical in every episode forever.
+
+**Conclusion:** the cartoon requirement is the bug. Nothing above is a reason to
+believe the sixth tool will behave differently.
+
+### The three paths (Farid's decision)
+
+**PATH A — THE WORKSHOP. Delete the face from the problem.**
+The camera never leaves the workbench. Real macro footage of real hands on real
+pipes; his voice narrating over it. There is no face to render, so there is
+nothing left to fail. This is the standard format of the largest craft channels
+on earth, and it suits the subject better than a talking head: you learn pipe
+work from hands, not from a face. Cost: a phone, a tripod, a lamp. Risk: zero
+research risk — every component already exists and is owned.
+*Note: this makes the hands FIRST, not last — it is the solution, not the step
+after it. That reverses Farid's stated order and needs his explicit yes.*
+
+**PATH B — THE REAL MAN. Keep the face, drop the cartoon.**
+Farid's own face, filmed or photographed, as the presenter — via a photo/video
+avatar built from his own footage, or simply by appearing himself. Likeness is
+100% preserved because it *is* him; no model has to reconstruct anything. The
+170 photos become an asset instead of failed training data. This is the same
+project minus the one requirement that has never worked.
+
+**PATH C — KEEP TRYING THE CARTOON.** Only one route has a real chance and it is
+already written in `PROFESSOR_FACE_PIPELINE.md`: iterate single-image edits until
+**one** take is approved, then never generate him from text again — the 170 photos
+and any future LoRA train on **~30 images generated from that approved take**,
+never on Farid's photographs. Honest cost: it is a lottery on one lucky take, the
+same way the voice needed 13. Months have already gone here.
+
+### The one unlock nobody has used: 34 hours of voice
+ElevenLabs **Professional Voice Clone** needs 30 minutes to 3 hours of clean
+speech and produces a large quality jump over the instant clone. **Farid has 34
+hours.** He is more than ten times over the requirement and has been running on
+an instant clone this whole time. This is a real upgrade sitting unused — and it
+is independent of every face decision above.
+*Standing law: the approved voice profile is LOCKED and must not be retuned.
+A PVC is a NEW profile built from the 34-hour corpus, not a retune — building it
+is Farid's call, and the locked profile stays in service until he approves a
+replacement.*
+
+---
 *Add new ideas below with a date.*

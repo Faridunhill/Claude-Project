@@ -257,11 +257,23 @@ a PDF generator, 10 encyclopedia articles, calibration folders.*
 *Branch `claude/pipe-authentication-system-vh4i3d`, `docs/MARKETING_PLAN.md`
 (2026-07-21) and `claude/peterson-…`, `docs/MARKETING.md`.*
 
-- **H6.1 Leather is the ad-safe department.** Leather goods are not tobacco →
+- **H6.1 Leather is the ad-safe department.** ~~Leather goods are not tobacco →
   they can carry **paid** campaigns and gift guides. "Use them as the paid front
-  door; the pipe departments are reached organically once the visitor is in."
-  *(Note the direct conflict with H4.1's policy wall prohibiting paid Meta spend.
-  Two documents, opposite rules, both unratified.)*
+  door; the pipe departments are reached organically once the visitor is in."~~
+  **★ KILLED BY FARID, 2026-07-31 — and the reason is field evidence, not
+  preference.** The platforms **refuse us**. It does not matter that leather is
+  not tobacco: leather sits in the same storefront as pipes, so the *account* is
+  refused, not the product. Farid: *"any product in faridunhill completely
+  unpaid, simply they refuse us — and any product sold beside the pipes in one
+  place, crazy."*
+  **THE RULING (faridunhill only):** faridunhill.com carries **zero paid
+  promotion, on any product, ever.** Organic only. H4.1's policy wall wins;
+  the marketing plan's ad-safe-department paragraph is dead.
+  **The correction it implies:** "ad-safe" was never a *department* property —
+  it is an *entity* property. A non-tobacco product can only be advertised from a
+  storefront with no pipes in it. That storefront already exists in the plan:
+  **Ashcombe & Co (D1/D3).** The paid front door is a different company, not a
+  different aisle. The ban is scoped to faridunhill; Ashcombe is unaffected.
 - **H6.2 Per-department angle table** — one angle + one Professor tie-in for each
   of the 8 departments, including "New Old Stock: factory-fresh survivors of
   closed workshops" and "the shop that closed in 1985" mini-histories.
