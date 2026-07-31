@@ -186,6 +186,68 @@ and any future LoRA train on **~30 images generated from that approved take**,
 never on Farid's photographs. Honest cost: it is a lottery on one lucky take, the
 same way the voice needed 13. Months have already gone here.
 
+### ★ CORRECTION, same day — I had the project's purpose wrong
+
+Farid: *"you missed the main point. This project is mainly to increase the traffic as
+organic marketing — linked to the encyclopedia, YouTube, social and any media we can
+reach. The main idea is to be **fun, informative and automated**. I can photo my hands,
+ok — but every episode I have to bother and video my hands during the repair. That is
+completely another idea. I need the system to create the episode subject from our
+cabinets and encyclopedia."*
+
+**He is right, and PATH A above is withdrawn as a recommendation.** Filming real hands
+solves the rendering problem by destroying the only property that matters:
+**automation.** A show that needs Farid behind a camera every episode is a job, not an
+engine — and with paid promotion now closed on faridunhill (ruling of 2026-07-31), this
+engine is not *a* marketing channel, it is **the** marketing channel.
+
+The requirement, stated correctly: **an automated pipeline that turns cabinet facts into
+published episodes, with no human filming and no per-episode art direction.**
+
+### ★ THE STYLE IS DECIDED — inked 2D comic, voice-over, no talking mouths
+
+Farid supplied a reference (a sponsored solar video: inked comic panels, still art with
+a slow camera move, burned-in captions, voice-over) and said **"I can accept something
+like this."** Full analysis in `PROFESSOR_CHARACTER_BRIEF.md` Part 5. Three consequences:
+
+1. **The hands are DRAWN, not filmed.** A panel shows the reamer at the wrong angle; the
+   next shows it right. Nothing is ever shot. Farid's objection is fully answered.
+2. **No lip-sync, no avatar, no HeyGen.** The characters never speak on camera; a
+   voice-over narrates over still panels. `ENCYCLOPEDIA.md` calls HeyGen credits "the
+   dominant cost" — that cost goes to zero, and so does frame-to-frame character drift.
+3. **Ink is forgiving and ink subtracts.** The black contour deletes the photographic
+   detail that made every smooth-3D take uncanny, and small anatomy errors read as style
+   instead of as defects.
+
+---
+
+## THE EPISODE ENGINE *(the actual product — 2026-07-31)*
+
+Seven stages. The character is **one swappable slot**; the other six can be built and
+tested with placeholder art starting today.
+
+| # | Stage | What it does | What already exists |
+|---|---|---|---|
+| 1 | **SUBJECT** | Picks the episode from the cabinets + encyclopedia: a dating fact, a correction, a common ruin. Framed as *the assistant's mistake*. **Law: every claim traces to a cabinet source, or the episode is not made** | 56 local cabinets, the ark manifest, 3 published essays |
+| 2 | **SCRIPT** | Claude writes a 60–90 s short or a 5–8 min episode as Professor/Assistant dialogue, **plus a panel breakdown** — one visual description per panel. Ends with him closing a book and naming it | Builder API route already writes narration + article |
+| 3 | **PANELS** | 8–14 images generated in the locked ink style from the locked character references | style lock + prompt written; character design pending |
+| 4 | **VOICE** | Professor = Farid's ElevenLabs clone. Assistant = a **separate licensed/synthetic voice** — never cloned from a real person without consent | paid ElevenLabs, approved profile, 34 h corpus for a PVC |
+| 5 | **ASSEMBLE** | Pan/zoom over panels, burned-in captions, FARIDUNHILL header + gold border, music bed | **both halves already built on branches:** the reel renderer (motion + brand frame) and the MoviePy composer (captions + TTS + assembly) |
+| 6 | **PUBLISH** | YouTube + shorts + social, and the same script becomes the encyclopedia entry **with its citations and changelog** | encyclopedia live; social engine + tiered publishing built (P2.7) |
+| 7 | **LEDGER** | Every episode records sources, brackets and corrections. A cabinet correction re-issues the entry | honesty laws; QA gate built (P2.4) |
+
+**The strategic point:** stages 1, 2, 5, 6 and 7 are largely built **already**, spread
+across branches nobody merged. Only stage 3 waits on the character. Building the engine
+with placeholder art costs nothing, and means that on the day the design is approved,
+episodes start that week instead of starting from zero.
+
+**Revision to an earlier verdict of mine:** I proposed killing the MoneyPrinter-class
+video generator because it builds videos from **stock footage of other people's pipes.**
+That kill stands *for its footage source*. But its **composer** — captions, TTS, MoviePy
+assembly, brand palette — is exactly stage 5, and should be reused with the footage
+source swapped from Pexels to our generated panels and our own photo archive.
+**Kill the input, keep the machine.**
+
 ### The one unlock nobody has used: 34 hours of voice
 ElevenLabs **Professional Voice Clone** needs 30 minutes to 3 hours of clean
 speech and produces a large quality jump over the instant clone. **Farid has 34
