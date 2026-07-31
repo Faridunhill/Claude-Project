@@ -410,3 +410,13 @@ properly instead of living in a chat log.
   either way. *"Buy, don't pirate" has a positive form: ask.*
 - **H10.11 Photograph anything that arrives broken** — burnouts, split shanks, cracked
   stems are free cross-sections that require no tool and arrive on their own.
+- **H10.12 The X-ray evidence track** *(Farid, 2026-07-31 — "I will do it for all premium
+  pipes to prove honest and go up in the collector level ladder")* — per-pipe internal
+  imaging as a published condition-and-originality badge. Standard museum conservation
+  practice on wooden objects; proves hidden repairs, replaced tenons, drilling quality
+  and wall thickness; **never dates and never authenticates.** Owning a machine is
+  NJDEP-registrable with a mandatory safety survey, so the route is rent-before-own.
+  Full research + sources: `docs/XRAY_EVIDENCE_TRACK.md`.
+- **H10.13 The interior fingerprint** — an X-ray cannot be scraped from a listing; it
+  can only be made by holding the object. The Indentation Layer (H2.1) applied to the
+  inside of the pipe, where no competitor can follow.
