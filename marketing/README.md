@@ -62,6 +62,17 @@ the PC by `social/video.py`. **No AI imagery, no vendor, £0 per asset.**
 Paid vendors stay off (`paid_vendors_enabled: false`); any non-zero
 charge raises `SpendCeiling`.
 
+## Laws
+
+The canonical register is `docs/LAWS.md`. Two bear directly on this
+system:
+
+**LAW 11 — the desk drive is the system of record.** All information is
+accessed from the master system, even when a copy exists in GitHub. This
+repository is a mirror. When it disagrees with the desk drive, the desk
+drive is right and this copy is stale. An agent that can only reach
+GitHub must say so rather than present a mirrored figure as current.
+
 ## Firewall note (LAW 06)
 
 This repository serves the pipe business only. The repeatable-physical
