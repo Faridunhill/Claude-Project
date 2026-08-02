@@ -25,6 +25,7 @@ LEDGERS = {
     "sources.jsonl": "digger/sources.jsonl",
 }
 ORGAN = {"events.jsonl": "SCALE", "decisions.jsonl": "JUDGE", "sources.jsonl": "DIGGER"}
+LABEL = {"sources.jsonl": "digger"}
 
 
 def _age_days(ts: str) -> float:
@@ -32,11 +33,29 @@ def _age_days(ts: str) -> float:
     return (datetime.now(timezone.utc) - then).total_seconds() / 86400
 
 
+def _dig_activity(root: pathlib.Path) -> list[dict]:
+    """A written dig is Digger activity. Judging the organ only by
+    sources.jsonl — which records OUTSIDE sources — declared it dead while it
+    was reading the Well and proposing lessons. A warning that cries wolf
+    teaches people to ignore warnings, which is worse than no warning."""
+    from datetime import datetime, timezone
+    out = []
+    for path in (root / "digger" / "digs").glob("*.md"):
+        try:
+            stamp = datetime.fromtimestamp(path.stat().st_mtime, timezone.utc)
+        except OSError:
+            continue
+        out.append({"ts": stamp.isoformat().replace("+00:00", "Z")})
+    return out
+
+
 def ledger_health(clone_root: str | pathlib.Path) -> list[dict]:
     root = pathlib.Path(clone_root)
     out = []
     for name, rel in LEDGERS.items():
         rows = AppendOnlyLog(root / rel).rows()
+        if name == "sources.jsonl":
+            rows = sorted(rows + _dig_activity(root), key=lambda r: r["ts"])
         week = sum(1 for r in rows if r.get("ts") and _age_days(r["ts"]) <= 7)
         prev = sum(1 for r in rows if r.get("ts") and 7 < _age_days(r["ts"]) <= 14)
         quiet = _age_days(rows[-1]["ts"]) if rows and rows[-1].get("ts") else None
@@ -62,7 +81,7 @@ def weekly_report(clone_root: str | pathlib.Path, today: date | None = None) -> 
                 "not_started": f"  ** {h['organ']} NOT STARTED (no rows yet)",
                 "silent": f"  ** {h['organ']} SILENT ({(h['days_quiet'] or 0):.0f}d quiet)",
                 }[h["state"]]
-        lines.append(f"  {h['ledger']:<18}{h['this_week']:>5} rows this week   "
+        lines.append(f"  {LABEL.get(h['ledger'], h['ledger']):<18}{h['this_week']:>5} rows this week   "
                      f"(prev {h['prev_week']}){flag}")
 
     pb = book.lines()

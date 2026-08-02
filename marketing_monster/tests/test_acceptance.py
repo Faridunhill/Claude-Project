@@ -634,3 +634,24 @@ class T19_TheMouth(MonsterCase):
         long = "Savinelli Roma 626 Sandblast Bent Apple Vulcanite Stem Estate Pipe Italy Briar Collectible"
         self.assertLessEqual(len(ebay_title(long)), EBAY_TITLE_MAX)
         self.assertTrue(ebay_title(long))
+
+
+class T20_NoCryingWolf(MonsterCase):
+    """A warning that fires while the organ is working teaches people to
+    ignore warnings — worse than no warning at all. The Digger was judged only
+    by sources.jsonl, which records OUTSIDE sources, so it read as dead while
+    it was digging the Well and proposing lessons."""
+
+    def test_a_written_dig_counts_as_digger_activity(self):
+        from monster.report import ledger_health
+        digs = self.root / "digger" / "digs"
+        digs.mkdir(parents=True)
+        (digs / "DIG_001_2026-08-01_pipes.md").write_text("# dig", encoding="utf-8")
+        digger = next(h for h in ledger_health(self.root) if h["organ"] == "DIGGER")
+        self.assertEqual(digger["state"], "ok")
+        self.assertEqual(digger["this_week"], 1)
+
+    def test_a_truly_idle_digger_is_still_flagged(self):
+        from monster.report import ledger_health
+        digger = next(h for h in ledger_health(self.root) if h["organ"] == "DIGGER")
+        self.assertEqual(digger["state"], "not_started")
