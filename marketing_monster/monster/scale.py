@@ -14,7 +14,7 @@ from .ledger import AppendOnlyLog, LedgerError, cohort_of, now_iso
 SURFACES = {"site", "ebay", "etsy", "instagram", "youtube", "email", "other"}
 EVENTS = {
     "impression", "visit", "save", "inquiry", "offer",
-    "sale", "expired_unsold", "email_capture",
+    "sale", "expired_unsold", "email_capture", "published",
 }
 ATTRIBUTION = {"direct", "assumed", "unattributable"}
 OUTCOME_EVENTS = {"sale", "expired_unsold", "email_capture"}

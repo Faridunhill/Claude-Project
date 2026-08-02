@@ -15,10 +15,15 @@ VERDICTS = {"DO", "DEFER", "REJECT", "PENDING"}
 RESERVED = {"floor_price", "spend", "category", "wall", "none"}
 CHANNEL_FLAG = {"organic_only", "paid_allowed"}
 
-# Standing fact: all paid channels are closed on the tobacco category —
-# permanent and structural, not a preference (v1.0).
-CLONE_CHANNEL = {"pipes": "organic_only", "groundtruth": "organic_only",
+# v1.0 said "ALL paid channels closed for Faridunhill". Farid's own sales
+# corrected it on 2026-08-01: three of five that day sold via eBay Promoted
+# Listings. The true rule is narrower — OFF-platform paid (Meta, Google) is
+# closed to tobacco; ON-platform promotion inside a marketplace is not.
+# Ratified by Farid, 2026-08-02. Spend ceilings remain his alone.
+CLONE_CHANNEL = {"pipes": "paid_allowed", "groundtruth": "organic_only",
                  "ashcombe": "paid_allowed"}
+PAID_SCOPE = {"pipes": "marketplace promotion only (eBay/Etsy ads). "
+                       "Meta and Google remain closed on the tobacco category."}
 
 
 class Judge:

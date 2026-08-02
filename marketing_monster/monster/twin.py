@@ -4,11 +4,14 @@ A pipe that sold on eBay is gone; the *listing* is not. Its title, its
 photographs and the words that worked are proven assets, and they currently
 live only on borrowed ground. Twinning moves them:
 
-  1. OWNED GROUND FIRST (v1.0's Mouth law) — an entry on faridunhill.com that
-     stays live after the sale and points at current stock. The encyclopedia
-     law already says this: entries launch WITH listings and sold entries stay
-     up. A sold pipe is a permanent page, not a deleted one.
-  2. BORROWED GROUND SECOND — Etsy copy, within Etsy's real limits.
+  1. OWNED GROUND FIRST (v1.0's Mouth law) — faridunhill.com. Farid's admin
+     already holds the live listing and pushes it to Etsy automatically, so
+     what this file writes for the site is the SOLD entry: the permanent
+     record that stays up after the pipe is gone and points at current stock,
+     exactly as the encyclopedia law requires.
+  2. BORROWED GROUND SECOND — the Etsy copy (reference; the admin push is
+     automatic) and the eBay File Exchange CSV, which is the one artifact
+     Farid actually uploads by hand.
 
 Two honesty laws bind this file:
   · It never invents a date. The dating engine owns that verdict; a twin says
@@ -25,7 +28,8 @@ from .dig import BRANDS, MATERIALS, SHAPES, find_in
 from .ledger import LedgerError, now_iso
 from .playbook import Playbook
 
-# Etsy's published limits. Real constraints, not preferences.
+# Platform limits. Real constraints, not preferences.
+EBAY_TITLE_MAX = 80          # eBay truncates hard at 80
 ETSY_TITLE_MAX = 140
 ETSY_TAG_MAX_CHARS = 20
 ETSY_TAG_COUNT = 13
@@ -156,13 +160,46 @@ def etsy_description(title: str, facts: dict, price: float) -> str:
     return "\n".join(lines)
 
 
+# eBay File Exchange — the same upload format Farid already uses (his own
+# EBAY_END_SOLD files carry this header). FILL markers are deliberate: the
+# category id, the location and the photo URLs are his, and inventing them
+# would produce a file that uploads wrong rather than one that refuses.
+EBAY_ACTION = "Add"
+EBAY_HEADER = [
+    "*Action(SiteID=US|Country=US|Currency=USD|Version=1193|CC=UTF-8)",
+    "CustomLabel", "*Category", "*Title", "*Description", "*ConditionID",
+    "PicURL", "*Quantity", "*StartPrice", "*Format", "*Duration", "*Location",
+]
+
+
+def ebay_title(source_title: str) -> str:
+    title = " ".join(source_title.split())
+    if len(title) <= EBAY_TITLE_MAX:
+        return title
+    return title[:EBAY_TITLE_MAX].rsplit(" ", 1)[0].rstrip(" -,|")
+
+
+def ebay_row(title: str, facts: dict, price: float, sku: str, *,
+             category: str = "", location: str = "", pic_url: str = "",
+             condition_id: str = "3000", quantity: int = 1) -> list[str]:
+    """One File Exchange line. Condition 3000 = Used, eBay's own code."""
+    return [
+        EBAY_ACTION, sku, category or "FILL_CATEGORY_ID",
+        ebay_title(title),
+        etsy_description(title, facts, price).replace("\n", "<br>"),
+        condition_id, pic_url or "FILL_PHOTO_URLS", str(quantity),
+        f"{price:.2f}", "FixedPrice", "GTC", location or "FILL_LOCATION",
+    ]
+
+
 class Twin:
     def __init__(self, clone_root: str | pathlib.Path):
         self.root = pathlib.Path(clone_root)
         self.playbook = Playbook(self.root)
 
     def build(self, title: str, price: float, sku: str, *, decision_id: str,
-              sold_on: str, source_channel: str = "ebay") -> dict:
+              sold_on: str, source_channel: str = "ebay",
+              ebay_category: str = "", ebay_location: str = "") -> dict:
         if not decision_id.strip():
             raise LedgerError(
                 "the Maker only produces what the Judge ordered — supply decision_id"
@@ -172,7 +209,15 @@ class Twin:
         out_dir = self.root / "maker" / "out" / slugify(sku or title)[:60]
         out_dir.mkdir(parents=True, exist_ok=True)
 
+        import csv, io
+        buffer = io.StringIO()
+        writer = csv.writer(buffer, lineterminator="\n")
+        writer.writerow(EBAY_HEADER)
+        writer.writerow(ebay_row(title, facts, price, sku, category=ebay_category,
+                                 location=ebay_location))
+
         artifacts = {
+            "ebay.csv": buffer.getvalue(),
             "site.md": site_entry(title, facts, price, sku, sold_on, source_channel),
             "etsy.txt": (
                 f"TITLE ({len(etsy_title(title))}/{ETSY_TITLE_MAX} chars)\n"
@@ -187,7 +232,10 @@ class Twin:
         for name, body in artifacts.items():
             (out_dir / name).write_text(body, encoding="utf-8")
 
+        needs_filling = [f for f in ("FILL_CATEGORY_ID", "FILL_PHOTO_URLS", "FILL_LOCATION")
+                         if f in artifacts["ebay.csv"]]
         return {"sku": sku, "facts": facts, "out_dir": out_dir,
+                "needs_filling": needs_filling,
                 "asset_version": version, "decision_id": decision_id,
                 "lessons_applied": [x.claim for x in self.playbook.for_maker()],
                 "files": sorted(artifacts)}

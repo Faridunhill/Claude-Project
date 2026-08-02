@@ -163,7 +163,9 @@ def cmd_twin(args) -> int:
     root = root_for(pathlib.Path(args.base), args.clone)
     result = Twin(root).build(args.title, args.price, args.sku,
                               decision_id=args.decision, sold_on=args.sold_on,
-                              source_channel=args.source)
+                              source_channel=args.source,
+                              ebay_category=args.ebay_category,
+                              ebay_location=args.ebay_location)
     facts = result["facts"]
     named = ", ".join(f"{k}={v}" for k, v in facts.items() if v)
     print(f"twinned {result['sku'] or '(no sku)'}")
@@ -173,7 +175,68 @@ def cmd_twin(args) -> int:
     print(f"  written: {result['out_dir']}")
     for name in result["files"]:
         print(f"    - {name}")
-    print("  owned ground first: publish site.md before the Etsy copy (Mouth law).")
+    if result["needs_filling"]:
+        print(f"  ebay.csv needs your values: {', '.join(result['needs_filling'])}")
+    print("  order: faridunhill first, then Etsy, then the eBay CSV upload.")
+    return 0
+
+
+def cmd_publish(args) -> int:
+    """THE MOUTH — owned ground first, borrowed second, and the Scale hears it."""
+    root = root_for(pathlib.Path(args.base), args.clone)
+    order = ["site", "etsy", "ebay"]
+    # Farid's admin holds the listing on faridunhill.com and pushes it to Etsy
+    # automatically, so those two are one act, not two. "admin" records both.
+    targets = order[:2] if args.where == "admin" else [args.where]
+    scale = Scale(root)
+    done = {r["surface"] for r in scale.rows()
+            if r["event"] == "published" and r["asset_id"] == args.sku}
+    if "ebay" in targets and "site" not in done | set(targets):
+        print("refused: owned ground first — faridunhill before eBay "
+              "(Mouth law, v1.0). Record the admin publish first:\n"
+              f"  monster publish {args.clone} {args.sku} --where admin",
+              file=sys.stderr)
+        return 2
+    for where in targets:
+        row = scale.record("published", args.sku, surface=where,
+                           asset_version=args.asset_version or None,
+                           attribution="direct",
+                           reason=("faridunhill admin, auto-pushed to Etsy"
+                                   if args.where == "admin" else
+                                   f"published to {where}"))
+        print(f"{row['id']}  published  {args.sku} -> {where}")
+    remaining = [x for x in order if x not in done | set(targets)]
+    print(f"  still to go: {', '.join(remaining) or 'nothing — live everywhere'}")
+    return 0
+
+
+def cmd_daily(args) -> int:
+    """The whole day's routine in one command."""
+    from . import pending
+    from .dig import Dig
+    root = root_for(pathlib.Path(args.base), args.clone)
+    book = Playbook(root)
+
+    dropped = book.expire_due()
+    if dropped:
+        print(f"{len(dropped)} playbook line(s) reached their review date and "
+              "stopped being read:")
+        for line in dropped:
+            print(f"  - {line.claim}")
+
+    if args.propose:
+        added = [book.add_line(x) for x in Dig(root).proposals()]
+        kept = [x for x in added if x]
+        print(f"dig proposed {len(kept)} new lesson(s) "
+              f"({len(added) - len(kept)} already known)")
+
+    path = pending.write(root)
+    body = path.read_text(encoding="utf-8")
+    waiting = body.count("→ yes / no") + body.count("→ keep / drop") + body.count("→ number")
+    print(f"\n{'=' * 60}\nWAITING FOR YOU: {waiting} item(s) — {path}\n{'=' * 60}")
+    if waiting:
+        print(body)
+    print(weekly_report(root))
     return 0
 
 
@@ -260,7 +323,21 @@ def main(argv=None) -> int:
     sp.add_argument("--decision", required=True)
     sp.add_argument("--sold-on", dest="sold_on", required=True)
     sp.add_argument("--source", default="ebay")
+    sp.add_argument("--ebay-category", dest="ebay_category", default="")
+    sp.add_argument("--ebay-location", dest="ebay_location", default="")
     sp.set_defaults(fn=cmd_twin)
+
+    sp = clone_arg(sub.add_parser("publish", help="record that an asset went live"))
+    sp.add_argument("sku")
+    sp.add_argument("--where", required=True,
+                    choices=["admin", "site", "etsy", "ebay"],
+                    help="admin = faridunhill + its automatic Etsy push, in one step")
+    sp.add_argument("--asset-version", dest="asset_version", default="")
+    sp.set_defaults(fn=cmd_publish)
+
+    sp = clone_arg(sub.add_parser("daily", help="the whole day's routine"))
+    sp.add_argument("--propose", action="store_true", default=True)
+    sp.set_defaults(fn=cmd_daily)
 
     clone_arg(sub.add_parser("pending")).set_defaults(fn=cmd_pending)
     clone_arg(sub.add_parser("verify")).set_defaults(fn=cmd_verify)

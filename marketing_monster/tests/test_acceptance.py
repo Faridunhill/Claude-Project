@@ -265,8 +265,14 @@ class T11_JudgeRemembersRejections(MonsterCase):
         with self.assertRaises(LedgerError):
             Judge(self.root).decide("Handy tools", edge="NONE", verdict="DO", reason="cheap")
 
-    def test_pipes_is_organic_only(self):
-        self.assertEqual(Judge(self.root).channel_flag(), "organic_only")
+    def test_pipes_allows_marketplace_promotion(self):
+        """v1.0 said all paid channels were closed for Faridunhill. Farid's own
+        sales disproved it on 2026-08-01 — three of five came through eBay
+        Promoted Listings. Ratified by Farid: on-platform promotion is open,
+        Meta and Google stay closed."""
+        from monster.judge import PAID_SCOPE
+        self.assertEqual(Judge(self.root).channel_flag(), "paid_allowed")
+        self.assertIn("Meta and Google remain closed", PAID_SCOPE["pipes"])
 
 
 if __name__ == "__main__":
@@ -580,3 +586,51 @@ class T18_DigFeedsThePlaybook(MonsterCase):
                 self.book.add_line(line)
         claims = [x.claim for x in self.book.lines()]
         self.assertEqual(len(claims), len(set(claims)))
+
+
+class T19_TheMouth(MonsterCase):
+    """Owned ground first, borrowed second — enforced, not remembered."""
+
+    def test_ebay_before_owned_ground_is_refused(self):
+        from monster.cli import main
+        code = main(["--base", str(self.base), "publish", "pipes", "sku-1",
+                     "--where", "ebay"])
+        self.assertEqual(code, 2)
+        self.assertEqual(Scale(self.root).rows(), [])
+
+    def test_admin_records_site_and_etsy_in_one_step(self):
+        """Farid's admin holds faridunhill and pushes Etsy automatically, so
+        those are one act. Making him record two would be paperwork."""
+        from monster.cli import main
+        self.assertEqual(
+            main(["--base", str(self.base), "publish", "pipes", "sku-1",
+                  "--where", "admin"]), 0)
+        surfaces = [r["surface"] for r in Scale(self.root).rows()
+                    if r["event"] == "published"]
+        self.assertEqual(surfaces, ["site", "etsy"])
+
+    def test_ebay_allowed_once_owned_ground_is_live(self):
+        from monster.cli import main
+        main(["--base", str(self.base), "publish", "pipes", "sku-1", "--where", "admin"])
+        self.assertEqual(
+            main(["--base", str(self.base), "publish", "pipes", "sku-1",
+                  "--where", "ebay"]), 0)
+        surfaces = [r["surface"] for r in Scale(self.root).rows()
+                    if r["event"] == "published"]
+        self.assertEqual(surfaces, ["site", "etsy", "ebay"])
+
+    def test_ebay_csv_marks_what_it_cannot_know(self):
+        """Inventing a category id would produce a file that uploads wrong.
+        Refusing to guess produces one that visibly needs a value."""
+        from monster.twin import Twin
+        result = Twin(self.root).build("Peterson System 307", 95.0, "pete-307",
+                                       decision_id="D-001", sold_on="2026-08-01")
+        body = (result["out_dir"] / "ebay.csv").read_text()
+        self.assertIn("FILL_CATEGORY_ID", body)
+        self.assertEqual(len(result["needs_filling"]), 3)
+
+    def test_ebay_title_is_cut_to_80(self):
+        from monster.twin import EBAY_TITLE_MAX, ebay_title
+        long = "Savinelli Roma 626 Sandblast Bent Apple Vulcanite Stem Estate Pipe Italy Briar Collectible"
+        self.assertLessEqual(len(ebay_title(long)), EBAY_TITLE_MAX)
+        self.assertTrue(ebay_title(long))
