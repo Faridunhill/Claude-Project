@@ -37,11 +37,22 @@ law rather than just blocking.
 python -m unittest discover -s marketing_monster/tests -t marketing_monster
 ```
 
-26 tests, T1–T11 from doc 004 §6. They are the laws written as code that
+33 tests, T1–T13 — the ten from doc 004 §6 plus the dig and locate guards. They are the laws written as code that
 fails — a future refactor that quietly drops a law breaks a test with the
 law's name on it.
 
-## When Farid is back at his PC
+## Start here, on the PC
+
+```bash
+python -m monster locate ~            # or: locate "C:/Users/<you>/Desktop"
+```
+
+Walks the folder, ranks every file that could be a Well, and prints the header
+row of each candidate. **It reads names, sizes and one header line — never a
+record — and writes nothing.** That output answers the hub/cabinet question in
+one command instead of a conversation.
+
+Then:
 
 ```bash
 cd <wherever the marketing root should live>          # e.g. FARIDOS/marketing
@@ -50,6 +61,7 @@ export PYTHONPATH=/path/to/marketing_monster
 python -m monster init pipes                          # builds the tree, mints the salt
 python -m monster inspect pipes ~/…/ebay_sold.csv     # READS HEADERS ONLY, writes nothing
 python -m monster load    pipes ~/…/ebay_sold.csv     # derived features only
+python -m monster dig     pipes --save                # the pipes dig, written up
 python -m monster report  pipes
 python -m monster verify  pipes                       # hash chains + the wall
 ```
@@ -62,11 +74,33 @@ If the export's columns are unusual, save the corrected mapping as JSON and
 pass `--mapping mapping.json`. No format work is needed in advance — CSV out
 of eBay, a spreadsheet export, anything with a header row.
 
+## The dig (wave 3, built)
+
+`monster dig pipes` answers the four questions from the DIG ORDER: what sold
+fastest, at what price, which title words, who bought twice. Three things make
+it a dig rather than a spreadsheet:
+
+- **Every figure carries its n**, and below 12 it is labelled an observation,
+  not evidence. The dig will say "this Well is not big enough to read title
+  effects" rather than produce a pattern.
+- **Title words are compared within brand.** The naive version of this
+  analysis just re-discovers the brands — a Castello outsells a Stanwell
+  however it is described — and produces unusable "lessons" like *use the word
+  Castello*. A word must also show its effect in two or more brands.
+- **It proposes PROPOSED lines only.** One dataset is one cohort; nothing can
+  reach CONFIRMED from a single look (B2).
+
+It also states what it cannot see: unsold inventory is invisible in a
+sold-item export, so "what sells" means "what sold" and the denominator is
+missing. That limitation is printed in the report, not left for someone to
+discover later.
+
 ## What is still blocked
 
 **Wave 2 only: the location of the hub and cabinet data.** That is a fact
-about Farid's PC, not a decision — the cloud side cannot look. Once a path
-exists, `inspect` → `load` is a two-minute job and the pipes dig starts.
+about Farid's PC, not a decision — the cloud side cannot look. `locate`
+answers it in one command; then `inspect` → `load` → `dig` is a five-minute
+sequence.
 
 ## Layout it builds
 

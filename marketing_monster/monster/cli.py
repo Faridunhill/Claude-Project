@@ -103,6 +103,25 @@ def cmd_pending(args) -> int:
     return 0
 
 
+def cmd_locate(args) -> int:
+    from .locate import render
+    print(render(args.path, limit=args.limit))
+    return 0
+
+
+def cmd_dig(args) -> int:
+    from .dig import Dig
+    root = root_for(pathlib.Path(args.base), args.clone)
+    dig = Dig(root)
+    if args.save:
+        path = dig.write()
+        print(dig.report())
+        print(f"\nsaved: {path}")
+    else:
+        print(dig.report())
+    return 0
+
+
 def cmd_verify(args) -> int:
     base = pathlib.Path(args.base)
     root = root_for(base, args.clone)
@@ -151,6 +170,15 @@ def main(argv=None) -> int:
     sp = clone_arg(sub.add_parser("report"))
     sp.add_argument("--save", action="store_true")
     sp.set_defaults(fn=cmd_report)
+
+    sp = sub.add_parser("locate", help="find candidate data files (reads no records)")
+    sp.add_argument("path", nargs="?", default="~")
+    sp.add_argument("--limit", type=int, default=25)
+    sp.set_defaults(fn=cmd_locate)
+
+    sp = clone_arg(sub.add_parser("dig"))
+    sp.add_argument("--save", action="store_true")
+    sp.set_defaults(fn=cmd_dig)
 
     clone_arg(sub.add_parser("pending")).set_defaults(fn=cmd_pending)
     clone_arg(sub.add_parser("verify")).set_defaults(fn=cmd_verify)

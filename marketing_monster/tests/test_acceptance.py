@@ -271,3 +271,90 @@ class T11_JudgeRemembersRejections(MonsterCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class T12_DigDoesNotInventPatterns(MonsterCase):
+    """B2 at the analysis layer: the dig must recover real effects, refuse to
+    report absent ones, and never propose a lesson that cannot be acted on."""
+
+    HEADER = ("Item number,Item title,Start date,Sale date,Sold for,"
+              "Buyer username\n")
+
+    def _write_well(self, rows):
+        csv_path = self.base / "export.csv"
+        csv_path.write_text(self.HEADER + "".join(rows), encoding="utf-8")
+        Well(self.root).load_csv(csv_path)
+
+    def _synthetic(self):
+        """Two brands at very different price levels. Inside each brand,
+        'boxed' adds 20%; 'restored' does nothing."""
+        rows, n = [], 0
+        for brand, base in (("Dunhill", 300), ("Stanwell", 60)):
+            for i in range(40):
+                boxed = i % 2 == 0
+                restored = i % 3 == 0
+                price = base * (1.2 if boxed else 1.0)
+                words = " ".join(w for w, on in
+                                 (("Boxed", boxed), ("Restored", restored)) if on)
+                n += 1
+                rows.append(f"{n},{brand} Billiard {words},2026-01-01,2026-03-01,"
+                            f"${price:.2f},buyer_{i % 7}\n")
+        return rows
+
+    def setUp(self):
+        super().setUp()
+        self._write_well(self._synthetic())
+        from monster.dig import Dig
+        self.dig = Dig(self.root)
+        self.words = {w["word"]: w for w in self.dig.title_words(min_n=10)}
+
+    def test_recovers_a_planted_effect(self):
+        self.assertIn("boxed", self.words)
+        self.assertAlmostEqual(self.words["boxed"]["price_lift"], 0.20, delta=0.05)
+
+    def test_reports_no_effect_where_none_exists(self):
+        self.assertAlmostEqual(self.words.get("restored", {}).get("price_lift", 0),
+                               0.0, delta=0.05)
+
+    def test_brand_names_are_never_title_word_findings(self):
+        """The confound that makes the naive version of this analysis useless:
+        a Dunhill outsells a Stanwell however it is described. 'Use the word
+        Dunhill' is not a lesson — you cannot rename a pipe."""
+        for brand in ("dunhill", "stanwell"):
+            self.assertNotIn(brand, self.words)
+
+    def test_proposals_are_never_confirmed(self):
+        for line in self.dig.proposals():
+            self.assertIn("[PROPOSED]", line)
+            self.assertNotIn("[CONFIRMED]", line)
+
+    def test_empty_well_proposes_nothing(self):
+        from monster.dig import Dig
+        empty = self.base / "clones" / "empty"
+        empty.mkdir(parents=True)
+        dig = Dig(empty)
+        self.assertEqual(dig.proposals(), [])
+        self.assertIn("Well is empty", dig.report())
+
+
+class T13_LocateReadsNoRecords(MonsterCase):
+    """`locate` answers "where does the data live?" without opening the data."""
+
+    def test_header_only(self):
+        from monster.locate import header_of, scan
+        path = self.base / "sold_items.csv"
+        path.write_text("Item number,Sold for\n1,340.00\nSECRET_ROW,999\n",
+                        encoding="utf-8")
+        head = header_of(path)
+        self.assertIn("Item number", head)
+        self.assertNotIn("SECRET_ROW", head)
+        self.assertNotIn("340.00", head)
+
+    def test_ranks_likely_data_first(self):
+        from monster.locate import scan
+        (self.base / "notes.txt").write_text("hello", encoding="utf-8")
+        (self.base / "ebay_sold_orders.csv").write_text(
+            "Item number,Sold for\n" + "1,2\n" * 500, encoding="utf-8")
+        hits = scan(self.base)
+        self.assertTrue(hits)
+        self.assertEqual(hits[0]["path"].name, "ebay_sold_orders.csv")
