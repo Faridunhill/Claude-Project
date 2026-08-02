@@ -446,6 +446,23 @@ def cmd_stock(args) -> int:
     return 0
 
 
+def cmd_research(args) -> int:
+    """Take a dossier from the cloud side into the ledger, and queue the
+    category pick for Farid — the one decision the machine may never make."""
+    root = root_for(pathlib.Path(args.base), args.clone)
+    result = Digger(root).take_dossier(args.dossier, category=args.category,
+                                       edge=args.edge, recommend=args.recommend,
+                                       judge=Judge(root))
+    print(f"dossier recorded: {result['dossier'].name}")
+    print(f"  source id : {result['source']['id']} "
+          f"(expires {result['source']['expires_on']})")
+    print(f"  queued    : {result['decision']['decision_id']} — "
+          f"category pick, waiting for your yes or no")
+    print(f"  machine recommends: {args.recommend}")
+    print("\n  see it in PENDING.md — the machine will not decide a category.")
+    return 0
+
+
 def cmd_verify(args) -> int:
     base = pathlib.Path(args.base)
     root = root_for(base, args.clone)
@@ -576,6 +593,13 @@ def main(argv=None) -> int:
 
     clone_arg(sub.add_parser("stock", help="what is live and how fast it moves")
               ).set_defaults(fn=cmd_stock)
+
+    sp = clone_arg(sub.add_parser("research", help="take a cloud dossier into the ledger"))
+    sp.add_argument("dossier")
+    sp.add_argument("--category", required=True)
+    sp.add_argument("--edge", default="audience")
+    sp.add_argument("--recommend", default="DO")
+    sp.set_defaults(fn=cmd_research)
 
     clone_arg(sub.add_parser("pending")).set_defaults(fn=cmd_pending)
     clone_arg(sub.add_parser("verify")).set_defaults(fn=cmd_verify)

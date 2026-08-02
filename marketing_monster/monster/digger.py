@@ -57,6 +57,28 @@ class Digger:
         return [r for r in live.values()
                 if r.get("expires_on") and date.fromisoformat(r["expires_on"]) < today]
 
+    def take_dossier(self, path: str | pathlib.Path, *, category: str,
+                     edge: str, recommend: str, judge) -> dict:
+        """Take a research dossier written by the cloud side and turn it into
+        a queued decision.
+
+        The outward Digger has no eyes of its own — crawling competitor stores
+        is what gets a seller's account blocked, and the house law is buy,
+        don't pirate. So the cloud agent reads public pages once and writes a
+        dossier; this carries it into the ledger with its source recorded, and
+        queues the category pick for Farid, who alone may make it (v1.0).
+        """
+        path = pathlib.Path(path)
+        if not path.exists():
+            raise LedgerError(f"no dossier at {path}")
+        source = self.record_source(str(path), source_type="public_page",
+                                    permission_basis="terms_permit",
+                                    claims=[f"category dig: {category}"])
+        decision = judge.propose(f"Enter category: {category}", edge=edge,
+                                 needs_farid="category", recommend=recommend,
+                                 dig_id=source["id"])
+        return {"source": source, "decision": decision, "dossier": path}
+
     def must_read_rejects(self, judge) -> list[str]:
         """M2: the Digger reads the reject log before proposing anything."""
         return [f"{r['decision_id']}: {r['proposal']} — {r['reason']}" for r in judge.rejects()]
