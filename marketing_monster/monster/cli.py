@@ -271,6 +271,23 @@ def cmd_auto(args) -> int:
     return 0
 
 
+def cmd_rebuild(args) -> int:
+    from .auto import Autopilot
+    pilot = Autopilot(pathlib.Path(args.base), args.clone)
+    r = pilot.rebuild(args.reason)
+    print(f"archived (not deleted): {r['archived_to']}")
+    print(f"  moved: {', '.join(r['archived'])}\n")
+    print("rebuilt from source files:")
+    print(f"  export files read : {r['files_ingested']}")
+    print(f"  sales into the Well: {r['rows_added']}")
+    span = f"  {r['sales_span'][0]} to {r['sales_span'][1]}" if r.get("sales_span") else ""
+    print(f"  sales recorded     : {r['sales_recorded']}{span}")
+    for bad in r["files_failed"]:
+        print(f"  skipped {pathlib.Path(bad['path']).name}: {bad['error']}")
+    print(f"\n  report: {r['report']}")
+    return 0
+
+
 def cmd_setup(args) -> int:
     """Ask once where the exports land, then never ask again."""
     from .auto import DEFAULT_CONFIG, load_config, write_config
@@ -414,6 +431,10 @@ def main(argv=None) -> int:
 
     clone_arg(sub.add_parser("auto", help="one full turn of the loop, no typing")
               ).set_defaults(fn=cmd_auto)
+
+    sp = clone_arg(sub.add_parser("rebuild", help="archive and rebuild from source files"))
+    sp.add_argument("--reason", required=True)
+    sp.set_defaults(fn=cmd_rebuild)
 
     sp = clone_arg(sub.add_parser("setup", help="tell it once where exports land"))
     sp.add_argument("--watch", action="append", default=[])

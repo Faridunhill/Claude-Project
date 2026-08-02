@@ -103,6 +103,12 @@ class Autopilot:
             if fingerprint in done:
                 continue
             try:
+                from .well import looks_like_active_listings, read_headers
+                marker = looks_like_active_listings(read_headers(path))
+                if marker:
+                    raise LedgerError(
+                        f"looks like an active-listings report (column {marker!r}) — "
+                        "unsold stock is not a sale and will not be loaded as one")
                 stats = well.load(path, append=True)
             except (LedgerError, Exception) as exc:      # a bad file must not stop the run
                 self.seen.append({"ts": now_iso(), "fingerprint": fingerprint,
@@ -183,6 +189,39 @@ class Autopilot:
                 ebay_category=self.config.get("ebay_category", ""),
                 ebay_location=self.config.get("ebay_location", "")))
         return made
+
+    # -- recovery ---------------------------------------------------------
+    def rebuild(self, reason: str) -> dict:
+        """Start the Well and the Scale again from the source files.
+
+        Nothing is deleted. The ledgers are append-only by law, and a bug in
+        the loader does not earn the right to erase history — it earns an
+        archive with a written reason, so the bad run stays inspectable.
+        """
+        import shutil
+        if not reason.strip():
+            raise LedgerError("a rebuild must state why — it is a correction, "
+                              "and corrections carry reasons")
+        stamp = now_iso().replace(":", "").replace("-", "")
+        archive = self.root / "archive" / stamp
+        archive.mkdir(parents=True, exist_ok=True)
+        moved = []
+        for rel in ("well/derived", "scale/events.jsonl", "auto/ingested.jsonl",
+                    "maker/out"):
+            source = self.root / rel
+            if source.exists():
+                target = archive / rel.replace("/", "_")
+                shutil.move(str(source), str(target))
+                moved.append(rel)
+        (archive / "WHY.txt").write_text(
+            f"archived {now_iso()}\nreason: {reason}\nmoved: {', '.join(moved)}\n"
+            "Nothing here was deleted. This is the state before the rebuild.\n",
+            encoding="utf-8")
+        (self.root / "well" / "derived").mkdir(parents=True, exist_ok=True)
+        result = self.run()
+        result["archived_to"] = archive
+        result["archived"] = moved
+        return result
 
     # -- 5 & 6: learn, then report ----------------------------------------
     def learn(self) -> dict:

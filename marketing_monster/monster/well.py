@@ -138,18 +138,45 @@ def read_headers(path: str | pathlib.Path) -> list[str]:
     return read_rows(path)[0]
 
 
+# Words too generic to match by substring. "date" as a last-resort alias is
+# what let an active-listings report's "Start date" be read as a sale date,
+# recording hundreds of unsold pipes as sold. Generic aliases must match a
+# column name exactly or not at all.
+# Only the date aliases. "price" matching "price_amount" is correct and
+# needed for Etsy's nested records; "date" matching "start date" is not, because
+# a start date and a sale date mean opposite things.
+EXACT_ONLY = {"date", "created"}
+
+
 def propose_mapping(headers: list[str]) -> dict[str, str | None]:
-    """Wave-2 helper: given a real export's headers, propose the mapping.
-    Run this first — it writes nothing and reads no rows."""
+    """Given a real export's headers, propose the mapping. Writes nothing."""
     seen = {_norm(h): h for h in headers}
     out: dict[str, str | None] = {}
     for field, names in ALIASES.items():
         hit = next((seen[_norm(n)] for n in names if _norm(n) in seen), None)
-        if hit is None:  # substring fallback
+        if hit is None:  # substring fallback, specific aliases only
             hit = next((orig for norm, orig in seen.items()
-                        if any(_norm(n) in norm for n in names)), None)
+                        if any(_norm(n) in norm for n in names
+                               if _norm(n) not in EXACT_ONLY)), None)
         out[field] = hit
     return out
+
+
+# Columns that only ever appear in a LIVE-inventory report. A file carrying
+# these is not a record of sales, whatever its date columns look like.
+ACTIVE_LISTING_MARKERS = ("available quantity", "auction buy it now price",
+                          "reserve price", "start price", "watchers",
+                          "listing duration", "relist")
+
+
+def looks_like_active_listings(headers: list[str]) -> str | None:
+    """Returns the marker found, or None. Active listings are the DENOMINATOR
+    — valuable, but they are not sales and must never be counted as sales."""
+    seen = {_norm(h) for h in headers}
+    for marker in ACTIVE_LISTING_MARKERS:
+        if any(marker in name for name in seen):
+            return marker
+    return None
 
 
 def dropped_columns(headers: list[str], mapping: dict) -> list[str]:

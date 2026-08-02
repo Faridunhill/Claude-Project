@@ -769,3 +769,58 @@ class T23_AmbiguousDatesFollowTheAccount(MonsterCase):
         from monster.well import iso_date
         self.assertEqual(iso_date("03/04/2026"), "2026-03-04")   # 4 March
         self.assertEqual(iso_date("12/31/2025"), "2025-12-31")   # unambiguous
+
+
+class T24_ActiveListingsAreNotSales(MonsterCase):
+    """The live run recorded 64 eBay "sales" in a week against an 11-year
+    average near 10. Cause: an active-listings report was in the watch folder,
+    and the column matcher accepted any name containing "date", so a listing's
+    Start date was read as a sale date. Unsold stock became sold stock."""
+
+    ACTIVE = ("Item number,Title,Custom label (SKU),Available quantity,"
+              "Format,Currency,Start price,Start date\n"
+              "111,Peterson System 307,pete-307,1,FixedPrice,USD,95.00,2026-08-01\n")
+    SOLD = ("Item Id,Listing Title,Price,Date\n"
+            "222,Dunhill Shell Billiard,340.00,2026-08-01\n")
+
+    def test_an_active_report_is_recognised(self):
+        from monster.well import looks_like_active_listings
+        headers = self.ACTIVE.splitlines()[0].split(",")
+        self.assertEqual(looks_like_active_listings(headers), "available quantity")
+
+    def test_start_date_is_no_longer_read_as_a_sale_date(self):
+        from monster.well import propose_mapping
+        headers = self.ACTIVE.splitlines()[0].split(",")
+        self.assertIsNone(propose_mapping(headers)["sold_at"])
+
+    def test_a_real_sold_export_still_maps(self):
+        from monster.well import looks_like_active_listings, propose_mapping
+        headers = self.SOLD.splitlines()[0].split(",")
+        self.assertIsNone(looks_like_active_listings(headers))
+        self.assertEqual(propose_mapping(headers)["sold_at"], "Date")
+
+    def test_the_autopilot_skips_it_and_keeps_going(self):
+        from monster.auto import Autopilot, write_config
+        drop = self.base / "drop"
+        drop.mkdir()
+        (drop / "eBay-all-active-listings-report.csv").write_text(self.ACTIVE, encoding="utf-8")
+        (drop / "ebay_sold.csv").write_text(self.SOLD, encoding="utf-8")
+        write_config(self.base, {"watch": [str(drop)]})
+        r = Autopilot(self.base, "pipes").run()
+        self.assertEqual(r["files_ingested"], 1)          # only the sold file
+        self.assertEqual(r["rows_added"], 1)
+        self.assertIn("active-listings", r["files_failed"][0]["error"])
+
+    def test_rebuild_archives_rather_than_deletes(self):
+        from monster.auto import Autopilot, write_config
+        drop = self.base / "drop"
+        drop.mkdir()
+        (drop / "ebay_sold.csv").write_text(self.SOLD, encoding="utf-8")
+        write_config(self.base, {"watch": [str(drop)]})
+        pilot = Autopilot(self.base, "pipes")
+        pilot.run()
+        r = pilot.rebuild("active listings were loaded as sales")
+        archive = r["archived_to"]
+        self.assertTrue((archive / "WHY.txt").exists())
+        self.assertTrue(any(archive.iterdir()))
+        self.assertIn("reason:", (archive / "WHY.txt").read_text())
