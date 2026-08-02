@@ -263,6 +263,9 @@ def cmd_auto(args) -> int:
     print(f"  lessons proposed       : {r['lessons_proposed']}")
     for bad in r["files_failed"]:
         print(f"  ** could not read {bad['path'].name}: {bad['error']}")
+    for spike in r.get("quarantined_days", [])[:5]:
+        print(f"  ** {spike['day']}: {spike['count']} rows with consecutive item "
+              "numbers — listed together, not sold. Not counted as sales.")
     print(f"\n  report : {r['report']}")
     if r["waiting_for_farid"]:
         print(f"\n  ** {r['waiting_for_farid']} question(s) waiting for you: {r['pending']}")

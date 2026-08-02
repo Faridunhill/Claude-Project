@@ -124,6 +124,20 @@ def weekly_report(clone_root: str | pathlib.Path, today: date | None = None) -> 
         lines += ["", "DUE FOR REVIEW (drop to PROPOSED if not re-confirmed)"]
         lines += [f"  - {x.claim}  (review {x.review})" for x in due]
 
+    try:
+        from .dig import Dig
+        spikes = Dig(root).suspicious_days()
+    except Exception:
+        spikes = []
+    if spikes:
+        lines += ["", "SUSPICIOUS DAYS — more sales than a normal day holds"]
+        for spike in spikes[:5]:
+            note = ("  item numbers are consecutive — these were LISTED together, "
+                    "not sold together" if spike["consecutive"] else "")
+            lines.append(f"  {spike['day']}  {spike['count']} rows "
+                         f"(a normal day is {spike['typical_day']}){note}")
+        lines.append("  ** check whether that file's date column means sold or listed.")
+
     ok, msg = scale.log.verify()
     lines += ["", f"INTEGRITY  {'ok' if ok else '** BROKEN **'} — {msg}"]
     return "\n".join(lines)

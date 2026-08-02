@@ -177,6 +177,37 @@ class Dig:
                         "confidence": confidence(len(group))})
         return sorted(out, key=lambda d: -d["n"])
 
+    def suspicious_days(self, factor: int = 8, floor: int = 20) -> list[dict]:
+        """Days holding far more "sales" than a normal day.
+
+        A seller's sales are spread out; a bulk LISTING upload lands dozens of
+        rows on one timestamp with consecutive item numbers. When a file mixes
+        the two, or its date column means "listed" rather than "sold", it shows
+        up here as a spike — and a spike the machine reports is one nobody has
+        to notice by hand.
+        """
+        from collections import Counter
+        by_day = Counter(str(r.get("sold_at") or "")[:10]
+                         for r in self.rows if r.get("sold_at"))
+        if len(by_day) < 5:
+            return []
+        counts = sorted(by_day.values())
+        typical = counts[len(counts) // 2] or 1
+        out = []
+        for day, count in by_day.items():
+            if count >= max(floor, typical * factor):
+                ids = sorted(str(r.get("item_id") or "") for r in self.rows
+                             if str(r.get("sold_at") or "")[:10] == day)
+                numeric = [int(float(x)) for x in ids if x.replace(".", "").isdigit()]
+                span = (max(numeric) - min(numeric)) if len(numeric) > 1 else None
+                out.append({
+                    "day": day, "count": count, "typical_day": typical,
+                    "item_id_span": span,
+                    # consecutive item numbers = created together, not sold together
+                    "consecutive": bool(span is not None and span < count * 4),
+                })
+        return sorted(out, key=lambda d: -d["count"])
+
     def vocabulary_gap(self, top: int = 15) -> dict:
         """How much of the catalogue the brand list cannot name.
 

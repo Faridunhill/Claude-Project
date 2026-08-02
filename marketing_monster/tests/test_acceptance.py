@@ -824,3 +824,55 @@ class T24_ActiveListingsAreNotSales(MonsterCase):
         self.assertTrue((archive / "WHY.txt").exists())
         self.assertTrue(any(archive.iterdir()))
         self.assertIn("reason:", (archive / "WHY.txt").read_text())
+
+
+class T25_SpotItsOwnSuspiciousClusters(MonsterCase):
+    """72 sales landed on one day with consecutive eBay item numbers, and
+    Farid confirmed he sold nothing like that. eBay issues item numbers in
+    order at LISTING time, so those rows were listed together, not sold
+    together. The machine must see that shape without being told."""
+
+    def _load(self, rows):
+        path = self.base / "ebay_sales.csv"
+        path.write_text("Item Id,Listing Title,Price,Date\n" + "".join(rows),
+                        encoding="utf-8")
+        Well(self.root).load(path)
+        from monster.dig import Dig
+        return Dig(self.root)
+
+    def test_a_bulk_batch_is_flagged_as_consecutive(self):
+        rows = [f"{307086878700 + i},Peterson Billiard {i},95.00,2026-07-26\n"
+                for i in range(40)]
+        rows += [f"{300000000000 + i * 7919},Dunhill Shell {i},340.00,2026-0{i % 9 + 1}-15\n"
+                 for i in range(10)]
+        spikes = self._load(rows).suspicious_days()
+        self.assertTrue(spikes)
+        self.assertEqual(spikes[0]["day"], "2026-07-26")
+        self.assertTrue(spikes[0]["consecutive"])
+
+    def test_normal_trading_raises_no_flag(self):
+        rows = []
+        for day in range(1, 28):
+            for j in range(2):
+                rows.append(f"{300000000000 + day * 991 + j},Peterson {day}-{j},"
+                            f"95.00,2026-06-{day:02d}\n")
+        self.assertEqual(self._load(rows).suspicious_days(), [])
+
+    def test_the_scale_refuses_to_learn_from_a_flagged_batch(self):
+        """The Well keeps everything for inspection. The Scale — which teaches
+        the playbook — must not swallow a listing batch as revenue."""
+        from monster.auto import Autopilot, write_config
+        rows = [f"{307086878700 + i},Peterson Billiard {i},95.00,2026-07-26\n"
+                for i in range(40)]
+        rows += [f"{300000000000 + i * 7919},Dunhill Shell {i},340.00,2026-07-{i + 10}\n"
+                 for i in range(10)]
+        path = self.base / "ebay_sales.csv"
+        path.write_text("Item Id,Listing Title,Price,Date\n" + "".join(rows),
+                        encoding="utf-8")
+        write_config(self.base, {"watch": [str(self.base)],
+                                 "record_sales_within_days": 4000})
+        pilot = Autopilot(self.base, "pipes")
+        pilot.run()
+        recorded = {r["ts"][:10] for r in Scale(self.root).rows() if r["event"] == "sale"}
+        self.assertNotIn("2026-07-26", recorded)
+        self.assertEqual(len(Well(self.root).transactions()), 50)   # Well keeps all

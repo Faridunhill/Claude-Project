@@ -126,6 +126,14 @@ class Autopilot:
     def record_new_sales(self) -> list[dict]:
         from datetime import date, timedelta
         scale = Scale(self.root)
+        # Days that look like a bulk LISTING upload, not a day of selling.
+        # The Well keeps them for inspection; the Scale must not learn from
+        # them, because the Scale is what teaches the playbook.
+        try:
+            quarantined = {s["day"] for s in Dig(self.root).suspicious_days()
+                           if s["consecutive"]}
+        except Exception:
+            quarantined = set()
         known = {r["asset_id"] for r in scale.rows() if r["event"] == "sale"}
         cutoff = (date.today()
                   - timedelta(days=int(self.config["record_sales_within_days"]))).isoformat()
@@ -135,7 +143,7 @@ class Autopilot:
             sold_at = str(row.get("sold_at") or "")[:10]
             if not item_id or item_id in known:
                 continue
-            if not sold_at or sold_at < cutoff:
+            if not sold_at or sold_at < cutoff or sold_at in quarantined:
                 continue
             surface = row.get("channel") if row.get("channel") in (
                 "ebay", "etsy", "site") else "other"
@@ -246,7 +254,12 @@ class Autopilot:
         report_path = write_report(self.root)
         waiting = pending_path.read_text(encoding="utf-8")
         stamps = sorted(r["ts"][:10] for r in sales if r.get("ts"))
+        try:
+            spikes = [s for s in Dig(self.root).suspicious_days() if s["consecutive"]]
+        except Exception:
+            spikes = []
         return {
+            "quarantined_days": spikes,
             "sales_span": (stamps[0], stamps[-1]) if stamps else None,
             "files_ingested": len([x for x in ingested if "error" not in x]),
             "files_failed": [x for x in ingested if "error" in x],
