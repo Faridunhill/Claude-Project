@@ -99,7 +99,7 @@ export function writeEpisode(fact, { slug } = {}) {
       background: 'bg-shelf',
       characters: ['prof-closing-book-3q'],
       object: { slot: 'source-page', hint: 'the reference itself, on the shelf' },
-      overlays: [{ type: 'citation', text: fact.source }],
+      overlays: [{ type: 'citation', text: fact.sourceFull || fact.source }],
       line: `And that is not my opinion. It is ${String(fact.source).replace(/\.$/, '')}.`,
     },
   ]
@@ -124,7 +124,7 @@ export function writeEpisode(fact, { slug } = {}) {
     fact_id: fact.id,
     claim: { reads: fact.reads, era: fact.era, confidence: fact.confidence },
     caveat: fact.caveat || null,
-    sources: [fact.source],
+    sources: [fact.sourceFull || fact.source],
     runtime: Number(panels.reduce((s, p) => s + p.duration, 0).toFixed(1)),
     panels,
   }

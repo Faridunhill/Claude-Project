@@ -1,0 +1,44 @@
+{
+  "_doc": "FERNDOWN dating cabinet (#55, Wave F closer, built 2026-07-17-eve; roster #18). Les Wood — Dunhill's master silversmith (from March 1963, 19 years) -> L. & J.S. BRIARS founded 1978 with wife Dolly ('the second ex-Dunhill man to go independent after Sasieni... followed by Ashton-Taylor'). FERNDOWN = the later house-name brand (named for his mansion; UK/US market; 'L. Wood' in Germany). SOURCES: staging/pipedia/Ferndown.json — INCLUDES LES WOOD'S OWN Jan-2020 first-person account (primary!).",
+  "brand": "Ferndown",
+  "region": {"country": "England", "school": "english"},
+  "aliases": ["ferndown", "l&js", "l & js briars", "ellwood", "les wood", "l. wood"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "Les Wood: Dunhill silver-mounting dept from March 1963 (under Jack Spriggs, took over after ~2 years). 1978: asked to buy the machinery and set up outside -> L. & J.S. BRIARS with Dolly (ex-Dunhill finisher — her double-oiling finish story = the house oil-cure); kept mounting DUNHILL'S pipes as a contractor until 1980/81. Early pipes sold as L.&J.S BRIARS / ELLWOOD / LES WOOD / L. WOOD (trademark vagaries); later ~1500-2000/yr as FERNDOWN (UK/US) + 'L. Wood' (Germany). Ferndown-name start = NOT dated in source -> approx floor. Oil-cured Italian+Spanish plateau; hand-cut stems; THE SILVER = the signature (bands/caps/spigots/army mounts on nearly all; LJS engraved on the mount). Grades by FINISH: BARK (~90%, dark rusticated), ANTIQUE BARK (tan), REO (brown/red smooth), ROOT (orange smooth), TUDOR ROOT (orange-brown) + SIZE STARS (1-4) + SG = straight grain. Sandblasted 'Premier Sandblast' pieces = blasted in CANADA (Maxim Engel arrangement, pipes2smoke era) — distinct from Dolly's hand-cut bark rustication. Wood's metalwork also served Ashton, Comoy's, Bentley (John Aylesbury POY 2008). 2020: semi-retired, limited production ('57 years in the trade' = counting from 1963)."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["ferndown", "l&js", "ellwood", "les wood", "l. wood", "bark", "antique bark", "reo", "root", "tudor root", "sg"],
+    "physical": "Silver-mounted almost throughout (rings/ferrules for spigots); LJS engraved on mounts; finish-name grades + 1-4 stars; 90% = Bark rustication (Dolly's two-point drill work)."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "Finish grades (Bark/Reo/Root/Tudor Root) span the brand -> unencoded. Premier Sandblast = Canada-blasted late-era pieces (undated edges)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["l&js", "l & js", "ljs", "ellwood"], "era_start": 1978, "era_end": 2026, "confidence": "high", "label": "L.&J.S Briars / Ellwood marks = 1978+ (the founding names; earliest era leans pre-Ferndown)"},
+        {"field": "lettering", "match": ["ferndown"], "era_start": 1982, "era_end": 2026, "confidence": "medium", "label": "FERNDOWN brand name = early 80s; founder's own word (MBSD interview): launched 'around \\'83' -> floor 1982 kept honest-wide, now founder-corroborated (was LOW/undocumented)"},
+        {"field": "lettering", "match": ["les wood", "l. wood"], "era_start": 1978, "era_end": 2026, "confidence": "medium", "label": "Les Wood / L. Wood marks = 1978+ (Germany-market wording ran alongside Ferndown)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel. NOTE: Ferndown silver is HALLMARKED — generic.json's London/Birmingham charts give EXACT years on most Ferndowns (the Les Wood silver = the dating gift)."}
+  },
+
+  "channels_future": {
+    "hallmark_route": "Most Ferndowns wear hallmarked silver -> route through generic.json charts = exact years; make this the identify-flow default for the brand.",
+    "ferndown_intro": "★PROGRESS 2026-07-23 (interview harvest iv-010, MBSD 'From Dunhill to Ferndown'): founder Les Wood verbatim — joined Dunhill 1963 ('two weeks after my birthday', age 15); 'around about \\'78/\\'79. That's when L&JS Silverware was founded'; 'Around \\'81-\\'82, we started to do the L&JS Briars'; Ferndown 'around \\'83'; retired ~2016 ('packed it in when I was about 62 or 63'). ⚠️CONFLICT NOTED (both kept, no overturn): pipedia's Jan-2020 first-person account = L.&J.S. BRIARS founded 1978 vs MBSD = silverware 78/79 + BRIARS 81-82; also 2016 retirement (MBSD) vs 2020 'semi-retired, limited production' (pipedia). The 1978 L&JS floor stays (safe under both readings). LEAD not encoded: a briar PIPE stamped L&JS leans 1981+ per MBSD — needs a second source before tightening.",
+    "premier_sandblast": "Date the Canada-blast arrangement window (Maxim Engel / pipes2smoke).",
+    "production_scale": "MBSD interview: ~500 pieces/yr (Kolpin era) rising to ~700-800/yr (McUmbrow era) — era-volume context for rarity notes."
+  }
+}

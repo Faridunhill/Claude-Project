@@ -1,0 +1,51 @@
+{
+  "_doc": "JOBEY dating cabinet (#42, Wave E, built 2026-07-17-eve; roster #49). The murkiest American brand — pipedia itself: 'solid information is scant'. Probably ALWAYS American (Jobey brothers, Brooklyn, patent 1915; the England-origin lore unsupported). Spine = the distributor/owner ladder + two good cliffs: the JOBEY LINK stem (patent 1969/1970) and JOBEY DANSK (Karl Erik-made, 1970s-1987). SOURCES: staging/pipedia/Jobey.json (incl. the Tobacco World 1941 Norwalk find) + Weber_Pipe_Co_.json + Karl_Erik.json (cross-corroboration on Dansk + the 1987 Butz-Choquin transfer).",
+  "brand": "Jobey",
+  "region": {"country": "USA", "school": "american"},
+  "aliases": ["jobey", "jobey dansk", "shellmoor"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1915: brothers Ulysses + Louis Jobey (Brooklyn) patent a cavalier-style pipe (USD46998). 1918 Louis bankrupt; 1922 Ulysses Jr = VP of Lakewood Pipe Co (NJ). 1941: Tobacco World — NORWALK PIPE CORP, 'manufacturers of Jobey and Shellmoor pipes', president LOUIS JOBEY, moves to 218 E 26th St NYC. Distributor/owner ladder: George Yale Pipes & Tobacco NY (1942) -> Norwalk (1949) -> Arlington Briar Pipes, Brooklyn (undated) -> HOLLCO International (1969; the JOBEY LINK screw-tenon patent 1969/1970) -> WEBER PIPE CO, Jersey City (1970s, owner+maker) -> Tinder Box retail era (1970s-80s). JOBEY DANSK = Danish freehands bought from KARL ERIK OTTENDAHL (1970s; ended 1987 when KE stopped US exports). 1987: Jobey transferred as a ghost brand to BUTZ-CHOQUIN, Saint-Claude. Production later abandoned; 2002 F&K Cigar Co (St. Louis) re-introduces the brand. Mainly US/Canada/England markets; classic shapes, low-mid price ('a well made pipe for the price'; the '100-year briar, 1-in-500 bowls' ad copy = marketing)."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["jobey", "jobey dansk", "shellmoor", "asti", "fawn extra", "filtersan", "pinch", "unicorn", "specimen grain", "air cooled", "hand rubbed"],
+    "physical": "Classic-pattern pipes; the JOBEY LINK = screw-in tenon system (1969/70 patent) — its presence floors a pipe at 1969. Dansk pipes = Danish freehand style, KE workmanship (2SM-class stamps seen). Lines: Shellmoor (back to 1941!), Asti, Fawn Extra, Filtersan, Pinch, Unicorn, Specimen Grain, Air Cooled, Hand Rubbed."
+  },
+
+  "fusion_order": ["line_years", "com_stamp", "feature_era", "stamped_year"],
+
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {"match": ["france", "st claude", "saint claude"], "era_start": 1987, "era_end": 2026, "confidence": "medium", "note": "French-made Jobey = the 1987+ Butz-Choquin ghost era (production later abandoned; 2002+ F&K era origin unverified)"}
+      ]
+    },
+
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "jobey dansk": [1970, 1987],
+        "dansk": [1970, 1987]
+      },
+      "_notes": "jobey dansk: Karl Erik-made Danish freehands, 1970s to the 1987 KE US-export stop (corroborated x3: Jobey + Weber + Karl Erik articles) — the strongest Jobey window. shellmoor: attested 1941 (Norwalk) but as a SIBLING brand, span unknown -> floor note only, unencoded. Other lines undated."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["jobey"], "era_start": 1915, "era_end": 2026, "confidence": "low", "label": "Jobey name attested from the 1915 Brooklyn patent (brand continuity murky pre-1941) -> honest wide"},
+        {"field": "bit_style", "match": ["jobey link", "link tenon", "screw tenon", "link"], "era_start": 1969, "era_end": 2026, "confidence": "high", "label": "the JOBEY LINK screw-tenon stem = 1969+ (Hollco-era patent)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "pre_link_split": "Pre-link Jobeys (Yale/Norwalk/Arlington eras 1941-1969): stamp diagnostics unknown — Chris' pipe pages (linked in mirror) may hold catalogs.",
+    "fk_era": "2002+ F&K Cigar re-introduction: maker + stamps unverified.",
+    "tinder_box": "1979 Tinder Box catalog page (pictured in mirror) = a Dansk-era price/line snapshot."
+  }
+}

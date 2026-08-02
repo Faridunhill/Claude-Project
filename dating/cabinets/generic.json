@@ -1,0 +1,275 @@
+{
+  "_doc": "GENERIC / ROUTER cabinet (#9, built 2026-07-16 -- the roster's crown jewel). For ANY pipe whose brand has no cabinet yet, and as the HALLMARK service for every brand: a silver-banded pipe with a UK hallmark dates to an EXACT year (or an honest candidate list) regardless of brand. Charts: LONDON (leopard's head) + BIRMINGHAM (anchor) in brand_research/uk_hallmarks/ -- constructed 2026-07-16 from documented cycle rules (silvermakersmarks.co.uk, 925-1000.com, vintagewatchstraps.com) with TWO ANCHORS VERIFIED against our local pipephil mirror (Birmingham lowercase o=1913, uppercase O=1938, the GBD bulldog example). Dublin stays in peterson.json (its fineness boundaries are Dublin-specific). CASE MATTERS: cycles repeat letters and differ by case/font -- the engine matches case-sensitively first and returns honest candidates otherwise; era hints from other channels narrow them. Pre-1975 hallmark years span TWO calendar years (London changed letters in May, Birmingham in July) -> a result year may truly be year-or-year+1 (Green's Comoy examples read '1913/14' for exactly this reason). | 2026-07-18 (Farid: 'general cabinet for the pipes without cabinet'): WIRED as the universal no-brand fallback in Chronos-Pipe cabinet_dating.py (before, it only matched notes saying 'unknown/unbranded' - the 12 NO_BRAND drafts in CABINET_REPORT_DRAFTS_20260718 never reached it). Added windows: Czechoslovakia, USSR, EIRE, Republic-of-Ireland, FOREIGN 1891-1921, 9mm-filter 1934 floor. Farid's law: UNDATED -> the listing says NOTHING about age.",
+  "brand": "Generic",
+  "aliases": [
+    "generic",
+    "unknown",
+    "unbranded",
+    "regular pipes"
+  ],
+  "max_year": 2026,
+  "history_anchors": {
+    "_doc": "This cabinet holds NO brand history -- it encodes cross-brand physical/legal facts: UK assay date letters (exact years), US import-marking law (origin wording floors), and (future) UK Registered-Design number tables. It is the fallback router: identify_full sends any no-cabinet brand here, and any brand cabinet's confirm-flow can consult it for hallmarks."
+  },
+  "brand_marks": {
+    "wordmarks": [
+      "made in england",
+      "made in france",
+      "made in italy",
+      "made in denmark",
+      "england",
+      "france",
+      "italy",
+      "foreign"
+    ],
+    "physical": "UK hallmark cluster = lion passant (sterling) + town mark (leopard's head = London, anchor = Birmingham, Hibernia+harp = Dublin) + date letter (+ duty head pre-1890). Read ALL marks; the date letter's CASE and the town mark are what disambiguate."
+  },
+  "fusion_order": [
+    "com_stamp",
+    "assay_hallmark",
+    "feature_era",
+    "stamped_year"
+  ],
+  "channels": {
+    "assay_hallmark": {
+      "applies_when": "sterling_silver_band",
+      "charts": {
+        "london": {
+          "chart_ref": "C:\\Users\\hadid\\FaridOS\\data\\hub\\pipes\\brand_research\\uk_hallmarks\\london_date_letters.json"
+        },
+        "birmingham": {
+          "chart_ref": "C:\\Users\\hadid\\FaridOS\\data\\hub\\pipes\\brand_research\\uk_hallmarks\\birmingham_date_letters.json"
+        }
+      },
+      "nickel_band_lines": [],
+      "caveat": "bands were bought in batches -> hallmark may predate the pipe by up to ~1-3 years (Green); aftermarket/repair bands exist (Barling guide) -> a hallmark dates the BAND with certainty, the PIPE with high probability. Pre-1975 letters span two calendar years (May/July changeover)."
+    },
+    "com_stamp": {
+      "table": [
+        {
+          "match": [
+            "us-zone",
+            "us zone",
+            "u.s. zone"
+          ],
+          "era_start": 1945,
+          "era_end": 1949,
+          "confidence": "high",
+          "note": "GERMAN GOODS: 'Germany US-Zone' = occupation era 1945-1949 (verified 2026-07-16: porcelainmarksandmore + antique-trade consensus)"
+        },
+        {
+          "match": [
+            "made in west germany",
+            "made in western germany",
+            "west germany",
+            "western germany",
+            "w. germany",
+            "w.germany"
+          ],
+          "era_start": 1949,
+          "era_end": 1990,
+          "confidence": "high",
+          "note": "THE German bracket: West-Germany wording = 1949-1990 (preferred from ~1952/55, standard after a 1973 court ruling; reunification 1990 ends it). Opens ANY German pipe -- Vauen etc."
+        },
+        {
+          "match": [
+            "made in gdr",
+            "gdr",
+            "ddr",
+            "east germany"
+          ],
+          "era_start": 1949,
+          "era_end": 1990,
+          "confidence": "high",
+          "note": "East German mark, mostly post-1973 standard"
+        },
+        {
+          "match": [
+            "made in germany us"
+          ],
+          "era_start": 1945,
+          "era_end": 1949,
+          "confidence": "medium",
+          "note": "variant of the US-Zone wording"
+        },
+        {
+          "match": [
+            "made in england",
+            "made in france",
+            "made in italy",
+            "made in denmark",
+            "made in ireland",
+            "made in london"
+          ],
+          "era_start": 1891,
+          "era_end": 2026,
+          "confidence": "low",
+          "note": "US McKinley Tariff (1891) forced origin marks on US-bound goods; the common collector rule 'MADE IN = post-1921' is UNRELIABLE (counterexample on file: 1910 Comoy's Cecil 'Made in England', Green) -> 1891 FLOOR only, low confidence"
+        },
+        {
+          "match": [
+            "made in germany"
+          ],
+          "era_start": 1891,
+          "era_end": 2026,
+          "confidence": "low",
+          "note": "bare 'Made in Germany' is AMBIGUOUS: pre-1949, a non-participating 1949-90 maker, or post-1990 -> floor only; the West-Germany wording above is the sharp one"
+        },
+        {
+          "match": [
+            "england",
+            "france",
+            "italy",
+            "germany"
+          ],
+          "era_start": 1891,
+          "era_end": 2026,
+          "confidence": "low",
+          "note": "bare country word = same 1891 floor; wording style is brand-specific -> the BRAND cabinet owns tighter brackets"
+        },
+        {
+          "match": [
+            "czechoslovakia",
+            "made in czechoslovakia"
+          ],
+          "era_start": 1918,
+          "era_end": 1992,
+          "confidence": "high",
+          "note": "state existed 1918-1992 (dissolved 1992-12-31)"
+        },
+        {
+          "match": [
+            "ussr",
+            "soviet union",
+            "made in ussr"
+          ],
+          "era_start": 1922,
+          "era_end": 1991,
+          "confidence": "high",
+          "note": "USSR existed 1922-1991"
+        },
+        {
+          "match": [
+            "eire"
+          ],
+          "era_start": 1937,
+          "era_end": 1949,
+          "confidence": "medium",
+          "note": "EIRE marking: 1937 constitution to 1949 Republic; some use ran later - medium"
+        },
+        {
+          "match": [
+            "republic of ireland",
+            "made in the republic of ireland"
+          ],
+          "era_start": 1949,
+          "era_end": 2026,
+          "confidence": "high",
+          "note": "Republic declared 1949 - floor only"
+        },
+        {
+          "match": [
+            "foreign"
+          ],
+          "era_start": 1891,
+          "era_end": 1921,
+          "confidence": "medium",
+          "note": "'FOREIGN' alone = McKinley-era US import marking window ~1891-1921; intersects with the existing 1891+ floor row"
+        },
+        {
+          "match": [
+            "9mm",
+            "9 mm filter"
+          ],
+          "era_start": 1934,
+          "era_end": 2026,
+          "confidence": "medium",
+          "note": "9mm filter system invented 1934 (Vauen Dr. Perl junior, world first - see vauen.json) - hard floor for ANY maker. Lives in com_stamp because the hub feeds free text only to text channels (cabinet_dating.py)"
+        }
+      ]
+    },
+    "feature_era": {
+      "table": [
+        {
+          "field": "stem_material",
+          "match": [
+            "amber"
+          ],
+          "era_start": 1850,
+          "era_end": 1930,
+          "confidence": "low",
+          "label": "amber stem = pre-1930 fashion (GBD history: amber/horn dominant before vulcanite spread from late 1870s; approx, verify per brand)"
+        },
+        {
+          "field": "stem_material",
+          "match": [
+            "horn"
+          ],
+          "era_start": 1850,
+          "era_end": 1940,
+          "confidence": "low",
+          "label": "horn stem = early fashion (approx)"
+        },
+        {
+          "field": "lettering",
+          "match": [
+            "drgm",
+            "d.r.g.m"
+          ],
+          "era_start": 1891,
+          "era_end": 1952,
+          "confidence": "medium",
+          "label": "DRGM (Deutsches Reichs-Gebrauchsmuster) = German utility-model mark, 1891-1945 Reich era (validity ran to ~1952 in the FRG) -- standard antiques rule, verify on first live use"
+        },
+        {
+          "field": "lettering",
+          "match": [
+            "drp",
+            "d.r.p"
+          ],
+          "era_start": 1877,
+          "era_end": 1945,
+          "confidence": "medium",
+          "label": "DRP (Deutsches Reichs-Patent) = pre-1945 German patent mark"
+        },
+        {
+          "field": "lettering",
+          "match": [
+            "dbgm",
+            "d.b.g.m",
+            "dbp",
+            "d.b.p"
+          ],
+          "era_start": 1949,
+          "era_end": 2026,
+          "confidence": "medium",
+          "label": "DBP/DBGM (Bundes-Patent/Gebrauchsmuster) = West German, 1949+ floor"
+        },
+        {
+          "field": "fineness_mark",
+          "match": [
+            "crescent",
+            "halbmond",
+            "crown 800",
+            "crown 835"
+          ],
+          "era_start": 1888,
+          "era_end": 2026,
+          "confidence": "medium",
+          "label": "German crescent+crown silver mark (Halbmond und Krone) = 1888+ by law; 800/835/925 fineness typical"
+        }
+      ]
+    },
+    "stamped_year": {
+      "_doc": "Generic literal-year reader -- anniversary pipes, commemoratives, Collection-style lockets work on ANY brand."
+    }
+  },
+  "channels_future": {
+    "registered_design": "UK 'Rd No' registered-design numbers -> year table (1884+). The official number-per-year table must be FETCHED (not memory-encoded) -- TODO, on the fetch list.",
+    "chester_dublin": "Chester (pre-1962) + Dublin charts can join 'charts' the same way; Dublin currently lives in peterson.json with its fineness boundaries."
+  },
+  "region": {
+    "country": "(router -- all regions)",
+    "school": "generic"
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "_doc": "SAVINELLI dating cabinet = DATA only (cabinet #4, built 2026-07-16 following control/CABINET_METHOD.md; exemplar = stanwell.json). Savinelli dates by: the 4-digit vs 3-digit shape-code cliff (switch during the early 1970s) + line years/floors + literal stamped years (Collection/anniversary pipes). SOURCES (local-first): pipedia mirror staging/pipedia/Savinelli.json (history + 'Dating Savinelli Pipes' section -- explicitly THIN: 'stamping variations maybe the best (if not the only) way'); pipephil mirror logos/en/logo-savinelli1/2/3.html (stamp authority). Web corroboration 2026-07-16: pipesmokersdens.com 'Savinelli Markings' thread (relayed from Savinelli: early 4-digit codes had a ZERO as 2nd digit which was later dropped -> 1028 became 128; 3-digit adopted in the 1970s); smokingpipes.com + savinelli.it current catalog (Punto Oro Super introduced 1980s AND still sold today -> FLOOR, not an 80s-only bracket -- pipephil's 2013 'canceled some few years after' is outdated). BLOG/PLATFORM SWEEP 2026-07-16 (Farid's directive -- sources beyond pipedia/pipephil): 4 smokingpipes.com posts + the production-interview PDF mirrored to brand_research/savinelli_dating/ (smokingpipes_blog_dating_facts.md = the extract) -> added Capri 1950-1984 (+2026 revival warning), Punto Oro 1950 floor from Savinelli's own staff, Miele ~2012, Oceano 2019, Luisa Fiammata 2023, Alligator Elegance 2025, anniversary editions 2020/2025/2026, shape-320-designed-1970s seed. Every disputed fact carries a note.",
+  "brand": "Savinelli",
+  "aliases": [
+    "savinelli",
+    "la savinelli",
+    "savinelli product"
+  ],
+  "max_year": 2026,
+  "history_anchors": {
+    "_doc": "1876 Achille Savinelli Sr. opens the Milan tobacco SHOP (retail; early commissioned pipes marked ASM-in-triangle / MILANO exist -- shop-era commissions, NOT the modern brand; do not date by this cabinet). 1890 son Carlo takes over (~50 years). 1948 Achille Jr. starts SAVINELLI PIPE PRODUCTION (pipedia: with Amleto Pome + Mario Vettoruzzo, 15 employees, Varese region; pipephil: in association with Enea Buzzi at Brebbia -- the accounts coexist). 1953 split from Buzzi (Brebbia continues as its own brand); Savinelli's own factory at Molina di Barasso. Production has stayed in Italy throughout -> no country cliff. 4th generation = Giancarlo Savinelli; US distribution = Laudisi. FLOOR: any modern-brand Savinelli pipe = 1948+. Sub-brands & seconds (own rules -- do NOT date by this cabinet's lines): Albatross, Bent Bob's, Baronet, Coronet, Duca, Hercules (pipephil seconds list); Arnold's (40s-50s), Estella (rejected Autographs), Fiammata (rejected Giubileo d'Oro straight grains), Kings Cross / Capt Warren / Royal Oak / Bent Bob's (US distribution), Columbus series (US only), plus the long pipedia sub-brand list."
+  },
+  "brand_marks": {
+    "stem_logos": [
+      "shield",
+      "two dots",
+      "three dots",
+      "brass dots",
+      "gold dot",
+      "star",
+      "crowned snake",
+      "bar",
+      "crown"
+    ],
+    "wordmarks": [
+      "savinelli",
+      "la savinelli",
+      "savinelli product",
+      "italy",
+      "made in italy"
+    ],
+    "physical": "Shield ('S' crest) shank stamp on most lines (style varied over time -- pipephil 'compare the shields'); crown logos on early pipes (model 4001, Extra, Champagne); star stem logo (Antique Shell / Garda / Oscar / Sila); crowned-snake stem logo (Hand Made / Rock Grain; Milan Visconti-crest serpent also on Autograph seconds); brass dots on Punto Oro stems (oxidize dark). Grading marks (identification, not dating): Autograph 3,4..8,0,00,000 ascending; Straight Grain = letter grade; early Giubileo d'Oro = 1-3 stars.",
+    "note_la_prefix": "'LA SAVINELLI' prefix: pipedia calls it 'the earlier pipes' BUT pipephil documents it as a LINE convention (ALL Giubileo d'Oro pipes carry LA, some Punto Oro too) -> NOT encoded as an era mark (would misdate every modern Giubileo). Corroborating hint only, never a channel."
+  },
+  "fusion_order": [
+    "line_years",
+    "com_stamp",
+    "feature_era",
+    "stamped_year"
+  ],
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {
+          "match": [
+            "italy",
+            "made in italy"
+          ],
+          "era_start": 1948,
+          "era_end": 2026,
+          "confidence": "high",
+          "note": "brand production floor -- Savinelli-made pipes exist only from 1948 (pipedia history); production never left Italy, so COM gives the floor, not a cliff"
+        }
+      ]
+    },
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "punto oro super": [
+          1980,
+          2026
+        ],
+        "punto oro": [
+          1950,
+          2026
+        ],
+        "capri": [
+          1950,
+          1984
+        ],
+        "arnold": [
+          1948,
+          1959
+        ],
+        "cadet": [
+          1955,
+          1975
+        ],
+        "grand prix": [
+          1955,
+          1975
+        ],
+        "sport": [
+          1955,
+          1975
+        ],
+        "miele": [
+          2012,
+          2026
+        ],
+        "oceano": [
+          2019,
+          2026
+        ],
+        "luisa fiammata": [
+          2023,
+          2026
+        ],
+        "alligator elegance": [
+          2025,
+          2026
+        ]
+      },
+      "_notes": "ORDER MATTERS: 'punto oro super' before 'punto oro' (first substring match wins). punto oro super: introduced early 1980s (pipephil, smokingpipes); pipephil (2013) said 'canceled some few years after' BUT savinelli.it sells Punto Oro Super in the CURRENT catalog -> sources disagree -> honest FLOOR [1980, 2026], never an 80s-only bracket. punto oro: 'we started producing Punto Oro in the 50s' (Savinelli's own Paolo Tamborini, smokingpipes production interview 2024 -- brand_research/savinelli_dating/) -> FLOOR 1950. capri: 'from sometime in the 1950s until maybe the early 1980s' (Sykes Wilford, smokingpipes 150th-anniversary post 2026) -> [1950, 1984] approx; ⚠️ REVIVED March 2026 for the 150th anniversary, DELIBERATELY vintage-built (vulcanite, 3mm unfiltered, old shapes 901 Opera/627/125/130) -> confirm-flow must check for anniversary/current nomenclature before trusting the vintage bracket. arnold's: pipedia '40-50's sub-brand', start clipped to the 1948 production floor. cadet / grand prix / sport: pipedia says only 'About 1960's' -- approx, encoded with a decade of slack on each side, verify. miele: 'introduced 12 years ago' said May 2024 (production interview) -> 2012 floor approx. oceano: debuted 2019 (Cassani, same interview -- confirmed). luisa fiammata: March 2023, Luisa Bozzetti retirement series; smooth pipes SERIALIZED /50. alligator elegance: May 2025 limited (old Elegance shapes, 4 colors). NOT encoded (no solid years -- needs research): plain ALLIGATOR (a VINTAGE brochure line exists AND a modern colorful line intro ~2005 'close to 20 years' approx -- name alone cannot date), Elegance (older Anglo-French line, no years), Arcobaleno, Ottavia (old 8-sided; revived 'lately' as OTTAGONO limited), Giubileo d'Oro, La Milano (one 'circa 1949-50s' caption = single uncorroborated example), Columbus series (US-only; LIKELY the 1992 anniversary but NOT sourced), Riviera (9mm, international market), New Art, Autograph, Oscar, Siena, Onda, Tundra, Hercules, Venetian + Marco Polo (event editions, years unstated) and the rest of the pipedia list. The 'Collection' line carries its LITERAL YEAR on the band/locket -> dated by stamped_year, not here. ANNIVERSARY EDITIONS with known years: Smokingpipes 20th = 2020, Smokingpipes 25th = 2025 (75 pcs, silver army mount + red stem + SPC rondelle), 150th-anniversary Capri = 2026. 'Favorite' editions (Bing's, Byron's, Clark's, Ginger's, Achille's I-III) -- years unknown, park."
+    },
+    "feature_era": {
+      "_doc": "The strongest Savinelli-specific cliff: 4-digit shape numbers = early production. pipedia (relayed from Savinelli): 4-digit ended 'sometime circa 1960s-1970s'; pipephil: a 4-digit pipe 'predates the 1970's'; pipesmokersdens (from Savinelli): 2nd digit was always 0 and was dropped -> 1028 became 128, 3-digit adopted in the 1970s -> honest wide bracket ends 1979. EXCEPTIONS (pipephil, explicit): Dry System and Non Pareil lines carry 3- OR 4-digit codes in ANY era -> unless_line guard. CAVEAT in note: pipephil's La Milano example '4907' shows the 2nd digit was not ALWAYS 0; and an unread line name on a Dry System pipe would wrongly look early -- medium confidence, never high.",
+      "table": [
+        {
+          "field": "shape_number",
+          "regex": "^\\d{4}$",
+          "unless_line": [
+            "dry system",
+            "non pareil",
+            "nonpareil"
+          ],
+          "era_start": 1948,
+          "era_end": 1979,
+          "confidence": "medium",
+          "label": "4-digit shape number = early production (ended during the 1970s; Dry System / Non Pareil excepted)"
+        }
+      ]
+    },
+    "stamped_year": {
+      "_doc": "Savinelli 'Collection' pipes stamp the LITERAL year (pipephil example: 'Savinelli, 1987, Italy' + locket '1987, Collection'). Anniversary/edition pipes similar. Generic channel reads the last 4-digit year in the evidence."
+    }
+  },
+  "shape_design": {
+    "_doc": "Savinelli routine = 3-digit shape codes + KS/EX size suffixes (KS = larger, EX = extra-large). Shape chart exists (pipephil savinelli-chart.html; 2017 chart image on pipedia) -- NOT yet a dating channel (no per-shape design years). Future enrichment like Stanwell's shape_chart. FIRST DESIGN-YEAR SEEDS (Luisa Bozzetti via smokingpipes 2023 + 2026 posts, mirrored in brand_research/savinelli_dating/): shape 320 Author INTRODUCED IN THE 1970s -> design floor 1970; shapes 101 + 606 = the bestsellers of the '60s-'70s (older designs); smokingpipes 2026 independently corroborates 4-digit code = pre-1970 production. Iconic shapes for the eye: 320 KS Author, 106 straight billiard, 207 apple, 315 prince, 616/677 KS bent billiards, 123 bent pot, 673 bulldog (the 'Cobra' triangular shanks), 904/920 flared bowls (Luisa's favorites), 901 Opera / 627 / 125 pot / 130 bent oval (old shapes revived in the 2026 anniversary Capri)."
+  },
+  "region": {
+    "country": "Italy",
+    "school": "italian"
+  }
+}

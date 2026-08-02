@@ -1,0 +1,44 @@
+{
+  "_doc": "MEDICO dating cabinet (#37, Wave E, built 2026-07-17-eve; roster #43). S.M. Frank & Co's filter-pipe brand, created 1933 WITH the absorbent paper filter (patent 1,967,585). THE CLIFF = BRYLON 1966: any Brylon (briar-resin synthetic) Medico is 1966+. SOURCES: staging/pipedia/Medico.json (Lopés + tobaccopipes.com history). S.M. Frank family ties: bought KAYWOODIE brands 1955 (our kaywoodie.json S.M. Frank era); Royal Demuth/WDC lineage (Feuerbach — same family as the Kaywoodie guide authors' sources).",
+  "brand": "Medico",
+  "region": {"country": "USA", "school": "american"},
+  "aliases": ["medico"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "S.M. Frank & Co: Sam Frank selling pipes from 1900; with Ferdinand Feuerbach made Royal DeMuth + Hesson Guard Milano. 1933: MEDICO brand + the absorbent paper filter launched together (filter patents: Minton 1932 application, improved #1,967,585 filed 1933, granted 1934). 1955: S.M. Frank buys the KAYWOODIE brands (Medico continues unchanged). 1966: BRYLON developed (briar+resin synthetic) — some Medico lines move to Brylon to cut costs, briar lines continue. Also sold via Cadogan + Oppenheimer Pipe in England. Modern line split: briar = Silver Crest, Premier, Bold Rebel, Kensington, Windsor; Brylon = Lancer, Apollo, Standard, Varsity, Conqueror, Medalist, Cavalier, V.F.Q. All push-bit with filters. College 'class pipes' exist (e.g. UNC Alma Mater).",
+    "logo": "Early pipes: '+' (medic's cross) mark. Later: M inside a shield. Switch year undocumented."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["m in shield", "plus sign"],
+    "wordmarks": ["medico", "brylon", "gold crest", "silver crest", "crest", "v.f.q", "standard"],
+    "physical": "M-in-shield stem logo (early = + sign). Filter push-bit construction throughout. Brylon pipes: molded synthetic look, heavier than briar. A 'Medico Crest Artisan' made in ITALY exists (undated)."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "Line intro years undocumented (Gold Crest, Silver Crest, Premier, Lancer, Apollo, V.F.Q...) -> identification only. Brylon-only line names imply 1966+ via the material channel instead."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["medico"], "era_start": 1933, "era_end": 2026, "confidence": "high", "label": "Medico brand floor = 1933 (created with the filter)"},
+        {"field": "bowl_material", "match": ["brylon"], "era_start": 1966, "era_end": 2026, "confidence": "high", "label": "BRYLON bowl material = 1966+ (S.M. Frank's briar-resin synthetic)"},
+        {"field": "stem_logo", "match": ["plus sign", "+ mark", "medic cross"], "era_start": 1933, "era_end": 1955, "confidence": "low", "label": "early '+' medic-cross mark = early era (switch to M-in-shield undated -> wide early lean)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "logo_switch": "Pin the +-to-shield logo switch year.",
+    "filter_packaging": "Vintage Medico filter BOXES are datable ephemera (designs pictured in mirror) — box-dating table possible.",
+    "italy_artisan": "The made-in-Italy Crest Artisan era — undocumented."
+  }
+}

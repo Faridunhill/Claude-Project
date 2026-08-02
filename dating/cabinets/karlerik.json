@@ -1,0 +1,45 @@
+{
+  "_doc": "KARL ERIK dating cabinet (#32, Wave D, built 2026-07-17-eve; roster #38). Karl Erik Ottendahl (1942-2004), Aalborg — the affordable-Danish-handmade house. LEVERS: the 1987 US-export STOP (resumed 2000), the 1990 back-to-one-man-shop grading switch, the 'Ottendahl' signature label (Germany, late 90s+), the 2004 death ceiling, and the ⚠️ Planta/Design-Berlin TRAP (German-market 'Karl Erik' pipes from ~1998/99 are GERMAN-made, not Danish). SOURCES: staging/pipedia/Karl_Erik.json (detailed). Single-source -> approx flags on soft edges.",
+  "brand": "Karl Erik",
+  "region": {"country": "Denmark", "school": "danish"},
+  "aliases": ["karl erik", "ke", "ottendahl", "karl erik ottendahl"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "b.1942 Aalborg. Lithographer apprenticeship at 16; carved pipes as gifts. 1962-65: Nairobi (lithographer) — made his own pipes there. ~1965: back in Denmark, side-line pipes under his prenames 'KARL ERIK' (KE logo) -> Copenhagen stores -> full-time. MANUFACTURE ERA: first co-workers ~1967/68; the WALLY FRANK Ltd (NYC) contract = the US engine; up to 15 craftsmen (Bent Nielsen + Peder Christian Jeppesen later independent — artisan links); honest hybrid method: machine-roughed (NO copy-milling), hand-finished; most stems supplied near-finished by STANWELL, who also did most of KE's sandblasting (stanwell link). Label/second brands he produced: Champ of Denmark, Garrick, Knute (rusticated second), Sven Egholm (second), Wenhall (NYC), Larsen & Stigart (shop brand; also 'Shelburne'), JOBEY DANSK for Weber Pipe Co (Tinder Box catalogs 1970s-80s; Jobey moved to Butz-Choquin Saint-Claude in 1987 — see jobey.json). II S / II SM / I S / I M / I B stamped pipes = almost certainly US-ONLY sales (origin tales debunked in source). 1987: ALL US exports STOPPED (waning sales + price pressure). 1990: back to a ONE-MAN shop; NEW grading (D->A ascending + Ekstravagant C/B/A/AA/AAA) replaces the OLD numeric grading (4->1 ascending + 'Ekstravagant' one-offs). 1990s: designs models for Stanwell's H.C. Andersen line. ~1998/99: GERMAN rights to the 'Karl Erik' name traded to Planta Tabak (Design Berlin) -> German-market KE = db-made. 'OTTENDAHL' family-name signature = his OWN pipes for Germany-only distribution (some crossed to the US). 2000: US sales officially resumed (after 13 years). ~2000s: 2,000+ pipes/yr. Died Sept 12, 2004 (stroke, Korsør). Epilogue: Tom Eltang bought his lathe (-> Sara Eltang project).",
+    "conflict_notes": "US-export stop '1987 ... after 13 years ... resumed 2000' is self-consistent. Kenya return: 'after three years' from 1962 -> ~1965 side-line start (approx)."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["ke"],
+    "wordmarks": ["karl erik", "ottendahl", "ekstravagant", "ii s", "ii sm", "i s", "handmade in denmark", "champ of denmark", "knute", "sven egholm", "garrick"],
+    "physical": "KE logo; 'KARL ERIK / HANDMADE IN DENMARK'. OLD grading: numbers 4-3-2-1 ascending + 'Ekstravagant' (fully handmade one-offs). NEW grading (1990+): letters D-C-B-A ascending; Ekstravagant graded C/B/A/AA/AAA. II-S-family stamps = US-market pipes (pre-1988). 'Ottendahl' signature = his German-market own pipes (late 90s-2004)."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "Label brands undated individually (Champ of Denmark, Garrick, Knute, Sven Egholm, Wenhall, Shelburne, Larsen & Stigart) -> identification notes only. Jobey Dansk window ~1970s-1987 (Tinder Box catalogs + the 1987 Butz-Choquin transfer) — encoded in jobey.json when built, not here (different brand key)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["karl erik"], "era_start": 1965, "era_end": 2004, "confidence": "high", "label": "Karl Erik DANISH production window: ~1965 side-line start (approx) to his death Sept 2004. ⚠️ TRAP: German-market 'Karl Erik' pipes from ~1998/99 onward may be Planta/Design-Berlin GERMAN-made — check for Danish wording/Ottendahl signature"},
+        {"field": "lettering", "match": ["ottendahl"], "era_start": 1997, "era_end": 2004, "confidence": "medium", "label": "'Ottendahl' family-name signature = his own late-era pipes (German distribution, some reached the US); floor approx ~1997"},
+        {"field": "lettering", "match": ["ii s", "ii sm", "i s stamp"], "era_start": 1968, "era_end": 1988, "confidence": "medium", "label": "II-S-family stamps = US-market pipes; US exports STOPPED 1987 -> ceiling 1988 (floor approx: manufacture era)"},
+        {"field": "lettering", "match": ["ekstravagant"], "era_start": 1965, "era_end": 2004, "confidence": "low", "label": "Ekstravagant = fully-handmade one-offs across BOTH grading eras (letter-graded AA/AAA examples = 1990+) -> wide"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "grading_split": "OLD numeric (4->1) vs NEW letter (D->A) grading switch ~1990 — encode once corroborated (would date any graded KE to a side of 1990).",
+    "us_gap": "A KE bought NEW in the US dates ≤1987 or ≥2000 (the 13-year export gap) — provenance-dependent, note for the identify flow.",
+    "planta_diagnostics": "Find Design-Berlin-made KE diagnostics (stamp style, 9mm filter?) to make the German trap operational."
+  }
+}

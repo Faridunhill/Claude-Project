@@ -1,0 +1,46 @@
+{
+  "_doc": "CUSTOM-BILT / CUSTOMBILT dating cabinet (#36, Wave E, built 2026-07-17-eve; roster #42). Tracy Mincer's big rough-carved American pipes. THE HEADLINE CLIFF IS SPELLING: 'Custom-Bilt' (hyphen) = Mincer era 1934-1946; 'Custombilt' (one word) = 1946 onward (Eugene J. Rich association + the 'AS INDIVIDUAL AS A THUMBPRINT' slogan). Unger's book (reviewed in our mirror) dates pipes by nomenclature style + carving subtleties (pp.91-94 of the book = future acquisition target). SOURCES: staging/pipedia/Custom-Bilt.json (Esserman + Soderman reviews of Unger, THE CUSTOM-BILT PIPE STORY) + Mincer/Tracy_Mincer.json refs.",
+  "brand": "Custombilt",
+  "region": {"country": "USA", "school": "american"},
+  "aliases": ["custombilt", "custom-bilt", "custom bilt", "tracy mincer", "doodler"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "Tracy Mincer in pipes from 1929; CUSTOM-BILT pipes start ~1934. Big/chunky bowls (Algerian briar, larger blocks than competitors), rough 'uncontrolled cut' carving (also hid flaws — Hartsock). 1940s retail $5-15. WWII: smooth pieces stop, carved only; 40,000 pipes made 1943. 1946: name -> CUSTOMBILT (Eugene J. Rich, Inc. association; thumbprint slogan; carved-animal line $7.50; Hartsock specials incl. the Stalin/Roosevelt chess pipe). Early 1950s: Mincer's finances collapse, loses the name; 1952-53 he develops THE DOODLER (ventilated holes-and-rings bowl; National Briar turned bowls; Mincer made it to the mid-60s, then National Briar continued). 1953 Leonard Rodgers buys Custombilt (emphasis shifts to pouches/lighters); 1964 Mincer dies; 1968 Rodgers -> Consolidated Cigar. Early 1970s WALLY FRANK buys the trademark -> production 1974/75 at the WEBER factory (NJ, Hollco Rohr), Grecian briar, 'Custombilt ORIGINAL' reissue ('The year 1940 gave birth…' ad copy). 1987 production -> BUTZ-CHOQUIN (France), then MEXICO until the late 1990s; LAST MANUFACTURE 1998 (Unger); name now with Tobacalera (Spain). Related: Claude Stuart bought the Tracy Mincer Pipe Co (post-1964) -> 'Tracy Mincer' stamped pipes until 1990. Look-alikes CONFIRMED related: Rogers Rarity, Moore Mark; NOT related: Shelldrake, Emperor. Burly Briar = suspected sub-brand."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["custom-bilt", "custombilt", "as individual as a thumbprint", "original", "doodler", "tracy mincer", "burly briar"],
+    "physical": "Rough deep-gouge carved finishes on oversized bowls = the signature (smooths rare). Multiple stamp styles (Unger's #1-#5; #5 = rarest early). Wally-Frank-era stamp #2: the C's top arch extends over to the 't'. Geometric punch markings = probably price codes (no consensus). Doodler: ventilated bowl w/ holes+rings, billiard-family shapes, some silver bands."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "doodler": [1952, 1990]
+      },
+      "_notes": "doodler: unveiled April 1953 (developed 1952) -> Mincer to mid-60s -> National Briar continued (end undocumented; Stuart's Tracy Mincer Co died 1990 -> that ceiling, LOW). NOT encoded: 'Original' (1974+ Hollco reissue name but also period word), carved-animal line (1946-era, undated end), Rogers Rarity / Moore Mark (related brands, own marks)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["custom-bilt", "custom bilt hyphen"], "era_start": 1934, "era_end": 1946, "confidence": "high", "label": "HYPHENATED 'Custom-Bilt' = the Mincer era spelling (to the 1946 rename). ⚠️ Unger: early spelling discipline was loose -> treat borderline stamps with the carving/nomenclature style"},
+        {"field": "lettering", "match": ["custombilt"], "era_start": 1946, "era_end": 1998, "confidence": "medium", "label": "One-word 'Custombilt' = 1946+ (Rich era onward, through Rodgers/Consolidated/Wally Frank-Weber 1974-87/Butz-Choquin+Mexico to the 1998 last manufacture)"},
+        {"field": "lettering", "match": ["thumbprint", "as individual as a thumbprint"], "era_start": 1946, "era_end": 1998, "confidence": "high", "label": "'AS INDIVIDUAL AS A THUMBPRINT' slogan = 1946+ (began with the Rich association)"},
+        {"field": "lettering", "match": ["tracy mincer"], "era_start": 1953, "era_end": 1990, "confidence": "low", "label": "'Tracy Mincer' stamped pipes = his own late work + the Claude Stuart company (out of business 1990) -> wide"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "unger_pp91_94": "Unger's 4-page nomenclature-style dating guide (stamps #1-#5 mapped to years) = the precision layer — BUY LIST candidate (plastic-spiral book, order-from-author).",
+    "wally_frank_stamp2": "Stamp #2 arch-C diagnostic (1974-87 Weber era) — encode once stamp classification is in the perception flow.",
+    "burly_briar": "Suspected sub-brand; unconfirmed."
+  }
+}

@@ -4,14 +4,14 @@
   <text x="640" y="62" text-anchor="middle" font-family="Georgia, serif" font-size="15"
         letter-spacing="5" fill="#c9a227" fill-opacity="0.85">F A R I D U N H I L L</text>
   <text x="70" y="250" font-family="Georgia, serif" font-size="13" fill="#efe3cf" fill-opacity="0.4">
-    background: bg-bench-a · placeholder
+    background: bg-shelf · placeholder
   </text>
   
     <g>
       <rect x="490" y="290" width="300" height="360" rx="6"
             fill="none" stroke="#c9a227" stroke-opacity="0.5" stroke-dasharray="8 6"/>
       <text x="640" y="470" text-anchor="middle"
-            font-family="Georgia, serif" font-size="19" fill="#efe3cf" fill-opacity="0.85">prof-explaining-front</text>
+            font-family="Georgia, serif" font-size="19" fill="#efe3cf" fill-opacity="0.85">prof-closing-book-3q</text>
       <text x="640" y="498" text-anchor="middle"
             font-family="Georgia, serif" font-size="14" fill="#c9a227" fill-opacity="0.7">placeholder</text>
     </g>
@@ -21,21 +21,21 @@
             fill="#000" fill-opacity="0.25" stroke="#c9a227"
             stroke-opacity="0.6" stroke-dasharray="8 6"/>
       <text x="1065" y="150" text-anchor="middle" font-family="Georgia, serif" font-size="16"
-            fill="#efe3cf" fill-opacity="0.9">stamp-macro</text>
+            fill="#efe3cf" fill-opacity="0.9">source-page</text>
       <text x="1065" y="176" text-anchor="middle" font-family="Georgia, serif" font-size="13"
             fill="#c9a227" fill-opacity="0.75">awaiting photograph</text>
       <text x="1065" y="200" text-anchor="middle" font-family="Georgia, serif" font-size="11"
-            fill="#efe3cf" fill-opacity="0.5">the same stamp, larger</text>
+            fill="#efe3cf" fill-opacity="0.5">the reference itself, on the shelf</text>
     </g>
   
     <g>
-      <rect x="70" y="100" width="180" height="40" rx="4"
-            fill="#4f7a4a" fill-opacity="0.16" stroke="#4f7a4a" stroke-opacity="0.75"/>
-      <text x="86" y="127" font-family="Georgia, serif" font-size="18" fill="#efe3cf">1938–c.1940/41</text>
+      <rect x="70" y="100" width="760" height="40" rx="4"
+            fill="#c9a227" fill-opacity="0.16" stroke="#c9a227" stroke-opacity="0.75"/>
+      <text x="86" y="127" font-family="Georgia, serif" font-size="18" fill="#efe3cf">pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)</text>
     </g>
   <rect x="26" y="602" width="1228" height="92" fill="#000" fill-opacity="0.45"/>
-  <text x="640" y="642" text-anchor="middle" font-family="Georgia, serif" font-size="21" fill="#efe3cf">MADE IN EIRE / EIRE points to 1938–c.1940/41. That is the bracket — a window, not a birthday.</text>
+  <text x="640" y="642" text-anchor="middle" font-family="Georgia, serif" font-size="21" fill="#efe3cf">And that is not my opinion. It is Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski</text><text x="640" y="670" text-anchor="middle" font-family="Georgia, serif" font-size="21" fill="#efe3cf">stock.</text>
   <text x="1236" y="684" text-anchor="end" font-family="Georgia, serif" font-size="12"
-        fill="#c9a227" fill-opacity="0.6">panel 4 · correction · 7.2s</text>
+        fill="#c9a227" fill-opacity="0.6">panel 7 · source · 7.2s</text>
   <text x="44" y="684" font-family="Georgia, serif" font-size="12" fill="#efe3cf" fill-opacity="0.35">PLACEHOLDER ART — awaiting the design commission</text>
 </svg>

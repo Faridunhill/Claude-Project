@@ -1,0 +1,55 @@
+{
+  "_doc": "CAMINETTO dating cabinet (#21, built 2026-07-18 — Wave B opener). THE THREE-LIVES LADDER: (1) original 'I tre Camini' 1968-1979/80 (Peppino Ascorti + Luigi Radice, Gianni Davoli distributing; slender moustache logo: bird-in-flight -> double comma); (2) HIATUS ~1980-1985 (Radice left Dec-1979, Ascorti left early-1980 -> Sergio ~3mo -> Ascorti brand; old workshop burned; brand 'all but disappeared'); (3) revival 1986 by Roberto Ascorti (big moustache + REAL YEAR CODE in stamp: year = 1985 + n, grid '54/6/2/01' = 1986); (4) relaunch 2013 by Tommi Ascorti (grandson, one-man shop, Event line). SOURCES (local-first per CABINET_METHOD): staging/pipedia/Caminetto.json + The_History_of_Caminetto…json (joshoowah/BoB post adopted by pipedia) + pipephil logo-c1 mirror + smokingpipes blog 'The Renaissance of Caminetto Pipes' (Stanion 2023, Tommi interview — family source; mirrored in brand_research/caminetto_dating/). Honesty flags: moustache eras are circa -> encoded wide; 'Hand Made in Italy Cucciago (Co)' wording spans BOTH periods (pipephil shows it on new-period pipes) -> NOT a cliff; Tommi-era possible pre-2013 gap NOT encoded (Ferrari analogy = market perception, no documented stop year); Tinder Box Golden Anniversary ~1978 approx -- verify.",
+  "brand": "Caminetto",
+  "region": {"country": "Italy", "school": "italian"},
+  "aliases": ["caminetto", "la pipa del baffo", "i tre camini"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1959 Peppino Ascorti hired at Castello. End 1968: leaves, founds Caminetto in Cucciago (Radice joins end-1968 per pipedia / 1969 per smokingpipes — one-year conflict noted). Davoli (Milan tobacconist) = sole distributor -> co-owner (majority by 1973); Tinder Box = US chain contract; production 3,000->7,000/yr. Dec 1979 Radice leaves (-> Radice brand). Early 1980 Ascorti leaves w/ whole crew -> 'Sergio' pipes ~3 months (800-1,000 made) -> Ascorti brand. Old workshop burns down ~1980-81. Peppino dies 1984. ~1985 Roberto Ascorti buys the name; official new production + retail 1986 (grid year-code 01). 2013 Tommi Ascorti (b.1989) buys brand from family, relaunches as one-man shop; Event line = annual special edition (copper accent, old shapes remade). Noise: Capitello (Enzo Galluzzo, 1982-1991) = Caminetto-lookalike fallout brand; Ascorti-brand pipes resemble 1976-81 Caminettos; Harvey Greif may have stamped his own property-claim marks."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["moustache", "bird-in-flight", "double comma", "big moustache"],
+    "wordmarks": ["caminetto", "business", "new dear", "sable d'or", "excellence", "moustache", "bagdad", "damasco", "green briar", "red briar", "torch", "event"],
+    "physical": "Moustache stem logo in gold or white (gold on Prestige-grade smooths). Old shank stamps: #1 'ASCORTI/RADICE/CUCCIAGO/CANTU-ITALY' (earliest, often w/ crest), #2 'HAND MADE IN ITALY/CUCCIAGO (Co)', #3 'MADE IN ITALY/CUCCIAGO (CANTU)'. 'Caminetto' in script OR block-in-quotes on early pipes (both, not a discriminator). New period: script Caminetto + 2x2 grid (shape/finish/series/YEAR) or 3-part stamp (finish + letter L or B + YEAR). Finish digits: 0 std smooth, 1 top straight-grain, 2 smooth natural, 6 sandblast, 7 New Dear, 8 Business. KS/KS1-3 = size. Tinder Box shield = US retail provenance."
+  },
+
+  "fusion_order": ["line_years", "date_code", "feature_era", "stamped_year"],
+
+  "channels": {
+    "date_code": {
+      "_doc": "NEW-PERIOD YEAR CODE (1986+ Roberto revival): last number of the 2x2 grid (shape/finish/series/YEAR) or of the 3-part stamp (finish/letter/YEAR) = year of manufacture, year = 1985 + n. Exemplar: 54/6/2/01 = 1986 (joshoowah's birth-year pipe; 'official production and retail sale did not begin until 1986', some hold 1985 -> base honors the majority reading). Old-period pipes carry NO year code. EXACT tier.",
+      "base_year": 1985
+    },
+
+    "line_years": {
+      "modern_floor_year": 2013,
+      "years": {
+        "business": [1968, 2026],
+        "new dear": [1968, 2026],
+        "event": [2013, 2026],
+        "tinder box golden anniversary": [1977, 1979]
+      },
+      "_notes": "business: the classic rusticated line from the original period, revived 1986 (rustication changed somewhat) -> FLOOR 1968 only. new dear: Peppino-era wax-drip finish, continued by Roberto AND Tommi -> floor 1968. event: Tommi's annual special edition (copper accent) -> floor 2013 (smokingpipes blog). tinder box golden anniversary: 250+51 made for Tinder Box's golden anniversary ~1978 (chain founded 1928 — approx -- verify) -> [1977,1979]. NOT encoded (documented names, no intro dates; several span both periods per pipephil): bagdad, damasco, double bowl, twin bowl, excellence (+extra/flame), green briar, red briar, sable d'or, torch, moustache/super moustache. 'gianni' private label (Davoli, Italy, 1970s 'couple of years') = undated, parked. Sergio = separate 1980 brand, never a Caminetto stamp."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "stem_logo", "match": ["bird-in-flight", "bird in flight", "slender moustache"], "era_start": 1968, "era_end": 1975, "confidence": "medium", "label": "bird-in-flight slender moustache = circa 1968/69-1974/75 (joshoowah) -> wide 1968-1975"},
+        {"field": "stem_logo", "match": ["double comma"], "era_start": 1975, "era_end": 1981, "confidence": "medium", "label": "double-comma moustache = circa 1975-1979/80/81 (joshoowah) -> 1975-1981"},
+        {"field": "stem_logo", "match": ["big moustache", "large moustache"], "era_start": 1986, "era_end": 2026, "confidence": "medium", "label": "big moustache = new-period logo (pipephil) -> 1986+"},
+        {"field": "lettering", "match": ["ascorti radice", "radice cucciago"], "era_start": 1968, "era_end": 1980, "confidence": "high", "label": "shank stamp ASCORTI/RADICE/CUCCIAGO/CANTU-ITALY = earliest production; Radice's name cannot postdate his Dec-1979 exit -> 1968-1980"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel (commemoratives etc.)."}
+  },
+
+  "channels_future": {
+    "com_wording": "'HAND MADE IN ITALY / CUCCIAGO (Co)' vs 'MADE IN ITALY / CUCCIAGO (CANTU)': difference undated AND #2 wording documented on new-period pipes (pipephil Excellence example) -> no cliff encodable. If a source ever dates the #2/#3 split, add a com_stamp table.",
+    "grid_letter": "New-period 3-part stamp letter (usually L, sometimes B) — meaning unknown to all sources; if decoded (e.g. L = line?), could refine.",
+    "moustache_color": "gold vs white moustache = grade signal (gold on Prestige smooths), not dating.",
+    "tommi_gap": "Whether Roberto-era production ran continuously 1986->2013 is UNDOCUMENTED (Tommi's 'Ferrari stopped 20 years' = US-market perception). If a stop year surfaces, split the revival era."
+  }
+}

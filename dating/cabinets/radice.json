@@ -1,0 +1,40 @@
+{
+  "_doc": "RADICE dating cabinet (#46, built 2026-07-17-eve; roster #22). Luigi Radice: Castello 1961 -> CAMINETTO co-founder 1968 (see caminetto.json) -> own PIPA RADICE from 1980 (sons Gianluca + Marzio; grandfather Paolo helped early). Family-workshop brand, few documented stamp cliffs -> floors + notes. SOURCES: staging/pipedia/Radice.json (family's own text) + caminetto.json cross-facts + artisan registry (Radice entry).",
+  "brand": "Radice",
+  "region": {"country": "Italy", "school": "italian"},
+  "aliases": ["radice", "pipa radice"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "Luigi Radice b.1939; first briar 1961 at Carlo Scotti's CASTELLO (Cantù). 1968: co-founds CAMINETTO ('Pipa del Baffo') with Peppino Ascorti (+ Gianni Davoli distribution; boom 1974-75). 1980: founds his own PIPA RADICE at Cucciago (CO); son Gianluca from the start; later Marzio too. House tells: faux-bamboo carved shanks, silver bands, hand-engraved save-rims (Luigi's engraving), horn accents (buffalo/moufflon/deer/roe), TWIN-BORE mouthpieces (their invention, on oil-cured pipes — NOTE: Savinelli-revival Rossi also used twinbore; different brand, no confusion in-cabinet), briar seasoned 3+ years. 'Recently introduced' ebonite mouthpieces (article era 2010s) — before that acrylic-era? unverified. Known grade/series names (from trade, not this article): Rind, Clear, Silk, Collect (XXL Rind Collect Bamboo pictured) — undated, unencoded."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["radice", "rind", "clear", "silk", "collect"],
+    "physical": "RADICE stamp + series; faux-bamboo shank carving = a house signature; twin-bore mouthpiece = house invention (era within brand undated); hand-engraved rim caps."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "Series (Rind/Clear/Silk/Collect...) undated in our source -> unencoded; lepipe.it/Monjure listings could bracket them later."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["radice"], "era_start": 1980, "era_end": 2026, "confidence": "high", "label": "Radice own-brand floor = 1980 (pre-1980 Luigi work = Castello 1961-67 / Caminetto 1968-79, stamped those brands)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "series_brackets": "Date the Rind/Clear/Silk/Collect series + the ebonite-stem introduction (smokingpipes brand page sweep).",
+    "twin_bore": "Twin-bore mouthpiece: house-wide or era-bound? Unverified."
+  }
+}

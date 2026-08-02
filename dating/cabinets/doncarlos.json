@@ -1,0 +1,42 @@
+{
+  "_doc": "DON CARLOS dating cabinet (#50, built 2026-07-17-eve; roster #27). Bruto Sordini (Cagli, Marche): Ser Jacopo co-founder (1981/82 with Guidi) who left 'after a few years' to found DON CARLOS with his wife Rosaria — the founding YEAR is not documented in our source -> honest approx floor mid-1980s. SOURCES: staging/pipedia/Don_Carlos.json (R.D. Field + company text) + Ser_Jacopo.json cross-facts.",
+  "brand": "Don Carlos",
+  "region": {"country": "Italy", "school": "italian"},
+  "aliases": ["don carlos", "urbino"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "Bruto Sordini: b. Cagli; left law studies for pipemaking; apprenticed at various firms; 1981 breaks from Mastro de Paja with Guidi -> SER JACOPO partnership (1982); 'after a few years' leaves to found DON CARLOS with wife Rosaria (Cagli) -> approx mid-1980s floor, encoded [1984] LOW. Local lineage claim: Primo Soriani, pipemaker near Cagli, early 1900s. House: fully handmade, 2+ yr open-air seasoned briar, UNCOATED chambers (a tell). US intro = 'excellent value' wave. A serious motorcycle accident paused production for years (undated); post-recovery = slower, more deliberate output, new shapes/finishes ('the imaginative musical master is back' — Field; grades named after music: 'due note'/'tre note' trade-known but NOT in our mirror -> unencoded). URBINO = the inexpensive handmade second line. Kronos Quartet connection pictured (musical naming culture).",
+    "conflict_notes": "Founding year: commonly cited ~1988 in trade lore; our source only says 'after a few years' from 1982 -> floor 1984 LOW, tighten when sourced."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["don carlos", "urbino"],
+    "physical": "DON CARLOS stamp (+ note-count grade stamps in trade practice — unverified); natural uncoated chambers; Urbino = budget line stamp."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "urbino: budget line, intro undated -> unencoded (alias only). Note-grades (due/tre note) not in mirror -> unencoded."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["don carlos"], "era_start": 1984, "era_end": 2026, "confidence": "low", "label": "Don Carlos floor = mid-1980s APPROX ('after a few years' of Ser Jacopo, founded 1982; trade lore says ~1988) -> LOW until pinned"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "founding_year": "Pin the Don Carlos founding year (smokingpipes brand page / Field articles) -> raise confidence.",
+    "note_grades": "Source the musical note-grading ladder (due note / tre note...).",
+    "accident_gap": "Date the production-pause years (would create a gap window)."
+  }
+}

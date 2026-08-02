@@ -1,0 +1,58 @@
+{
+  "_doc": "CASTELLO dating cabinet (#16, built 2026-07-17 — opens Tier 2 Italian). The Italian premium marque with a REAL DATE CODE since 1987: the number inside the castle stamp = 1947 + n (40th-anniversary system; '50' in castle = 1997). Before 1987: grading-letter eras (SA/SB/SC/SS sizes -> uppercase K -> 1982 lowercase k-in-oval) + stamp/logo eras do the work. SOURCES (local-first per CABINET_METHOD): staging/pipedia/Castello_Dating_and_Information_Guide.json ★ (the Briar Blues guide by Mike Glukler, compiled with Franco 'Kino' Coppo via Marco Parascenzo, G.L. Pease, Bob Hamlin et al. — maker-adjacent authority) + staging/pipedia/Castello.json. Honesty flags: pre-K grading window 'late 1950s to mid-1960s' encoded wide 1955-1966; uppercase-K start 'late 1960s/early 1970s' encoded 1968; Big Line kept as FLOOR only (stamp continued on huge pipes after 1972).",
+  "brand": "Castello",
+  "region": {"country": "Italy", "school": "italian"},
+  "aliases": ["castello", "carlo scotti", "mi reserva"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1947 Carlo Scotti founds the firm in Cantu. 1947-1949/50 pipes stamped 'Mi Reserva'; 'Reg No' added later (= trademark registration number, NOT a shape number). Wally Frank Ltd = early US distributor (their 'White Bar' pipe line forced Castello to change its own white-bar stem logo for the US); Hollco Rohr takes over US distribution mid-to-late 1960s (Old Sea Rock + rhinestone = US-only Hollco items; brief 'Antiquari' fume-top import). 1967 Natural Vergin first issued (series production from 1985). 1969 Franco 'Kino' Coppo joins; late 60s/early 70s = switch to fully handmade + uppercase-K grading. 1982 grading switches to lowercase k in oval/circle. 1984-85 Kino takes over the firm. 1987 (40th anniversary) number-in-castle date stamp begins. 1992 Carlo Scotti dies. 1997 'US' stamp begins. 2007 (60th anniversary) 'KINO' stamp begins. Shape numbers: 2-digit; 2xx prefix = fancy interpretation, 3xx = unique carving (currently a pi symbol instead of 3xx). Shop stamps (provenance, not dates): N1 Novelli, N Noli, F Fincato, LO Lorenzi (+ '*'), B Bonfiglioli, BO/B15 Bollito, V Agide, SO Scarafioffi, JO Osstermann (Austria), R3 Ruocco, L Lanzola, US = US distributor."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["white bar", "black dot", "faux diamond", "rhinestone"],
+    "wordmarks": ["castello", "mi reserva", "reg no", "sea rock", "old sea rock", "old antiquari", "trademark", "collection", "great line", "big line", "natural vergin", "perla nera", "occhio di pernice", "fiammata", "kino", "us"],
+    "physical": "Stem logos: white bar = the first logo; faux diamond (rhinestone) = created for the US market (Wally Frank conflict), still occasionally set to keep the trademark alive; black dot = used on white Lucite stems. No Vulcanite-stemmed faux-diamond Castello ever documented (guide). Grading: SA/SB/SC/SS sizes (pre-K era) -> uppercase K (size; on smooths grain+size) -> 1982+ lowercase k in oval (kk+) or circle (single k) + G/GG/GL tiers."
+  },
+
+  "fusion_order": ["line_years", "date_code", "feature_era", "stamped_year"],
+
+  "channels": {
+    "date_code": {
+      "_doc": "Number INSIDE the castle stamp = 1947 + n. Began 1987 (n=40, the 40th anniversary) -> a castle number BELOW 40 should not exist = confirm-flow; '50' = 1997. EXACT tier.",
+      "base_year": 1947
+    },
+
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "natural vergin": [1967, 2026],
+        "great line": [1972, 2026],
+        "big line": [1968, 2026],
+        "old sea rock": [1965, 2026]
+      },
+      "_notes": "natural vergin: first issued 1967 (series from 1985) -> floor 1967. great line: replaced Big Line 1972 -> approx floor. big line: stamp PRIMARILY 1968-1972 but 'still used on huge pipes' after -> FLOOR only, never a ceiling; a Big Line + uppercase-K + no castle number profile lands 1968-72 via feature convergence. old sea rock: US-only Hollco Rohr item (distribution mid-late 1960s) -> approx floor 1965, verify. NOT encoded (no dates in sources): sea rock (early days -> no value), trademark, collection, perla nera, occhio di pernice, fiammata, aristocratica, dune (current-catalogue names), antiquari-brief-import (single mention, 'a couple of years', undated)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["mi reserva"], "era_start": 1947, "era_end": 1950, "confidence": "high", "label": "'Mi Reserva' stamp = the founding era 1947-1949/50 (guide; Reg No added later)"},
+        {"field": "grading", "match": ["sa", "sb", "sc", "ss"], "era_start": 1955, "era_end": 1966, "confidence": "medium", "label": "pre-K size letters SA/SB/SC/SS = 'late 1950s to mid-1960s' -> wide honest 1955-1966"},
+        {"field": "grading", "match": ["large k", "uppercase k", "big k"], "era_start": 1968, "era_end": 1982, "confidence": "medium", "label": "uppercase K grading = late-1960s (Kino joined 1969) until the 1982 switch; also the machine->fully-handmade transition years"},
+        {"field": "grading", "match": ["k in oval", "k in circle", "lowercase k"], "era_start": 1982, "era_end": 2026, "confidence": "high", "label": "lowercase k in oval (multi-k) / circle (single k) = 1982+ (documented switch year)"},
+        {"field": "lettering", "match": ["kino"], "era_start": 2007, "era_end": 2026, "confidence": "high", "label": "'KINO' stamp began 2007 (60th anniversary)"},
+        {"field": "lettering", "match": ["us"], "era_start": 1997, "era_end": 2026, "confidence": "medium", "label": "'US' stamp began 1997 (US-distributor mark)"},
+        {"field": "stem_logo", "match": ["white bar"], "era_start": 1947, "era_end": 1970, "confidence": "low", "label": "white bar = the FIRST stem logo; changed for the US when Wally Frank's own 'White Bar' line clashed — end year undocumented -> wide honest 1970 end, approx"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel (commemoratives etc.)."}
+  },
+
+  "channels_future": {
+    "faux_diamond": "faux-diamond/rhinestone stem = US-market marker (Wally Frank/Hollco eras); START YEAR undocumented in our sources -> identification only, no bracket. If a dated source lands, encode as stem_logo era.",
+    "black_dot": "black dot = white-Lucite-stem pipes, undated -> identification only.",
+    "shop_stamps": "N1/N/F/LO/B/BO/B15/V/SO/JO/R3/L/US = retailer provenance marks (see history_anchors); LO adds '*'. Not dates; useful for provenance stories.",
+    "colored_lucite": "colored Lucite stems 'used in the 1970s, and on occasion today' -> too leaky for a bracket; confirm-flow hint only."
+  }
+}

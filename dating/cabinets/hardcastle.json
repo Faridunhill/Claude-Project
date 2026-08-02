@@ -1,0 +1,54 @@
+{
+  "_doc": "HARDCASTLE dating cabinet (#19, built 2026-07-18 — closes the Dunhill family cluster with parker.json). NO date codes, NO documented COM eras — Loring's verdict is encoded honestly: 'in the absence of sales receipts or other provenance, Hardcastles cannot be accurately dated'. What CAN be dated: the OWNERSHIP-ERA ladder (family -> Dunhill 49% 1936 -> Dunhill 100% 1946 -> Parker-Hardcastle 1967 with the Forest Road plant closed) + model-name era lists + the WWII horn-stem tell. SOURCE (local-first): staging/pipedia/Hardcastle.json (incl. Loring refs, Valitchka nomenclature photos, FinePipes 1944 6-day set). SOURCE-INTERNAL CONFLICT: intro says founded 1908, its own timeline says 1903 (Edmund Hardcastle) -> wide honest floor 1903, note kept. Never claim Dunhill production in a Hardcastle (Loring: indistinguishable, unlikely).",
+  "brand": "Hardcastle",
+  "region": {"country": "England", "school": "english"},
+  "aliases": ["hardcastle", "hardcastle's", "parker-hardcastle", "jack o'london", "jack o london"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1903 (timeline) or 1908 (intro) — Edmund Hardcastle founds the brand; reputable British mid-grader. Forest Road, Walthamstow, London E17. 1935: Dunhill builds a factory NEXT DOOR. 1936: family sells 49% to Dunhill. 1946: Dunhill buys the rest (family still manages; Notting Hill Dunhill factory closes same year). 1967: merged with Parker -> PARKER-HARDCASTLE LIMITED (absorbs Masta Patent Pipe Co too); Forest Road plant given up, production moves to Parker's St Andrews Road factory; Edwin Hardcastle (last family executive) openly called the result 'an inferior Dunhill second'. Post-1967: speculated 'Parker seconds' brand; funneled-down bowls not fit for Dunhill/Parker stamps. 1982: Dunhill's OWN production moves into the Parker-Hardcastle Walthamstow factory (both firms listed at 32 St Andrews Rd E17). WWII: German vulcanite unavailable -> 1944 6-day set wears HORN stems, workmanship still first-rate."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["hardcastle", "jack o'london", "camden", "supergrain", "phito", "dryconomy", "dental briar", "old bruyere", "royal windsor sandhewn", "royal crown", "lonsdale", "crescent extra", "welard de luxe", "nut bruyere", "leweard", "telebirar", "drawel"],
+    "physical": "Family/Dunhill-era boxes and bags stamped Jack O'London (Forest Rd factory era sheets exist). WWII pipes may carry HORN stems (vulcanite shortage)."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "jack o'london": [1903, 1967],
+        "camden": [1903, 1967],
+        "supergrain": [1903, 1967],
+        "phito": [1903, 1967],
+        "dryconomy": [1903, 1967],
+        "old bruyere": [1903, 1967],
+        "royal windsor sandhewn": [1903, 1967],
+        "lonsdale": [1903, 1967],
+        "welard de luxe": [1903, 1967],
+        "jockey club": [1946, 1999],
+        "after lunch": [1946, 1999],
+        "argyle": [1946, 1999],
+        "scout": [1946, 1999]
+      },
+      "_notes": "FAMILY-PERIOD model list (pipedia) -> era 1903-1967 (ends at the Parker-Hardcastle merger; start = wide brand floor per the 1903/1908 conflict). DUNHILL-SECONDS model list (Start/Argyle/After Lunch/Crescent/Duke/Jockey Club/Scout) -> the Dunhill-ownership era; encoded 1946-1999 LOW-side-wide (list is undated; 1946 = 100% ownership; end approx). NOT encoded: start/crescent/duke (generic word collision), the table/dental/lightweight (generic), de luxe/straight grain (generic across brands). Loring rule: none of this is precise — provenance beats all."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "stem_material", "match": ["horn"], "era_start": 1939, "era_end": 1946, "confidence": "low", "label": "HORN stem on a Hardcastle = WWII vulcanite shortage profile (1944 6-day set documented) — low conf (horn also used decoratively elsewhere); corroborate with wartime finish/box"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "post_1967": "Parker-Hardcastle era stamps (post-67) undocumented in our mirror — enrich from estate exemplars/catalogues; BNA layer-1 'Hardcastle' sweep queued.",
+    "masta": "Masta Patent Pipe Co absorbed 1967 — Masta-stamped pipes are their own mini-brand (Tierney's 1921 ad lists 'MASTA PATENT' — see stories S-002); candidate roster addition."
+  }
+}

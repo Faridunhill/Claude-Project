@@ -1,0 +1,43 @@
+{
+  "_doc": "MASTRO DE PAJA dating cabinet (#48, built 2026-07-17-eve; roster #25). THE Pesaro-school mother house: founded 1972 by Giancarlo Guidi ('Pajetta'); the ownership ladder is the dating spine — Guidi+Spadoni 1972-1981 -> Guidi leaves (-> Ser Jacopo) -> Spadoni + Cecchini -> Spadoni leaves -> Alberto Montini (from ~1983-84; later sole owner). SOURCES: staging/pipedia/Mastro_de_Paja.json (company text) + Ser_Jacopo.json + Il_Ceppo.json cross-facts.",
+  "brand": "Mastro de Paja",
+  "region": {"country": "Italy", "school": "italian"},
+  "aliases": ["mastro de paja", "mastro de paia"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1972: Guidi founds MASTRO DE PAJA (Pesaro); Giannino Spadoni joins shortly after ('Mastro de Paja di Guidi e Spadoni'). 1981: the partnership breaks — GUIDI LEAVES (founds Ser Jacopo 1982, with Bruto Sordini who later founds Don Carlos). Spadoni stays; financial trouble -> TERENZIO CECCHINI becomes majority owner/director; Spadoni then leaves too (founds his own firm). ~1983-84: ALBERTO MONTINI (b. Pesaro, accountant; at his uncle's firm 1978-1983) hired by Cecchini — employee -> administrator -> partner -> SOLE OWNER after Cecchini's death. Montini reset: fewer pipes, higher quality, export pivot (40+ countries; ~2,000/yr today). 2017: 45th-anniversary pipe = Inter-Tabac 'Pipe of the Year'. Classification: LIMITED EDITION / ELITE (all handmade) / CLASSICA. Grade stamps: rusticated 0B (0B Unica), sandblast 1B (+1 Sun), partial 2D (+1 Sun), colored smooth Ruber/Castanea/3A(+Suns), natural smooth 3B/3C(+Suns), F straight grain (+1/2/3 Suns); silver/gold work stamps P/N/L/S/G; sizes Media/Gigante. SUN symbols = grain quality steps.",
+    "guidi_era_tells": "Guidi-era (1972-81) pipes pre-date the Montini reset; specific stamp differences NOT documented in our source — era attribution needs the sun-system evolution (unresearched)."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["sun symbol"],
+    "wordmarks": ["mastro de paja", "elite", "classica", "unica", "ruber", "castanea", "media", "gigante"],
+    "physical": "Fire-branded stamps; SUN symbols grade the grain; P/N/L/S/G = metalwork class; Media/Gigante = size."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "Grade/collection names span eras -> unencoded. Anniversary pipes (e.g. 2017 45°) = stamped_year territory."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["mastro de paja", "mastro de paia"], "era_start": 1972, "era_end": 2026, "confidence": "high", "label": "Mastro de Paja brand floor = 1972 (Guidi founding; Guidi-era = 1972-81, Montini era = ~1984+; stamp-level split undocumented)"},
+        {"field": "lettering", "match": ["di guidi e spadoni", "guidi e spadoni"], "era_start": 1972, "era_end": 1981, "confidence": "high", "label": "'di Guidi e Spadoni' company wording = the founding partnership window (Guidi left 1981)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel (anniversary editions self-date)."}
+  },
+
+  "channels_future": {
+    "sun_system_evolution": "Did the sun-grading exist from 1972 or arrive later? Date it -> era splits.",
+    "spadoni_brand": "Spadoni's own post-MdP firm = future roster note.",
+    "montini_reset": "Pin Montini's exact start + the quality-reset markers (interviews exist online)."
+  }
+}

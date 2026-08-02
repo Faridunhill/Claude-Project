@@ -1,0 +1,52 @@
+{
+  "_doc": "ROPP (vintage) dating cabinet (#25, Wave C, built 2026-07-17-eve; roster #31 'ropp_vintage' — file named ropp.json because it OWNS the brand key, as decided in chacom.json). The cherrywood house of the Vosges: dates by workshop-era stamps (Bussang 1870-1893), generation signatures, the Sept-1991 closure cliff, and the 1994+ Chacom-made revival. SOURCES: staging/pipedia/Ropp.json + pipephil logo-ropp (mirror; Bussang-period diagnostics) + chacom build notes (Cuty-Fort 1994). ⚠️ CLOSURE GAP: no production 1991-09 to 1994 (GBA Synergie owned the dormant brand 1988-1991) — a 'Ropp' pipe is either ≤1991 vintage or 1994+ Chapuis-Comoy-made.",
+  "brand": "Ropp",
+  "region": {"country": "France", "school": "saint-claude"},
+  "aliases": ["ropp", "eug. ropp", "j. ropp", "ropp bussang"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "Eugène-Léon Ropp (1830-1907) patents a CHERRYWOOD pipe (Prunus avium) 1869; 1870 first workshop at BUSSANG (Vosges). ~1893 move into the former Sicard mill, Baume-les-Dames (Doubs; part of the commune from 1895). Export success; shortly before 1914 A. FRANKAU & CO (BBB) appointed exclusive distributor for the UK + colonies (ties to our bbb.json + the Cadogan/NPA map — Ropp listed among Adler's directorships). ~1917 (probably) a Saint-Claude workshop at Rue du Plan du Moulin 8 starts BRIAR pipe production; 1923 polishing annex added. Cherrywood stays the mainstay until the company CLOSES September 1991. GBA Synergie (Bernard Amiel) had bought Ropp 1988 and held it to 1991. 1994: Cuty-Fort Entreprises (Chapuis-Comoy/Chacom) takes the brand — modern Ropp = made by Chapuis-Comoy in Saint-Claude. A 1920s-1930s Ropp catalogue exists (Joseph Morris PDF, pipedia) — mirror target for the catalogue hunter.",
+    "generations": "Three generations: Eugène-Léon (founder, d.1907) -> 'Eug. Ropp' script signature = Eugène II, second of the dynasty -> 'J. Ropp' = Jean, third. Generation stamps are era HINTS but pipephil gives no hard year edges — kept as notes, not brackets."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["cursive r", "1er"],
+    "wordmarks": ["ropp", "ropp in oval", "eug. ropp", "j. ropp", "bussang", "genuine cherry", "hors classe", "virgin de luxe", "nationale", "classic", "edil", "yeco", "trocadero", "concorde", "gypon"],
+    "physical": "ROPP in an OVAL = the standard shank mark across eras. Earliest period: 'Ropp Bussang' + S G D G underside, HORN mouthpiece with ROUND lip (pipephil dates such a pipe 1870-1893 by the Bussang stamp). Script 'Eug. Ropp' (underlined) = 2nd generation; 'J. Ropp, Maitre Pipier' = 3rd. Brass logo on higher grades (Hors Classe). Cursive R on stems of some export pipes. Cherry pipes: 'Genuine Cherry, Made in France' with bark left on."
+  },
+
+  "fusion_order": ["line_years", "com_stamp", "feature_era", "stamped_year"],
+
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {"match": ["made in france", "france"], "era_start": 1870, "era_end": 2026, "confidence": "low", "note": "French production across all eras; no COM cliff documented"}
+      ]
+    },
+
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "NO line intro years are documented in our sources — lines catalogued for identification only: Edil (Grand Luxe), Yeco (Super/Junior), Trocadero, Nationale (French-flag logo), Hors Classe (brass logo), Virgin De Luxe, Classic, Concorde, Gypon, Bakerloo, Apache, Supreme, Big Jean, Delux (US Wally Frank ads exist), Tonic, Eco, seconds Golden Burl/Grande Morez/Nantua/Versailles. The 1920s-30s catalogue (pipedia PDF) = the future bracket source; mirror queued."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["bussang"], "era_start": 1870, "era_end": 1893, "confidence": "medium", "label": "'Ropp Bussang' stamp = the first workshop period (1870 founding to the ~1893 Baume-les-Dames move); corroborate with horn mouthpiece + round lip (pipephil's early-period tells)"},
+        {"field": "lettering", "match": ["sgdg", "s g d g", "s.g.d.g"], "era_start": 1844, "era_end": 1968, "confidence": "medium", "label": "'S.G.D.G.' (Sans Garantie Du Gouvernement) on any French pipe = the French patent formula, legally abolished by the law of 2 Jan 1968 -> hard ceiling 1968 (generic French fact — promote to generic.json later)"},
+        {"field": "bit_style", "match": ["horn", "horn mouthpiece"], "era_start": 1870, "era_end": 1940, "confidence": "low", "label": "horn mouthpiece = early-period tell (pipephil pairs it with Bussang; horn persisted on French rustic pipes -> LOW, wide)"},
+        {"field": "lettering", "match": ["eug. ropp", "eug ropp"], "era_start": 1893, "era_end": 1960, "confidence": "low", "label": "'Eug. Ropp' script = 2nd-generation signature era; NO documented year edges -> honest wide, corroborate elsewhere"},
+        {"field": "lettering", "match": ["j. ropp", "j ropp", "maitre pipier"], "era_start": 1920, "era_end": 1991, "confidence": "low", "label": "'J. Ropp Maitre Pipier' = 3rd generation (Jean); NO documented edges -> honest wide with the 1991 closure ceiling"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel (commemoratives)."}
+  },
+
+  "channels_future": {
+    "closure_vs_revival": "The 1991-09 closure vs 1994+ Chacom production: find the modern Ropp stamp diagnostics (Chacom-era oval? 'depuis 1869' wording?) to split vintage from revival — smokingpipes carries modern Ropp; blog sweep queued.",
+    "catalogue": "1920s-30s Ropp catalogue PDF (Joseph Morris, linked on pipedia) -> mirror via catalogue hunter -> line brackets.",
+    "cherry_vs_briar": "Cherrywood = mainstay to 1991; briar from ~1917 (probably) — a BRIAR Ropp has a soft 1917 floor, but 'probably' in source -> not encoded."
+  }
+}

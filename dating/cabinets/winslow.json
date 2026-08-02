@@ -1,0 +1,44 @@
+{
+  "_doc": "WINSLOW dating cabinet (#28, Wave D, built 2026-07-17-eve; roster #34). Poul Winsløw (b. ~1952): Preben Holm's head-assistant 1967-1985, own brand from the 1985 Holm closure. THE CLIFF SET = the mid-1990s stamp change (old block/oval name + ONE silver dot -> new fancy-pipe symbol + TWO dots), documented as already done in Jan Andersson's May-1997 profile. SOURCES: staging/pipedia/Winslow.json (Andersson 1997) + Preben_Holm.json (autobiography corroborates the 1967 hire: 'engaged 16 years ago when he was 16/17' written 1983) + artisan registry. Registry career fix 2026-07-17: Holm-era start corrected 1975->1967 per both articles.",
+  "brand": "Winslow",
+  "region": {"country": "Denmark", "school": "danish"},
+  "aliases": ["winslow", "winsløw", "poul winslow", "poul winsløw"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1967: Poul (17) answers Preben Holm's apprentice advertisement; becomes head-assistant/foreman (Holm kept 1/3 salary during his military service to hold him). 1985: returns from vacation to find the Holm factory CLOSED -> builds his own workshop at his house in Hvidovre (south Copenhagen) -> WINSLOW brand floor 1985. Early years tough; Stanwell helps (exhibition demos abroad — ties to stanwell.json Winslow years). By 1997: 2 assistants, ~900 pipes/yr. CROWN series started 'some years ago' before 1997 (cheaper line, NOT seconds: less-dense-grain briar, preformed-then-finished acrylic mouthpiece vs hand-cut). Style: colourful; inlays of boxwood, acrylic, silver, laburnum. Every pipe ships with a handmade wooden tamper + black leather pouch."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["one silver dot", "three dots triangle", "two dots"],
+    "wordmarks": ["winslow", "winsløw", "crown", "private collection", "p.c.", "harlequin"],
+    "physical": "OLD pipes (1985 to mid-90s): 'WINSLÖW' in big block letters OR in an oval; ONE silver stem-dot (rarely THREE in a triangle). NEW pipes (mid-90s+): fancy-pipe symbol + WINSLÖW in small block letters; always TWO dots, one bigger than the other. Grades: P.C. (Private Collection) top, then A-E descending (A best). All Corsican briar. Crown: own series stamp + grade numbers (e.g. Crown 300)."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "crown": [1988, 2026]
+      },
+      "_notes": "crown: 'some years ago' before the May-1997 article -> floor ~1990 with slack = [1988,...], approx flagged. Harlequin = limited editions (undated). NOT encoded: grade letters (A-E span the whole brand), P.C./Private Collection (spans)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["winslow", "winsløw", "winslow oval", "block winslow"], "era_start": 1985, "era_end": 2026, "confidence": "high", "label": "Winslow own-brand floor = 1985 (workshop founded on the Preben Holm closure)"},
+        {"field": "stem_logo", "match": ["one dot", "single dot", "one silver dot", "three dots"], "era_start": 1985, "era_end": 1997, "confidence": "medium", "label": "ONE silver dot (rarely 3-in-triangle) + big-block/oval name = OLD stamping, ended by the May-1997 profile ('now he has changed') -> 1985 to ~1996/97"},
+        {"field": "stem_logo", "match": ["two dots", "2 dots"], "era_start": 1993, "era_end": 2026, "confidence": "medium", "label": "TWO dots (one bigger) + fancy-pipe symbol + small block letters = NEW stamping; switch year not exact -> floor 1993 with slack, approx"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "stamp_switch_year": "Pin the exact old->new stamp switch year (Winslow is alive and reachable; Danish forums / smokingpipes brand page) -> tighten the 1997/1993 edges.",
+    "crown_intro": "Pin the Crown launch year (article: 'some years ago' from 1997)."
+  }
+}

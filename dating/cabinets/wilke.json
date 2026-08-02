@@ -1,0 +1,43 @@
+{
+  "_doc": "WILKE dating cabinet (#44, Wave E closer, built 2026-07-17-eve; roster #51 — the AD-CORPUS-BORN cabinet: our own 4 mirrored NYC ads seeded it). The 145+-year New York shop brand: Edwin Wilke 1872 -> the pipe-making SISTERS (Anna + Louisa) -> 1983 Nachwalter/Burns -> early-90s Vermont mail-order. THE POSTAL CLIFF: 'New York 17, N.Y.' = 1943-1963 (zone system) — already proven on our ad corpus. SOURCES: staging/pipedia/Wilke.json + Wilke_Briars.json (duplicates) + ads_archive/corpus wilke items (eBay ad scans) + Weber_Pipe_Co_.json (Weber supplied most Wilke pipes UNSTAINED).",
+  "brand": "Wilke",
+  "region": {"country": "USA", "school": "american"},
+  "aliases": ["wilke", "wilke pipe shop", "pipeworks & wilke"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1872: Edwin Wilke founds Wilke Tobacco, NYC. No sons -> daughters ANNA + LOUISA WILKE trained in pipemaking + blending; on his death 1930 they run it (1950: the only women pipe makers in the USA; customers incl. Herbert Hoover, Lord Halifax, John Steinbeck). Creed: 'unpainted pipes' — Macedonian briar only, no paint/varnish/plug/putty (our ad corpus confirms the wording + 'Established 1872' + 'pipes made to order from your own design'). Shop at 400 MADISON AVE at 48th for decades ('New York 17, N.Y.' on boxes/ads = zone era 1943-1963). Prices: to $100 by 1950, to $500 by 1970 (NY Magazine). 1970s: Wanamaker's (Philadelphia) satellite — Wilke pipes there made by STEVEN JOHNSON. 1983: brand bought by ELLIOTT NACHWALTER + CAROLE BURNS; Madison Ave store to the early 1990s -> Vermont, 'PIPEWORKS & WILKE' mail-order. Blending: Burns (Montpelier VT) to July 2017 -> John Brandt continues the blends. ⚠️ MAKER TRUTH (Weber article): most Wilke-stamped pipes were WEBER-made, supplied unstained ('Wilke Danish Bent' = a Weber model) — 'Wilke' dates the SHOP era, not a maker."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["wilke", "made to order", "established 1872", "new york 17", "pipeworks & wilke", "barclay mixture"],
+    "physical": "Unstained natural finishes = the house creed. Nomenclature: WILKE + model/size; boxes + ads carry the Madison Ave address (+ postal zone in the 1943-63 window). Leather-accessory sales (pouches: suede/deerskin/peccary — our corpus ads)."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "Model names (Squatty Bulldog, Prince of Wales, Tipped Billiard, Apple...) = shapes, not dated lines. 'catalog N' numbering seen in our ads — catalog-edition dating possible if catalogs surface."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["new york 17"], "era_start": 1943, "era_end": 1963, "confidence": "high", "label": "'New York 17, N.Y.' address = the postal-zone window 1943-1963 (zones introduced 1943, ZIP replaced 1963) — proven on our own ad corpus"},
+        {"field": "lettering", "match": ["pipeworks & wilke", "pipeworks and wilke"], "era_start": 1991, "era_end": 2026, "confidence": "medium", "label": "'Pipeworks & Wilke' = the Vermont mail-order era (early 1990s+)"},
+        {"field": "lettering", "match": ["wilke"], "era_start": 1872, "era_end": 2026, "confidence": "low", "label": "Wilke shop brand across all eras (1872 founding) — the stamp dates the SHOP, the maker was often WEBER (unstained supply) or Steven Johnson (1970s Philadelphia)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "ad_corpus": "corpus/INDEX.jsonl wilke items (4 ads, 1943-63 bracketed) = the growing evidence base; eBay paper originals = BUY-LIST standing note.",
+    "johnson_era": "1970s Wanamaker-satellite pipes by Steven Johnson — distinguishing stamps unknown.",
+    "sisters_era": "1930-1970s sisters' handmades vs Weber-supplied stock: no documented split — collector-forum target."
+  }
+}

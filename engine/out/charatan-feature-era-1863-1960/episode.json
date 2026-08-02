@@ -1,18 +1,18 @@
 {
-  "slug": "peterson-made-in-1938-c-1940-41",
-  "title": "Peterson: what \"MADE IN EIRE / EIRE\" really tells you",
-  "brand": "Peterson",
-  "fact_id": "peterson.shank_nomenclature.made_in.3",
+  "slug": "charatan-feature-era-1863-1960",
+  "title": "Charatan: what \"bit style: tapered\" really tells you",
+  "brand": "Charatan",
+  "fact_id": "charatan.feature_era.0",
   "claim": {
-    "reads": "MADE IN EIRE / EIRE (circle: \"Made\" & \"Eire\" around the ring, \"in\" in the centre)",
-    "era": "1938–c.1940/41",
+    "reads": "bit style: tapered",
+    "era": "1863–1960",
     "confidence": "high"
   },
-  "caveat": "Refinement per Leverette — the EIRE stamp itself is short-lived (~1938–41), NOT used all the way to 1949.",
+  "caveat": "tapered mouthpiece = definitely pre-Lane (Ferrara: 'never tapered' after 1960)",
   "sources": [
-    "Era formats & windows per Leverette (Pipedia, 2006, rule of thumb)."
+    "pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)"
   ],
-  "runtime": 46.4,
+  "runtime": 41.2,
   "panels": [
     {
       "panel": 1,
@@ -29,11 +29,11 @@
       "overlays": [
         {
           "type": "label",
-          "text": "MADE IN EIRE / EIRE"
+          "text": "bit style: tapered"
         }
       ],
-      "narration": "Look — it says MADE IN EIRE / EIRE. So that tells us exactly when it was made, doesn't it?",
-      "duration": 8,
+      "narration": "Look — it says bit style: tapered. So that tells us exactly when it was made, doesn't it?",
+      "duration": 7.2,
       "motion": {
         "zoom": [
           1,
@@ -64,7 +64,7 @@
         "overlays": [
           {
             "type": "label",
-            "text": "MADE IN EIRE / EIRE"
+            "text": "bit style: tapered"
           }
         ]
       }
@@ -82,11 +82,11 @@
       "overlays": [
         {
           "type": "label",
-          "text": "1938–1949, exactly",
+          "text": "1863–1960, exactly",
           "tone": "wrong"
         }
       ],
-      "narration": "1938–1949, exactly. The book says so, and the stamp is right there in front of me.",
+      "narration": "1863–1960, exactly. The book says so, and the stamp is right there in front of me.",
       "duration": 6.4,
       "motion": {
         "zoom": [
@@ -119,7 +119,7 @@
         "overlays": [
           {
             "type": "label",
-            "text": "1938–1949, exactly",
+            "text": "1863–1960, exactly",
             "tone": "wrong"
           }
         ]
@@ -184,12 +184,12 @@
       "overlays": [
         {
           "type": "label",
-          "text": "1938–c.1940/41",
+          "text": "1863–1960",
           "tone": "right"
         }
       ],
-      "narration": "MADE IN EIRE / EIRE points to 1938–c.1940/41. That is the bracket — a window, not a birthday.",
-      "duration": 7.2,
+      "narration": "bit style: tapered points to 1863–1960. That is the bracket — a window, not a birthday.",
+      "duration": 6.4,
       "motion": {
         "zoom": [
           1.05,
@@ -220,7 +220,7 @@
         "overlays": [
           {
             "type": "label",
-            "text": "1938–c.1940/41",
+            "text": "1863–1960",
             "tone": "right"
           }
         ]
@@ -242,8 +242,8 @@
           "tone": "warn"
         }
       ],
-      "narration": "Refinement per Leverette — the EIRE stamp itself is short-lived (~1938–41), NOT used all the way to 1949.",
-      "duration": 7.2,
+      "narration": "tapered mouthpiece = definitely pre-Lane (Ferrara: 'never tapered' after 1960).",
+      "duration": 4,
       "motion": {
         "zoom": [
           1,
@@ -346,11 +346,11 @@
       "overlays": [
         {
           "type": "citation",
-          "text": "Era formats & windows per Leverette (Pipedia, 2006, rule of thumb)."
+          "text": "pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)"
         }
       ],
-      "narration": "And that is not my opinion. It is Era formats & windows per Leverette (Pipedia, 2006, rule of thumb).",
-      "duration": 7.6,
+      "narration": "And that is not my opinion. It is Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock.",
+      "duration": 7.2,
       "motion": {
         "zoom": [
           1,
@@ -381,7 +381,7 @@
         "overlays": [
           {
             "type": "citation",
-            "text": "Era formats & windows per Leverette (Pipedia, 2006, rule of thumb)."
+            "text": "pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)"
           }
         ]
       }

@@ -1,0 +1,43 @@
+{
+  "_doc": "WEBER dating cabinet (#43, Wave E, built 2026-07-17-eve; roster #50). Carl B. Weber's Jersey City factory — an American middle-market GIANT and the great PRIVATE-LABEL engine (Wilke, Barclay Rex, Trinity East and countless shop brands after 1950; also made Custombilt for Wally Frank/Hollco 1974-87 and owned Jobey in the 70s). Company end date UNDOCUMENTED -> wide honest ceilings. SOURCES: staging/pipedia/Weber_Pipe_Co_.json (+ Custom-Bilt.json + Jobey.json cross-facts).",
+  "brand": "Weber",
+  "region": {"country": "USA", "school": "american"},
+  "aliases": ["weber", "weber briars", "weber pipe co"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "Carl B. Weber: Bavarian, emigrated 1911 aged 21. 1938: WEBER BRIARS INC, Jersey City NJ (later renamed Weber Pipe Co). Middle price/quality giant; trademark 'Weber' in an OVAL. Post-1950: THE private-label supplier — identical pipes at Wilke's, Barclay Rex, Trinity East, Northampton (Queens), Don-Lou (Brooklyn)...; most Wilke pipes = unstained Webers. Anthony Passante (d.1994; NOT Tony Pesante) worked there. STREAMLINER = c.1941 (Wayne Leser patent 1941; non-briar versions exist). 'The Scoop' (+ Scoop Junior sets), Golden Walnut, Deep Grain lines. Rogers pipes/accessory connection (Rodgers-Custombilt orbit). 1970s: owned by HOLLCO ROHR; made JOBEY (Tinder Box era) + CUSTOMBILT (1974-87, Grecian briar) at the NJ factory. Factory end: after the 1987 Custombilt move to France the trail goes cold — closure undocumented."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["weber", "streamliner", "the scoop", "golden walnut", "deep grain", "rogers"],
+    "physical": "'Weber' in an oval = the trademark. Private-label output usually carries the SHOP's name, not Weber's — attribution to Weber needs shape/finish matching (e.g. the 'Wilke Danish Bent'), never assume."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "streamliner": [1940, 1960]
+      },
+      "_notes": "streamliner: c.1941 patent (Leser) -> [1940,1960] wide-approx (run length unknown). The Scoop / Golden Walnut / Deep Grain undated."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["weber"], "era_start": 1938, "era_end": 1995, "confidence": "low", "label": "Weber marking = 1938 founding to the undocumented end (trail cold after 1987; ceiling 1995 with slack, LOW)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "closure_date": "Pin the Weber factory closure (NJ business records / collector forums).",
+    "private_label_map": "The Weber private-label web (Wilke etc.) = an attribution layer for unmarked NY-shop pipes; build from shape matching.",
+    "webers_guide_book": "Carl Weber's 'Guide to Pipes and Pipe Smoking' (famous book) = period reference, PD-check for encyclopedia use."
+  }
+}

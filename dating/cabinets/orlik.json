@@ -1,0 +1,157 @@
+{
+ "_doc": "ORLIK dating cabinet (#17, built 2026-07-17 — Tier-1 leftover, Cadogan family). Dating spine = the 1980 CADOGAN CLIFF with a documented COM change: pre-Cadogan 'ORLIK' + 'MADE IN ENGLAND' both in STRAIGHT capital block letters + brass circular-O stem inlay; post-1980 the shared Cadogan origin stamp 'MADE IN LONDON' (circular) over 'ENGLAND' (straight) — identical wording family to Comoy's/GBD post-merger. SOURCES (local-first): staging/pipedia/Orlik.json (history + dating guide + pre-Cadogan model/series-letter list; Dreyer collection exemplars 1908 Goudron meerschaum + 1914 'L&AO' Benson & Hedges) + Orlik_Catalog_Nr__70.json (shapes). PERIOD-PRINT corroboration from our own BNA harvest 2026-07-17: 'ORLIK-DUGOUT' in Tierney's Grimsby roster 1921-08-26 + ORLIK in The Pipe Shop Bath roster 1939-12-09 (brand_research/_general/stories/STORIES_LOG.md S-002, bna_clips). Honesty: pre-Cadogan model list has NO documented intro dates -> encoded as wide era brackets ending at the cliff (+5yr slack), approx-flagged; 'Captain Black' NOT encoded (Lane tobacco-brand collision).",
+ "brand": "Orlik",
+ "region": {
+  "country": "England",
+  "school": "english"
+ },
+ "aliases": [
+  "orlik",
+  "l. orlik",
+  "l & a orlik",
+  "l&ao"
+ ],
+ "max_year": 2026,
+ "history_anchors": {
+  "_doc": "1899 Louis Orlik founds L. Orlik Ltd., Bond Street, London — quality pipes at accessible prices. By 1907 the name is L & A ORLIK (brother Alfred joins) -> 'L&AO' stamps are 1907+. Early 1900s: Birmingham presence (silver hallmarks verify — route banded pipes to the generic hallmark charts for EXACT years). Slogan: 'Smoked by all shrewd judges' (wigged-judge artwork; the image survived into Danish Orlik cigarette branding). 1980: acquired by CADOGAN -> production moves to Southend-on-Sea with the group's other brands (Comoy's/GBD/BBB). WWI-era 'Dugout' model attested in period print 1921 (our BNA Tierney's clip). Pre-Cadogan series letters: Virgin(none) OldBondStreet(A/AX) Supreme(T/TX) MeerschaumLined(M) Corona(C) OldRoot(R) DeLuxe(L/LX) DoubleBore(W) PrinceRegent(P) MajorBlack(MB) CaptainBlack(B/BX) Clubman(6793) BlackPrince(6791) 3/4oz(1986/1990 — catalogue numbers, NOT years!). NPA FAMILY TIMELINE (Simon Orlik, pipearchive.co.uk, intaken 2026-07-18): brothers from Vienna — Alfred->US, Louis->London (Great Arthur St EC1; pipes + cigarette holders). 1923: Saint-Claude workers come to London, Orlik ADDS BOWL-MAKING (pre-1923 bowls French-turned). ~1926/27 move to Ashbrook Rd; then cases + leather pouches; by 1933 lighters too. 1937/38 move to Chiswell St EC1. War/austerity: abbreviated catalogues to 1949; 1950 = FIRST full post-war catalogue. ~1950 sons Herbert + Dennis take over. 1954: Old Bond St showroom + Nutt Products (Hurricane) takeover; 1956 Roy Tallent; 1959 Bennett leather; 1961 Colin Byford (pipe maker). 1974 new Essex factory. 1979: Oppenheimer/Cadogan TAKEOVER AGREED (corroborates the 1980 cliff — Simon made redundant a year later)."
+ },
+ "brand_marks": {
+  "stem_logos": [
+   "circular o",
+   "brass o"
+  ],
+  "wordmarks": [
+   "orlik",
+   "l&ao",
+   "made in england",
+   "made in london",
+   "dugout",
+   "old bond street",
+   "supreme",
+   "corona",
+   "old root",
+   "de luxe",
+   "double bore",
+   "prince regent",
+   "major black",
+   "clubman",
+   "black prince",
+   "supergrain",
+   "virgin"
+  ],
+  "physical": "Pre-Cadogan: ORLIK straight capital block + MADE IN ENGLAND straight capital block; mouthpiece carries a brass-inlay circular O. (One known model, Natural T 1155, has serif MADE IN ENGLAND — date unknown, confirm-flow.) Post-1980 Cadogan: circular MADE IN LONDON over straight ENGLAND."
+ },
+ "fusion_order": [
+  "line_years",
+  "com_stamp",
+  "feature_era",
+  "stamped_year"
+ ],
+ "channels": {
+  "com_stamp": {
+   "table": [
+    {
+     "match": [
+      "made in london england",
+      "made in london"
+     ],
+     "era_start": 1980,
+     "era_end": 2026,
+     "confidence": "high",
+     "note": "the shared CADOGAN origin stamp (circular Made in London / straight England) = post-1980 acquisition, same family as Comoy's/GBD"
+    },
+    {
+     "match": [
+      "made in england"
+     ],
+     "era_start": 1899,
+     "era_end": 1980,
+     "confidence": "medium",
+     "note": "straight block MADE IN ENGLAND = pre-Cadogan profile; brand floor 1899. Serif variant (Natural T 1155) undated -> confirm-flow"
+    }
+   ]
+  },
+  "line_years": {
+   "modern_floor_year": 2000,
+   "years": {
+    "old bond street": [
+     1954,
+     1985
+    ],
+    "supreme": [
+     1899,
+     1985
+    ],
+    "old root": [
+     1899,
+     1985
+    ],
+    "double bore": [
+     1899,
+     1985
+    ],
+    "prince regent": [
+     1899,
+     1985
+    ],
+    "major black": [
+     1899,
+     1985
+    ],
+    "clubman": [
+     1899,
+     1985
+    ],
+    "black prince": [
+     1899,
+     1985
+    ],
+    "dugout": [
+     1914,
+     1939
+    ],
+    "hurricane": [
+     1954,
+     2026
+    ]
+   },
+   "_notes": "The pipedia model list is titled 'Pre-Cadogan era' but carries NO intro dates -> wide honest brackets: start = brand floor 1899, end = Cadogan cliff +5yr slack (1985, approx — some lines may have continued under Cadogan). dugout: WWI-era model, attested in print 1921 (our BNA Tierney's clip); encoded 1914-1939 approx (trench-era name -> unlikely post-WWII), verify. NOT encoded: virgin/corona/de luxe (generic words — still listed as wordmarks for identification), captain black (collides with Lane's Captain Black tobacco), supergrain (undated), 3/4-oz items ('1986'/'1990' are SERIES NUMBERS not years — trap noted), meerschaum lined (generic). NPA REFINEMENTS 2026-07-18 (pipearchive.co.uk/briar/orlik.html = SIMON ORLIK's family account, PRIMARY): 'old bond street' floor RAISED 1899->1954 — the Old Bond Street office/showroom OPENED 1954 (⚠️ conflict noted: our founding anchor says 'Bond Street 1899' per secondary lore; family account has initial premises = Great Arthur Street EC1; family primary wins for the address-stamp floor, medium confidence). 'hurricane' = Nutt Products' windproof pipe, Orlik took Nutt over 1954 -> Orlik-marked Hurricane = 1954+ (pre-1954 Hurricanes = Nutt-marked, not Orlik)."
+  },
+  "feature_era": {
+   "table": [
+    {
+     "field": "lettering",
+     "match": [
+      "l&ao",
+      "l & a orlik",
+      "l and a orlik"
+     ],
+     "era_start": 1907,
+     "era_end": 1980,
+     "confidence": "medium",
+     "label": "L&AO company-name stamp = 1907+ (Alfred joins; 1914 Benson & Hedges exemplar); pre-Cadogan"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "circular o",
+      "brass o",
+      "o inlay"
+     ],
+     "era_start": 1899,
+     "era_end": 1980,
+     "confidence": "medium",
+     "label": "brass circular-O mouthpiece inlay = the pre-Cadogan logo"
+    }
+   ]
+  },
+  "stamped_year": {
+   "_doc": "Generic channel."
+  }
+ },
+ "channels_future": {
+  "assay_hallmark": "Early Orliks (London AND Birmingham marks — firm present in Birmingham from the early 1900s) -> silver-banded pieces date EXACT via the generic.json hallmark charts; route through confirm-flow.",
+  "series_letters": "The series-letter system (A/T/C/R/L/W/P/MB/B + X for sandblast) identifies MODELS, not years; if a dated catalogue run lands (Catalog Nr.70 is undated in our mirror), letters could gain brackets.",
+  "bna_enrichment": "BNA layer-1 sweep 'Orlik' queued (ARCHIVE_FRONTS_STATUS) — ads may date model introductions (Dugout already caught 1921)."
+ }
+}

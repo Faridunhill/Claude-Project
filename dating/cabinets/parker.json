@@ -1,0 +1,144 @@
+{
+ "_doc": "PARKER dating cabinet (#18, built 2026-07-17). The Dunhill second WITH ITS OWN DATE CODE — three documented regimes, encoded as a generic code_table (engine growth 2026-07-17, brand-agnostic lookup): 1923 = NO code; 1924-1942 = consecutive 1..19 (year = 1923+n); WWII gap (Parker not government-approved — made the bakelite/clay 'Wunup' instead; ONE known 19-code 1942 briar, Jason Lynn photos); 1945-1949 = codes 20..24; 1950-1957 = UNDERLINED RAISED 0..7 (record as 'u0'..'u7'); after 1957 codes AND patent numbers cease. The code always follows 'MADE IN LONDON over ENGLAND'. SOURCES (local-first): staging/pipedia/Parker.json (incl. Loring 'The Dunhill Briar Pipe' + the John Campbell/ASP letter + dated exemplars: Super Briar Bark 73/F pat.116989/17 code 14 = 1937; underlined-5 = 1955). ⚠️ PERCEPTION RULE: a bare digit 1-7 maps to the 1920s per the table; if the digit is UNDERLINED/RAISED it must be recorded as 'u<digit>' (1950s). Loring caveat: very few Parkers are true Dunhill 'failings' (most graded out pre-finishing; briar also bought elsewhere) — never claim Dunhill production without provenance.",
+ "brand": "Parker",
+ "region": {
+  "country": "England",
+  "school": "english"
+ },
+ "aliases": [
+  "parker",
+  "parker's",
+  "parker of london"
+ ],
+ "max_year": 2026,
+ "history_anchors": {
+  "_doc": "1922 Parker Pipe Co Ltd formed by Alfred Dunhill to finish and market Dunhill 'failings' (before that: X-overstamp or 'Damaged Price' on Dunhill's own). 1923 first Parker pipes (no date code year). 1935 Dunhill opens a factory next door to Hardcastle; 1936 buys 49% of Hardcastle (some non-possessive PARKER stamps from 1936); 1946 buys the rest; 1967 PARKER-HARDCASTLE LIMITED formed -> from 1967 the brand is fully independent product-wise (never sold in Dunhill's own catalogues/stores). US market: strong 1930s-1950s, faded, RE-INTRODUCED 1991. WWII: 'Wunup' bakelite+clay pipe. Patent stamped up to 1954 = the Inner-Tube-with-flange patent."
+ },
+ "brand_marks": {
+  "stem_logos": [],
+  "wordmarks": [
+   "parker",
+   "parker's",
+   "made in london",
+   "made in london england",
+   "super briar bark",
+   "super bruyere bark",
+   "wunup",
+   "select"
+  ],
+  "physical": "Date code follows the circular MADE IN LONDON over straight ENGLAND stamp. 'F' suffix on shapes = likely Fantail (as on Dunhill). Possessive PARKER'S = pre-WWII usage (non-possessive existed from at least 1936)."
+ },
+ "fusion_order": [
+  "line_years",
+  "date_code",
+  "patent_number",
+  "com_stamp",
+  "feature_era",
+  "stamped_year"
+ ],
+ "channels": {
+  "date_code": {
+   "_doc": "code_table regimes: '1'..'19' = 1923+n (1924-1942); '20'..'24' = 1945-1949 (post-war restart, 1943-44 skipped); 'u0'..'u7' = underlined raised digits 1950-1957. No code + pre-war profile could be 1923 (or worn) -> confirm-flow, never guessed. Codes end 1957.",
+   "code_table": {
+    "1": 1924,
+    "2": 1925,
+    "3": 1926,
+    "4": 1927,
+    "5": 1928,
+    "6": 1929,
+    "7": 1930,
+    "8": 1931,
+    "9": 1932,
+    "10": 1933,
+    "11": 1934,
+    "12": 1935,
+    "13": 1936,
+    "14": 1937,
+    "15": 1938,
+    "16": 1939,
+    "17": 1940,
+    "18": 1941,
+    "19": 1942,
+    "20": 1945,
+    "21": 1946,
+    "22": 1947,
+    "23": 1948,
+    "24": 1949,
+    "u0": 1950,
+    "u1": 1951,
+    "u2": 1952,
+    "u3": 1953,
+    "u4": 1954,
+    "u5": 1955,
+    "u6": 1956,
+    "u7": 1957
+   }
+  },
+  "patent_number": {
+   "table": [
+    {
+     "match": [
+      "116989/17",
+      "116989"
+     ],
+     "era_start": 1923,
+     "era_end": 1954,
+     "confidence": "medium",
+     "note": "the Inner-Tube-with-flange patent; patent numbers stamped only up to 1954 (dated exemplar: code 14 = 1937 Super Briar Bark)"
+    }
+   ],
+   "any_patent_era": [
+    1923,
+    1954
+   ]
+  },
+  "com_stamp": {
+   "table": [
+    {
+     "match": [
+      "made in london england",
+      "made in london"
+     ],
+     "era_start": 1923,
+     "era_end": 2026,
+     "confidence": "medium",
+     "note": "the standard Parker origin stamp from the start -> brand floor only; the DATE CODE after it does the precise work (absent after 1957)"
+    }
+   ]
+  },
+  "line_years": {
+   "modern_floor_year": 2000,
+   "years": {
+    "wunup": [
+     1940,
+     1945
+    ]
+   },
+   "_notes": "wunup: the WWII bakelite+clay pipe (Parker wasn't an approved wartime briar manufacturer) -> war-years bracket. NOT encoded: super briar bark / super bruyere bark (single dated exemplars 1937/1955 — the date CODE dates them), select (undated estate name)."
+  },
+  "feature_era": {
+   "table": [
+    {
+     "field": "lettering",
+     "match": [
+      "parker's",
+      "possessive"
+     ],
+     "era_start": 1923,
+     "era_end": 1941,
+     "confidence": "medium",
+     "label": "possessive PARKER'S stamp = pre-WWII usage (non-possessive existed from at least 1936 -> overlap; wide honest end 1941)"
+    }
+   ]
+  },
+  "stamped_year": {
+   "_doc": "Generic channel."
+  }
+ },
+ "channels_future": {
+  "post_1957": "After 1957: no codes, no patents -> post-57 Parkers date only by line/catalogue evidence (1958 pamphlet + Parker-Hardcastle brochures are pictured on pipedia — mirror + mine for line brackets). Pipedia itself asks for post-1957 code info — none documented.",
+  "us_reintro": "US re-introduction 1991 -> a US-market-only line name could gain a 1991 floor if catalogues land.",
+  "shape_letters": "'F' = Fantail (as Dunhill). Shape-number reader already proven on the Parker '575' class (see method notes)."
+ },
+ "_note_alias_qc_2026_07_17": "QC fix: alias 'parker-hardcastle' removed here — hardcastle.json owns it (deterministic routing; its era ladder closes on the 1967 Parker-Hardcastle merger). A pipe stamped only 'Parker-Hardcastle' routes to hardcastle; Parker-stamped pipes stay here."
+}

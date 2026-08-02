@@ -1,0 +1,63 @@
+{
+  "_doc": "CHACOM dating cabinet (#24, built 2026-07-18 — WAVE C opener, the FRENCH school's flagship). Combines the Chapuis-Comoy house + the Chacom brand per roster entry 30. Dates by: brand-name floors (CHACOM 1928+), the company-name ladder (Chapuis-Comoy & Cie 1922 / La Bruyère window 1932-1957 / name back 1957), and design-line launch years from the company's own timeline. SOURCES (local-first per CABINET_METHOD): staging/pipedia/Chacom.json (company timeline 1825-2016) + Chapuis-Comoy.json (Lopés) + pipephil logo-chacom + chapuiscomoy-en doc (mirror) + NPA Adler-collection facts (_general/npa_national_pipe_archive_facts.md: Oppenheimer capital 1924, Cadogan Investments 1928) + the 1922-32 Chapuis-Comoy factory PHOTO ALBUM (catalogues/comoys/, 70pp 'Quelques vues de nos usines' — a primary document of the 1922-32 company-name window, not a shape catalogue). ⚠️ ROPP DECISION: modern Ropp (1994+) is MADE by Chapuis-Comoy, but the bare alias 'ropp' is NOT claimed here — it would swallow vintage Ropp pipes (1870-1991, different systems). ropp_vintage.json (roster #31) will own the brand key; until then Ropp pipes stay honestly uncabineted. CONFLICTS encoded/noted: Chacom brand creation 1928 (company timeline + Lopés + pipephil's own doc page + ★the company's OWN printed timeline in the ~1973-76 catalog, mined 2026-07-22) vs 1934 (pipephil logo-page header — outlier, likely confusing the 1932 La Bruyère merger); London independence 1971 (pipedia ×2) vs 1972 (pipephil doc) vs 1973 (the catalog timeline's last entry — digit blurry at 500dpi, reading uncertain; no overturn). ★2026-07-22 (Builder): both archive.org catalogs mined — catalog 1 dated [1957,1975] ('un siècle et demi' cover ≈1975 vs old-style phone 1.74), catalog 2 dated [1971,~1976] (floored by its own timeline); full analysis + ~1970s shape-number roster snapshot in brand_research/chacom_dating/chacom_catalogs_1970s_facts.md — shape numbers NOT encoded per the reuse rule (attestations only, await the 1979 catalog for a 3-point first/last-seen channel).",
+  "brand": "Chacom",
+  "region": {"country": "France", "school": "saint-claude"},
+  "aliases": ["chacom", "chapuis-comoy", "chapuis comoy", "chapuis comoy & cie", "super chacom"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1825 Comoy family (François) makes boxwood/clay pipes at Avignon-lès-Saint-Claude (Napoleon's army 'grumblers'). 1850 Henri Comoy born. 1856 briar arrives — Saint-Claude becomes the world capital. 1870 Henri, POW in Switzerland, meets his Chapuis cousins. 1879 Henri founds H. Comoy & Co in LONDON; Saint-Claude supplies ebauchons/bowls. 1922 the association is realised: CHAPUIS-COMOY & Cie, Saint-Claude. 1924 Henri dies; sons Paul (St-Claude) + Adrien (London) with Emile + Louis Chapuis; ★Oppenheimer group holds the capital (pipephil doc; NPA Adler map: Chapuis Comoy + Ropp + La Bruyère + Verguet all inside the Cadogan/Oppenheimer orbit; Cadogan Investments formed 1928). 1928 the CHACOM brand is created (CHApuis+COMoy; pre-1939 sold ONLY in France/Belgium/Switzerland to spare Comoy's same-shape exports). 1932 crisis merger → the company operates as LA BRUYÈRE (450 workers, biggest pipe concern in the world); the Chapuis-Comoy name disappears. 1945 Chacom takes full commercial liberty; 1946 no.1 in France+Belgium; 1947-48 no.1 Scandinavia, Germany, USA. 1957 success of Chacom → company name back to CHAPUIS-COMOY & Cie (125 workers). 1964 Adrien dies; Pierre Comoy heads London, Mr Reed MD in St-Claude. 1965 first French brand in Japan. 1971 (pipephil: 1972) independence from Comoy's London — Yves Grenard (2nd cousin of Pierre) takes over + exclusive H. Comoy sales in France. 1978 Pierre Morel (freehand master) creates the GRAND CRU line (+ Naja, Fleur de Bruyère shapes); 1987 Morel joins full-time. 1988 Cuty-Fort Entreprises SA holding (Chapuis-Comoy + Vuillard + Jeantet-David + Jean Lacroix; shared production, separate brands). 1994 ROPP integrated (Ropp: 1869 cherrywood patent, 1870 Bussang workshop, ~1893/95 Baume-les-Dames, BBB = exclusive UK distributor pre-1914, briar at St-Claude ~1917, closed Sept 1991, GBA Synergie 1988-91). 1996 Volute (first design pipe, Claude Robin); 1998 Volute 2. 1999 PASTEL collection (Hedo, Cyclade). 2001 MILLENIUM line (new shape each year, Yves Grenard). 2002 China. 2007 Antoine Grenard (Yves' son, trained designer) leads; launches Monza. 2012 Yves Grenard dies (Feb 8). 2016 factory moves Faubourg St-Claude → VILLARD-SAINT-SAUVEUR."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["cc", "white cc on black", "brass cc"],
+    "wordmarks": ["chacom", "chapuis-comoy", "chapuis comoy & cie", "made in st claude", "super chacom", "grand cru", "volute", "millenium", "monza"],
+    "physical": "Shank: CHACOM + line name (left), often circular 'Made in St Claude (in circle) France' — deliberately similar to Comoy's circular 'Made in London England'. Stem: CC logo; brass CC reserved for higher lines; white-CC-on-black on Rocky-type lines; 'France' sometimes on the stem bottom. A bold TAILED C stamping seems aimed at export pipes (pipephil: to be confirmed). Seconds: Bayard, Dr Berger. Tobacconist customizations appear on right shanks (e.g. 'A la Pipe du Nord')."
+  },
+
+  "fusion_order": ["line_years", "com_stamp", "feature_era", "stamped_year"],
+
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {"match": ["st claude", "saint-claude", "st. claude"], "era_start": 1922, "era_end": 2026, "confidence": "low", "note": "St-Claude marking = the French house (any era from the 1922 founding; the circular 'Made in St Claude France' form is Chacom-brand production — undated as a form, LOW)"}
+      ]
+    },
+
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "grand cru": [1978, 2026],
+        "naja": [1978, 2026],
+        "fleur de bruyere": [1978, 2026],
+        "volute": [1996, 2026],
+        "pastel": [1999, 2026],
+        "hedo": [1999, 2026],
+        "cyclade": [1999, 2026],
+        "millenium": [2001, 2026],
+        "monza": [2007, 2026]
+      },
+      "_notes": "All launch years from the company's OWN timeline (pipedia Chacom.json): grand cru 1978 = Pierre Morel's handmade line (his freehand shapes Naja + 'Fleur de Bruyère' share the floor); volute 1996 = first design pipe (Claude Robin; Volute 2 = 1998); pastel/hedo/cyclade 1999 = designer co-op collection; millenium 2001 = Yves Grenard's one-new-shape-per-year line; monza 2007+ = Antoine Grenard era launch (year approximate — 'will launch such as'). NOT encoded (no dates documented): Cap Blanc, Concorde, Courbet, Premier, Prestige, Rocky, Synchro, Dynastie, Idéal, 'Super Chacom'; seconds Bayard + Dr Berger; Reverse Calabash + morta models (recent-era, undated)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["chacom"], "era_start": 1928, "era_end": 2026, "confidence": "high", "label": "CHACOM wordmark = 1928+ (brand created 1928 per the company timeline + Lopés + pipephil's doc page; pipephil's logo-page header says 1934 — outlier noted). Market note: pre-1939 Chacom sold ONLY in France/Belgium/Switzerland -> a Chacom bought new elsewhere leans 1945+"},
+        {"field": "lettering", "match": ["chapuis comoy", "chapuis-comoy"], "era_start": 1922, "era_end": 2026, "confidence": "low", "label": "Chapuis-Comoy company marking = 1922+ BUT two windows (1922-1932, then 1957+ after the La Bruyère interlude 1932-57) — LOW, corroborate with other features"},
+        {"field": "stem_logo", "match": ["brass cc"], "era_start": 1928, "era_end": 2026, "confidence": "low", "label": "brass CC stem logo = higher-quality Chacom lines (undated as a form)"},
+        {"field": "stem_logo", "match": ["white cc", "cc on black"], "era_start": 1928, "era_end": 2026, "confidence": "low", "label": "white CC on black stem = Chacom (Rocky-type lines; undated as a form)"}
+      ]
+    },
+
+    "stamped_year": {
+      "_doc": "Generic channel; Chacom rarely stamps years (commemoratives possible)."
+    }
+  },
+
+  "channels_future": {
+    "ropp_vintage": "roster #31: vintage Ropp (1870-1991) gets its own cabinet — Bussang stamp (1870-1893 first workshop, horn mouthpiece + round lip = earliest), Eug. Ropp script, J. Ropp (3rd generation), oval ROPP, lines Edil/Yeco/Trocadero/Nationale/Hors Classe/Virgin De Luxe; BBB-distribution UK pre-1914; closure Sept 1991; 1994+ Ropp = made by Chapuis-Comoy (this house).",
+    "chacom_1979_catalog": "pipedia hosts a 1979 catalog page + a full Chacom catalog PDF — mirror + mine for line floors (catalogue hunter follow-up). 2026-07-22: two archive.org catalogs (~[1957,1975] + ~[1971,1976]) already mined into brand_research/chacom_dating/ with a full shape-number roster; adding the 1979 catalog + any modern chart would give 3 time-points for a shape first/last-seen channel.",
+    "factory_album": "the 1922-32 'Quelques vues de nos usines' album (70pp, catalogues/comoys/) = primary factory photos of the Chapuis-Comoy window — encyclopedia/social layer asset; page images pending extraction.",
+    "tailed_c_export": "pipephil: bold tailed-C stampings seem export-aimed (unconfirmed) — verify before encoding."
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "_doc": "SER JACOPO dating cabinet (#45, built 2026-07-17-eve; roster #21). Pesaro school: Giancarlo Guidi (ex-Mastro de Paja, broke away 1981) founded Ser Jacopo dalla Gemma 1982. THE CLIFF = the stem logo: RED CORAL DOT (sometimes silver-ringed) 1983-1997 -> STERLING SILVER 'J' 1997+. Plus year-locked annual lines: DOMINA 1996+ (333/yr), HISTORICA 2009+ (per-year model list = EXACT dating). SOURCES: staging/pipedia/Ser_Jacopo.json (Marble Arch + smokingpipes history).",
+  "brand": "Ser Jacopo",
+  "region": {"country": "Italy", "school": "italian"},
+  "aliases": ["ser jacopo", "ser jacopo dalla gemma", "mastro geppetto"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1981: Guidi + Bruto Sordini leave Mastro de Paja; 1982 SER JACOPO founded (Pesaro). Sordini later leaves -> Don Carlos (see doncarlos.json). Guidi dies Aug 6, 2012 (64). ~6,000 pipes/yr. Motto stamp: 'Per Aspera Ad Astra' + 'Fatta A Mano in Italia'. Grades: entry Geppetto + La Fuma Finché Tira; seconds = MODICA; top = GEM SERIES (stone on stem in 18k gold): Smeraldo<Granato<Zaffiro<Rubino<Brillante (Brillante/Diamond Gemma pipes ARE date-coded — the one SJ date code). PICTA themed series (Van Gogh, Magritte, Miró). DOMINA = pipe-of-the-year from 1996 (333 numbered). HISTORICA = annual re-edition from 2009: Delecta-2009, Nauta-2010, Senecta-2011, Luciano-2012, 30°-2013, Calabash-2014, Dome-2015, Captain Warren-2016, Lacus-2017, 35°-2018, Mons-2019, Pulchra-2020, Picta Van Gogh-2021, 40°-2022, Picta Magritte-2023, Cymatium-2024. Finish codes: R1/R2 rusticated, S/S1/S2/S3 sandblast, L/L1/L2 smooth, L3 discontinued; Maxima = oversize, Maxima Maxima = giant."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["red coral dot", "coral dot silver ring", "silver j", "gem stone gold ring"],
+    "wordmarks": ["ser jacopo", "per aspera ad astra", "fatta a mano", "domina", "historica", "picta", "modica", "geppetto", "maxima"],
+    "physical": "Stem: red coral dot (early; +silver ring variant) vs sterling J (modern) vs gemstone-in-gold (Gem series). Shank: Ser Jacopo / Fatta A Mano / In Italia / Per Aspera Ad Astra + finish code."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "domina": [1996, 2026],
+        "historica": [2009, 2026]
+      },
+      "_notes": "domina: annual from 1996 (each year's brochure pictures all prior — a Domina usually self-dates via its brochure/number). historica: annual from 2009; the per-year model list in anchors dates a Historica EXACTLY by model name. NOT encoded: Picta (multi-era theme), Geppetto/La Fuma/Modica (undated), finish codes (span eras; L3 'discontinued' undated)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "stem_logo", "match": ["red coral", "coral dot"], "era_start": 1983, "era_end": 1997, "confidence": "high", "label": "red coral stem dot (± silver ring) = 1983-1997 (discontinued for the silver J)"},
+        {"field": "stem_logo", "match": ["silver j", "sterling j"], "era_start": 1997, "era_end": 2026, "confidence": "high", "label": "sterling silver J stem logo = 1997+ (replaced the coral dot)"},
+        {"field": "lettering", "match": ["ser jacopo"], "era_start": 1982, "era_end": 2026, "confidence": "high", "label": "Ser Jacopo brand floor = 1982 founding"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel; Diamond/Brillante Gemma pipes carry date codes (decode table not yet sourced — channels_future)."}
+  },
+
+  "channels_future": {
+    "gemma_date_codes": "The Brillante (Diamond) Gemma series date-code system — decode table not in our mirror; source from Marble Arch/collectors.",
+    "guidi_estate": "Pre/post-2012 (Guidi's death) diagnostics unverified — the firm continued.",
+    "historica_exact": "Wire the Historica model->year list into a stamped_year-style exact lookup if these appear in inventory."
+  }
+}

@@ -1,0 +1,260 @@
+{
+ "_doc": "COMOY'S dating cabinet = DATA only (cabinet #5, built 2026-07-16 following control/CABINET_METHOD.md). Comoy's dates by CONVERGENCE of: name-stamp style (script/arched/straight) + COM-stamp wording eras + inlaid-C stem-logo generations + line/grade years + the Grand Slam patent. No serial date code exists ('Unlike Dunhill... dating the Comoy pipe is far more difficult' -- Green). SOURCES (local-first): pipedia mirror staging/pipedia/A_History_Of_Comoy_s_and_A_Guide_Toward_Dating_the_Pipes.json (Derek Green, NASPC 2006 -- THE authority, built on 19 hallmark-dated pipes + Jacques Cole interviews + original catalogues) + Comoy_s.json; pipephil mirror logos/en/logo-comoy.html (corroborates + adds the Grand Slam bar-logo 1933-1945 rule). Disagreements between the two are encoded as WIDE brackets with notes. RETRO-SWEEP 2026-07-16: the mirrored Comoy_s_Dating_Guide.json (pipedia's structured guide) CORROBORATES every encoded rule (name-stamp styles incl. the ~1945 block 'COMOYS' no-apostrophe variant, COM eras, C generations, bar logo 1933-45); smokingpipes.eu estate listings label three-piece-C pipes 'pre-1980' (consistent). HALLMARKED silver/gold bands date Comoy's EXACTLY (London/Birmingham assay) -- channel NOT wired yet: needs the UK date-letter charts planned for generic.json; until then a hallmark goes to confirm-flow.",
+ "brand": "Comoy's",
+ "aliases": [
+  "comoy",
+  "comoys",
+  "comoy's",
+  "h. comoy",
+  "h comoy"
+ ],
+ "max_year": 2026,
+ "history_anchors": {
+  "_doc": "1825 Francois Comoy starts pipe making in Saint-Claude, France (clays/wood). 1848 briar only. 1879 Henri Comoy moves to LONDON (credited author of 'London Made'). 1914 incorporated as H. Comoy & Co Ltd. 1929 joins Cadogan Investments -- 'The Merger' (Civic Company + Oppenheimer Pipes); marketing stays independent. WWII: production nearly ceased. 1950 Aldershot factory opens. Early 1960s: manufacture merges under one management. EARLY 1980s: full Cadogan takeover = THE collector cliff (pre-Cadogan = collectable era; both sources agree). Cadogan-era production continues per Green-2006, BUT smokingpipes' 2024 history claims 'no Comoy's pipes have been produced since the early 2000s' (vs Godbee-2013 'Comoys Come Back') -- DISPUTED, so treat any post-2005 'new' Comoy's with care. French cousin line: Chapuis-Comoy & Cie (Saint-Claude factory 1922) -> CHACOM brand official 1928 = a SEPARATE brand (Tier-3 cabinet; seeds in brand_research/comoys_dating/smokingpipes_2024-01_comoys_history_facts.md). SECONDS / sub-brands (own rules -- do NOT date by this cabinet's lines): Cecil, Everyman/Every Man (attested in retail print by Sept 1931 at 5/- -- BNA Banffshire Advertiser, see comoys_dating/bna_1930s_ads_facts.md), Town Hall, Guildhall, Yomac/The Yomoc, H.C., Standard, Ace of Spades, Ancestor, Astor, Atwood, Britannia, Carlyle, Charles Cross, Claridge, Cromwell, Dorchester, Dunbar, Drury Lane, Dulcet, Emerson, Falcon, Grand Master, Gresham, Jockey, Kingsway, Lion's Head, Lord Clive, Hyde Park, Lloyds, Mc Gahey, Moorgate, Overland, Royal Falcon, Scotland Yard, St James, Sunrise, Sussex, The Academy Award, The Exmoor, The Golden Arrow, The Mansion House, Trident, Twin Bore, Wilshire (pipephil seconds list)."
+ },
+ "brand_marks": {
+  "stem_logos": [
+   "three-piece C",
+   "C",
+   "bar",
+   "blue C"
+  ],
+  "wordmarks": [
+   "comoy's",
+   "comoy",
+   "london made",
+   "made in london",
+   "made in england",
+   "prima",
+   "old bruyere",
+   "virgin briar",
+   "tradition",
+   "grand slam",
+   "blue riband",
+   "london pride",
+   "specimen straight grain",
+   "extraordinaire"
+  ],
+  "physical": "Inlaid 'C' on stem side from ~1919: THREE-piece inlay (white ring + black centre + black gap plug) until the Cadogan era (cancelled early 1980s); 1920s-early-30s version is thinner/more delicate than post-war. Cadogan: ONE-piece drilled inlay with printed C, later a LASER imprint. Grand Slam 1933-1945 wore a BAR logo (white/turquoise/white) instead of the C. Rare: one WWII year the Blue Riband carried a BLUE C. Early-1920s 'Par Excellence' had the C on TOP of the stem (rare)."
+ },
+ "fusion_order": [
+  "line_years",
+  "com_stamp",
+  "patent_number",
+  "feature_era",
+  "stamped_year"
+ ],
+ "channels": {
+  "com_stamp": {
+   "table": [
+    {
+     "match": [
+      "made in london england",
+      "london england"
+     ],
+     "era_start": 1948,
+     "era_end": 2026,
+     "confidence": "medium",
+     "note": "circular 'Made in London' + straight 'England' beneath: first used late 1940s/early 1950s (pipephil) / early-1950s export drive, never pre-WWII (Green) -> FLOOR 1948; no documented end (Cadogan kept variants), so never a ceiling"
+    },
+    {
+     "match": [
+      "london made"
+     ],
+     "era_start": 1902,
+     "era_end": 1939,
+     "confidence": "medium",
+     "note": "the earliest stamp. Sources DISAGREE on the end: pipephil 'until about 1915', Green 'on into the 1930s' -> wide honest end 1939"
+    },
+    {
+     "match": [
+      "made in london"
+     ],
+     "era_start": 1919,
+     "era_end": 1929,
+     "confidence": "low",
+     "note": "straight-line 'Made in London' WITHOUT England: Green saw it only on two 1921 hallmarked Old Bruyeres -> narrow, low-confidence"
+    },
+    {
+     "match": [
+      "made in england"
+     ],
+     "era_start": 1910,
+     "era_end": 1955,
+     "confidence": "low",
+     "note": "the 'football' circle: Green documents 1910 (Cecil), 1921, then 1930s; Pease (glpease.com draft, mirrored brand_research/comoys_dating/): circular MADE IN ENGLAND was THE standard c.1938 to the mid/late-1940s; Grand Slam pipes 1933-45 carry it with the patent; post-war standard became 'Made in London England' -> low-conf wide bracket, but with block-COMOYS-no-apostrophe lettering it tightens to the 1944-53 window via feature_era"
+    }
+   ],
+   "_note_format": "oval/rugby-ball COM stamps are earlier; the circle form is usual from 1950 (pipephil, Extraordinaire 804 example). Not encoded as a channel -- perception rarely reads the outline reliably; corroborating hint for confirm-flow."
+  },
+  "line_years": {
+   "modern_floor_year": 2000,
+   "years": {
+    "prima": [
+     1900,
+     1939
+    ],
+    "old bruyere": [
+     1915,
+     1975
+    ],
+    "virgin briar": [
+     1920,
+     1964
+    ],
+    "tradition": [
+     1925,
+     1979
+    ],
+    "grand slam": [
+     1933,
+     1979
+    ],
+    "specimen straight grain": [
+     1937,
+     2026
+    ],
+    "blue riband": [
+     1936,
+     2026
+    ],
+    "london pride": [
+     1936,
+     2026
+    ],
+    "extraordinaire": [
+     1930,
+     2026
+    ],
+    "deluxe": [
+     1930,
+     2026
+    ]
+   },
+   "_notes": "prima: top grade from the early 1900s, dropped pre-WWII (Royal became top standard grade 'after the Prima was dropped' -- Green) -> end approx. old bruyere: hallmarked 1921 examples, high grade 1931, downgraded by 1943, gone from the 1965 catalogue -> start approx 1915, verify ★END WIDENED 1964->1975 (2026-07-22): the Comoy House/Vanguard USA price list of 1975-07-15 (library/archive_org/1975_Comoys_Smoking_Pipes_Price_List.pdf, importer 150th-year list) SELLS Old Bruyere at 12.50/25.00 USD -- UK-catalogue absence (1965) vs US-market presence (1975): wide honest end 1975; facts file brand_research/comoys_dating/comoy_house_1975_pricelist_facts.md. virgin briar: sources DISAGREE (Green owns a hallmarked 1925; pipephil says 'period: 1933 until (?)') -> wide start 1920; gone by 1965. tradition: introduced 1925 (centenary), produced until the 1970s. grand slam: introduced 1933 with the metal-filter patent, until the 1970s. PRIMARY BNA corroboration (brand_research/comoys_dating/bna_1930s_ads_facts.md, image-verified 2026-07-17): retailed by 1934-11 at 8s6d ('an enormous boon to wet smokers' -- East Kent Times); national Christmas campaign Dec 1936 'Complete with bag -- 8/6'; named local agencies 1938-39 (Davidson's Dunoon); still front-line Dec 1939 (Bath wartime roster, market prices 2/6-25/-). blue riband: first used 1936 (Queen Mary crossing -- Green's belief, flagged approx); no documented end -> FLOOR. london pride: introduced 'around the same time' as Blue Riband -> 1936 approx FLOOR (still priced in 1979). specimen straight grain: 'probably just before WWII' -> 1937 approx FLOOR. extraordinaire: introduced 1930s; REINTRODUCED 1979 as Extraordinaire I/II -> FLOOR only, never a ceiling. deluxe: 1930s examples + 1965 catalogue -> FLOOR. NOT encoded (thin/single examples -- park): Royal ('always' a high grade), Par Excellence (early-1920s cased pair), Magnum (800-series 1920s-30s, name reused 1960s + Cadogan 1990s), Olympic (probably 1948), Exceptional (Ory Jameson, early 1960s), Celebration (one 1976 example), Selected Straight Grain (1965 catalogue), Golden Grain, Silver Cloud, Rockroot, Golden Arrow, Royal Guard, Special, Meerschaum Lined (1930s+)."
+  },
+  "patent_number": {
+   "table": [
+    {
+     "match": [
+      "2001612"
+     ],
+     "era_start": 1933,
+     "era_end": 1979,
+     "confidence": "medium",
+     "note": "U.S. Pat. 2001612 = the Grand Slam metal stinger/filter (introduced 1933, line ran until the 1970s). Also on Virgin Briars fitted with the Grand Slam stinger. The *N mark near the stem = leather-washer size, not a date"
+    }
+   ]
+  },
+  "feature_era": {
+   "table": [
+    {
+     "field": "lettering",
+     "match": [
+      "flowing script",
+      "script with tail",
+      "long tail",
+      "canted"
+     ],
+     "era_start": 1900,
+     "era_end": 1919,
+     "confidence": "medium",
+     "label": "joined flowing-script Comoy's with tail = 1900-c.1919 (both sources)"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "arched",
+      "curved"
+     ],
+     "era_start": 1917,
+     "era_end": 1948,
+     "confidence": "medium",
+     "label": "arched serif COMOY'S with apostrophe = 1917 to end-1930s, briefly continued post-WWII (Green + Pease: serif big-C existed by 1919)"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "no apostrophe",
+      "comoys block"
+     ],
+     "era_start": 1944,
+     "era_end": 1953,
+     "confidence": "medium",
+     "label": "block sans-serif COMOYS with NO apostrophe = mid/late-1940s to early-50s (Pease + pipedia dating guide: change 1945 or slightly later; replaced early 50s by sans-serif WITH apostrophe)"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "three-piece c",
+      "three piece c",
+      "3-piece c",
+      "3 piece c",
+      "three pieces c"
+     ],
+     "era_start": 1919,
+     "era_end": 1985,
+     "confidence": "medium",
+     "label": "three-piece inlaid C = c.1919 until the Cadogan era. END DISPUTED: smokingpipes history (2024) says 'in use until 1979'; Green/pipephil say cancelled early 80s -> wide honest end 1985"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "bar logo",
+      "bar"
+     ],
+     "era_start": 1933,
+     "era_end": 1945,
+     "confidence": "high",
+     "label": "Grand Slam bar logo (white/turquoise/white) = 1933-1945; replaced by the 3-piece C after WWII (pipephil)"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "one-piece c",
+      "one piece c",
+      "single inlay",
+      "printed c",
+      "painted c"
+     ],
+     "era_start": 1980,
+     "era_end": 2000,
+     "confidence": "medium",
+     "label": "Cadogan ONE-PIECE drilled C inlay (or painted) = the EARLY Cadogan generation; Green: the inlay came FIRST, 'more recently' replaced by laser -> c.1980-2000, end approx flagged (refined 2026-07-16 on Farid's real grade-6 SSG)"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "laser"
+     ],
+     "era_start": 1990,
+     "era_end": 2026,
+     "confidence": "low",
+     "label": "laser-imprinted C = recent Cadogan (approx -- verify)"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "blue c"
+     ],
+     "era_start": 1939,
+     "era_end": 1945,
+     "confidence": "low",
+     "label": "blue C on a Blue Riband = one WWII year (pipephil; exact year unknown)"
+    }
+   ]
+  },
+  "stamped_year": {
+   "_doc": "Commemoratives carry literal years (e.g. 1933 Chicago World's Fair Virgin Briar). Generic channel reads the last 4-digit year."
+  }
+ },
+ "channels_future": {
+  "_farid_fetch_OPEN_QUESTION": "THE ONE UNDATED CLIFF: when did Cadogan switch the stem C from one-piece INLAY to LASER imprint? No published source dates it (Green 2006: 'more recently'). PERMANENT RESOLUTION IN FLIGHT (Farid's no-parked-issues doctrine, 2026-07-16): (1) email drafted to CADOGAN THEMSELVES -- cad@oppenheimers.co.uk (address from our GBD mirror) -- they made both generations; (2) fallback: Derek Green invites collector contact (his guide); (3) fallback: BNA/estate-listing exemplar sequence (dated laser-C examples). When answered: change era_end of the one-piece entry + laser era_start, add a locking test. Until then [1980,2000] approx-flagged = the honest encoding.",
+  "assay_hallmark": "Comoy's banded pipes hallmarked London (leopard's head) or Birmingham (anchor) -> EXACT year once the UK date-letter charts land in generic.json. Green's whole guide is calibrated on 19 such pipes. Until wired: a read hallmark goes to confirm-flow, never guessed. Note Green's caveat: bands were bought in batches -> can run ~a year late.",
+  "shape_chart": "3-digit shape codes (800-series = Magnum-sized Extraordinaires, 1920s-30s; Kruger Extraordinaire = 236, Woodstock/'Danish' = 202). Comoy_s_Shape_Number_Chart.json is mirrored. ⚠️ Roan caveat (via smokingpipes 2024): Comoy's shape numbering was 'mercurial' -- a number was sometimes REUSED for a different shape -> a future chart must match shape+form, never the number alone. No design-year chart yet -- future enrichment."
+ },
+ "region": {
+  "country": "England",
+  "school": "english"
+ }
+}

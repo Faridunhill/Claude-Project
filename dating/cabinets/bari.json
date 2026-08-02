@@ -1,0 +1,42 @@
+{
+  "_doc": "BARI dating cabinet (#33, Wave D, built 2026-07-17-eve; roster #39). Kolding/Vejen series-pipe house: THE OWNERSHIP LADDER is the dating spine — Viggo Nielsen 1950/51-1978 -> Joh. Wilh. von Eicken GmbH (Hamburg) 1978-1993 -> Helmer Thomsen 1993+ ('Bari Piber Helmer Thomsen', moved to Vejen). SOURCES: staging/pipedia/Bari.json. ⚠️ CROSS-BRAND TRAP: the 'Excellent' second is ALSO an Oldenkott sub-brand (horseshoe stamp) — never attribute an Excellent to Bari without the Bari context. Our inventory already dated one Bari to 1999 via the generic router (INVENTORY_DATING_REPORT_v1).",
+  "brand": "Bari",
+  "region": {"country": "Denmark", "school": "danish"},
+  "aliases": ["bari", "bari piber", "bari piber helmer thomsen"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "~1950/51: Viggo Nielsen founds Bari Piber in KOLDING. Sons Kai + Jørgen Nielsen work there until 1975 (Kai Nielsen later independent — artisan link). Bari rides the Stanwell-led 'Danish Design' wave with series pipes: machine-roughed, hand-finished — solid everyday pipes, no highgrades. 1978: Viggo sells to Joh. Wilh. von EICKEN GmbH (Hamburg); 33 employees at sale. 1978-1993: Åge Bogelund + Helmer Thomsen head production (Bogelund also made respectable freehands; trail lost after 1993). 1993: THOMSEN buys the company -> renamed 'BARI PIBER HELMER THOMSEN', workshop moves to VEJEN. Famous series: smooth 'Classic Diamond', blasted 'WIKING' (also 'Viking Classic' spelling). Seconds: 'Excellent' + 'DON' (source flags the attribution as unproven; Excellent = Oldenkott sub-brand too!)."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["bari", "classic diamond", "wiking", "viking", "don", "excellent", "amber", "renomee", "ruby", "select nature", "senior", "matador", "mandarin", "handcut"],
+    "physical": "Series stamps: Bari + line name (Classic Diamond, Wiking, Amber, Renomee, Ruby, Select Nature, Senior, Matador, Mandarin, Handcut...). Post-1993 wording: 'Bari Piber Helmer Thomsen'."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "Line intro years undocumented (Classic Diamond, Wiking, Amber, Renomee, Ruby, Select Nature, Senior, Matador, Mandarin) -> identification only. Seconds DON + Excellent: attribution itself flagged uncertain in source (footnote) + the Oldenkott-Excellent horseshoe trap -> NEVER auto-attribute."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["helmer thomsen"], "era_start": 1993, "era_end": 2026, "confidence": "high", "label": "'Bari Piber Helmer Thomsen' wording = post-1993 (Thomsen buyout + Vejen move)"},
+        {"field": "lettering", "match": ["bari"], "era_start": 1950, "era_end": 2026, "confidence": "medium", "label": "Bari brand floor ~1950/51 (Kolding founding, approx)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "von_eicken_era": "1978-93 von-Eicken-era stamp diagnostics unknown — any 'Hamburg' or changed wording? Verify on estates.",
+    "series_brackets": "Danish Pipe Shop / estate listings could bracket Classic Diamond + Wiking eras.",
+    "kai_nielsen": "Kai Nielsen's own artisan career (post-Bari) -> artisan registry enrichment."
+  }
+}

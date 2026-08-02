@@ -1,0 +1,49 @@
+{
+  "_doc": "JEANTET dating cabinet (#26, Wave C, built 2026-07-17-eve; roster #32). One of Saint-Claude's oldest houses (family firm first mentioned 1775; 'since 1807' is the company's own export-stamp claim). Dates mostly by the company ladder + honest wide brackets — NO documented stamp cliffs or line intro years exist in our sources. SOURCES: staging/pipedia/Jeantet.json (factory history, detailed) + pipephil logo-jeantet + jeantetusine doc (mirror). CONFLICT noted: joined Cuty-Fort 1988 (pipedia: 'merged in the Cuty Fort Group in 1988'; plant closed, city bought it 1989) vs 1992 (pipephil) -> both carried, bracket edges kept loose.",
+  "brand": "Jeantet",
+  "region": {"country": "France", "school": "saint-claude"},
+  "aliases": ["jeantet", "jeantet-david", "jeantet production"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1775 Jeantet family firm first mentioned. 1807 turnery (wooden shanks for porcelain pipes + wild-cherry pipes) — the year the company's export stamp claims ('JEANTET Production since 1807'). 1816 firm named JEANTET-DAVID; 1837 corporation (collective name for workshops all over Saint-Claude). 1858 BRIAR pipe manufacturing begins. 1891+ integrated factory built, Rue de Bonneville 12-14. 1898 Maurice Jeantet restructures (+ Genoud workshop purchase). 1938 limited company + branch workshop at Montréal-la-Cluse (Ain, cheaper pipes). 1948: 107 employees St-Claude + 18 Ain. ~1950 factory modernized. 1969 PEAK: 30-35k dozens/year, 72 workers. Decline to 6-7k dozens, 22 workers by 1987. 1988 merged into Cuty-Fort (est. 1987, headed by Chacom; pipephil says 1992) along with Jean Lacroix + Emile Vuillard; CHACOM CLOSES THE JEANTET PLANT; the city buys the buildings 1989 (wrecked ~1992). Post-merger Jeantet = a CHAPUIS-COMOY-MADE SUB-BRAND. Yves Grenard was Jeantet's chief designer before taking over Chapuis-Comoy 1971 (artisan-registry link). 2000 Dominique Jeantet retires; 2010 the brand DROPS OUT of Cuty-Fort, label back to the Jeantet family, PIPE PRODUCTION DISCONTINUED."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["jeantet on stem", "octogonal logo", "olympic logo"],
+    "wordmarks": ["jeantet", "luxe jeantet", "jeantet production", "since 1807", "corsican briar", "maya", "sir duke", "duke of kent", "grand duke", "hermes", "sir bruce", "antidote", "lumberman", "preference"],
+    "physical": "Early stamping: 'Jeantet' with a FLORID J. Arched 'Jeantet' later. 'JEANTET Production since 1807' (sometimes + CORSICAN BRIAR, Made in France) = EXPORT-intended pipes. Sir Duke line = Algerian briar, some meerschaum-lined. Octogonal + Olympic stem logos exist (undated). Maya line named after the 'Maya the Bee' cartoon."
+  },
+
+  "fusion_order": ["line_years", "com_stamp", "feature_era", "stamped_year"],
+
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {"match": ["made in france", "france"], "era_start": 1858, "era_end": 2010, "confidence": "low", "note": "briar era to the 2010 discontinuation; no COM cliff documented"}
+      ]
+    },
+
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "NO line intro years documented — identification-only lines: Sir Duke (Algerian briar), Duke of Kent, Grand Duke, Hermes, Sir Bruce, Antidote, Maya (named after the 'Maya the Bee' cartoon — its French TV fame is 1978+, a tempting floor but NOT documented for the pipe line -> unencoded lead), Luxe, Lumberman, Preference, Jumbos. The 1980 Jeantet catalog pictured on pipedia = future bracket source (catalogue hunter target)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["jeantet"], "era_start": 1858, "era_end": 2010, "confidence": "low", "label": "Jeantet briar pipes span 1858 (briar begins) to 2010 (production discontinued after the Cuty-Fort exit); family-factory pipes = ≤1988/89 plant closure, Chacom-made sub-brand pipes = 1988-2010 — no stamp diagnostic documented to split them -> honest wide LOW"},
+        {"field": "lettering", "match": ["jeantet production", "since 1807"], "era_start": 1900, "era_end": 2010, "confidence": "low", "label": "'JEANTET Production since 1807' = EXPORT-market stamping (pipephil); form undated -> wide, low"},
+        {"field": "lettering", "match": ["florid j"], "era_start": 1858, "era_end": 1950, "confidence": "low", "label": "florid-J 'Jeantet' = EARLY stamping per pipephil; no year edges documented -> wide early lean"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "catalogue_1980": "pipedia pictures a 1980 Jeantet catalog (Valitchka) — mirror + mine for line floors.",
+    "factory_vs_subbrand": "Find a stamp diagnostic separating family-factory (≤1988) from Chacom-made (1988-2010) Jeantets — French collector forums / fumeursdepipe.net sweep.",
+    "montreal_la_cluse": "1938+ Ain-branch cheaper pipes — any distinct marking? Unknown."
+  }
+}

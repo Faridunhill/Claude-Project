@@ -1,0 +1,45 @@
+{
+  "_doc": "PREBEN HOLM dating cabinet (#30, Wave D, built 2026-07-17-eve; roster #36). The Danish-freehand prodigy (1947-1989): first pipes sold June 5, 1963 (11 days before his 16th birthday); factory CLOSED EARLY 1986 = the hard ceiling (a brief same-year re-entry attempt failed on health). SOURCES: staging/pipedia/Preben_Holm.json (INCLUDES his own 1983-84 autobiography = primary) + Winslow.json (Andersson 1997). ⚠️ CROSS-CABINET CORRECTION NOTED: benwade.json carries 'Handmade Denmark' Preben Holm window 1971-89 (to his death); the autobiography says staff dismissed END 1985 + factory closed EARLY 1986 -> Danish Ben Wade production realistically ceased 1986; benwade bracket kept wide (death ceiling) with this note mirrored there.",
+  "brand": "Preben Holm",
+  "region": {"country": "Denmark", "school": "danish"},
+  "aliases": ["preben holm", "ph", "pipe lon", "rungsted", "monte verdi"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "b. June 16, 1947. Age 15: cellar workshop (1/2 m²) in father's Copenhagen provision shop; JUNE 5, 1963 first pipes sold (father's shop, then Pipe-Dan, 20-30/week). Grain-following freehands invented at ~500kr vs 30kr standard — the 'Danish Design' fancy wave. 'PIPE LON' pipes for Lon Schwartz (St. Thomas, US Virgin Islands; US monopoly; c.1965 examples known). March 1969: Snug Harbour (NYC) US cooperation + series production; bought out a pipe factory; 45 employees at age 22. Snug Harbour defaults -> FEBRUARY 1971 meeting with Herman G. Lane -> Ben Wade label (Lane-owned name; finishes altered; qualities upgraded); later Lane sold 'Preben Holm' pipes too (Snug Harbour's leftover stock became instant collectors' items). 12-13 year Lane cooperation. 1983 (autobiography year = 20th anniversary): staff of 20; DIAMOND COLLECTION launched 'this year' (50,000kr pieces, golden ring + diamond); PRIVATE COLLECTION = his signature grade (~2% of production, personally molded + finished + SIGNED). Head-assistant Poul Winslow (hired 1967). END 1985: most staff dismissed (US market collapse); EARLY 1986: factory closed completely; re-entry attempt 1986 stopped by illness; died 1989 (42). Lines outside the Lane contract: RUNGSTED (Mariner, Viking), MONTE VERDI; also Caprice/Britta Beck label pipes; 'Ben Wade Nobel Prize 2000' = precursor of the Private Collection (undated)."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["ph"],
+    "wordmarks": ["preben holm", "pipe lon", "private collection", "diamond collection", "rungsted", "monte verdi", "harlequin"],
+    "physical": "Fancy freehands: grain-chased shapes, smooth+blast combos, bark-top crowns, bark stem-ends. Grades incl. Private Collection (e.g. '404C') with his signature. Series-produced era pipes (1969-71) exist alongside handmades. Ben Wade-labelled Danish production = see benwade.json (its own cabinet)."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "pipe lon": [1963, 1971],
+        "diamond collection": [1983, 1986]
+      },
+      "_notes": "pipe lon: the Lon Schwartz US-monopoly brand — from the early sales (c.1963-65 examples) until the Lane switch (1971); approx edges. diamond collection: launched 'this year' in the 1983 autobiography -> [1983,1986] to the closure. NOT encoded: private collection (intro undated; 'Nobel Prize 2000' precursor), rungsted + monte verdi (undated side lines), Britta Beck / Caprice (label pipes, undated)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["preben holm"], "era_start": 1963, "era_end": 1986, "confidence": "high", "label": "Preben Holm production window: first sale June 1963 -> factory closed early 1986 (hard ceiling; he died 1989 without resuming)"},
+        {"field": "lettering", "match": ["rungsted", "monte verdi"], "era_start": 1963, "era_end": 1986, "confidence": "medium", "label": "PH side lines (outside the Lane contract) -> production window"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "grade_system": "PH grade stamps (404C-class Private Collection numbers etc.) are not decoded in our sources — collector lists could map number blocks to eras.",
+    "series_vs_hand": "1969-71 series-produced pipes vs handmades: stamp differences unverified.",
+    "snug_harbour_stock": "Snug-Harbour-era 'Preben Holm' pipes (pre-1971) vs Lane-era ones — distinguishing stamps unknown."
+  }
+}

@@ -1,0 +1,107 @@
+{
+ "_doc": "OLDENKOTT dating cabinet (#52, WAVE F — THE ARCHIVE-BORN CABINET, built 2026-07-17-eve). The Rhenish tobacco dynasty's pipe brand. ★OUR OWN HARVEST ANTEDATES THE LITERATURE: pipedia says the German company 'produced pipes starting in 1932', but our Europeana-fulltext snippet-verified BERLIN CAMPAIGN (May-June 1926, 8 issues: '…geraucht aus einer eleganten Original-Oldenkott-Pfeife') proves Oldenkott-BRANDED pipes in commerce by 1926 -> wordmark floor 1926 encoded (maker attribution for 1926-32 open). SOURCES: staging/pipedia/Oldenkott.json (detailed; internal contradictions flagged) + our oldenkott_dating facts (ANNO graded: 1863='fiction' novel; Kruger 1901; firm style 1918) + eu_ft grading + Europeana museum artifacts (23). CONFLICTS noted: closure 1992 (main text, Kersten era) vs 'factory in Hallen closed April 1982, workers to VAUEN' (Lopes paragraph) — encoded wide w/ both; founding 1740 (infobox) vs 1760 Amsterdam (text).",
+ "brand": "Oldenkott",
+ "region": {
+  "country": "Germany",
+  "school": "german"
+ },
+ "aliases": [
+  "oldenkott",
+  "henric's oldenkott",
+  "herms oldenkott",
+  "derby by oldenkott",
+  "michelle visconti",
+  "egra",
+  "oldenkott egra"
+ ],
+ "max_year": 2026,
+ "history_anchors": {
+  "_doc": "Tobacco dynasty: 1740/1760 origins (Henricus Oldenkott/Rees + Hermannus Oldenkott/Ahaus lines; Amsterdam house — 'Herms, Oldenkott und Zonen in Ahaus mit einem Zweiggeschäft in Amsterdam' in 1918 print, our ANNO grade). 1838 August Kersten (Rees) buys Heinric Oldenkott factories (Elten + Weesp). One of Germany's largest tobacco firms (Kruger smoked Oldenkott Knaster in exile; his likeness on packets — 1901, our ANNO grade; our eu_ft mass = the Dutch 1850s-70s heyday). ★1926: 'Original Oldenkott' PIPES advertised nationally in Berlin (OUR eu_ft find). 1929: buys the Ahaus + Neuss Hermann-Oldenkott factories. 1932: German company's own PIPE production begins (pipedia). Post-war: Germany's #2 pipe maker (after VAUEN). TURBO series (motor-block-turned, silver-grey lacquer — 'probably influenced Porsche Design'; actual Porsche Design pipes = Elbert Gubbels, pipephil). 1972: bought by NIEMEIJER (NL); 1974 tobacco production CEASES — pipes only. Lopes variant: Hallen factory closed April 1982, some workers -> VAUEN (vauen.json link). 1987: Kersten family buys the pipe company back; 1992: CLOSED. 2012: marks acquired by Alexander Strähnz (Cologne) -> Italian-made REVIVAL (smaller bowls, slimmer shanks; premium models get the historic RED+WHITE DOT mark back). 1973 catalog documented (qualities/shapes in mirror). 'Bruyere Prima' probably 1950s. Sub-brands: EMINENT, EXCELLENT, EXCELSIOR (+ horseshoe stamp — THE BARI TRAP RESOLVED: an 'Excellent' with horseshoe = Oldenkott, NOT Bari), MAXIM (for Terella/Wolsdorff; post-closure made by Design Berlin), OLDEX, MICHELLE VISCONTI (trademark registered 1981-06-23, DELETED 2002 = a clean window), Derby ('Derby by Oldenkott', horseshoe). 'Danish Design' stamped Eminent/Excellent = the 60s-70s Danish-wave era. ★EGRA ADDED 2026-08-01 (customer correction, verified): pipedia's Oldenkott model list carries 'Oldenkott Egra' between Dorado and Eminent (shape numbers NOT recorded there). NO source anywhere links EGRA to Hilson — 0 hits across pipephil's whole brand index, and Hilson's documented lines are Elan/Fantasia/Avanti/Bolero/Maestro/New Tone/Royal Club/Unicorn/Viva/Mastro. Confidence MEDIUM: one source, no corroborating shape number. ⚠️Ahaus is a TOWN in Westphalia, not a parent company — Oldenkott's own factory was there ('Herms, Oldenkott und Zonen in Ahaus', 1918 print; 1929 bought the Ahaus + Neuss Hermann-Oldenkott factories). EGRA therefore points to GERMANY, never Belgium."
+ },
+ "brand_marks": {
+  "stem_logos": [
+   "red and white dot",
+   "horseshoe"
+  ],
+  "wordmarks": [
+   "oldenkott",
+   "eminent",
+   "excellent",
+   "excelsior",
+   "maxim",
+   "oldex",
+   "derby",
+   "turbo",
+   "supra",
+   "rubin",
+   "nicofry",
+   "danish design",
+   "michelle visconti"
+  ],
+  "physical": "Horseshoe stamp on sub-brands (Excellent, Derby). Red+white stem dot = historic premium mark (revived 2012+). Turbo = ribbed motor-block bowl, silver-grey lacquer. 1973-catalog quality names (Supra, Rubin, Nicofry w/ ring, Privat...) + 1-3 digit shape numbers."
+ },
+ "fusion_order": [
+  "line_years",
+  "feature_era",
+  "stamped_year"
+ ],
+ "channels": {
+  "line_years": {
+   "modern_floor_year": 2000,
+   "years": {
+    "michelle visconti": [
+     1981,
+     2002
+    ],
+    "turbo": [
+     1965,
+     1992
+    ]
+   },
+   "_notes": "michelle visconti: DPMA trademark window 1981-2002 (registered/deleted — documentary). turbo: pre-Porsche-Design (1972 PD launch context) -> [1965,1992] approx-wide, LOW-leaning. NOT encoded: the 40+ quality names (Aristocrat..Tradition — 1973-catalog era but spans unknown), Bruyere Prima ('probably 1950s' — too soft), Maxim (span crosses into Design-Berlin production — trap noted), Eminent/Excellent/Excelsior (sub-brands, undated spans)."
+  },
+  "feature_era": {
+   "table": [
+    {
+     "field": "lettering",
+     "match": [
+      "oldenkott"
+     ],
+     "era_start": 1926,
+     "era_end": 2026,
+     "confidence": "medium",
+     "label": "Oldenkott-branded PIPES: floor 1926 (OUR Berlin-campaign evidence; pipedia's own-production start = 1932); German factory era ends 1992 (Lopes variant: Hallen 1982); 2012+ = Italian-made revival -> a 1992-2012 gap, revival tells = smaller bowls + red/white dot"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "danish design"
+     ],
+     "era_start": 1965,
+     "era_end": 1985,
+     "confidence": "low",
+     "label": "'Danish Design' stamped sub-brand pipes = the Danish-wave era (approx)"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "horseshoe"
+     ],
+     "era_start": 1950,
+     "era_end": 1992,
+     "confidence": "low",
+     "label": "horseshoe stamp (Excellent/Derby sub-brands) = factory-era mark; ⚠️ resolves the Bari-Excellent attribution trap (bari.json)"
+    }
+   ]
+  },
+  "stamped_year": {
+   "_doc": "Generic channel."
+  }
+ },
+ "channels_future": {
+  "delpher": "Delpher (NL) = the door for the Amsterdam mass (fronts board) — could date Dutch-market pipe ads.",
+  "catalog_1973": "The 1973 catalog table (in mirror) = quality->shape mapping; more catalogs would bracket the quality names.",
+  "revival_check": "Post-2012 Strähnz revival: current production status + stamps to verify.",
+  "kruger_story": "S-candidate 'The President on the packet' (Kruger 1901) = social/encyclopedia."
+ }
+}

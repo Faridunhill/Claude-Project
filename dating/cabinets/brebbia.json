@@ -1,0 +1,44 @@
+{
+  "_doc": "BREBBIA dating cabinet (#22, built 2026-07-18 — Wave B). One clean cliff does the work: 1968, when the MPB (Manifattura Pipe Brebbia) logo gave way to the gold-outlined DIAMOND and the brand became simply 'Brebbia'. Before that: gnome stem logo (1953-56, variant outline to 1968). Company story: 1947 Enea Buzzi + Achille Savinelli joint firm (pipes = SAVINELLI-branded); 1953 split — Buzzi keeps the factory; MPB brand created 1953 (pipephil) / formally set up 1956-06-22 after the buyout (monjureinternational) -> start encoded 1953 = earliest plausible, conflict noted; 1968 logo cliff; 1990s Luciano Buzzi (son) manages. SOURCES: staging/pipedia/Brebbia.json + pipephil logo-brebbia mirror (stamp authority) + monjureinternational.com corroboration — extract in brand_research/brebbia_dating/. TRAP: line 'Serie 1960' carries a year in its NAME — never a manufacture year (perception must not feed it to stamped_year).",
+  "brand": "Brebbia",
+  "region": {"country": "Italy", "school": "italian"},
+  "aliases": ["brebbia", "mpb", "m.p.b.", "manifattura pipe brebbia", "bebbia"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1947 Enea Buzzi + Achille Savinelli found the joint firm at Bosco Grosso di Brebbia (Varese) — output sold under the SAVINELLI name (exclusive to 1953, name rights ran out 1956). 1953 split: Savinelli builds his own plant at Barasso; Buzzi keeps the Brebbia factory; MPB brand born (1953 per pipephil / 1956-06-22 formal buyout per monjure). 1968: logo changes MPB -> simple gold-outlined diamond, brand = 'Brebbia' (slow-smoking-competition era). 1990s+: Luciano Buzzi manages. Seconds: Cellini (script-B stem logo), Jceberg/Iceberg, Jumbo, Vincenzo Lombardi. Rainer Barbi designed a 'Barbi Design' line (undated). Corsellini (Firenze) relation = open question. Modern: 9mm filter pipes for northern Europe, some with VAUEN's Konex system."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["gnome", "diamond", "script b"],
+    "wordmarks": ["brebbia", "mpb", "m.p.b.", "golden gnome", "sun", "pura", "amaranto", "rubino", "gioia", "golden natural", "silver star", "lido", "lord", "nikotex", "linea roma", "collection", "serie 1960", "barbi design"],
+    "physical": "Pre-1968: 'M.P.B.' in the stamp (diamond with MPB letters), gnome stem logo (original 1953-56; slightly different outline 1956-68). Post-1968: gold-outlined diamond stem logo, brand word 'Brebbia' alone. Script 'B' stem logo = destined for the Cellini seconds line. Enea Buzzi signature on Collection pipes. ⚠️ 'Serie 1960' = a LINE NAME, not a year."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "No line has documented intro/end years in our sources -> nothing encoded (honesty rule: thin/unknown line years stay out). Parked names: golden gnome, sun, pura (+diagonale), amaranto, rubino serie 83, gioia, golden natural, silver star, lido, lord, nikotex, linea roma, collection, serie 1960 (TRAP: name contains a year), barbi design (Rainer Barbi collaboration, undated). Seconds (separate stamps, route here for era logic only): cellini, jceberg, jumbo, vincenzo lombardi."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["mpb", "m.p.b", "manifattura pipe brebbia", "manifatture pipe brebbia"], "era_start": 1953, "era_end": 1968, "confidence": "medium", "label": "MPB stamp = pre-cliff era (diamond replaced it 1968; start 1953-pipephil vs 1956-monjure). ⚠️ TRAP (2016 company catalogue, mined 2026-07-17): the M.P.B. logo was REVIVED ~2008 for Vintage/silver-ferrule/pipe-of-the-year lines — a modern-construction MPB (acrylic stem, Ag-925 ferrule, 4-digit modern shapes, 'Museum Series') = 2008+, NOT pre-1968. Confidence dropped HIGH->MEDIUM for the trap; corroborate with gnome/diamond + construction", "unless_line": ["museum", "vintage"]},
+        {"field": "stem_logo", "match": ["gnome"], "era_start": 1953, "era_end": 1968, "confidence": "medium", "label": "gnome stem logo: original 1953-1956 (pipephil), variant outline documented 1956-1968 -> wide honest 1953-1968"},
+        {"field": "stem_logo", "match": ["diamond"], "era_start": 1968, "era_end": 2026, "confidence": "high", "label": "gold-outlined diamond = the 1968+ logo (still current)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel. ⚠️ TRAP: 'Serie 1960' is a line name — perception must pass series names via line_name, never stamped_year."}
+  },
+
+  "channels_future": {
+    "gnome_variants": "If the 1956 gnome-outline change ever gets a documented visual key (original vs variant), split the gnome bracket into 1953-56 / 1956-68.",
+    "barbi_design": "Rainer Barbi collaboration line — date it via Barbi's career window when a source lands (artisan registry candidate).",
+    "konex_9mm": "Konex-system filter pipes cannot predate Vauen's Konex (1968); a documented Brebbia adoption year would give a floor.",
+    "enea_signature": "Enea Buzzi signature on Collection pipes — his death year would give a ceiling; undocumented in our sources."
+  }
+}

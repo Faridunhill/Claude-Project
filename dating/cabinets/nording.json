@@ -1,0 +1,43 @@
+{
+  "_doc": "NØRDING dating cabinet (#29, Wave D, built 2026-07-17-eve; roster #35). Erik Nørding (blacksmith-engineer): started as SON (Skovbo og Nørding) in the early 1960s, renamed NØRDING mid-'60s after the partnership split. Grading letters + the SON precursor window are the levers. SOURCES: staging/pipedia/Nording.json (Chuck Stanion interview — detailed) + Dennis Dreyer photo captions ('Early 1960s SON D Grade'). Single-source brackets = approx-flagged.",
+  "brand": "Nording",
+  "region": {"country": "Denmark", "school": "danish"},
+  "aliases": ["nording", "nørding", "erik nording", "erik nørding", "son", "skovbo og nørding"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "Erik Nørding: blacksmith at 15, then engineering (father's razor-blade factory). Pipe machinery built for repairman SKOVBO -> unpaid -> partnership: SON pipes (Skovbo Og Nørding acronym), early 1960s; each partner borrowed $5,500. Skovbo quits the partnership ('you'll never be a pipemaker') -> by the legal agreement Nørding KEEPS the company, pays Skovbo off over 5 years. 'Continued with SON pipes for only a year or two before changing the company name to NØRDING in the mid-60s.' Exclusively freehands at first; graded A/B/C/D + EXTRA (highest); an F grade added LATER (cheaper than A). 1970s-early-80s = the freehand boom: peak 52 workers. Later: ~6 makers, ~15k pipes/yr (interview era ~2001); today ~50k/yr with 90% export (intro paragraph — figures vary by era). Handmades (acrylic bits, ~300/month) vs machine-roughed freehands (vulcanite). Hunting Series = annual themed pipe (running by 2001; start year not documented). Giant Guinness-record pipe (Copenhagen airport). Seconds: AALBØRG, ERIKSEN; 'Sorn' also made by Nørding. Briar: Corsica + Greece."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["nording script"],
+    "wordmarks": ["nording", "nørding", "son", "extra", "pradikat", "nord-coat", "aalbørg", "eriksen", "sorn"],
+    "physical": "SON-era: 'SON' stamp + grade letter (A-D), some with horn shank extensions; 'SON Pradikat' line existed. Nørding-era: script/block Nørding + grade letter (A-E... F later, EXTRA top); Hunting Series = annual motif; high grades with sterling mounts (Nørding 18, 20)."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "Hunting Series: annual, running by 2001 — start year undocumented -> unencoded. NORD-COAT / AS / FS lines pictured, undated. Grade letters span the brand -> never encoded. F grade 'added later' — year unknown."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["son", "skovbo"], "era_start": 1960, "era_end": 1967, "confidence": "medium", "label": "SON (Skovbo og Nørding) marking = the partnership window: early-60s founding, renamed mid-60s ('only a year or two') -> [1960,1967] approx"},
+        {"field": "lettering", "match": ["nording", "nørding"], "era_start": 1964, "era_end": 2026, "confidence": "high", "label": "Nørding company name = from the mid-'60s rename -> floor 1964 (approx: 'mid-60s')"},
+        {"field": "lettering", "match": ["eriksen", "aalbørg", "aalborg"], "era_start": 1964, "era_end": 2026, "confidence": "low", "label": "Nørding seconds (undated forms) -> brand-wide window only"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "hunting_series": "The annual Hunting Series pipes are year-THEMED — a per-year motif list would date them EXACTLY; nordingpipes.com / collector lists = source.",
+    "f_grade_intro": "Pin the F-grade introduction year.",
+    "peak_era_split": "52-worker peak (70s-early 80s) vs 6-maker era — any stamp difference? Unverified."
+  }
+}

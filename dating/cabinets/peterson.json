@@ -1,0 +1,232 @@
+{
+ "_doc": "PETERSON dating cabinet = DATA only. Channel-typed for the general engine (agents/dating/engine.py). Peterson dates by: line-years + COM stamp + silver hallmark + SHAPE-NUMBER windows (feature_era channel added 2026-07-22 from Mark Irwin's 'A Guide to System Shapes 1896-2019' Parts 1+2, petersonpipenotes.org #146/#147, mirrored in library/shape_charts/ -- Irwin = THE Peterson authority, same source tier as the hallmark notes). Consolidated 2026-07-15 from the proven Peterson tables; nothing from the 3-day build is lost.",
+ "brand": "Peterson",
+ "aliases": [
+  "peterson",
+  "k&p",
+  "k & p",
+  "kapp & peterson",
+  "kapp and peterson",
+  "kapp",
+  "dublin"
+ ],
+ "max_year": 2026,
+ "brand_marks": {
+  "stem_logos": [
+   "P"
+  ],
+  "wordmarks": [
+   "peterson",
+   "k&p",
+   "k & p",
+   "kapp",
+   "dublin"
+  ],
+  "logo_exemplars_dir": "C:\\Users\\hadid\\FaridOS\\data\\hub\\pipes\\brand_research\\peterson_p_logo\\pipephil\\images"
+ },
+ "fusion_order": [
+  "line_years",
+  "com_stamp",
+  "assay_hallmark",
+  "feature_era",
+  "stamped_year"
+ ],
+ "channels": {
+  "com_stamp": {
+   "table": [
+    {
+     "match": [
+      "irish free state"
+     ],
+     "era_start": 1922,
+     "era_end": 1937,
+     "confidence": "high",
+     "note": "1 or 2 lines (petersonpipenotes: adopted 1922, replaced by Eire 1937)"
+    },
+    {
+     "match": [
+      "made in eire"
+     ],
+     "era_start": 1938,
+     "era_end": 1947,
+     "confidence": "high",
+     "note": "circle format. Sources DISAGREE on end: rule-of-thumb table said 1941, petersonpipenotes/pipedia say 1938-1947 (Made in Ireland circle appears ~1945, overlap real) -> wide honest end 1947 (retro-sweep 2026-07-16)"
+    },
+    {
+     "match": [
+      "eire"
+     ],
+     "era_start": 1937,
+     "era_end": 1949,
+     "confidence": "high",
+     "note": "bare EIRE wording = 1937-1949 (state renamed); pre-Republic. ★UPGRADED medium->high 2026-07-26 (internal mining): 2nd INDEPENDENT source = pipedia (staging/pipedia/Peterson.json), verbatim 'Irish Free State was adopted in 1922; and replaced by Eire in 1937 and then by Republic of Ireland in 1949' -- corroborates both endpoints; joins the petersonpipenotes IFS note."
+    },
+    {
+     "match": [
+      "made in the republic of ireland",
+      "republic of ireland",
+      "rep. of ireland"
+     ],
+     "era_start": 1949,
+     "era_end": 2026,
+     "confidence": "high",
+     "note": "the post-1949 stamp"
+    },
+    {
+     "match": [
+      "made in ireland"
+     ],
+     "era_start": 1915,
+     "era_end": 1949,
+     "confidence": "high",
+     "note": "PRE-REPUBLIC (no 'Republic of'). ★UPGRADED medium->high 2026-07-26 (internal mining): 2nd INDEPENDENT source = pipedia (staging/pipedia/Peterson.json), verbatim '1915 - 1949 The Pre Republic Period' + 'Around 1916, Peterson began stamping their pipes Made in Ireland in a block format' + 'From about 1930 to 1949, most of the pipes were stamped Made in Ireland' -- corroborates the 1915-1949 bracket.",
+     "refine": {
+      "block": [
+       1947,
+       1949
+      ],
+      "circle": [
+       1945,
+       1947
+      ]
+     }
+    },
+    {
+     "match": [
+      "made in england",
+      "made in london",
+      "london england",
+      "great britain"
+     ],
+     "era_start": 1895,
+     "era_end": 1970,
+     "confidence": "medium",
+     "note": "English (London) factory era. ★END WIDENED 1959->1970 2026-07-26 (internal mining, honest bracket): pipedia (staging/pipedia/Peterson.json) verbatim '1969/70 - The Made in England stamp was discontinued with the closing down of the London based factory' -- our old 1959 end was unsourced; widened to the sourced factory-closing date (never narrow on uncertainty). STAYS medium: single clear source for the span. ★2026-07-28 (publishing-day mining, petersonpipenotes mirror) — CONFLICT DOCUMENTED, still medium: Mark Irwin gives a PRIMARY-CITED manufacturing window that does NOT match pipedia. Post #462 verbatim: 'Peterson's London factory from its opening at 74-77 White Lion Street in late 1937 until its final dissolution on the 5th of September, 1963' (footnote: 'London Gazette, Sept. 17, 1963, p. 341'). Same mirror, two more statements: #151 'it was made after the London factory opened in 1937 and before it closed in the early 1960s'; #153 '1937 is the earliest this 359 can have been made, simply because that's the year the London factory opened'. pipedia instead says Peterson 'maintained a pipe factory in London since 1899' and dates the stamp's end to 1969/70 — pipedia appears to conflate the London SHOPS (opened 1899) with the White Lion St manufacturing factory. Because the two accounts genuinely disagree at BOTH ends, the bracket is kept WIDE (1895-1970) and confidence STAYS medium — the 1937-1963 manufacturing window is published as the documented lean, not as the bracket. Also from #462: 'London-hallmarked Petersons have been identified with dates of 1949 to 1954. Most London-made Petersons seem to have been made in these post-war years, from 1949 until the closing of the factory.'"
+    },
+    {
+     "match": [
+      "peterson's patent",
+      "patent"
+     ],
+     "era_start": 1890,
+     "era_end": 1916,
+     "confidence": "medium",
+     "note": "Patent era. END-YEAR CONFLICT documented 2026-07-26 (internal mining): pipedia 'Patent Period 1890-1914' vs Irwin bulldog essay #388 '1891-1919' vs our 1916 (between them). START 1890 solid (patent granted, pipedia 'Patent No.8, 1890'); the END is genuinely fuzzy -- patent-stamped pipes ran a few years past the ~1914 expiry. STAYS medium until a source pins the end; bracket kept wide/honest."
+    }
+   ]
+  },
+  "line_years": {
+   "modern_floor_year": 2000,
+   "years": {
+    "kapruf": [
+     1922,
+     1987
+    ],
+    "system": [
+     1896,
+     2026
+    ],
+    "deluxe": [
+     1940,
+     2026
+    ],
+    "de luxe": [
+     1940,
+     2026
+    ],
+    "aran": [
+     1965,
+     2026
+    ],
+    "sherlock holmes": [
+     1987,
+     2026
+    ],
+    "dracula": [
+     2012,
+     2026
+    ],
+    "halloween": [
+     2009,
+     2026
+    ],
+    "st patrick": [
+     1985,
+     2026
+    ],
+    "st. patrick": [
+     1985,
+     2026
+    ],
+    "samhain": [
+     2009,
+     2010
+    ],
+    "rosslare": [
+     2000,
+     2026
+    ],
+    "christmas": [
+     2009,
+     2026
+    ],
+    "founder": [
+     2015,
+     2026
+    ],
+    "pub pipe": [
+     2019,
+     2026
+    ]
+   },
+   "_notes": "2026-08-01 (publishing-day upgrade + corrections, annual-commemorative block). ★CHRISTMAS 1990 -> 2009, medium -> HIGH: two INDEPENDENT sources state the first Christmas pipe verbatim. (1) Mark Irwin, petersonpipenotes #437 'A Visual History of the Christmas Pipes 2009-2024' (pub. 22 Dec 2024): quick-reference 'Christmas (2009-) ... Original release in shape B33 only, a bent setter shape from the Rivers Collection, sterling band inscribed with fir tree', the annual-pipe list line '2009 - : Christmas', and 'an annual pipe commemorating the season arrived only 15 years ago'. (2) pipedia Peterson article (OUTSIDE the petersonpipenotes mirror, so genuinely independent): 'Christmas Pipe: Originally commissioned by the American retailer \"Cup O' Joes\", Peterson's first ever Christmas pipe! ... The bowl was stamped with the Peterson logo and \"Christmas 2009\". ... Each year since then, Peterson has continued to issue ... a Christmas pipe, now known as a \"Holiday Season\" issue.' The old 1990 floor was never sourced. ★ST PATRICK 1995 -> 1985 (stays medium, WIDENED not narrowed): 1995 was likewise unsourced and the two sources CONFLICT -- pipedia: 'Saint Patrick's Day: first issued, Mid 1980s (was previously know as Flag Pipe)'; Irwin #84 'A Visual History of the St. Patrick's Day Pipes, 1998-2022': 'We know the series began in 1998 because ... the final sales catalog of [Hollco-Rohr], dated July 15, 1998'. Irwin's is the documented one (a primary catalogue) and is our published lean; the floor is widened to pipedia's mid-1980s so a genuine Flag-Pipe-era example is not excluded. Do NOT narrow to 1998 until the pipedia claim is disproved. ★SAMHAIN 2017-2026 -> 2009-2010 (2017 was unsourced and contradicted): Irwin #246 'The 2021 Halloween System Pipe' -- 'the Samhain (2009), the Dracula 2012 and the Dracula army mount (2018)' and 'The line seems to have been sold only in 2009 and 2010'; 'seems' is his own hedge and is carried here. ★HALLOWEEN floor 2009 KEPT (not the 2021 line launch) for a documented reason: the 2009 Samhain's nickel band is 'stamped Peterson in script over a witch on a broom stick over HALLOWEEN in small caps' (#246), so the WORD Halloween on a band can be 2009/2010 as well as 2021+. Irwin's annual list gives '2021 - : Halloween (preceded by the Samhain in 2009 only)'."
+  },
+  "assay_hallmark": {
+   "applies_when": "sterling_silver_band",
+   "assay_office": "Dublin",
+   "chart_ref": "C:\\Users\\hadid\\FaridOS\\data\\hub\\pipes\\brand_research\\peterson_hallmark\\peterson_hallmark_chart.json",
+   "fineness_boundary": {
+    "harp_crowned_max": 2002,
+    "point925_min": 2003
+   },
+   "no_hallmark_gap": [
+    1939,
+    1968
+   ],
+   "nickel_band_lines": [
+    "dracula",
+    "aran",
+    "kapruf",
+    "rosslare"
+   ],
+   "caveat": "bands stockpiled -> hallmark can predate the pipe by 1-3 years",
+   "_note_jubilee": "RETRO-SWEEP 2026-07-16 (petersonpipenotes.org, Mark Irwin -- THE Peterson authority, add to future sweeps): a 4th 'Jubilee' hallmark (hand holding the flaming sword 'an Claiomh Solais', dated 1916/1966) was used ONLY IN 1966 for the Easter Rising 50th -> a band showing it = EXACT 1966 (feed '1916 1966' to stamped_year: the generic channel reads the LAST year = 1966).",
+   "_note_handbook_2026_07_18": "PIPEMAN'S HANDBOOK intake (source assessment in brand_research/_general/handbooks/): (1) Peterson's OWN chart (Smoker's Guild Vol.5 2005, image asset in peterson_hallmark/) lists commemorative FOURTH marks with EXACT years: 1966 Sword of Light (corroborates Irwin's Jubilee note - now 2 sources), 1973 Glenisheen Collar (EEC), 1987 Dublin Crest, 1988 Dublin Millennium, 1999 millennium mark; Leverette: many 1987/88 pipes lack the 4th mark - presence dates, absence never does. (2) Date-letter change day: to 1931 the Dublin letter changed JUNE 1 (a pre-1932 letter spans two calendar years); from 1932 = JANUARY 1. (3) VERIFY-CONFLICT parked: handbook says Hibernia replaced by European/millesimal 925 mark OCT 1992, and Leverette says a 925-balance convention mark exists on export pipes from 1976 - TENSION with our fineness_boundary point925_min=2003; do NOT change encoding until corroborated (petersonpipenotes / Dublin assay office); if confirmed, point925_min must widen and E+925 exactness degrades honestly. (4) 'A Peterson Product' over COM = ~1948+ (late pre-Republic onward)."
+  },
+  "feature_era": {
+   "_doc": "SHAPE-NUMBER windows, mined 2026-07-22 from Irwin's System Shapes guide Parts 1+2 (library/shape_charts/ 146+147; NOTE: our Part 1 PDF mirror truncates at shape 312 -- re-mirror the full article for 312/313/314 windows). IRWIN'S EPHEMERA RULE encoded: first-year in his headers = first PAPER record; documented hallmarks can PREDATE the paper by ~1-3y (XL305a HM 1975 vs 1978 catalog; 305b Premier HM 1984 vs 1986 catalog) -- era_starts below take the earliest documented evidence. TRAPS registered: (1) the 1890-1990 Commemorative Straight Patent (issued 1990) mimics a vintage Patent-era straight System and has fooled experienced collectors -- if '1890 ... 1990' is stamped, the generic stamped_year channel correctly reads 1990; (2) XL315 = the American-market designation of XL305; (3) straight Patent Systems (shapes 29-36) ran 1896-c.1925 but bare 2-digit numbers collide with too much -- NOT machine-encoded except the documented 31 revival; (4) 120 dublin + 86 apple straights had TWO windows (c.1950s Early Republic + 1976 Associated Imports re-release) -- thin + twin-windowed, parked, not encoded.",
+   "table": [
+    {"field": "shape_number", "regex": "^3\\d{2}$", "era_start": 1937, "era_end": 2026, "confidence": "medium", "label": "300-group shape number = the 1937 catalog renumbering onward (30X = 2nd quality, 35X = 3rd; before 1937 the same shapes carried 1896-catalog numbers like 2/4/9/14)"},
+    {"field": "shape_number", "regex": "^30[123]$", "era_start": 1978, "era_end": 2026, "confidence": "medium", "label": "301/302/303 entered the System line in the 1978 Peterson-Glass catalog (first new System shapes since the 1930s; wide horn-flared P-Lip on the 301 = the 1978-1990 issue)"},
+    {"field": "shape_number", "regex": "^304$", "era_start": 1991, "era_end": 2026, "confidence": "medium", "label": "304 medium flat bottom debuts in the 1991 Flat Bottom brochure (Paddy Larrigan design)"},
+    {"field": "shape_number", "regex": "^306\\s*\\(?b\\)?$", "era_start": 1991, "era_end": 2026, "confidence": "medium", "label": "306(b) large flat bottom = 1991+ (bare '306' stays on the generic 1937+ rule -- 306 is ALSO the 1937 2nd-quality oom paul number)"},
+    {"field": "shape_number", "regex": "^306\\s*\\(?a\\)?$", "era_start": 1896, "era_end": 1945, "confidence": "medium", "label": "306(a) XL oom paul = 1896 catalog shape 2; renumbered 306/356 in 1937 then dropped from the catalog -- production likely ran a few more years (approx end 1945)"},
+    {"field": "shape_number", "regex": "^308$", "era_start": 1937, "era_end": 1959, "confidence": "medium", "label": "308 large chubby billiard: number assigned in the 1937 catalog (shape = 1896 catalog 14), officially dropped 1959; inspired the 1981 Mark Twain Commemorative"},
+    {"field": "shape_number", "regex": "^309$", "era_start": 1937, "era_end": 2013, "confidence": "medium", "label": "309 large bent dutch ('Thinking Man' / 'Basil Rathbone'): number from the 1937 catalog (1896 shape 4 / 4AB), discontinued 2013 (a few Derry Rustic/Arklow stragglers after)"},
+    {"field": "shape_number", "regex": "^(xl)?305\\s*\\(?a\\)?$", "era_start": 1975, "era_end": 1984, "confidence": "medium", "label": "305(a)/XL305(a)/XL315(a) bent dublin: documented HM 1975 (predates the 1978 catalog paper), replaced by the (b) calabash by 1984 -- the shortest-lived System shape"},
+    {"field": "shape_number", "regex": "^(xl)?305\\s*\\(?b\\)?$", "era_start": 1984, "era_end": 2026, "confidence": "medium", "label": "305(b)/XL305(b)/XL315(b) calabash: documented Premier HM 1984, catalogs from 1986; the XL = the 1988 Sherlock Holmes launch shape (Larrigan's idea)"},
+    {"field": "shape_number", "regex": "^(xl3[01]5|305)$", "era_start": 1975, "era_end": 2026, "confidence": "low", "label": "bare 305/XL305/XL315 (a/b form unknown) = 1975+ floor; the (a) dublin form ends 1984, the (b) calabash runs on -- corroborate the bowl form (dublin vs calabash)"},
+    {"field": "shape_number", "regex": "^[o0][123]$", "era_start": 1896, "era_end": 1937, "confidence": "medium", "unless_line": ["shamrock"], "label": "O1/O2/O3 oversize House Pipes: 'Extra Large' in the 1896/1906 catalogs, last catalogued in the 1922 price list, documented through the IFS era (1922-1937). NOT the Shamrock 02/O2BB (late 1940s+, slimmer, often with reservoir) -- rule skips when line = Shamrock"},
+    {"field": "shape_number", "regex": "^31$", "era_start": 1945, "era_end": 2018, "confidence": "low", "label": "31 straight System: 1945 catalog to its 2018 drop (the only straight System in continuous production). LOW -- corroborate System features (P-Lip, reservoir); the 1896-c.1925 straight Patents used shapes 29-36"}
+   ]
+  },
+  "stamped_year": {
+   "_doc": "Generic channel (added to fusion 2026-07-16): commemoratives carry literal years -- the 1966 Jubilee hallmark ('1916 ... 1966' -> 1966), anniversary lines (Founders/150th etc.), and the 1890-1990 Commemorative Straight Patent (reads 1990 -- correctly defeating its vintage-Patent look). Reads the LAST 4-digit year."
+  }
+ },
+ "region": {
+  "country": "Ireland",
+  "school": "irish"
+ },
+ "_note_bna_1893_1894_image_verified_2026_07_18": "TILE-OCR + VISUAL VERIFICATION (clips + hit tiles in brand_research/bna_clips/): (1) ★ EARLIEST PRINT WE HOLD: Irish Times 1893-06-02 p.1, Kosmos Ballots, Suburban Stall: '3 Peterson's Patent Pipes — Ticket 267' as raffle prizes — the brand called 'Peterson's PATENT Pipes' in Dublin print 3 years after the 1890 patent; already gift/prize-worthy. (2) ★★ Irish Times 1894-05-16 p.7: KAPP v. LALOR, Chancery Division, Master of the Rolls — plaintiffs ALFRED HENRY KAPP, CHRISTIAN G. B. KAPP and CHARLES PETERSON (pipe manufacturers + tobacconists, Grafton Street) v. Mathew A. Lalor (Dublin tobacconist) for infringing Charles Peterson's pipe patent; the pipe 'known as Kapp's pipe or Peterson's pipe'; system described in court: reservoir in the bowl + tapering mouthpiece preventing nicotine/saliva re-entering the mouth; defendant took B.B.B. pipes and REBORED/enlarged them to fake the reservoir; NO defence filed; PERPETUAL INJUNCTION + costs granted. Dating value: 1894 trade names, principals' names, and the System's legal description; also corroborates the pre-1896 'Kapp & Peterson' naming era (firm names, not yet a trademark-heavy stamp system). No bracket changes."
+}

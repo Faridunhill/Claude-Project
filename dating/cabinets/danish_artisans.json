@@ -1,0 +1,44 @@
+{
+  "_doc": "DANISH ARTISANS combine cabinet (#34, Wave D closer, built 2026-07-17-eve; the roster's Tier-4 combine: 'small Danish artisan marques below cabinet-worthiness fold into ONE danish_artisans.json with per-maker floors'). A ROUTER-STYLE cabinet: each maker's stamp = a career-window bracket sourced from data/hub/pipes/artisans/registry.json (which carries the citations; enriched 2026-07-16/18 from smokingpipes/pipedia sweeps). Makers with their OWN cabinets (S. Bang, Winslow, Preben Holm, Karl Erik, Nording, Bari) are NOT here. The Ivarsson/Chonowitsch 'AN IVARSSON PRODUCT' letter system IS here — the sharpest artisan cliff set.",
+  "brand": "Danish Artisans",
+  "region": {"country": "Denmark", "school": "danish"},
+  "aliases": ["danish artisans", "an ivarsson product", "ivarsson", "sixten ivarsson", "lars ivarsson", "nanna ivarsson", "jess chonowitsch", "emil chonowitsch", "poul rasmussen", "anne julie", "tom eltang", "former", "hans nielsen"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "The school's trunk: SIXTEN IVARSSON (d.2001) — repairman at Suhr's, Copenhagen 1940s -> Denmark's first independent artisan (~1950); taught nearly everyone (Lars Ivarsson, Jess Chonowitsch, Anne Julie era-adjacent; Stanwell design work). POUL RASMUSSEN (d.1968) took over Suhr's repair shop ~1950 — the CLASSIC-shapes master (taught Jess the classics); his widow + ANNE JULIE continued the workshop after 1968. LARS IVARSSON (d.2018) from ~1960; NANNA IVARSSON (3rd generation) from ~1990. JESS CHONOWITSCH: Rasmussen 1966-68 + W.Ø. Larsen mornings + Sixten afternoons 1968-70 -> own from 1970 (with father EMIL CHONOWITSCH, who worked 1966-1990). TOM ELTANG from ~1980 (golden contrast stain; bought Karl Erik's lathe 2004 -> Sara Eltang). HANS 'FORMER' NIELSEN: W.Ø. Larsen foreman 1960-85 -> own brand 'FORMER' ~1985+ (years approx). ANNE JULIE: Rasmussen workshop 1968-75 -> own artistic career to ~2015. All windows = the artisan registry's career entries (citations there)."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["an ivarsson product", "ivarsson", "sixten", "lars ivarsson", "nanna ivarsson", "jess chonowitsch", "e. chonowitsch", "poul rasmussen", "anne julie", "tom eltang", "eltang", "former"],
+    "physical": "'AN IVARSSON PRODUCT' + sun symbol = Sixten's workshop; an added 'L' = carved by LARS (in Sixten's workshop), an added 'J' = carved by JESS (1968-70 window — the tightest artisan bracket in the system). Individual signatures otherwise (script names)."
+  },
+
+  "fusion_order": ["feature_era", "stamped_year"],
+
+  "channels": {
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["an ivarsson product"], "era_start": 1950, "era_end": 1990, "confidence": "medium", "label": "'AN IVARSSON PRODUCT' (+ sun symbol) = Sixten's own workshop production window (registry: 1950-1990 approx)"},
+        {"field": "lettering", "match": ["ivarsson product l", "l on ivarsson"], "era_start": 1960, "era_end": 1990, "confidence": "medium", "label": "'L' on an AN IVARSSON PRODUCT pipe = carved by Lars Ivarsson in Sixten's workshop"},
+        {"field": "lettering", "match": ["ivarsson product j", "j on ivarsson"], "era_start": 1968, "era_end": 1970, "confidence": "high", "label": "'J' on an AN IVARSSON PRODUCT pipe = carved by Jess Chonowitsch in Sixten's workshop — TIGHT 1968-1970 window (registry)"},
+        {"field": "lettering", "match": ["nanna ivarsson"], "era_start": 1990, "era_end": 2026, "confidence": "medium", "label": "Nanna Ivarsson = third generation, own work from ~1990"},
+        {"field": "lettering", "match": ["jess chonowitsch"], "era_start": 1970, "era_end": 2026, "confidence": "medium", "label": "Jess Chonowitsch own-name pipes = 1970+ (own workshop; before that he carved under Ivarsson/Larsen marks)"},
+        {"field": "lettering", "match": ["e. chonowitsch", "emil chonowitsch"], "era_start": 1966, "era_end": 1990, "confidence": "medium", "label": "Emil Chonowitsch (Jess's father) = 1966-1990 career window"},
+        {"field": "lettering", "match": ["poul rasmussen"], "era_start": 1950, "era_end": 1968, "confidence": "high", "label": "Poul Rasmussen = classic-shape master, Suhr's successor; died 1968 -> hard ceiling"},
+        {"field": "lettering", "match": ["anne julie"], "era_start": 1968, "era_end": 2015, "confidence": "medium", "label": "Anne Julie: Rasmussen workshop 1968-75, then own painterly-sculptural career to ~2015 (approx)"},
+        {"field": "lettering", "match": ["eltang", "tom eltang"], "era_start": 1980, "era_end": 2026, "confidence": "medium", "label": "Tom Eltang own work from ~1980"},
+        {"field": "lettering", "match": ["former"], "era_start": 1985, "era_end": 2026, "confidence": "low", "label": "'FORMER' = Hans Nielsen's own brand after his W.Ø. Larsen foreman years (1960-85); ~1985+ approx (registry flags verify)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel. Some artisans year-stamp special pieces — reads EXACT here."}
+  },
+
+  "channels_future": {
+    "registry_growth": "Every new artisan in registry.json with a career window can gain a row here — keep the two in sync (registry = source of truth + citations).",
+    "wo_larsen": "W.Ø. Larsen shop pipes (the workshop Svend Bang built) deserve their own future cabinet — staging W____Larsen.json exists.",
+    "larsen_stigart": "Larsen & Stigart shop brand (KE-made + own carvers ~a decade, even supplied Dunhill with Danish fancies) — future roster note."
+  }
+}

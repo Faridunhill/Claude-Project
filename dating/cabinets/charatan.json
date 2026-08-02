@@ -1,0 +1,258 @@
+{
+ "_doc": "CHARATAN dating cabinet = DATA only (cabinet #7, built 2026-07-16 following control/CABINET_METHOD.md). Charatan dates by the FERRARA ERA SYSTEM: bit style (tapered vs Double Comfort), DC/X shape-code suffixes, the circled-L '£' Lane stamp, CP stem-logo generations, and the shank-engraving evolution. SOURCES (local-first): pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it). DISAGREEMENTS encoded wide + noted: Reuben's death 1960 (Ferrara) vs 1962 (Ken Barnes interview); Dunhill acquisition April 1976 (Ferrara, documented) vs 1978 (main article); Lane era start 'often quoted' 1950 vs sole-distributorship 1955.",
+ "brand": "Charatan",
+ "aliases": [
+  "charatan",
+  "charatan's make",
+  "charatans make",
+  "charatan of london"
+ ],
+ "max_year": 2026,
+ "history_anchors": {
+  "_doc": "1951 CATALOGUE ANCHORS (primary, self-dated Festival-of-Britain issue): 'Established as manufacturers in 1863'; addresses = Charatan Pipes Ltd, 18 Jermyn St Haymarket S.W.1 + 49 Whitcomb St Leicester Sq W.C.2, FACTORY: Minories E.C.3; shape numbers all PLAIN (incl. 0-prefixed 014/099/0104...), ZERO DC/X suffixes -> corroborates the Ferrara post-1960 suffix cliff; mouthpieces = tapered standard + optional Dental / Solid Bite (no Double Comfort in 1951); 1951 shape names: Newmarket, Dresden China, Lonsdale, Lovat, Artist, Bell Dublin, Lumberman, Huntsman, Ritz, Zulu, Small Golfer, Prince, Cutty, Giants 42/43/44; free ANY-SHAPE bespoke service + free exchange/alteration invitation enclosed with each pipe. FERRARA ERAS: (1) Frederick 1863-1910 Mansell St then Prescot St (meerschaum first; first all-handmade English briars -- 'Charatan's Make'). (2) Reuben 1910-1960/62 (Grosvenor St later). (3) First Lane era 1961-1965 (widow sold to Lane Ltd; DC stem = the one Lane innovation). (4) Second Lane era 1965-1976 (Ben Wade machines arrive 1965; some freehands commissioned to Preben Holm + Willmer). (5) First Dunhill era 1977-1981 (Dunhill bought Lane mid-1976; Grosvenor St closed March 1982). (6) Second Dunhill era 1982-1987 = Parker/Hardcastle factory, Forest Rd Walthamstow. (7) Russell era 1988-2000 = production in Saint-Claude FRANCE (Butz-Choquin said to make them; the 'dark period'). (8) New Dunhill era 2000+ = Colin Fromm, Invicta, Chatham; per Dunhill MD, made in the Dunhill factory since 2022. Barry Jones (master carver) era ~1955-1977 -> left for Tilshead/James Upshall with Kenneth Barnes 1978. SUB-BRANDS/SECONDS (own rules): Mountbatten (apprentice-made), London Straight Grain, International Selection, Falstaff, Samirva, Vauxhall, Britannia, Benlet; Ben Wade (Lane, post-1965); Chippendale = Belvedere series for Tinder Box (encoded as a line). Pre-Lane records lost in a factory fire -> pre-1950 dating leans on hallmarks + features."
+ },
+ "brand_marks": {
+  "stem_logos": [
+   "CP",
+   "CD",
+   "L",
+   "£"
+  ],
+  "wordmarks": [
+   "charatan",
+   "charatan's make",
+   "london england",
+   "made by hand",
+   "city of london",
+   "charatan of london",
+   "supreme",
+   "selected",
+   "executive",
+   "belvedere"
+  ],
+  "physical": "CP stem logo in generations: very FINE with C penetrating P (until 1960) -> thicker, C still penetrates (1961-1977) -> C joined but NOT penetrating (from ~1980) -> distinct Dunhill-era vs Russell-era shapes. Circled £ (Lane trademark) on shank 1955-c.1980. Chippendale pipes carry CD instead of CP. Shape codes: plain numbers pre-1961; DC suffix (Double Comfort) or X suffix (saddle, no DC) from 1961."
+ },
+ "fusion_order": [
+  "line_years",
+  "com_stamp",
+  "feature_era",
+  "stamped_year"
+ ],
+ "channels": {
+  "com_stamp": {
+   "table": [
+    {
+     "match": [
+      "france",
+      "made in france",
+      "saint-claude"
+     ],
+     "era_start": 1988,
+     "era_end": 2000,
+     "confidence": "high",
+     "note": "'France' marking = Russell era (production moved to Saint-Claude 1988-2000)"
+    },
+    {
+     "match": [
+      "london"
+     ],
+     "era_start": 1863,
+     "era_end": 1987,
+     "confidence": "low",
+     "note": "London-praising markings ran until the 2nd Dunhill era ended (1987); they disappear under Russell. LOW conf: post-2000 Chatham pipes may reference London again -- verify"
+    }
+   ]
+  },
+  "line_years": {
+   "modern_floor_year": 2000,
+   "years": {
+    "supreme s": [
+     1957,
+     2026
+    ],
+    "underboar": [
+     1918,
+     1932
+    ],
+    "chippendale": [
+     1977,
+     1981
+    ],
+    "supreme": [
+     1951,
+     2026
+    ],
+    "selected": [
+     1951,
+     2026
+    ],
+    "special": [
+     1951,
+     2026
+    ],
+    "de luxe": [
+     1951,
+     2026
+    ]
+   },
+   "_notes": "supreme s: introduced by Lane 1957 -> FLOOR. underboar: own-catalogue line with metal stinger, 'made from 1920 to 1930 (approx.)' -> a hair of slack each side, approx flagged. chippendale: the Belvedere series sold for Tinder Box in the FIRST Dunhill era, CD stem logo. ★1951 CATALOGUE MINED (2026-07-18, 'FESTIVAL OF BRITAIN ISSUE, 1951' self-dated, OCR in brand_research\\charatan_dating\\catalogue_ocr\\): the FIVE 1951 qualities = SUPREME / SELECTED / SPECIAL / DE LUXE / DE LUXE SANDBLAST -- so Supreme+Selected+Special exist PRE-LANE (by 1951); 'EXECUTIVE' and 'BELVEDERE' are NOT among the 1951 qualities and first show in our 1964/1965 Lane flyers (Straight Grain ladder: Executive->Selected->Supreme->Supreme S.100->S.200->CORONATION) -> an Executive- or Belvedere-graded pipe LEANS Lane-era-or-later, but ABSENCE NEVER DATES -- kept as a lean, not a bracket. Coronation (top grade, $250 in 1965) = candidate 1953-coronation name, unverified. NOT encoded (no intro years documented): the pre-1950 grade starts (records burned; note 'supreme s' must be matched before bare 'supreme' would be), Free Hand / FH (used 1957-1967/68 per the main article -- single source, sizes varied; park as _note_verify), Double Comfort as a LINE name (it is a BIT STYLE -> bit_style channel), Danish-made freehands of the 2nd Lane era (Preben Holm/Willmer -- inconsistent by design). ★1951-CATALOG FLOORS (2026-07-22, image-read, brand_research/charatan_dating/charatan_1951_catalog_facts.md): the maker's own 1951 catalog names the five qualities SUPREME/SELECTED/SPECIAL/DE LUXE/DE LUXE SANDBLAST -> floors 1951 for supreme/selected/special/de luxe (may antedate; floor = first documented evidence; 'supreme s' stays 1957+ as the distinct later stamp). Same catalog, image-verified: shank stamp CHARATAN'S MAKE / LONDON ENGLAND + CP stem monogram + shape number on shank = the 1951 forms; 1951 addresses Jermyn St SW1 / factory Minories EC3 / Whitcomb St WC2; shape-numbering convention: appended digits = size/length variants (12/180/102, 14/140/1400, 99/990/199); Giants 42/43/44 only in Selected/Supreme quality."
+  },
+  "feature_era": {
+   "_doc": "The Ferrara system, encoded. Bit style + shape-code suffixes are the sharpest cliffs: tapered = NEVER after 1960; DC/X suffix = ONLY after 1960. The £ and CP generations bracket the middle eras.",
+   "table": [
+    {
+     "field": "bit_style",
+     "match": [
+      "tapered"
+     ],
+     "era_start": 1863,
+     "era_end": 1960,
+     "confidence": "high",
+     "label": "tapered mouthpiece = definitely pre-Lane (Ferrara: 'never tapered' after 1960)"
+    },
+    {
+     "field": "bit_style",
+     "match": [
+      "double comfort",
+      "dc bit",
+      "two-step"
+     ],
+     "era_start": 1961,
+     "era_end": 2026,
+     "confidence": "high",
+     "label": "Double Comfort bit = after 1960 (the one Lane innovation; Charatan records say 1950s intro but DC-as-standard = 1961+ -- sources noted, wide honest floor 1961)"
+    },
+    {
+     "field": "shape_number",
+     "regex": "dc$",
+     "era_start": 1961,
+     "era_end": 2026,
+     "confidence": "high",
+     "label": "DC suffix after the shape number = post-1960"
+    },
+    {
+     "field": "shape_number",
+     "regex": "\\dx$",
+     "era_start": 1961,
+     "era_end": 2026,
+     "confidence": "high",
+     "label": "X suffix (saddle bit, no DC) = post-1960"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "lane",
+      "circled l",
+      "£"
+     ],
+     "era_start": 1955,
+     "era_end": 1980,
+     "confidence": "high",
+     "label": "circled-L Lane trademark = 1955 (US sole distributorship) to c.end-1980 (Dunhill kept it briefly); ABSENCE never dates -- factory often forgot the stamp / European-market pipes lack it"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "block made by hand",
+      "made by hand block"
+     ],
+     "era_start": 1958,
+     "era_end": 1966,
+     "confidence": "medium",
+     "label": "block-capitals MADE BY HAND = 1958-1965/66 (introduced 1958; the 3-line block variant ran ~6 months in 1965)"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "made by hand in city of london",
+      "script made by hand",
+      "made by hand script",
+      "city of london"
+     ],
+     "era_start": 1965,
+     "era_end": 1979,
+     "confidence": "medium",
+     "label": "script 'Made by Hand -In- City of London' = 1965/66-1979 (evolved with block/script variants -- main article + Ferrara)"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "charatan of london"
+     ],
+     "era_start": 1988,
+     "era_end": 2026,
+     "confidence": "medium",
+     "label": "'CHARATAN of London' marking first appears in the Russell era (1988+)"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "fine cp",
+      "cp fine",
+      "thin cp"
+     ],
+     "era_start": 1863,
+     "era_end": 1960,
+     "confidence": "medium",
+     "label": "very fine CP with C penetrating P = until 1960"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "c enters p",
+      "c penetrates p"
+     ],
+     "era_start": 1863,
+     "era_end": 1980,
+     "confidence": "medium",
+     "label": "C penetrating P = until c.1980"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "c does not penetrate",
+      "not penetrating",
+      "joined cp"
+     ],
+     "era_start": 1980,
+     "era_end": 2026,
+     "confidence": "medium",
+     "label": "C joined but NOT penetrating P = from c.1980"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "cd"
+     ],
+     "era_start": 1977,
+     "era_end": 1981,
+     "confidence": "high",
+     "label": "CD stem logo = Chippendale (Belvedere for Tinder Box, first Dunhill era)"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "shape number left",
+      "number alongside nomenclature",
+      "shape number alongside"
+     ],
+     "era_start": 1863,
+     "era_end": 1960,
+     "confidence": "low",
+     "label": "shape number stamped ALONGSIDE the nomenclature on the LEFT shank side = pre-1960 (vkpipes Selected-56 listing, verbatim 'before 1960, as the shape number is situated alongside the nomenclature on the left side of the shank'; NOT in Ferrara -- single specialist source, LOW; describe as 'shape number left' / 'shape number alongside nomenclature' in lettering evidence)"
+    }
+   ]
+  },
+  "stamped_year": {
+   "_doc": "Generic channel; Charatan rarely stamps years, but silver-banded early pipes carry hallmarks (Rudy Tieman examples: 1921-22 straight, 1925-26 bent) -> exact years once generic.json UK charts land."
+  }
+ },
+ "channels_future": {
+  "assay_hallmark": "Early Charatans wear hallmarked silver bands -> EXACT year via London date-letter chart (generic.json). Until wired: confirm-flow.",
+  "carver_attribution": "Ferrara's endgame: recognizing the MASTER CARVER'S hand (Barry Jones freehands = gold). Not a dating channel -- a future value-grading feature for the encyclopedia/Passport."
+ },
+ "region": {
+  "country": "England",
+  "school": "english"
+ }
+}

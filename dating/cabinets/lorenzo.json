@@ -1,0 +1,47 @@
+{
+  "_doc": "LORENZO dating cabinet (#51, built 2026-07-17-eve; roster #29). The Gallarate (Varese) mass-market cult brand: Fratelli Lana 1900 -> Tagliabue 1946 -> THE 1969 RENAME to LORENZO PIPES (the wordmark floor) -> 1983 Tagliabue retires (Comoy's/Cadogan license interlude) -> 1988 ALIVERTI family buys the trademark, production resumes. ⚠️ MODERN TRAP: cheaper current lines are ALBANIAN-made (Tomori). SOURCES: staging/pipedia/Lorenzo.json (detailed).",
+  "brand": "Lorenzo",
+  "region": {"country": "Italy", "school": "italian"},
+  "aliases": ["lorenzo", "lorenzo pipes", "spitfire", "lloyds", "lloyd's"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1900: FRATELLI LANA founded, Gallarate (3rd Varese maker after Rossi 1886 + Ceresa 1897 — rossi.json ecosystem). 1922: Tagliabue (Milan merchants) co-operation; exports grow; 1939 = 120 workers. Budget mass pipes, many unmarked beyond 'Genuine Bruyere' (generic-wordmark trap, same rule as Rossi). 1946: Tagliabue takes over -> MANUFATTURA DI PIPE TAGLIABUE. ~1950: LORENZO TAGLIABUE manages; studies Castello/Brebbia; new own-style models, upmarket shift. 1969: brand renamed LORENZO PIPES (another Tagliabue firm existed). The 70s-80s CULT: beefy thick walls, flat sitting bottoms, silk-matte patina in bold red/orange, big Oom Pauls; 'made for real men with strong hands'; student-culture icon; generous putty fills(!). SPITFIRE = budget sister brand (1:1 Lorenzo models, mostly 9mm + smaller classics); LLOYD'S = strictly a second. 1983: Lorenzo Tagliabue's daughter dies; he retires 1983; brand licensed briefly to COMOY'S OF LONDON (Cadogan/Oppenheimer); near-disappearance; Tagliabue dies 1987. 1988: RICCARDO ALIVERTI + Gabriella buy all rights from the family — production resumes (Aliverti lineage: Romolo joined Lana 1920, technical director; Riccardo from 1954, technical director 1973; son Massimo sales director 1991+). MODERN SPLIT: Italian-made better lines (One Star/Two Star/Three Star, Moscato, Spumante, Grand Canadian) vs ALBANIAN-made cheap lines by Tomori (New Era Riesling/Poggio, Angera, Cadry, Churchwarden, Filtro, Arena, Cadore, Sport PS, Garden)."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["lorenzo", "spitfire", "lloyds", "genuine bruyere", "one star", "moscato", "spumante", "new era", "angera"],
+    "physical": "LORENZO + model/number; 70s-80s tells: thick beefy walls, flat bottoms, silk-matte red/orange staining, visible putty fills. Pre-1969 Tagliabue-era pipes rarely say Lorenzo."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "new era": [1988, 2026],
+        "moscato": [1988, 2026],
+        "spumante": [1988, 2026]
+      },
+      "_notes": "new era/moscato/spumante = Aliverti-era catalog names -> floor 1988 approx (line-level intro years unknown; LOW-leaning). Spitfire/Lloyd's = 70s-80s cult era but undated edges -> aliases only. Star grades unencoded (span)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["lorenzo"], "era_start": 1969, "era_end": 2026, "confidence": "high", "label": "LORENZO wordmark = 1969+ (the rename from Manufattura di Pipe Tagliabue). Gap note: 1983-1988 = license/limbo interlude (Comoy's/Cadogan), production thin"},
+        {"field": "lettering", "match": ["spitfire"], "era_start": 1969, "era_end": 1990, "confidence": "low", "label": "SPITFIRE budget sister = the cult era (edges undocumented -> approx)"},
+        {"field": "lettering", "match": ["lloyds", "lloyd's"], "era_start": 1969, "era_end": 1990, "confidence": "low", "label": "Lloyd's = strictly a Lorenzo second (same era logic, approx)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "albania_tells": "Tomori/Albania-made line diagnostics (COM stamps?) — verify what modern cheap Lorenzos actually say.",
+    "tagliabue_era": "Pre-1969 Tagliabue-marked pipes = future note (different brand key).",
+    "catalog_1979": "1979 Tinder Box listing (pictured) = a US-market snapshot for the cult era."
+  }
+}

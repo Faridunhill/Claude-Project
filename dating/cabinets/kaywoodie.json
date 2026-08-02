@@ -1,0 +1,84 @@
+{
+  "_doc": "KAYWOODIE dating cabinet (#13, built 2026-07-16 -- the FIRST AMERICAN cabinet; combines Kaywoodie + KB&B + Yello-Bole, one company, per roster). Dates by: 4-digit-shape cliff (pre-1936), the Drinkless screw-fitment floor (~1925), cloverleaf-logo generations, KB&B shank marks, and grade/catalog presence (catalogs 1936/1947/1955/1968-69 mirrored in the guide). SOURCES: staging/pipedia/Collector_s_Guide_to_Kaywoodie_Pipes.json (Stokes/Keene/Feuerbach -- THE authority) + Kaywoodie_Shape_Numbers.json + Kaywoodie.json + pipephil logo-kaywoodie-1/2 + kaywoodie-timechart (mirror). 731 harvested LoC newspaper ads incl. Drinkless COMPLETE 91/91 (ads_archive) = corroboration layer.",
+  "brand": "Kaywoodie",
+  "region": {"country": "USA", "school": "american"},
+  "aliases": ["kaywoodie", "kb&b", "kbb", "kaufmann bros", "yello-bole", "yello bole"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1851 Kaufmann Bros., New York (meerschaums/clays; Bondy partner 1854 -> KB&B). KB&B briar brand c.1900-post-WWI. KAYWOODIE brand created 1915 (overlap 1915-17 = 'transition' KB&B/Kaywoodie; a 'Dinwoodie' prototype name exists -- Lowndes). Drinkless screw-in fitment (Synchro-Stem + Drinkless filter) introduced ~1925. YELLO-BOLE = the lower-grade sister brand, on the market SINCE 1933 (their own 1948 catalog; KBB leaf WITHOUT ampersand). In its heyday = the world's largest briar consumer. WWII briar shortage = the quality decline collectors mark. Later: S.M. Frank Co. owns the name (stopped making); Italian-made drugstore Kaywoodies (white-outline logo); recent US-made revival. ENGLISH Kaywoodies existed ('New York and London'; later made by Oppenheimer -- ties to our Cadogan world; 1985 Oppenheimer letter: black-in-white logo discontinued)."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["white cloverleaf", "elongated cloverleaf", "black cloverleaf", "white outline cloverleaf", "double diamond"],
+    "wordmarks": ["kaywoodie", "kb&b", "kbb", "drinkless", "synchro-stem", "yello-bole"],
+    "physical": "Cloverleaf logo generations: ELONGATED white leaf + large fitment + 4-digit shapes = pre-1936; fuller white leaf = 1936+; BLACK leaf in white circle = better pipes from 1936-47 onward (ran into the 80s on English ones); WHITE-OUTLINE leaf = modern Italian era. Shank: cloverleaf around KB&B (with ampersand) = KB&B/early Kaywoodie, dropped before 1936; KBB without ampersand = Yello-Bole. Heritage line (1960s Dunhill rival): DOUBLE DIAMOND logo, no fitment, not marked Kaywoodie."
+  },
+
+  "fusion_order": ["line_years", "com_stamp", "feature_era", "stamped_year"],
+
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {"match": ["new york", "usa", "u.s.a", "made in usa"], "era_start": 1900, "era_end": 2026, "confidence": "high", "note": "KB&B briar era floor; 'New York and London' on cases/accessories"},
+        {"match": ["italy", "made in italy"], "era_start": 1975, "era_end": 2026, "confidence": "medium", "note": "Italian-made drugstore era (S.M. Frank licensing; approx start -- verify)"}
+      ]
+    },
+
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "drinkless": [1925, 1980],
+        "carburetor": [1934, 1975],
+        "ninety-fiver": [1946, 1970],
+        "ninety fiver": [1946, 1970],
+        "centennial": [1947, 1970],
+        "chesterfield": [1935, 1975],
+        "filter plus": [1955, 1970],
+        "filter-plus": [1955, 1970],
+        "presentation": [1947, 1975],
+        "heritage": [1960, 1975],
+        "regent": [1964, 1975],
+        "durobit": [1965, 1975],
+        "syncro-lok": [1964, 1975],
+        "campus": [1964, 1980],
+        "flame grain": [1928, 1985],
+        "super grain": [1936, 1985],
+        "stembiter": [1937, 1970],
+        "stem-biter": [1937, 1970],
+        "matched grain": [1937, 1975],
+        "white briar": [1955, 1975],
+        "standard": [1955, 1975],
+        "fine-line": [1964, 1975],
+        "fine line": [1964, 1975],
+        "prime grain": [1964, 1975],
+        "signet": [1964, 1975],
+        "custom grain": [1964, 1975],
+        "yello-bole": [1933, 2026],
+        "yello bole": [1933, 2026]
+      },
+      "_notes": "CATALOGUE-MINED 2026-07-18 (5 originals OCR'd: 1937/1947/1955/1964-65/1970-71, catalogue_ocr\\ in kaywoodie_dating). drinkless: fitment ~1925 (Lowndes) -> floor 1925; ads_archive holds ALL 91 LoC 'kaywoodie drinkless' hits; by 1970-71 'Drinkless' = the LOWEST-price line name ($6.95). carburetor: 'the newest' in the 1936 catalog BUT a 4-digit example exists -> start 1934 approx; in 1937 catalog at $4 w/ U.S. Pat 2,082,106; absent only from the 1947 catalog; present 1955/1964/1970; end approx 1975. ninety-fiver: 95th anniversary of 1851 -> c.1946; END CORRECTED 1960->1970: present in the 1964-65 dealer album (D-998, $22.50), absent from the 1970-71 catalog. centennial: appears 1947 catalog ($25) -- present 1955+1964, absent 1970-71 -> [1947,1970] holds. chesterfield: 4-digit 'Jumbo' in a 1938 Yello-Bole catalog -> start 1935 approx; present 1955 ($5-15 grades) + 1970 ($15). presentation: FLOOR CORRECTED 1956->1947 -- the 1947 catalog SELLS the Presentation Collection ($2500, 31 pipes, 12 sets/yr) 9 years before the Newsweek 1956 mention; WWII-era smaller version (Lowndes) still noted. stembiter: LAUNCH 1937 ('Newest KAYWOODIE', pat. pending, Miami finish only, $5); absent 1947 catalog; present 1955 ($5 + a mouthpiece style w/ Fit-Rite + Dri-Smoke); by 1970-71 the Durobit is sold as the bite-proof bit instead -> end ~1970 approx. matched grain: LAUNCH 1937 ('announces something that has never happened before', 7-day set $100 .. one-month $1000); sets present 1947/1955/1970 -> end wide 1975. white briar: LAUNCH 1955 ('2nd Century Introductions'); Coral White Briar variant NEW in 1964 album; present 1970. standard: line name first in 1955 catalog ($4.00 Standard); present 1964/1970 ($8.95). fine-line/prime grain/signet/custom grain: present in BOTH the 1964-65 album and 1970-71 catalog -> floor 1964 ('Custom Grain' still called 'New' in 1970 text). regent: 1964 album (D-854) -> floor 1964; India-Grain rubber bit (1970). syncro-lok: NEW-flagged in the 1964 album (500/600 series) -> floor 1964; 'new Syncro-Lok feature' still in 1970 text. durobit/campus: campus present 1964 (D-495, Campus White Briar NEW) -> floor 1964; durobit not in the 1964 album, floor stays 1965 approx. filter plus: REAL LAUNCH 1955 ('NOW! Kaywoodie announces', patented 5000-fiber nylon brush filter, $4); 1964 album sells a 'Filter-Pipe' w/ CERAMIC filter (D-690); neither in the 1970-71 ToC. heritage: 1960s anti-Dunhill line, double-diamond, no fitment (not in these catalogs -- separate marketing). straight grain: in 1936 + 1968-69 + 1970-71 ($100, registered, 1-in-10,000 bowls) but NOT 1947/1955 -> gap real but absence never dates; NOT encoded. SINGLE-CATALOG lines NOT encoded (method rule): Streamliner/Doctor's Pipe/All Briar/Meerschaum-Lined All Briar/Briar Mates/Casuals/Squires/Chinrester-as-new (all 1955), Mandarin/Hi-Bowl/Setter/Coral White Briar (1964 album), Birdseye ($100 registered)/Colt-as-line/Originals-5-shapes (1970-71), oversize names (Colossus/Hercules/John Henry/Paul Bunyan/Goliath/Atlas/Samson -- 1947-era). Also NOT encoded: Silhouette/Relief Grain/Connoisseur/Meerschaum-Inlaid (present across catalogs, no cliffs; M-I 'for 10 years have been known' in 1947 -> began c.1937), Tuckaway (present 1955+1964 but pre-1955 existence unresolved), Mission Briar (WWII manzanita), Rock Ambera (1930s-40s bakelite bits), Gale, Shellcraft, English lines (Ruby Grain/Minaret/London Made -- Oppenheimer era). SHAPE-NUMBER RENAMES 1936->1947 (reuse trap): 78 'Large Breakfast'->'Small Pot', 69 'Pat'->'Large Pot', 30 'Russell Square'->'Large Apple Full Bent', 16 was 16B 'E-Z-Set Pear' -> 16 'Medium Billiard Full Bent'; C-suffix shapes (06C..23C, 68C) first appear in the 1947 catalog. ADDRESS DATING: 'New York and London' (1937), postal zones 'New York 20/22' (1947, zones=1943+), ZIP 10012 + West New York NJ 07093 (1964+, ZIP=1963+); Rockefeller Center HQ 'new headquarters' in the 1937 catalog."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "shape_number", "regex": "^\\d{4}$", "era_start": 1915, "era_end": 1936, "confidence": "medium", "label": "4-digit shape number = pre-1936 vintage (practice ended just before 1936; a few ran to mid-30s -- Stokes)"},
+        {"field": "lettering", "match": ["kb&b", "kb & b"], "era_start": 1900, "era_end": 1936, "confidence": "medium", "label": "cloverleaf-around-KB&B shank mark = KB&B era / early Kaywoodie (dropped before 1936). KBB WITHOUT ampersand = Yello-Bole (1933+), not this bracket"},
+        {"field": "stem_logo", "match": ["elongated cloverleaf", "elongated white"], "era_start": 1915, "era_end": 1936, "confidence": "medium", "label": "elongated white cloverleaf on bit = pre-1936"},
+        {"field": "stem_logo", "match": ["black cloverleaf", "black-in-white", "black leaf"], "era_start": 1936, "era_end": 1990, "confidence": "medium", "label": "black cloverleaf in white circle = post-1936 better grades (discontinued on English pipes by 1985 -- Oppenheimer letter)"},
+        {"field": "stem_logo", "match": ["white outline"], "era_start": 1975, "era_end": 2026, "confidence": "low", "label": "white-outline cloverleaf = modern Italian-made era (approx)"},
+        {"field": "stem_logo", "match": ["double diamond"], "era_start": 1960, "era_end": 1975, "confidence": "medium", "label": "double-diamond = Heritage line (1960s)"},
+        {"field": "bit_style", "match": ["no fitment", "push bit", "push-bit"], "era_start": 1900, "era_end": 1925, "confidence": "low", "label": "no screw fitment + 4-digit shape = probably pre-1925 (Drinkless fitment ~1925). LOW: Export models (1955+) and Heritage also lack fitments -- corroborate with logo/shape"}
+      ]
+    },
+
+    "stamped_year": {
+      "_doc": "Generic channel; anniversary pieces (Ninety-Fiver/Centennial) are line-dated, not year-stamped."
+    }
+  },
+
+  "channels_future": {
+    "catalog_presence": "DONE 2026-07-18 for LINES: 5 original catalogues (1937/1947/1955/1964-65/1970-71) mirrored in catalogues\\kaywoodie\\ + OCR'd to brand_research\\kaywoodie_dating\\catalogue_ocr\\ -> 11 new line brackets + 2 corrections encoded above. STILL OPEN: per-SHAPE presence brackets (full 1936 + 1947 + 1955 + 1970 shape rosters now sit in the OCR text files; guide appendix adds 1968-69).",
+    "ads": "731 harvested LoC ads (kaywoodie 640/784 + drinkless 91/91 complete) -> ad_miner v2 (full-page OCR) will bracket lines like Carburetor/Flame Grain from dated ads."
+  }
+}

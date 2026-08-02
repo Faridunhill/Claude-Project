@@ -1,0 +1,224 @@
+{
+  "_doc": "SASIENI dating cabinet (#11, built 2026-07-16). Dates by the SMITH SYSTEM ('Connecting the Dots', Stephen P. Smith 1996 -- THE authority, full text in our pipedia mirror staging/pipedia/Sasieni.json): nomenclature script styles + patent numbers + THE DOTS (count/size/arrangement) + town names. Eras mirror Barling's: Pre-Transition (family, 1919-1979: Joel 1919-46, Alfred 1946-79), Transition (1979-1986), Post-Transition (1986+, mid-grade). Also pipephil logo-sasieni 1+2 + sasieni-timechart (image) in mirror. Catalogs ON the pipedia page as PDFs: 1935 + 1965 + shape chart (Michael DiCuccio) -> FARID-FETCH for the catalogue inventory. ⚠️ EIGHT-DOT TRAP: the 8-dot was reissued ~1979/80 as a ~100-pc commemorative (natural, optional gold band, blue string + tab signed by Alfred) -- confirm-flow must check before dating an 8-dot to the vintage window.",
+  "brand": "Sasieni",
+  "region": {
+    "country": "England",
+    "school": "english"
+  },
+  "aliases": [
+    "sasieni",
+    "j. sasieni",
+    "joel sasieni",
+    "four dot",
+    "4 dot"
+  ],
+  "max_year": 2026,
+  "history_anchors": {
+    "_doc": "Joel Sasieni: apprenticed at CHARATAN -> DUNHILL factory manager -> own factory 1919 (burned down immediately, rebuilt; oven-cured bowls 6 weeks). Blue-dot logo -> Dunhill legal war: UK kept ONE blue dot (Europe-market until the 1960s); US: brief side-dot, then FOUR blue dots (elongated diamond) by the early-mid 1920s; by the 1930s >90% of production went to the US. EIGHT DOT debut late 1920s/early 1930s, discontinued during WWII. Joel died 1946 -> son ALFRED (nomenclature simplified, dots enlarged to equilateral diamond, patent numbers dropped, 'Four Dot' stamped -- all changes 1946-1950, then stable to 1979). 1979 sold (TRANSITION): town names eliminated, dots enlarged again, commemorative 8-dot reissue, TEN DOT with Lucite stem (Alfred quit over it -- he was vulcanite-only). 1986 sold again (POST-TRANSITION): everything a '4 Dot' (Arabic numeral), putty fills appear, 2-line nomenclature. SECONDS (own rules): Mayfair, Fantail (patent 1953), Olde English, Friar (rum-cured, rum-bottle stinger), Two Dot (= flawed four-dot quality), + the long Valitchka list (His Royal Highness, King's Court, Windsor, Barclay...). Ladies' pipes: Argyle, Montrose, Dorset. LEAD-NOT-ENCODED (BNA 2026-07-17): Worthing Herald Dec-1923 ad (image-verified, twice) sells 'The PIPE with the GREEN SPOT - THE SASIENI' at 16/6 post-free (Van Toll Bros agents) -- GREEN, not blue; single source, parked pending corroboration (see brand_research/sasieni_dating/bna_1923_green_spot_facts.md). Also: 'four dot' = zero UK newspaper hits ever -> corroborates the US-market four-dot story."
+  },
+  "brand_marks": {
+    "stem_logos": [
+      "one dot",
+      "four dots",
+      "eight dots",
+      "ten dots",
+      "two dots",
+      "blue dot"
+    ],
+    "wordmarks": [
+      "sasieni",
+      "four dot",
+      "4 dot",
+      "london made"
+    ],
+    "physical": "Blue dots inserted as individual rods (like Dunhill's spot) -- originals are perfectly symmetrical; misaligned dots = replacement/fake stem. Pre-1946: SMALL dots, ELONGATED diamond + florid 'fish' script (the last i's tail sweeps under the name). Post-1946: LARGER dots, EQUILATERAL diamond, simpler script. Transition: larger still. Dots range light-to-sky blue (color varies with age -- not a dating signal)."
+  },
+  "fusion_order": [
+    "line_years",
+    "com_stamp",
+    "patent_number",
+    "feature_era",
+    "stamped_year"
+  ],
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {
+          "match": [
+            "london made",
+            "london"
+          ],
+          "era_start": 1919,
+          "era_end": 2026,
+          "confidence": "high",
+          "note": "brand floor -- factory opened 1919"
+        }
+      ]
+    },
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "hurlingham": [
+          1935,
+          1979
+        ],
+        "grosvenor": [
+          1935,
+          1979
+        ],
+        "danzey": [
+          1935,
+          1979
+        ],
+        "lincoln": [
+          1935,
+          1979
+        ],
+        "viscount lascelles": [
+          1935,
+          1979
+        ],
+        "exeter": [
+          1935,
+          1979
+        ],
+        "pembroke": [
+          1935,
+          1979
+        ],
+        "fantail": [
+          1950,
+          1986
+        ],
+        "4 dot": [
+          1986,
+          2026
+        ],
+        "four dot": [
+          1946,
+          1986
+        ]
+      },
+      "_notes": "'four dot' SPELLED OUT on shank = Alfred's 1946-50 addition, ran to the 1986 sale; '4 Dot' ARABIC NUMERAL + 2-line nomenclature = Post-Transition 1986+ (Smith: 'the easiest way to spot a Post-Transition'). TOWN NAMES (Hurlingham=apple, Grosvenor/Danzey=bulldogs, Lincoln=panel, Viscount Lascelles=large bent, Exeter=freehand-ish, Pembroke...) = introduced 1935, ELIMINATED by the new owners 1979 -> town name present = [1935,1979] HIGH-value bracket (only on Four/Eight Dot grades). fantail: seconds line, patent dated July-21-1953 -> floor 1950 approx. NOT year-encoded: the seconds list (Mayfair/Friar/Olde English/Two Dot etc. -- no documented years), ladies' lines (Argyle/Montrose/Dorset). NOTE 'grosvenor' also exists as a CHARATAN mark -- per-cabinet matching keeps them apart, but brand ID must precede."
+    },
+    "patent_number": {
+      "_doc": "US-market pre-WWII pipes carry patents starting '15' (150221/20, 1513428). Patents DISCONTINUED by Alfred 1946-50. EXCEPTION (Smith): some plum-finish pipes kept the patent post-war -> confidence medium, never high.",
+      "any_patent_era": [
+        1919,
+        1950
+      ],
+      "table": [
+        {
+          "match": [
+            "150221/20",
+            "150221"
+          ],
+          "era_start": 1920,
+          "era_end": 1946,
+          "confidence": "medium",
+          "note": "the classic US patent (Danzey example)"
+        },
+        {
+          "match": [
+            "1513428"
+          ],
+          "era_start": 1922,
+          "era_end": 1946,
+          "confidence": "medium",
+          "note": "representative '15'-family US patent"
+        }
+      ]
+    },
+    "feature_era": {
+      "table": [
+        {
+          "field": "lettering",
+          "match": [
+            "florid",
+            "fish",
+            "sweeping tail",
+            "flowing script"
+          ],
+          "era_start": 1919,
+          "era_end": 1946,
+          "confidence": "high",
+          "label": "florid 'fish' script Sasieni = Joel era; Alfred dropped it immediately on taking over 1946"
+        },
+        {
+          "field": "stem_logo",
+          "match": [
+            "eight dot",
+            "8 dot",
+            "8-dot"
+          ],
+          "era_start": 1927,
+          "era_end": 1946,
+          "confidence": "medium",
+          "label": "Eight Dot = late-1920s debut, discontinued during WWII. ⚠️ ~100-pc commemorative REISSUE 1979/80 (natural finish, blue string, signed tab, optional gold band) -> confirm before dating vintage"
+        },
+        {
+          "field": "stem_logo",
+          "match": [
+            "ten dot",
+            "10 dot"
+          ],
+          "era_start": 1979,
+          "era_end": 1986,
+          "confidence": "high",
+          "label": "Ten Dot with Lucite stem = Transition firm only (the line that made Alfred quit)"
+        },
+        {
+          "field": "stem_logo",
+          "match": [
+            "one dot",
+            "single dot"
+          ],
+          "era_start": 1919,
+          "era_end": 1969,
+          "confidence": "medium",
+          "label": "One Dot = Europe-market until the 1960s (US one-dots = 1919-c.1925 only; side-dot = ultra-rare early-20s -> confirm-flow)"
+        },
+        {
+          "field": "stem_logo",
+          "match": [
+            "small dots",
+            "elongated diamond"
+          ],
+          "era_start": 1922,
+          "era_end": 1950,
+          "confidence": "medium",
+          "label": "small dots in elongated diamond = pre-Alfred-enlargement"
+        },
+        {
+          "field": "stem_logo",
+          "match": [
+            "equilateral",
+            "large dots"
+          ],
+          "era_start": 1946,
+          "era_end": 2026,
+          "confidence": "medium",
+          "label": "enlarged dots, equilateral diamond = 1946+ (enlarged again 1979)"
+        },
+        {
+          "field": "lettering",
+          "match": [
+            "two lines",
+            "2-line"
+          ],
+          "era_start": 1986,
+          "era_end": 2026,
+          "confidence": "medium",
+          "label": "two-line nomenclature = Post-Transition"
+        }
+      ]
+    },
+    "stamped_year": {
+      "_doc": "Generic channel. Sasieni rarely stamps years; commemoratives may."
+    }
+  },
+  "channels_future": {
+    "catalogues": "1935 + 1965 catalog PDFs + shape chart PDF are LINKED on the pipedia Sasieni page (DiCuccio) -> FARID-FETCH; enables shape brackets (by 1935: 50 shapes) + XS/S-suffix decoding (XS = premium shape all grades, XS* = premium in 4-Dot only; trailing s = saddle variant where a tapered twin exists).",
+    "us_advertising": "Sasieni sold >90% to the US by the 1930s -> Chronicling America (US archive pipeline) will hold DATED Sasieni ads = line/launch evidence. Same for UK archives (British Newspaper Archive)."
+  }
+}

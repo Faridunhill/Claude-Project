@@ -1,0 +1,43 @@
+{
+  "_doc": "DENICOTEA dating cabinet (#53, Wave F, built 2026-07-17-eve). The Cologne/Bergisch-Gladbach ACCESSORY house (silica-gel filters, cigarette holders) that also sells pipes under fictional-Italian labels. Founded 1932 (Willy Heineberg). Corroborated by OUR archive work: Estonian Päevaleht ads Nov-Dec 1938 (eu_ft, 3 records) = 1930s international holder sales. SOURCES: staging/pipedia/Denicotea.json + eu_ft grading facts.",
+  "brand": "Denicotea",
+  "region": {"country": "Germany", "school": "german"},
+  "aliases": ["denicotea", "aldo morelli", "adsorba"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1932: Willy Heineberg founds DENICOTEA, Cologne — filters, filter inserts, cigarette holders, pipes. Post-WWII: HQ moves to BERGISCH GLADBACH. 'Denicotea' = properly the silica-gel FILTER name (holders + care products too); company + brand duality (today operated with COMPOSING-STUDIO GmbH). Our evidence: Estonian ads 1938 = pre-war international distribution. PIPE LABELS: ADSORBA = fantasy series by Luigi Crugnola for the German market (undated); ALDO MORELLI = fictional Italian name, trademark registered FEB 26, 1992 (DPMA) — pipes made by Cesare Barontini, Gigi, or Molina depending on line ('HAND CUT' stem imprint; kinship to 'Mauro Cateni', Gebr. Heinemann's fictional brand — same device); WESSEX also listed. ⚠️ ATTRIBUTION RULE: an Aldo Morelli is an ITALIAN-MADE pipe for a German distributor — never treat as an artisan brand."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["denicotea", "aldo morelli", "adsorba", "wessex", "hand cut"],
+    "physical": "Denicotea = crystal/silica filter branding on holders + boxes; pipe labels carry the fictional names (Aldo Morelli w/ HAND CUT stem stamp)."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "aldo morelli": [1992, 2026]
+      },
+      "_notes": "aldo morelli: DPMA registration 1992-02-26 = documentary floor. adsorba/wessex: undated -> unencoded."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["denicotea"], "era_start": 1932, "era_end": 2026, "confidence": "high", "label": "Denicotea floor = 1932 founding (1938 Estonian ads corroborate the pre-war international era — our eu_ft find)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "holder_boxes": "Early filter-box designs (one pictured in mirror) = datable ephemera.",
+    "adsorba_era": "Date the Crugnola Adsorba series.",
+    "wessex": "Wessex label span unknown."
+  }
+}

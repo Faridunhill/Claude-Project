@@ -1,0 +1,111 @@
+{
+ "_doc": "JAMES UPSHALL dating cabinet (#54, Wave F, built 2026-07-17-eve; roster #17). The Charatan diaspora house: 1978, Tilshead (Wiltshire) — Barry Jones (Charatan's master carver, our artisan registry) + Major Kenneth Barnes (Charatan's ex-MD) + son Kennedy Barnes. Named for the Major's ancestor James Archelaus Upshall. TILSHEAD = the briar-flaw second line (same make). SOURCES: staging/pipedia/James_Upshall.json (company text + the 1984 pamphlet scans + Barnes radio interviews referenced) + artisan registry (barry-jones: Charatan 1955-77 -> Tilshead 1978-2010).",
+ "brand": "James Upshall",
+ "region": {
+  "country": "England",
+  "school": "english"
+ },
+ "aliases": [
+  "james upshall",
+  "upshall",
+  "tilshead"
+ ],
+ "max_year": 2026,
+ "history_anchors": {
+  "_doc": "1978: founded at Tilshead, Wiltshire. Barry Jones: from age 15 at Charatan (personally guided by Reuben Charatan; responsible for most famous Charatan shapes — charatan.json link); Kennedy Barnes also ex-Charatan (father = MD before the Dunhill sale). Hand-turned on flat-bed lathes, NO copy-fraisers; naturally-dried Greek plateau; NO fills/putty on Upshall-stamped pipes (flawed bowls -> TILSHEAD). Grading: finishes bark/sandblast/black dress/smooth; root-quality ladder S (mahogany red) < A (chestnut tan) < P (walnut, straighter grain); straight-grain high grades B < G < E < X < XX (XX ≈ 1% of production); EMPIRE SERIES = limited giant pieces. 1984: leatherette catalog (scans in mirror; note: S-grade RED stain 'must have come later' than 1984 — pamphlet-era S = other colors). Fishing pipes w/ lanyard rings + UNBOXED logo exist (1984 pamphlet). Silver/gold banding program (6/10mm, 9ct/18ct, spigot + army mounts). Celebrity roster lore (King Hussein, Sadat, Crosby...). April 2021: Ken(nedy) Barnes dies unexpectedly (had restarted limited making in Cornwall). Production continued under later ownership (Ezrati contact era)."
+ },
+ "brand_marks": {
+  "stem_logos": [],
+  "wordmarks": [
+   "james upshall",
+   "tilshead",
+   "empire"
+  ],
+  "physical": "Boxed JAMES UPSHALL logo (unboxed variant on the fishing pipes); grade letters S/A/P/B/G/E/X/XX; Tilshead = second stamp; Empire = giants."
+ },
+ "fusion_order": [
+  "line_years",
+  "feature_era",
+  "stamped_year"
+ ],
+ "channels": {
+  "line_years": {
+   "modern_floor_year": 2000,
+   "years": {},
+   "_notes": "Grade letters span the brand -> unencoded. Empire series undated intro."
+  },
+  "feature_era": {
+   "_doc": "Upshall dating rules. ⚠️ INCIDENT NOTE 2026-07-22: the first sweep script OVERWROTE this channel instead of merging -- the two founding rules below are reconstructed from the test suite (both proven by tests 'James Upshall -> 1978' + 'Tilshead second -> 1978'); if the lost table held more entries they must be re-mined (lesson encoded in memory: MERGE channels, never assign over them). Cliff sources + verify plan: brand_research/jamesupshall_dating/upshall_dating_facts.md. vkpipes cliffs = LOW until the Ken Barnes radio interviews (2016-02-09 + 2017-01-03; GPU job, wait for Farid's all-clear) corroborate. Ownership anchor (2-way corroborated): Kennedy Barnes sold his shares 1989 (founders' era 1978-1989). Brenchley (Kent) location per pipephil ~2006 -- move from Tilshead UNDATED, parked.",
+   "table": [
+    {
+     "field": "lettering",
+     "match": [
+      "james upshall",
+      "upshall"
+     ],
+     "era_start": 1978,
+     "era_end": 2026,
+     "confidence": "high",
+     "label": "JAMES UPSHALL marking = 1978+ (Tilshead founding: Barry Jones + Kenneth/Kennedy Barnes, ex-Charatan)"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "tilshead"
+     ],
+     "era_start": 1978,
+     "era_end": 2026,
+     "confidence": "high",
+     "label": "TILSHEAD marking (second line / location stamp) = 1978+ (same founding floor)"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "ju",
+      "upshall logo"
+     ],
+     "era_start": 1996,
+     "era_end": 2026,
+     "confidence": "low",
+     "label": "JU logo on the mouthpiece = 1996+ (vkpipes: stem logos introduced 1996; before that stems were bare -- absence never dates)"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "pantograph"
+     ],
+     "era_start": 1984,
+     "era_end": 2026,
+     "confidence": "low",
+     "label": "pantograph-ENGRAVED stampings = 1984+ (vkpipes: engraving began 1984; earlier stamps conventional -- describe engraving as 'pantograph' in lettering evidence)"
+    },
+    {
+     "field": "shape_number",
+     "regex": "\\bl[2-4]\\b",
+     "era_start": 1985,
+     "era_end": 2026,
+     "confidence": "low",
+     "label": "L-series stamp (L2/L3/L4 = shank length, longest L4) = 1985+ (Pete Siegel, US distributor + series creator, via rebornpipes 2024-09-27: first 'few dozen made in 1986', article brackets earliest 1985-86; digits after = shank cm x10, e.g. 95 = 9.5cm; L series launched all P-grade + length surcharge)"
+    },
+    {
+     "field": "stamped_year",
+     "regex": "^(19)?78$",
+     "era_start": 1978,
+     "era_end": 1978,
+     "confidence": "medium",
+     "label": "★'78' YEAR STAMP = EXACTLY 1978, first year ONLY (Ken Barnes verbatim, PipesMag ep178 interview 2016-02-09 @40:50: 'did you continue stamping the years?' -> 'No, we did only 1978' + @37:32 'if you want a really rare Upshall look for one with the 78 stamp... it's from the first year'. Founder-primary, single source, 38-yr recollection -> MEDIUM; transcript: encyclopedia/interviews/transcripts/iv-001)"
+    }
+   ]
+  },
+  "stamped_year": {
+   "_doc": "Generic channel."
+  }
+ },
+ "channels_future": {
+  "barnes_interviews": "★VERIFY CLIFFS: PipesMagazine Radio Show w/ Ken Barnes Part 1 2016-02-09 + Part 2 2017-01-03 -- process with visual.video_brief (LOCAL whisper; GPU job, wait for Farid's all-clear) -> corroborate/correct the 1984+1996 cliffs, date the Tilshead->Brenchley move, stamp history from the founder.",
+  "catalog_1984": "The 1984 catalog PDF (linked on pipedia) = mirror target for the catalogue hunter.",
+  "cornwall_2020": "Barnes's 2020-21 Cornwall pipes = a distinct micro-era; stamps unverified.",
+  "ownership_ladder": "Post-founders ownership changes (Ezrati era) undocumented in mirror — web check someday.",
+  "brenchley_move": "Tilshead (Wiltshire) -> Brenchley (Kent) move: real (pipephil ~2006 snapshot: Brenchley, ~30 pipes/week) but UNDATED -- hunt a dated source, then encode as a location cliff."
+ }
+}

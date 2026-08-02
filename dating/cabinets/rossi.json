@@ -1,0 +1,52 @@
+{
+  "_doc": "ROSSI dating cabinet (#23, built 2026-07-18 — Wave B closer). Once the BIGGEST pipe factory on earth (1936 peak: 860 employees, >50,000 pipes/DAY), Barasso 1886-1985; THE CLIFF = the 1985 closure (one year short of the centenary), then 'Rossi by Savinelli' revival (YEAR UNDOCUMENTED — encoded wide 1986+, never invented). Mark-era ladder from pipedia's own 'Dating Rossi pipes' section (all eras flagged 'approximatively' there -> wide brackets here): no-brand generic marks to ~1918 -> FRB/MFRB oval ~1920s (kept on cheap models to the 60s) -> cursive 'Rossi'+model ~1936 -> ROSSI-in-oval ~1970s-1985 + 'Nino Rossi' signature (last heir). SOURCES: staging/pipedia/Rossi.json (wayback 2021); no pipephil page in mirror; web sweep 2026-07-18 found NO documented revival year (honesty note in brand_research/rossi_dating/). TRAP: pre-1918 pipes carry only REAL BRIAR / VERA RADICA / BRUYERE GARANTIE — generic wordmarks every maker used -> NEVER attribute a pipe to Rossi from those alone.",
+  "brand": "Rossi",
+  "region": {"country": "Italy", "school": "italian"},
+  "aliases": ["rossi", "frb", "mfrb", "fratelli rossi barasso", "rossi by savinelli", "nino rossi"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1880 Ferdinando Rossi (Milan tobacco wholesaler) catches the industrial-briar idea in Saint-Claude. 1886 founds Fabbrica di Pipe di Radica Rossi at Barasso (Varese); electric factory (own canal turbines). 1892 first Brazil export. 1918 son Leonida joins -> firm = Fratelli Rossi Barasso (FRB). Interwar = world's biggest pipe factory; 1936 peak (50th anniversary): 860 employees, >50k pipes/day. ~1946 Ferdinando Rossi II heads firm. Post-war decline (cigarettes, Danish fame, smarter young rivals Castello/Brebbia/Savinelli). 1985 closure. Savinelli later revives the name (Achille Savinelli + Ferdinando Rossi were intimate friends) as affordable 'Rossi by Savinelli' — revival year undocumented. Ecosystem: ex-Rossi spin-offs made Varese Italy's pipe center (Ceresa 1897, Fratelli Lana 1900 -> Tagliabue 1922, Santambrogio 1910, Rovera brothers 1911); Paronelli museum in Gavirate holds 4,000 Rossi pipes; Giovanni Carollo (Molina di Barasso) took part of the factory. Seconds: Montechristo."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["r in circle", "rossi"],
+    "wordmarks": ["rossi", "frb", "mfrb", "old briar", "mfd. by rossi", "fratelli rossi", "nino rossi", "extra", "racine", "extra grain", "super", "fiamma", "standard", "grana", "montechristo"],
+    "physical": "Era ladder: (to ~1918) generic 'REAL BRIAR'/'VERA RADICA'/'BRUYERE GARANTIE' only — no brand mark; (~1920s+) FRB or MFRB in an oval + OLD BRIAR, sometimes MFD. BY ROSSI, stem = R in circle; (~1936+) cursive 'Rossi' + model name, stem ROSSI on expensive models (extra/racine/extra grain/super/fiamma) or R-in-circle on cheap (standard/grana/FRB); (~1970s-1985) ROSSI in an oval (sometimes ITALY), stem ROSSI, 'Nino Rossi' cursive signature. Savinelli era: first pipes twinbore mouthpiece; today 6mm/9mm adapter, methacrylate stems."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "racine": [1936, 1985],
+        "fiamma": [1936, 1985],
+        "extra grain": [1936, 1985]
+      },
+      "_notes": "racine (hand-rusticated), fiamma (Sardinia+Greece briar, very limited), extra grain (sandblast) = expensive lines of the cursive-Rossi era (~1936 on) -> [1936,1985] with the 1985 closure as ceiling; ⚠️ approx start ('approximatively' in source); no revival-reuse found for these names (Savinelli-era series = Notte, Rubino Antico, Sitting…) but re-check before trusting the ceiling hard. NOT encoded: 'extra' + 'super' + 'standard' (words too generic for substring matching), grana (thin), old briar (stamp not line), montechristo (seconds, undated)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["frb", "mfrb", "mfd. by rossi", "mfd by rossi"], "era_start": 1920, "era_end": 1969, "confidence": "medium", "label": "FRB/MFRB oval stamps = ~1920s era, KEPT on cheap traditional models 'surely to Sixties' -> wide 1920-1969"},
+        {"field": "lettering", "match": ["cursive rossi", "rossi cursive", "rossi script"], "era_start": 1936, "era_end": 1975, "confidence": "medium", "label": "cursive 'Rossi' + model name = from ~1936 (50th anniversary) until the ~1970s oval takeover -> approx"},
+        {"field": "lettering", "match": ["rossi in oval", "rossi oval"], "era_start": 1970, "era_end": 1985, "confidence": "medium", "label": "ROSSI in an oval (sometimes ITALY) = ~1970s to the 1985 closure"},
+        {"field": "lettering", "match": ["nino rossi"], "era_start": 1970, "era_end": 1985, "confidence": "high", "label": "'Nino Rossi' cursive signature (the last heir) = the final era ~1970s-1985"},
+        {"field": "stem_logo", "match": ["r in circle", "circled r"], "era_start": 1920, "era_end": 1975, "confidence": "low", "label": "R-in-circle stem = 1920s standard mark, stayed on cheap models through the cursive era -> wide 1920-1975"},
+        {"field": "stem_material", "match": ["twinbore"], "era_start": 1986, "era_end": 2026, "confidence": "low", "label": "twinbore mouthpiece = first Savinelli-revival pipes; revival year UNDOCUMENTED -> honest wide 1986+"},
+        {"field": "stem_material", "match": ["methacrylate", "6mm adapter", "9mm adapter"], "era_start": 1986, "era_end": 2026, "confidence": "low", "label": "methacrylate stem / filter adapter = current Savinelli-era production -> 1986+ wide"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel (commemoratives etc.)."}
+  },
+
+  "channels_future": {
+    "generic_wordmarks": "REAL BRIAR / VERA RADICA / BRUYERE GARANTIE alone = pre-~1918 era IF the pipe is otherwise proven Rossi (provenance/catalog match) — attribution can NEVER come from these marks; that is why no channel encodes them.",
+    "savinelli_revival_year": "Find the documented 'Rossi by Savinelli' launch year (press release / smokingpipes brand page / Savinelli interview) -> tighten the 1986+ brackets.",
+    "shape_numbers": ">800 shapes by the 60s -> shape numbers carry no dating value for Rossi.",
+    "montechristo": "Seconds brand — undated; encode if a source lands."
+  }
+}

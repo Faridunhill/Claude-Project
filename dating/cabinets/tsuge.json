@@ -1,0 +1,44 @@
+{
+  "_doc": "TSUGE dating cabinet (#41, Wave E, built 2026-07-17-eve; roster #48 — the JAPANESE school opener). Kyoichiro Tsuge's house: workshop founded 1936 (ivory pipes/cigarette holders first), cherry pipes from 1945, BRIAR from the 1950s, European-trained freehand era from the 1970s. SOURCES: staging/pipedia/Tsuge.json (company catalog history via Uekusa/Poggenpohl) + Beyond_Tsuge.json (smokingpipes, 16KB — partially mined; Ikebana noted).",
+  "brand": "Tsuge",
+  "region": {"country": "Japan", "school": "japanese"},
+  "aliases": ["tsuge", "tsuge pipe company", "ikebana"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "Kyoichiro Tsuge b.1911 (Kanazawa; swordsmith/samurai lineage). Orphaned 13; apprenticed under a master IVORY pipe maker (Tokyo) from 1924. 1936: opens TSUGE PIPE COMPANY Ltd. WWII: factory makes wooden gun stocks; Kyoichiro sent to war. 1945: restart — ivory unobtainable (GHQ control) -> CHERRY WOOD (Tohoku) cigarette holders, then pipes (the MacArthur corncob landing + US pipe tobacco = the boom); umbrella-handle craftsmen hired; billiards/bent billiards mass-produced; 120 craftsmen at peak. 1950s: imported BRIAR arrives -> briar pipes; carved souvenir bowls for US soldiers (Mt. Fuji, three monkeys, Toshogu, Geisha; sold at Imperial Hotel/PX/USO). 1960s: Vietnam-war soldier demand; cherry pipes exported to Saigon. 1970s: yen crisis -> pivot to high-value: six craftsmen sent to Italy+Denmark; FUKADO + SATO study under SIXTEN IVARSSON and JØRGEN LARSEN (Danish-school graft — artisan registry links!) -> freehands to the US, then Germany/Switzerland success. Ikebana = the high-grade line (Beyond Tsuge covers the modern era — future mine)."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["tsuge", "ikebana", "made in japan"],
+    "physical": "Era tells by MATERIAL: ivory = pre-war/earliest; cherry wood = 1945+ (mainstay to the 60s; Saigon exports); briar = 1950s+; Danish-influenced freehands = 1970s+. Carved traditional-motif bowls (Fuji/monkeys/Geisha) = 1950s-60s souvenir era."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "Ikebana: high-grade line, intro year not in our mirror (Beyond_Tsuge future mine) -> unencoded."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["tsuge"], "era_start": 1936, "era_end": 2026, "confidence": "high", "label": "Tsuge company floor = 1936 (workshop founded)"},
+        {"field": "bowl_material", "match": ["cherry", "cherry wood"], "era_start": 1945, "era_end": 1975, "confidence": "medium", "label": "cherry-wood Tsuge = post-war era (1945 restart; mainstay through the 60s Saigon exports) -> wide"},
+        {"field": "bowl_material", "match": ["briar"], "era_start": 1950, "era_end": 2026, "confidence": "medium", "label": "briar Tsuge = 1950s+ (imported briar became available)"},
+        {"field": "finish", "match": ["carved fuji", "geisha", "three monkeys", "carved souvenir"], "era_start": 1950, "era_end": 1970, "confidence": "medium", "label": "carved traditional-motif souvenir bowls = the 1950s-60s US-forces era"},
+        {"field": "finish", "match": ["freehand"], "era_start": 1972, "era_end": 2026, "confidence": "low", "label": "Danish-style freehands = the 1970s Europe-trained era onward (Fukado/Sato under Ivarsson/Larsen) -> approx floor"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "beyond_tsuge": "Beyond_Tsuge.json (smokingpipes article, mirrored) = the modern-era detail (Ikebana grades, Tokutomi links, current lines) — mine next Japan session.",
+    "ivory_era": "Pre-war ivory pieces: attribution/perception rules unbuilt (ivory also legally sensitive — flag in listings)."
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "_doc": "DR. GRABOW dating cabinet (#35, Wave E, built 2026-07-17-eve; roster #41). The great American drugstore pipe — and one of the best-documented: Russell McKay's ad-dated timeline + model-name lists (BOTH mirrored as dedicated pipedia guides). Dating spine: the Linkman->Dr.Grabow name ladder, logo/emblem evolution (shield->spade), the Ajustomatic stem cliff (1949), the Chicago->Sparta NC move (~1952-55), and ad-dated line floors. SOURCES: staging/pipedia/Dr__Grabow_Pipe_History_Timeline.json (McKay/Bridges chronology) + Dr__Grabow_Models__Series_Line__Names_Through_the_Years.json (McKay) + Dr__Grabow.json + RJR_Grabow_information.json + The_Legend_of_Dr__Grabow.json (unread — future). McKay flags much as working-notes -> soft edges get approx/low.",
+  "brand": "Dr. Grabow",
+  "region": {"country": "USA", "school": "american"},
+  "aliases": ["dr. grabow", "dr grabow", "grabow", "linkman", "linkman's", "m. linkman"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1892 Louis B. Linkman founds M. LINKMAN & CO, Chicago. 1914 first patent (1104203, aluminum push-stem). 1922 factory at Fullerton & Racine. 1924 stinger patent 1487867. 1930 (or 1931) Linkman starts using the DR. GRABOW name (a real Chicago physician, Paul E. Grabow, d.1965 aged 97). 1933 threaded-stem stinger patent 1896800 (types L1/L2). 1937 'Pre-Smoked' marketing begins (registered 1947). 1941 'C'-cut stinger + PLAIN BLOCK printed logo (LIFE ad). 1942-43 wartime: yellow/orange plastic bands + non-metallic stingers. Oct-1943 block lettering w/o 'Linkman's'; SHIELD emblem on DeLuxe (ads 1943-1946). Late 1944: 'Slanted Blocks' logo + name change to DR. GRABOW PIPE CO + SPADE emblem first in ads + postal zone '14' in addresses. 1946 Lavietes files AJUSTOMATIC patent (granted Feb-1949, #2461905; his D&P Pipe Co had moved to Boone NC 1943 -> the NC connection). 1947 'Dr Grabow' + 'Pre-Smoked' trademarks registered; 'Slanted Block and Oval' logo appears. 1949 brief unionization (ads May-Nov 1949). ~1952-55: Linkman retires; DR. GRABOW RELOCATES TO NORTH CAROLINA (1955 RTDA lists HL&T of NC as maker; 'transition period' pipes = both plants, collector nickname 'Dr. Crapos'). 1957 Linkman dies. Owners ladder: HL&T -> 1985 merge w/ Mastercraft + Sparta Pipes = SPARTA INDUSTRIES (trademark assigned 1987) -> 1997 Sparta merges w/ LANE Ltd -> 1999 Lane->RJ Reynolds -> 2006 International Pipes & Accessories buys Dr. Grabow + Sparta. RJR-era special-offer pipes: Westbrook, Belvedere, Sculptura, Commodore. Line names of the NC era = 1950s-60s CAR names (Eldorado, Viscount, Starfire, Regal, Savoy, Riviera, Lark)."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["white spade", "shield"],
+    "wordmarks": ["dr. grabow", "linkman's", "m. linkman", "pre-smoked", "ajustomatic", "westbrook", "viscount", "eldorado", "starfire", "regal", "savoy", "riviera", "duke", "lark", "sculptura", "commodore", "omega", "royalton"],
+    "physical": "Ladder of tells: MLC-in-oval + 2-digit shape = earliest Dr. Grabow era (c.1930-32). 'Fashioned by Linkman' / Linkman's wording = pre-1945. SHIELD emblem (DeLuxe) = ads 1943-46. SPADE emblem = late-1944 onward (the lasting mark). PLAIN BLOCK logo 1941+, SLANTED BLOCKS late-1944+, SLANTED BLOCK+OVAL 1947+. Push-stem Linkman's vs AJUSTOMATIC threaded system = 1949+. Wartime: colored plastic bands, non-metal stingers. Meerschaum-lined: 'Italy' + no spade = pre-1989, spade + no Italy = post-1989."
+  },
+
+  "fusion_order": ["line_years", "com_stamp", "feature_era", "stamped_year"],
+
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {"match": ["italy"], "era_start": 1964, "era_end": 1989, "confidence": "low", "note": "Italian-made Grabows: Lark + 'Little' Duke imported 1964-1984; Meerschaum-Lined from M. Gasparini stamped 'Italy' until 1989 (then Sparta-made w/ spade)"}
+      ]
+    },
+
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "westbrook": [1955, 1985],
+        "standard": [1954, 1956],
+        "regal": [1956, 2026],
+        "savoy": [1956, 2026],
+        "starfire": [1956, 2026],
+        "riviera": [1957, 2026],
+        "viscount": [1957, 2026],
+        "eldorado": [1960, 2026],
+        "belvedere": [1955, 2026],
+        "commodore": [1964, 2026],
+        "golden duke": [1964, 2026],
+        "duke": [1964, 2026],
+        "berwyck": [1964, 2026],
+        "sculptura": [1967, 2026],
+        "color viscount": [1971, 2026],
+        "omega": [1974, 2026],
+        "cdl": [1975, 1983],
+        "viking pacer": [1976, 2026],
+        "pacer": [1976, 2026],
+        "royalton": [1988, 2026],
+        "bucko": [1985, 2026],
+        "hillcrest": [1985, 2026],
+        "freehand": [1985, 2026]
+      },
+      "_notes": "Floors = McKay's FIRST-AD dates (strong): Westbrook c1955 RJR pipe, ran 'to about 1985 or so' -> [1955,1985]. standard: Mar-1954 ad -> ~1956 replacement window BUT a 'Fashioned by Linkman' 4-digit example exists (McKay calls the name a mystery) -> LOW, narrow kept w/ this caveat. regal Nov-1956 ($2.50) · savoy Oct-1956 · starfire Dec-1956 · riviera Mar-1957 · viscount Dec-1957 ($5) · eldorado Nov-1961 ad but a $10 pipe existed 1956 -> floor 1960 approx · belvedere c1955 (early RJR; later dropped, end unknown) · commodore 1964 ad · golden duke Dec-1964 ad · duke/berwyck c1964 · sculptura 1967 (big-blast sandblast era 1967-69) · color viscount 1971 (brochure-dated) · omega: purchased June-1974 (Amash) -> floor 1974 · CDL 1975-1983 test-market window (EXACT, first in 1976 RTDA) · pacer/viking pacer 1976 (RTDA ad) · royalton 1988 (reused old HL&T name + leftover HLT shield stamp!) · bucko/hillcrest/freehand c1985-91 era. ENDS mostly open (lines ran long) -> 2026 unless documented. NOT encoded: viking (c1960 'or earlier', 1954 patent design — too fuzzy), lark (1964 import but name reused), emperor/alpha/bard/big pipe/cardinal/half-and-half/redwood/vanroy (Lane-era or single-sighting), old Linkman series numbers (Courtleigh 91, De Luxe 92/97/98/99, Ventilator 63-65 etc. = c1937 catalog codes, NOT stamped on pipes per TED's note)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["linkman", "linkman's", "fashioned by linkman", "m. linkman"], "era_start": 1892, "era_end": 1955, "confidence": "medium", "label": "Linkman wording = Chicago eras (company renamed Dr. Grabow Pipe Co late 1944, but 'Fashioned by Linkman' lingered into the transition) -> wide to the NC handover"},
+        {"field": "lettering", "match": ["mlc oval", "mlc"], "era_start": 1930, "era_end": 1935, "confidence": "medium", "label": "MLC-in-oval + plain 2-digit shape = the first Dr. Grabow era (c.1930-32, slack to 1935)"},
+        {"field": "lettering", "match": ["pre-smoked", "presmoked"], "era_start": 1937, "era_end": 2026, "confidence": "high", "label": "'Pre-Smoked' = 1937+ (marketing began; trademark 1947)"},
+        {"field": "lettering", "match": ["ajustomatic"], "era_start": 1949, "era_end": 2026, "confidence": "high", "label": "AJUSTOMATIC threaded stem = 1949+ (Lavietes patent 2461905, Feb-1949)"},
+        {"field": "stem_logo", "match": ["shield"], "era_start": 1943, "era_end": 1947, "confidence": "medium", "label": "SHIELD emblem (DeLuxe) = ads Oct-1943 to 1946 (+slack). EXCEPTION: 1988 Royalton reused an old HLT shield stamp — check line name"},
+        {"field": "stem_logo", "match": ["spade"], "era_start": 1944, "era_end": 2026, "confidence": "high", "label": "SPADE emblem = late-1944 onward (the enduring Dr. Grabow mark)"},
+        {"field": "bit_style", "match": ["push stem", "push bit"], "era_start": 1914, "era_end": 1955, "confidence": "low", "label": "push-stem = Linkman construction (pre-Ajustomatic; NC-era VanRoy revival also push -> LOW)"},
+        {"field": "lettering", "match": ["plastic band", "yellow band", "orange band"], "era_start": 1942, "era_end": 1944, "confidence": "medium", "label": "yellow/orange plastic band + non-metallic stinger = the wartime window (1942-43 ads, steel-penny era)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "stinger_typology": "Stinger types (L1/L2 1933 / H1 Hollycourt 1937 / 'C'-cut 1941 / postwar) = a precise dating channel once perception can classify stingers — McKay's site had photos; hunt an archive copy.",
+    "transition_pipes": "The Chicago/NC 'transition period' (~1952-55, 'Dr. Crapos') diagnostics — McKay flags it unresolved.",
+    "postal_zones": "Address stampings/boxes: zone '14' = 1944+; ZIP = 1963+ (generic address dating, boxes/papers only)."
+  }
+}

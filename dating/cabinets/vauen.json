@@ -1,0 +1,198 @@
+{
+  "_doc": "VAUEN dating cabinet (#10, built 2026-07-16; QUEUE-JUMPED from roster #47 -- 7 Vauen pipes in Farid's live stock). Germany's oldest pipe factory; dates by NAME floor (VAUEN coined 1909), the dot system (white = DE/AT market from the 1920s; blue/grey = export), filter-system floors (paper 1921, Dr. Perl 9mm 1934, Conex 1968) and stamped Pipe-of-the-Year years. SOURCE: pipedia mirror staging/pipedia/VAUEN.json -- which itself cites vauen.com (manufacturer-primary). Pipephil has no dedicated Vauen page in our mirror; further sweep (checklist) = TODO on next enrichment pass.",
+  "brand": "Vauen",
+  "aliases": [
+    "vauen",
+    "vpfn",
+    "vereinigte pfeifenfabriken"
+  ],
+  "max_year": 2026,
+  "history_anchors": {
+    "_doc": "1848 Karl Ellenberger + Carl August Ziener, Nuremberg = FIRST German pipe factory. 1901 merger with Gebhard Ott (f. 1866) -> Vereinigte Pfeifenfabriken Nurnberg (VPFN), managed by Ernst Eckert (Ott family). 1909: Adolf Eckert coins 'VAUEN' (V of Vereinigte + N of Nurnberg) -> the NAME FLOOR. 1920s: white-dot trademark for Germany/Austria; court case vs Dunhill split the world: VAUEN white dot ONLY in DE/AT, light-blue/grey dots everywhere else since. Dot = higher grades; VAUEN imprint alone = lower grades. 1921 paper filter; 1934 Dr. Perl junior 9mm activated-carbon filter (world first -> today >90% of German-market pipes are 9mm). 1968: Conex conical filter seat on MOST models (exceptions exist -- floor only, absence never dates). Family-run throughout; Alexander Eckert (5th gen) heads since 1982. Distributes Kansas (made by Achaiki Amadeus)."
+  },
+  "brand_marks": {
+    "stem_logos": [
+      "white dot",
+      "blue dot",
+      "grey dot"
+    ],
+    "wordmarks": [
+      "vauen",
+      "vpfn",
+      "dr. perl",
+      "nuremberg",
+      "nurnberg",
+      "germany"
+    ],
+    "physical": "Dot on mouthpiece = higher-grade Vauen (white in DE/AT, light-blue/grey export -- the Dunhill settlement). Lower grades: VAUEN imprint on stem only. 9mm filter chamber standard; Conex = conical filter-seat end in the mouthpiece (1968+)."
+  },
+  "fusion_order": [
+    "line_years",
+    "com_stamp",
+    "feature_era",
+    "stamped_year"
+  ],
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {
+          "match": [
+            "us-zone",
+            "us zone"
+          ],
+          "era_start": 1945,
+          "era_end": 1949,
+          "confidence": "high",
+          "note": "occupation-era wording (generic German rule, verified 2026-07-16)"
+        },
+        {
+          "match": [
+            "made in west germany",
+            "west germany",
+            "western germany",
+            "w. germany"
+          ],
+          "era_start": 1949,
+          "era_end": 1990,
+          "confidence": "high",
+          "note": "THE Vauen-era splitter: West-Germany wording = 1949-1990 hard bracket"
+        },
+        {
+          "match": [
+            "germany",
+            "nuremberg",
+            "nurnberg",
+            "made in germany"
+          ],
+          "era_start": 1848,
+          "era_end": 2026,
+          "confidence": "high",
+          "note": "production floor -- Nuremberg since 1848; never moved. Bare 'Germany' = pre-1949 OR post-1990 OR non-participating maker -> floor only; the West-Germany wording above is the sharp one"
+        }
+      ]
+    },
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "pipe of the year": [
+          1993,
+          2026
+        ],
+        "jahrespfeife": [
+          1993,
+          2026
+        ],
+        "175 years": [
+          2023,
+          2026
+        ],
+        "anniversary pipe": [
+          2023,
+          2026
+        ]
+      },
+      "_notes": "PoY VERIFIED on Vauen's OWN archive (both pages read 2026-07-16): unbroken 1993-2025, 33 editions; every PoY = new shape not in the normal range, sterling-decorated, sterling CROSSED-PIPES mark + literal year -> stamped_year EXACT (stock L0078 = 2002 ✓). Retailer J-codes (J2024A) -> perception feeds them to stamped_year. 175 Years Anniversary Pipe = 2023 (1848+175), still sold 2026. Lines to research: Lucus, Pearl, Luxus, Basic, Il Maestro (Barontini -- L0267 in stock), Auenland (Hobbit flagship family, 2010s), Diamond (existed 2014: Inter-tabac Star). ★ CATALOG BRACKETS = WAYBACK MACHINE: no PDFs online, but web.archive.org holds vauen.de range pages across ~2005-2026 -> per-year line-presence snapshots = intro/discontinue brackets; our dlt collector already fetches via web.archive.org -> collector job queued (see brand_research/vauen_dating/vauen_com_archive_facts.md). VIDEO QUEUE: official YouTube + Eckert interviews incl. seasonal novelty presentations (each = dated line-intro evidence)."
+    },
+    "feature_era": {
+      "table": [
+        {
+          "field": "lettering",
+          "match": [
+            "vauen"
+          ],
+          "era_start": 1909,
+          "era_end": 2026,
+          "confidence": "high",
+          "label": "the name VAUEN was coined 1909 -- any VAUEN-marked pipe is 1909+ (VPFN/Gebhard Ott marks = earlier company eras). PRIMARY SOURCE found 2026-07-18: Deutscher Reichsanzeiger 1909-10-12, Warenzeichen 121675 (V.3706), applied 1909-07-27, registered 1909-09-21, by 'Vereinigte Pfeifenfabriken vorm. Gebhard Ott und Ziener & Ellenberger AG'. NOTE (maker's own 1921 statement, Volksfreund Karlsruhe 1921-09-19): pre-WWI EXPORT pipes were NOT stamped with the mark -- a VAUEN-stamped pipe found outside Germany is practically ~1919/1921+ (single source, note only, no bracket change)"
+        },
+        {
+          "field": "stem_logo",
+          "match": [
+            "white dot"
+          ],
+          "era_start": 1920,
+          "era_end": 2026,
+          "confidence": "medium",
+          "label": "white dot = 1920s+ trademark AND a Germany/Austria-market pipe (export pipes got blue/grey after the Dunhill settlement)"
+        },
+        {
+          "field": "stem_logo",
+          "match": [
+            "blue dot",
+            "light blue dot",
+            "grey dot",
+            "gray dot"
+          ],
+          "era_start": 1925,
+          "era_end": 2026,
+          "confidence": "medium",
+          "label": "blue/grey dot = export-market Vauen, post-settlement (settlement date approx 1920s -- verify exact year on enrichment)"
+        },
+        {
+          "field": "bit_style",
+          "match": [
+            "conex"
+          ],
+          "era_start": 1968,
+          "era_end": 2026,
+          "confidence": "high",
+          "label": "Conex conical filter seat = 1968+ (floor; most but not all models -- absence never dates)"
+        },
+        {
+          "field": "bit_style",
+          "match": [
+            "9mm",
+            "9 mm"
+          ],
+          "era_start": 1934,
+          "era_end": 2026,
+          "confidence": "medium",
+          "label": "9mm filter chamber = Dr. Perl era, 1934+ floor. CAVEAT (DDB fulltext 2026-07-17): the Dr. Perl NAME predates the 9mm system -- 'Dr. Perls pat. Trockenrauch-Pfeifen' advertised 1930 (Harzer Volksstimme 1930-04-17 p.8, repeats; 117 hits 1930-32) and 'Trockenrauch-Patrone' tech advertised 1926 (Stuttgarter Neues Tagblatt 1926-11-01 p.10) -- so a Dr. Perl WORDMARK alone is NOT a 1934 floor; only the 9mm CHAMBER is. ANTEDATED AGAIN 2026-07-18 (ANNO, image-verified): 'Die Dr. Perl-Pfeife mit dem eingepraegten Namen VAUEN' advertised Pilsner Tagblatt 1927-12-11 p.4 ('beste Gesundheitspfeife der Welt', 1 Jahr Garantie, 'VAUEN sind seit 60 Jahren die besten' -> heritage math ~1867) -- Dr. Perl wordmark floor = 1927. See brand_research/vauen_dating/ddb_fulltext_facts.md"
+        },
+        {
+          "field": "stem_logo",
+          "match": [
+            "crossed pipes"
+          ],
+          "era_start": 1993,
+          "era_end": 2026,
+          "confidence": "high",
+          "label": "sterling crossed-pipes mark = Pipe of the Year series (1993+); the stamped year gives the EXACT date"
+        },
+        {
+          "field": "lettering",
+          "match": [
+            "drgm",
+            "d.r.g.m"
+          ],
+          "era_start": 1891,
+          "era_end": 1952,
+          "confidence": "medium",
+          "label": "DRGM = Reich-era utility mark (generic German rule)"
+        },
+        {
+          "field": "lettering",
+          "match": [
+            "dbgm",
+            "dbp"
+          ],
+          "era_start": 1949,
+          "era_end": 2026,
+          "confidence": "medium",
+          "label": "DBGM/DBP = West German 1949+ (generic German rule)"
+        }
+      ]
+    },
+    "stamped_year": {
+      "_doc": "Vauen Pipe of the Year carries its literal year (stock example L0078 = 2002; L0184's '2003' silver -- confirm on pipe). Generic channel."
+    }
+  },
+  "channels_future": {
+    "shape_chart": "shape_reference/charts/vauen.json exists (eye). 3-4 digit model numbers (368 Pearl, 1243, 3075 Luxus, 1300 Basic, 3239) -- no design-year data yet.",
+    "enrichment": "checklist pass pending: vauen.com history page (primary), German forums, smokingpipes blog 'Vauen'; exact Dunhill-settlement year; PoY series start; Il Maestro/Barontini collab years (links Vauen to the Stanwell-Barontini Italy story!)."
+  },
+  "region": {
+    "country": "Germany",
+    "school": "german"
+  }
+}

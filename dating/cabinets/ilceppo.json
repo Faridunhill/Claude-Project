@@ -1,0 +1,42 @@
+{
+  "_doc": "IL CEPPO dating cabinet (#49, built 2026-07-17-eve; roster #26). Pesaro school: founded 1978 by architect GIORGIO IMPERATORI; the value cliff = 1995, when FRANCO ROSSI joined (the design flair era; Giorgio later retired -> Franco + sister Nadia make the pipes). SOURCES: staging/pipedia/Il_Ceppo.json (R.D. Field text; the Lubinski discussion-tab history NOT in mirror -> future).",
+  "brand": "Il Ceppo",
+  "region": {"country": "Italy", "school": "italian"},
+  "aliases": ["il ceppo", "ceppo"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1978: Giorgio Imperatori (architect, pipe passion) begins designing + making IL CEPPO (Pesaro; 'late 1970s' per Field). Always a good value; limited US presence. 1995: FRANCO ROSSI joins — elegance/flair era begins; Giorgio retires to his farmhouse; production = Franco + Nadia Rossi. Massimo Palazzi worked at Il Ceppo until 1998 -> founded L'ANATRA (future roster note). MARIO LUBINSKI = the Italian distributor (the same Lubinski of the Ferrara/Charatan stock + Peterson Sherlock Holmes design credit — small world note). Giuseppe Cambioli involved (contact era).",
+    "grading_note": "Il Ceppo grades by number groups (1-4 quality tiers in trade listings) — NOT documented in our mirror -> unencoded until sourced."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["il ceppo"],
+    "physical": "IL CEPPO stamp + grade number; Pesaro-school aesthetics (kin to Mastro de Paja / Ser Jacopo, distinct lines)."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {},
+      "_notes": "No dated lines in our source."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["il ceppo", "ceppo"], "era_start": 1978, "era_end": 2026, "confidence": "high", "label": "Il Ceppo brand floor = 1978 (Imperatori founding; Rossi era = 1995+, stamp-level split undocumented)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "lubinski_history": "The Lubinski discussion-tab account (pipedia) = richer history incl. other brands — fetch on a web pass.",
+    "grade_numbers": "Source the 1-4 grade-number system + any era changes.",
+    "rossi_era_tells": "Imperatori-era vs Rossi-era (1995+) design/stamp diagnostics — collector knowledge, unresearched."
+  }
+}

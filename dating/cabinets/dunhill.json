@@ -1,0 +1,206 @@
+{
+  "_doc": "DUNHILL dating cabinet = DATA only, same general engine as Peterson. Now filled from the AUTHORITATIVE source Farid saved: the Pipedia Dunhill Dating Guide (based on Loring's & Field's guides) -> data/hub/pipes/brand_research/dunhill_dating/dunhill_dating_guide_FULL.txt, plus the local pipephil mirror. Proves the cabinet model generalises: Dunhill dates by date-code + finish + patent, a totally different system from Peterson, with NO engine change. Built + filled 2026-07-15.",
+  "brand": "Dunhill",
+  "aliases": [
+    "dunhill",
+    "alfred dunhill",
+    "dunhill london",
+    "white spot"
+  ],
+  "max_year": 2026,
+  "brand_marks": {
+    "wordmarks": [
+      "dunhill",
+      "the white spot",
+      "made in england"
+    ],
+    "physical": "the inlaid WHITE SPOT on the top of the stem (from 1912) = Dunhill's own mark. A visual white-dot matcher can confirm brand later.",
+    "note": "'DUNHILL over DUKE ST S.W.' = 1910-1918; 'DUNHILL over LONDON' = Nov 1918-1952; from 1952 'DUNHILL over the FINISH NAME' (BRUYERE/ROOT BRIAR/etc)."
+  },
+  "fusion_order": [
+    "finish_series",
+    "patent_number",
+    "date_code"
+  ],
+  "channels": {
+    "finish_series": {
+      "_doc": "Dunhill's finish IS the series, read VISUALLY (sandblast vs smooth) even if the word is worn. Gives a FLOOR (a pipe can't predate its finish) + the series label. Intros from the guide.",
+      "table": [
+        {
+          "match": [
+            "bruyere",
+            "bruy"
+          ],
+          "series": "Bruyere",
+          "intro": 1910,
+          "note": "original smooth deep red-brown; Dunhill's first finish"
+        },
+        {
+          "match": [
+            "shell",
+            "sandblast"
+          ],
+          "series": "Shell",
+          "intro": 1917,
+          "note": "iconic black sandblast; 'Shell' in quotes until 1934; possessive DUNHILL'S 'SHELL' 1918-1934"
+        },
+        {
+          "match": [
+            "root",
+            "root briar"
+          ],
+          "series": "Root",
+          "intro": 1931,
+          "note": "smooth light finish showing straight grain (guide: introduced 1931)"
+        },
+        {
+          "match": [
+            "tanshell",
+            "tan shell"
+          ],
+          "series": "Tanshell",
+          "intro": 1952,
+          "note": "tan sandblast; the 'T' finish letter half-height from 1953"
+        },
+        {
+          "match": [
+            "cumberland"
+          ],
+          "series": "Cumberland",
+          "intro": 1979,
+          "note": "brindled reddish sandblast + cumberland stem"
+        },
+        {
+          "match": [
+            "chestnut"
+          ],
+          "series": "Chestnut",
+          "intro": 1983,
+          "note": "smooth mid-brown; intro approx -- verify in guide"
+        },
+        {
+          "match": [
+            "county"
+          ],
+          "series": "County",
+          "intro": 1985,
+          "note": "deep rustication; intro approx -- verify in guide"
+        },
+        {
+          "match": [
+            "amber root"
+          ],
+          "series": "Amber Root",
+          "intro": 1995,
+          "note": "intro approx -- verify"
+        },
+        {
+          "match": [
+            "dead root",
+            "dr "
+          ],
+          "series": "Dead Root",
+          "intro": 1915,
+          "note": "straight-grain designation; pre-1931 on Bruyere ('DR'), post-1931 Root ('DRR')"
+        }
+      ]
+    },
+    "patent_number": {
+      "_doc": "Dunhill stamped patent numbers through 1954 (ceased 1955). A patent number present => PRE-1955. Specific numbers bracket the era. ENRICHED 2026-07-16 from the LOCAL pipephil mirror (logos/en/dunhill/patent1-3.html -- retro blog/platform sweep): usage eras below are pipephil's documented ones; where the Loring/Field guide disagrees the WIDE bracket is kept with a note.",
+      "any_patent_era": [
+        1912,
+        1954
+      ],
+      "table": [
+        {
+          "match": [
+            "5861/12",
+            "5681/12"
+          ],
+          "era_start": 1912,
+          "era_end": 1935,
+          "confidence": "medium",
+          "note": "Inner Tube patent (5681/12 = documented factory misstamp). Sources DISAGREE on end: pipephil 'used 1913-1926', guide table to 1935 -> wide kept"
+        },
+        {
+          "match": [
+            "119708/17"
+          ],
+          "era_start": 1918,
+          "era_end": 1926,
+          "confidence": "medium",
+          "note": "sandblast patent; the DOUBLE pattern '5861/12 119708/17' ('PATENT Nos') = 1918-1926 on Shells (pipephil)"
+        },
+        {
+          "match": [
+            "116989/17"
+          ],
+          "era_start": 1917,
+          "era_end": 1950,
+          "confidence": "low",
+          "note": "Inner Tube with Flange"
+        },
+        {
+          "match": [
+            "1341418/20"
+          ],
+          "era_start": 1932,
+          "era_end": 1936,
+          "confidence": "medium",
+          "note": "US oil-treatment/sandblast patent on Shell"
+        },
+        {
+          "match": [
+            "1861910/32"
+          ],
+          "era_start": 1932,
+          "era_end": 1936,
+          "confidence": "medium",
+          "note": "US 'Vernon' fitment patent"
+        },
+        {
+          "match": [
+            "1343253/20"
+          ],
+          "era_start": 1925,
+          "era_end": 1934,
+          "confidence": "medium",
+          "note": "US patent sometimes used in place of the primaries 1925-34 (pipephil)"
+        },
+        {
+          "match": [
+            "417574/34",
+            "417574"
+          ],
+          "era_start": 1942,
+          "era_end": 1954,
+          "confidence": "high",
+          "note": "the late patent, used 1942-1954 (pipephil patent3; guide sometimes shows it without /34 from 1935 -- if a bare '417574' turns up on a late-30s pipe widen honestly). Suffix on this patent is base-1940/1950 (guide: 1943='3', 1954='4') -> engine's candidate-intersection resolves or stays honestly ambiguous"
+        },
+        {
+          "match": [
+            "915",
+            "mar.9.15"
+          ],
+          "era_start": 1915,
+          "era_end": 1928,
+          "confidence": "low",
+          "note": "'PATENTED MARCH-9-15' US reference; with 'PAT.APP.FOR' = 1918-1920 (pipephil)"
+        }
+      ]
+    },
+    "date_code": {
+      "_doc": "'MADE IN ENGLAND n' suffix. REAL RULE (Pipedia guide, Loring/Field): from 1960 the suffix is a RUNNING number -> year = 1960 + n. England 4 = 1964, 15 = 1975, 24 = 1984, 44 = 2004, 64 = 2024. UNAMBIGUOUS -- no decade guess. 1955-59 used a single digit 5-9. PATENT-ERA RULE (guide + pipephil, added 2026-07-16): the suffix was INTRODUCED LATE 1921 and ran on RESTARTING bases while patents were stamped (to 1954): 1921-41 = 1920+n (documented: 5861/12+'3'=1923, '16'=1936, '21'=1941), 1940s = 1940+n (guide: 1943='3'), 1950-54 = 1950+n (guide: 1954='4' on 417574/34). Engine builds candidates from all bases and INTERSECTS with the matched patent's usage era -- one survivor = exact, else honest ambiguity. A patent pipe with NO suffix is pre-1921 (absence noted, never auto-dated).",
+      "base_year": 1960,
+      "patent_suffix_bases": [
+        1920,
+        1940,
+        1950
+      ]
+    }
+  },
+  "region": {
+    "country": "England",
+    "school": "english"
+  }
+}

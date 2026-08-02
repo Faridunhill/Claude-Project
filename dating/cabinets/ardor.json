@@ -1,0 +1,45 @@
+{
+  "_doc": "ARDOR dating cabinet (#47, built 2026-07-17-eve; roster #23). Varese family house: 1974 Dorelio Rovera + father Angelo turn the family production artisan — ARDOR = AngeloRovera + DORelio. The Rovera line goes back to Sociedade Rovera 1911 (the ex-Rossi spin-off ecosystem — matches rossi.json's 'Rovera brothers 1911'). Few hard stamp cliffs -> floors + era hints (Giants/Super Giants = Monjure-US era 2000s). SOURCES: staging/pipedia/Ardor.json (company text + Morrison NASPC article).",
+  "brand": "Ardor",
+  "region": {"country": "Italy", "school": "italian"},
+  "aliases": ["ardor"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1911: Sociedade Rovera founded (Francesco Rovera + brothers; Varese pipe country). Angelo (Francesco's son) -> 1974: ARDOR founded with Dorelio (4th generation later = DAMIANO, who introduced the COLOURED METHACRYLATE stems + modern shapes). Gavirate (VA) — same town as the Paronelli museum (rossi.json ecosystem). US: Steve Monjure (Monjure International) = the distributor era; 'GIANTS' stamp born of the Morrison demand (~2000s), then 'SUPER GIANTS' (old huge blocks found); J. MORRISON series = 2002 (his own shape drawings). Grading (Roman-gods ladder): Venere 2 Punti (top straight grain/birdseye) > Venere > Mercurio > Marte (+ Marte Sabbiata) > Terra Sabbiata > Giove > Plutone > Tabacco (sculpted leaves) > Meteora (scale rustication, house signature) > Urano (sabbiata/roccia) > Nettuno > Goccia. Briar air-cured ~10 years (Monjure-era claim); fantasy series w/ silver + colored acrylic."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["ardor", "giants", "super giants", "j. morrison", "venere", "mercurio", "marte", "meteora", "urano", "fantasy"],
+    "physical": "ARDOR + grade name (Roman gods) + finish; Meteora scale-rustication = house signature; colored methacrylate stems = Damiano era (later years)."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "j. morrison": [2002, 2026],
+        "super giants": [2003, 2026]
+      },
+      "_notes": "j. morrison: series born 2002 (Morrison's own account). super giants: after the Giants line was established (Morrison timeline, ~2000s) -> floor 2003 approx LOW. 'giants' NOT encoded as a bare key (the word appears descriptively too often); grade names (Venere...) span the brand -> unencoded."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["ardor"], "era_start": 1974, "era_end": 2026, "confidence": "high", "label": "ARDOR brand floor = 1974 (pre-1974 Rovera pipes = Sociedade Rovera / Rovera marks, mid-grade production)"},
+        {"field": "stem_material", "match": ["colored methacrylate", "coloured methacrylate", "colored acrylic"], "era_start": 1995, "era_end": 2026, "confidence": "low", "label": "COLOURED methacrylate stems = the Damiano era (introduction year undocumented -> approx floor 1995, LOW)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel. NOTE: Ardor is often cited as year-stamping some pipes (roster note 'year-coded stampings — verify') — our mirror does NOT document a system; if a 2-or-4-digit year stamp is read, the generic channel takes it, else abstain."}
+  },
+
+  "channels_future": {
+    "year_stamps": "VERIFY the roster's 'Ardor year-coded stampings' claim (collector forums / Monjure) — if real, wire format rules.",
+    "damiano_floor": "Pin the coloured-stem introduction year.",
+    "rovera_vintage": "Pre-1974 Rovera-marked pipes: future note in a generic Varese context (rossi.json ecosystem)."
+  }
+}

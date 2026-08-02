@@ -1,0 +1,53 @@
+{
+  "_doc": "BUTZ-CHOQUIN dating cabinet (#27, Wave C closer, built 2026-07-17-eve; roster #33). THE CLIFF = 1951: Berrod-Regad buys the trademark and production moves Metz -> Saint-Claude; pipephil explicitly dates an arched 'Butz Choquin / A Metz' (without St Claude) pipe PRE-1951. SOURCES: staging/pipedia/Butz-Choquin.json + pipephil logo-butzchoquin + butzchoquin1 doc (Corot/Origine) (mirror). Name variants: buyer 2002 = 'Fabien Guichon' (pipedia) / 'Fabien Gichon' (pipephil) — same person, spelling noted.",
+  "brand": "Butz-Choquin",
+  "region": {"country": "France", "school": "saint-claude"},
+  "aliases": ["butz-choquin", "butz choquin", "bc"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1858 Metz: tobacconist Jean-Baptiste Choquin + his first workman (and son-in-law, m.1858) Gustave Butz create the CHOQUIN pipe — bent, flat-bottomed bowl, hollow ALBATROSS-BONE mouthpiece extension fixed with silver rings (the 'Origine' model; the painter Corot smoked one — Nadar photo, used in BC's own ads). Butz builds the Metz establishment under the Butz-Choquin name. Pre-1951: BC pipes crafted/distributed by various makers incl. Berrod-Regad itself. **1951 Berrod-Regad buys the trademark -> production relocates to SAINT-CLAUDE.** 1960 export-market entry (network rebuilt; Gold Cup of French good taste). Collection grows 10 -> 70 series. 1969-2002 Jean Paul Berrod manages; 2002 retires, sells to Fabien Guichon (Saint-Claude native). 2006 Denis Blanc (owner of EWA) takes over S.A. Berrod-Regad. Carvers: Paul Lanier (Maitre Pipier series) until retirement, then Alain Albuisson (also the Collection line) — artisan registry links. 1960s: designer JOE COLOMBO designs the 'Optimal' pipes (modèle déposé N°154217/154221)."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["bc", "golden logo"],
+    "wordmarks": ["butz-choquin", "butz choquin", "a metz", "origine", "st claude", "saint claude", "collection", "maitre pipier", "cybele", "bellevue", "select", "free hand", "c'est bon", "auto-sport", "frontenac", "optimal"],
+    "physical": "Standard: 'Butz-Choquin' + line (left), 'St Claude France' + shape number (right). PRE-1951 tell: arched 'Butz Choquin / A Metz' WITHOUT any St Claude wording. Modern Origine reissues: 'Butz-Choquin A Metz Origine' + 'St Claude France' (the St Claude side = modern). Origine extension: albatross bone (19th c.) vs white ACRYLIC (recent). Collection line: 3-tier star grading (2/3/4 stars), 'Fait main', encircled A (= Albuisson). Frontenac = 'Fabriqué par BC' second. Hurricane-type wind pipes exist (Auto-Sport)."
+  },
+
+  "fusion_order": ["line_years", "com_stamp", "feature_era", "stamped_year"],
+
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {"match": ["st claude", "saint claude", "st. claude"], "era_start": 1951, "era_end": 2026, "confidence": "high", "note": "any St-Claude wording on a BC = post-1951 (Berrod-Regad relocation cliff)"},
+        {"match": ["metz"], "era_start": 1858, "era_end": 2026, "confidence": "low", "note": "'A Metz' ALONE (no St Claude) = pre-1951 (see feature_era); combined with St Claude = modern heritage marking -> LOW here, the feature channel splits it"}
+      ]
+    },
+
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "optimal": [1960, 1975]
+      },
+      "_notes": "optimal: Joe Colombo-designed, 'dating from the 60s' (pipephil) + modèle-déposé numbers; Colombo died 1971 -> [1960,1975] with slack, approx flagged. NOT encoded (undated): Origine (1858 model, made continuously incl. modern acrylic reissues — NEVER date by name), Collection (Albuisson, modern), Maitre Pipier (Lanier -> Albuisson, spans decades), Cybele, Bellevue, Select, Free Hand, C'est bon, Auto-Sport (Hurricane type), Frontenac (second), Dr Boston + Jacky Berrod (related pipephil pages, unread)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["a metz alone", "metz no st claude", "arched a metz"], "era_start": 1858, "era_end": 1951, "confidence": "high", "label": "arched 'Butz Choquin / A Metz' WITHOUT St-Claude wording = pre-1951 (pipephil dates such a pipe explicitly pre-Berrod-Regad)"},
+        {"field": "lettering", "match": ["fait main"], "era_start": 1951, "era_end": 2026, "confidence": "low", "label": "'Fait main' St-Claude hand-made marking = Berrod-Regad era onward (form undated)"},
+        {"field": "bit_style", "match": ["albatross", "bone extension"], "era_start": 1858, "era_end": 1930, "confidence": "low", "label": "hollow albatross-BONE Origine extension = the historic fitment (19th century per pipephil); acrylic white extension = recent reissue -> if BONE is confirmed, pipe leans early"},
+        {"field": "stem_material", "match": ["acrylic extension", "synthetic extension"], "era_start": 1951, "era_end": 2026, "confidence": "low", "label": "synthetic/acrylic Origine extension = modern reissue era"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel. Example in sources: 'Pipe Club of Japan 1974-1994' commemorative — stamped years read EXACT here."}
+  },
+
+  "channels_future": {
+    "berrod_regad_doc": "pipephil hosts 'The Berrod Regad factory and its history' doc page — mirror + mine (era details, maybe stamp evolution).",
+    "seventy_series": "the 10->70 series growth = a per-line bracket goldmine once a 1960s-80s BC catalogue lands (catalogue hunter: BC brochure pages already pictured on pipedia).",
+    "ewa_era": "2006+ Denis Blanc/EWA era diagnostics unknown — modern BC stamps to verify."
+  }
+}

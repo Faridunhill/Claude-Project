@@ -1,0 +1,60 @@
+{
+  "_doc": "LOEWE & CO. dating cabinet (#15, built 2026-07-16). Era ladder from the DEDICATED mirrored guide (Michael Lankton, 'Dating Loewe Pipes' -- originally on his dead site Cake & Dottle, preserved on pipedia = site-preservation doctrine in action): Haymarket eras (1856-1964) -> Civic (1964-78) -> Cadogan (1978+). Sharpest cliffs: SERIES NAMES from 1955; 3-DIGIT SHAPE NUMBERS replace shape names 1967; Cadogan 'Comoy's-style' encircled Made in England = 1978+ giveaway; LES WOOD hallmarked ALL Cadogan silver 1979-2007 -> generic.json charts date those exactly. SOURCE: staging/pipedia/Dating_Loewe_Pipes.json + Loewe___Co_.json + Loewe_Shape_Chart.json.",
+  "brand": "Loewe",
+  "region": {"country": "England", "school": "english"},
+  "aliases": ["loewe", "loewe & co", "l&co", "l & co"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1856 founded (Haymarket, London). 1920: CIVIC bought Loewe (into the Cadogan/Oppenheimer orbit later that decade) BUT quality/nomenclature unchanged until 1964 -> collector eras: EARLY HAYMARKET 1856-1920 (hallmark dating), MIDDLE 1920-1955 (no series; shape NAMES on underside; L&Co oval + 'Loewe London W.'), LATE 1955-1964 (first series: Centurion/Original/Old English, introduced 1955), EARLY CIVIC 1964-67 (same stamps, quality drops -- 'transition Barlings'; series expand +Standard/Spigot/Mounted, mystery 'Great Britain' stamp), LATE CIVIC 1967-78 (3-digit shape NUMBERS replace names), CADOGAN 1978+ (numbers + Comoy's encircled MIE; Lucite + Filigree series introduced; LES WOOD silver 1979-2007, hallmarked at Cadogan's request). Grades above shape names: Extra Grain > Straight Grain > Special Grain (limited; until/into Civic; ~ Comoy's Specimen/SSG/Blue Riband). SECONDS: 'Haymarket' stamp (2-digit shapes) = Haymarket-era second; 'Beefeater' = Civic-era second. Lankton's warning: Standard/Original-marked pipes may be Civic-made -- quality check in hand."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["loewe", "l&co", "loewe london w", "made in england", "centurion", "old english", "beefeater", "haymarket"],
+    "physical": "L&Co in oval (left shank) + 'Loewe London W.' (right). Pre-1955: shape NAME on underside, no series. Grades (Extra/Straight/Special Grain) replace the shape name. Step in tenon = all later pipes (Haymarket both ways -> presence weak, absence useless). Soft near-rubbery vulcanite stems on early pipes (like Charatan DC)."
+  },
+
+  "fusion_order": ["line_years", "com_stamp", "feature_era", "stamped_year"],
+
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {"match": ["london", "made in england", "england"], "era_start": 1856, "era_end": 2026, "confidence": "high", "note": "brand floor 1856. The 'Comoy's-style' ENCIRCLED Made in England = Cadogan 1978+ giveaway per Lankton, but mid-Haymarket exports also wore an encircled MIE -> wording alone can't split them; the 3-digit number + series decide"}
+      ]
+    },
+
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "centurion": [1955, 1978],
+        "old english": [1955, 1978],
+        "original": [1955, 1978],
+        "standard": [1964, 1978],
+        "spigot": [1964, 1978],
+        "mounted": [1964, 1978],
+        "great britain": [1964, 1978],
+        "beefeater": [1964, 1978],
+        "lucite": [1978, 2026],
+        "filigree": [1978, 2026],
+        "haymarket": [1920, 1964]
+      },
+      "_notes": "Original three series INTRODUCED 1955 (Centurion/Original/Old English); continued into Civic; end approx 1978 when numbers replaced names -- flagged. Civic additions (Standard/Spigot/Mounted + the undocumented 'Great Britain') = 1964+. Lucite + Filigree = Cadogan era. 'haymarket' as a SERIES stamp = seconds of the Haymarket era (one Military example may predate 1955 series names -- Lankton's note). Grades Extra/Straight/Special Grain NOT year-encoded (existence window unclear pre-1955 -- honest gap)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "shape_number", "regex": "^\\d{3}$", "era_start": 1967, "era_end": 2026, "confidence": "medium", "label": "3-digit shape number = late Civic (1967+) or Cadogan; before that Loewe used shape NAMES (SYSOP note: identical 3-digit shapes exist on Civic-branded pipes -- brand ID first)"},
+        {"field": "shape_number", "regex": "^\\d{2}$", "era_start": 1920, "era_end": 1964, "confidence": "low", "label": "2-digit shape = 'Haymarket' seconds line profile (proper Loewes wore shape names)"},
+        {"field": "bit_style", "match": ["step tenon", "stepped tenon"], "era_start": 1955, "era_end": 2026, "confidence": "low", "label": "step in tenon = all later pipes; Haymarket-era pipes exist both ways -> weak floor only"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "assay_hallmark": "TWO hallmark windows: early Haymarket (1856-1920, silver-mounted) AND Cadogan 1979-2007 (Les Wood hallmarked ALL Cadogan silver at their request -- he does NOT hallmark his own/Dunhill/Ashton/Upshall work, a dating-relevant negative!). Route silver-banded Loewes to generic.json charts.",
+    "shape_chart": "Loewe_Shape_Chart.json is mirrored -> shape-name-to-form chart buildable; shape NAMES (not numbers) = pre-1967 signal in itself."
+  }
+}

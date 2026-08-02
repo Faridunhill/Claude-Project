@@ -1,0 +1,58 @@
+{
+  "_doc": "KIRSTEN dating cabinet (#39, Wave E, built 2026-07-17-eve; roster #45). Seattle's metal-system pipe (Prof. Frederick Kirsten, Boeing wind-tunnel engineer, designed 1936). THE GENERATION SYSTEM (Dave Whitney's collector classification, on pipedia): Gen 1 1936-1958 (no O-rings, precise machining) / Gen 1.5 transition mid-late-50s (mixed parts) / Gen 2 1958-1985 (O-rings both ends; 1958 = incorporation, 'biggest change' per Lynn Kirsten) / Gen 3 1985+. PATENT-STAMP LADDER: 'PAT APPLIED FOR' = 1936-1938 ONLY (tightest cliff). Factory kept NO records (Lynn Kirsten confirmed) -> generation edges approx. SOURCES: staging/pipedia/Kirsten_Pipe_Company.json (Whitney).",
+  "brand": "Kirsten",
+  "region": {"country": "USA", "school": "american"},
+  "aliases": ["kirsten"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1936: Frederick Kirsten designs the pipe (physician told him to quit smoking; the radiator-valve system traps tars/moisture). 5-6 components: mouthpiece, radiator body, valve, bowl, bowl screw (+bowl ring). Gene Kirsten ran the factory for years. 1958: company INCORPORATED = the big model/technique change (Gen 2, O-rings). EARLY BOWLS WERE MADE BY KAYWOODIE (unstamped!); Kirsten-made bowls stamped on the bottom (start date unclear); bowl adapters arrive ~transition period. 1960s: 'Eternalum' antiqued brass-tone finish ('Traditional'); cigarette holders in the 50s-60s (3 sizes). Corncob bowls exist (probably Missouri-made); one Doodler bowl mated to a Kirsten known (pre-1964, Mincer link!). Finishes: polished silver/gold/black, rough 'Heritage' Parkerized. 1976-77 catalog mirrored on pipedia.",
+    "generation_models": "Gen 1 straights: Companion (rough 1st ed.), S Standard (full-length fins), M Medium, L Large, A ARISTOCRAT (XL). Gen 1.5: K Companion, M, L + oddballs (Thrifty w/ reverse black valve, No-Letter short pipe). Gen 2: K Companion, G Gem, S Sportsman, SX, M Mariner, MB, L Lancer; quarter-bents A Aladdin, V Vagabond, CX Cavalier, T Tyrolean; full-bents W Westerner, B Beau Geste, P Premier, F Firesider. Gen 3: JX Jewel, M Mariner, L Lancer; RX Regent, H Horizon; EX Esquire, DX Designer. X suffix = brass-tone, B = black."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["kirsten script", "kirsten shield"],
+    "wordmarks": ["kirsten", "pat applied for", "pats & pats pending", "pat pending", "made in u.s.a.", "companion", "eternalum", "heritage"],
+    "physical": "Kirsten script logo on the radiator body (shield logo ONLY on the 'Thrifty'; early Companions sometimes unmarked). Model letter stamps (S/M/L/A...). O-rings: none = Gen 1; one end only = Gen 1.5; both = Gen 2/3."
+  },
+
+  "fusion_order": ["line_years", "feature_era", "stamped_year"],
+
+  "channels": {
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "aristocrat": [1936, 1958],
+        "gem": [1958, 1985],
+        "vagabond": [1958, 1985],
+        "tyrolean": [1958, 1985],
+        "westerner": [1958, 1985],
+        "beau geste": [1958, 1985],
+        "firesider": [1958, 1985],
+        "horizon": [1985, 2026],
+        "esquire": [1985, 2026],
+        "designer": [1985, 2026],
+        "jewel": [1985, 2026]
+      },
+      "_notes": "Model->generation mapping per Whitney's table; generation edges approx (1958 incorporation is the firm one; 1985 Gen2/3 edge 'with possibly some backward overlap'). Models SPANNING generations NOT encoded: Companion (1+1.5+2), Standard/Medium/Large letters, Mariner + Lancer (2+3), Sportsman/Aladdin/Cavalier/Premier (single-gen but common-word collision risk accepted-out). 'Thrifty' = transition oddball ~mid-50s -> note only."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["pat applied for", "pat. appl. for"], "era_start": 1936, "era_end": 1938, "confidence": "high", "label": "'PAT APPLIED FOR' stamp = first ~2 years only (1936-1938) — the tightest Kirsten cliff"},
+        {"field": "lettering", "match": ["pats & pats pending", "pats and pats pending"], "era_start": 1938, "era_end": 1958, "confidence": "medium", "label": "'PATS & PATS PENDING' = ~1938-1958 (Gen 1 tail; hypothetical end edge per Whitney)"},
+        {"field": "bit_style", "match": ["no o rings", "no o-rings"], "era_start": 1936, "era_end": 1958, "confidence": "medium", "label": "NO O-rings (precision metal fit) = Generation 1"},
+        {"field": "bit_style", "match": ["o rings both", "o-rings both"], "era_start": 1958, "era_end": 2026, "confidence": "low", "label": "O-rings on valve + mouthpiece = Gen 2/3 (1958+); one-end-only = the mid-50s transition"},
+        {"field": "lettering", "match": ["eternalum"], "era_start": 1960, "era_end": 1970, "confidence": "medium", "label": "'Eternalum' antiqued brass-tone = a 1960s finish"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "kaywoodie_bowls": "Early unstamped Kirsten bowls = Kaywoodie-made (cross-cabinet fact; bowls alone are NOT attributable).",
+    "catalog_1976": "The mirrored 1976-77 catalog page -> Gen 2 model roster verification.",
+    "serial_less": "No serials/records exist (factory-confirmed) — generations are the ceiling of precision."
+  }
+}

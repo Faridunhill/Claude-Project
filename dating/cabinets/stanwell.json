@@ -1,0 +1,230 @@
+{
+  "_doc": "STANWELL dating cabinet = DATA only (cabinet #3, built 2026-07-16 as the EXEMPLAR for all upcoming cabinets -- see control/CABINET_METHOD.md). Stanwell dates by: COM stamp (Denmark vs Danish Design = the 2010 Italy cliff) + Reg.No 969-48 + line years + physical features (stem material/logo/lettering) + literal stamped years (competition/jubilee). SOURCES (local-first): pipedia mirror staging/pipedia/Stanwell.json + Stanwell_Shape_Numbers_and_Designers.json (Bas Stevens/James McNally); pipephil mirror logos/en/logo-stanwell.html; web: mbsdpipes.com 'Dating Stanwell Pipes: A Guide and Commentary' -- FULL TEXT MIRRORED 2026-07-16 to brand_research/stanwell_dating/mbsd_stanwell_dating_guide_FULL.txt (its revised 6-era table is the master reference: 1945-48 script | 1948-c.1982 RegNo | 1970s-90s ebonite | 1994-98 gold-dot transition | 1998-2009 acrylic Denmark | 2010+ DANISH DESIGN Italy). Every disputed fact carries a note. | PRIMARY-SOURCE CORROBORATION ingested 2026-07-21 from Bas Stevens' 'Stanwell Dating & Pricing Information' (library\\45022903..., citing Jorgen Grundtvig, Managing Director of Stanwell A/S = FACTORY primary): (a) Regd.No stamping was discontinued 'late 1960s to very early 1970s' -- this factory-MD statement CORROBORATES the consensus/Farid ruling that >90% of RegNo pipes predate ~1970 (vs mbsd's argued extension to early 1980s; cabinet keeps the wide 1948-1985 bracket but the LISTING presents 1948-c.1970 w/ the early-80s stragglers as a note -- see no-joke-brackets law). (b) 'Silver S' block-letter logo used until late 1960s then changed to SCRIPT. (c) crown-over-S on the STEM appears only on top-grade pipes until the early 1960s. (d) logo progression = white 'S' -> white crown-S -> brass crown-S -> silver crown-S. (e) acrylic mouthpieces from 1995, marked by a DOT after the crown-S (matches the existing gold-dot/acrylic feature_era rules 1994-1998). (f) finish first-digit code (early-50s catalogue): 1xx Best Make, 2xx De Luxe, 3xx Old Briar, 4xx Fine Briar, 7xx Sandblast Extra, 8xx Sandblast De Luxe, 9xx Royal Tan/Tanshell -- FINISH not year, kept as reference. (g) Winslow: early 'W' stamp -> later 'Winslow' stamp (see winslow cabinet).",
+  "brand": "Stanwell",
+  "aliases": [
+    "stanwell",
+    "kyringe",
+    "poul nielsen",
+    "poul stanwell"
+  ],
+  "max_year": 2026,
+  "history_anchors": {
+    "_doc": "Timeline the channels rest on. 1942 Poul Nielsen starts pipes under Kyringe (beech, wartime); 1948 'Stanwell' registered as trademark (Reg.No 969-48, the 48 = 1948) + horse-drawn-carriage logo; factory to Borup (pipephil says from 1965, pipedia/smokingpipes says 1969 -- sources disagree, does not affect dating channels); Danish production ENDS end-2009; from 2010 made by Barontini, Italy (EXCEPT limited editions, still Danish-linked). Sub-brands/seconds (own numbering, do NOT date by this cabinet's lines): Scandia, Danish Sovereign (3 X's on stem, US/Canada), Danske Club, Royal Danish, Royal Guard, Royal Sovereign, Majestic, Svendson, Sailor, Sorn, Henley, Kong Christian, Bijou, Reddish, Danish Quaint, Danish Natural."
+  },
+  "brand_marks": {
+    "stem_logos": [
+      "S",
+      "crowned S"
+    ],
+    "wordmarks": [
+      "stanwell",
+      "made in denmark",
+      "danish design",
+      "reg",
+      "regd"
+    ],
+    "physical": "crowned-S stem logo (after 1948 registration; until the early 1960s only top lines carried it -- mbsdpipes). Horse-drawn carriage logo on boxes/silverwork.",
+    "note_pre_reg": "1942-1948: 'Stanwell' stamped in SCRIPT/ITALIC letters, NO S on the stem (pipephil: S appeared only after registration)."
+  },
+  "fusion_order": [
+    "line_years",
+    "shape_chart",
+    "com_stamp",
+    "patent_number",
+    "feature_era",
+    "stamped_year"
+  ],
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {
+          "match": [
+            "969-48",
+            "reg. no. 969",
+            "reg.nr. 969",
+            "reg no 969",
+            "registry mark present"
+          ],
+          "era_start": 1948,
+          "era_end": 1985,
+          "confidence": "medium",
+          "note": "'REG. No. 969-48' stamp era per the mirrored mbsdpipes.com dating guide (master reference, brand_research/stanwell_dating/): used 1948-c.1982; end widened to 1985 for the 'circa'. Farid's source-challenge 2026-07-19 exposed this row was missing. QC fix 2026-07-23: 'registry mark present' = normalizer tag (cabinet_dating.normalize_marks) fired when a reg/regd+no/nr+digits pattern is read — Stanwell carried only ONE registry number, so PRESENCE dates (this channel's own presence rule, pipephil + mbsdpipes); digits stay unverified on curved shanks (blind test A read 860/GER/018 for a true 969)."
+        },
+        {
+          "match": [
+            "danish design"
+          ],
+          "era_start": 2010,
+          "era_end": 2026,
+          "confidence": "high",
+          "note": "Italian production (Barontini) stamp from 2010 -- replaces 'Made in Denmark' (mbsdpipes + forum consensus)"
+        },
+        {
+          "match": [
+            "made in denmark",
+            "hand made in denmark"
+          ],
+          "era_start": 1948,
+          "era_end": 2010,
+          "confidence": "high",
+          "note": "Danish era; end-2009 factory close, brief 2010 transition pipes exist (Nanna Ivarsson N1/N2 Denmark vs N3/N4 not)"
+        },
+        {
+          "match": [
+            "denmark"
+          ],
+          "era_start": 1948,
+          "era_end": 2010,
+          "confidence": "medium",
+          "note": "bare DENMARK variant"
+        }
+      ],
+      "_note_verify": "early photos show a 'Stanwell Old Briar ... Made in England' example (pipedia gallery, Novikov) -- NOT encoded: single uncorroborated example; verify before ever dating by it."
+    },
+    "patent_number": {
+      "_doc": "Stanwell's registration mark 'REGD. No. 969-48' (the 48 = registered 1948). END of use DISPUTED between sources: pipephil says discontinued late 1960s to very early 1970s; mbsdpipes documents Reg.No pipes at 1975 (Anne Julie debut), 1979 (Pipe of the Year) and 1982 (Golden Contrast). Honest bracket = the WIDE one.",
+      "any_patent_era": [
+        1948,
+        1982
+      ],
+      "table": [
+        {
+          "match": [
+            "969-48",
+            "96948",
+            "969 48",
+            "reg. no. 969-48",
+            "regd. no. 969-48"
+          ],
+          "era_start": 1948,
+          "era_end": 1982,
+          "confidence": "high",
+          "note": "presence = registry era; absence on a Danish pipe suggests post-~1970s but absence is NEVER dated (worn stamps)"
+        }
+      ]
+    },
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "golden s": [
+          1948,
+          1979
+        ],
+        "silver s": [
+          1970,
+          1996
+        ],
+        "golden contrast": [
+          1975,
+          1990
+        ],
+        "hand cut": [
+          1950,
+          1995
+        ],
+        "chess": [
+          1994,
+          2009
+        ],
+        "rook": [
+          1994,
+          2009
+        ],
+        "bishop": [
+          1994,
+          2009
+        ],
+        "hans christian andersen": [
+          2005,
+          2005
+        ],
+        "winslow": [
+          1986,
+          2010
+        ],
+        "winsløw": [
+          1986,
+          2010
+        ],
+        "poul stanwell collection": [
+          1998,
+          2026
+        ]
+      },
+      "_notes": "golden s: 18k gold crown+S, last produced mid-late 1970s (Grundtvig via pipedia). silver s: finest line, discontinued ~mid-1990s; START year approx -- verify. golden contrast: mid/late-80s pricing, existed 1982 (Reg.No example); bracket approx. hand cut: exists in 1950s catalogs AND as the early/mid-1980s Cumberland-stem specialty -> wide honest bracket. chess series mid-1990s-2009 (mbsdpipes; Larsen then Winslow). winslow collab began after Preben Holm closed late 1985. NOT encoded (no solid years yet): Brass Band, Brazilia, Bamboo, De Luxe, Royal Prince, Star, Antique, Anne Julie. STAMP RESOLVED (smokingpipes Chonowitsch interview 2019, mirrored brand_research/danish_artisans/): 'AN IVARSSON PRODUCT' = SIXTEN'S OWN WORKSHOP (not Stanwell!) -- only Sixten (sun mark), Lars ('L'), Jess ('J') made them, MANY carry the literal YEAR + number-in-year -> stamped_year EXACT; such a pipe should route to the (future) ivarsson/danish_artisans cabinet, not date as a Stanwell. The separate 'AN IVARSSON DESIGN' circle on Stanwells = 2009-2010 Nanna era per mbsdpipes -- still verify before encoding."
+    },
+    "feature_era": {
+      "table": [
+        {
+          "field": "stem_material",
+          "match": [
+            "acrylic"
+          ],
+          "era_start": 1994,
+          "era_end": 2026,
+          "confidence": "medium",
+          "label": "acrylic stem (transition from ~1994, standard by ~1998)"
+        },
+        {
+          "field": "stem_material",
+          "match": [
+            "ebonite",
+            "vulcanite"
+          ],
+          "era_start": 1942,
+          "era_end": 1998,
+          "confidence": "low",
+          "label": "ebonite stem (standard until the 1990s)"
+        },
+        {
+          "field": "stem_material",
+          "match": [
+            "horn"
+          ],
+          "era_start": 1942,
+          "era_end": 1955,
+          "confidence": "low",
+          "label": "horn stem (earliest era only)"
+        },
+        {
+          "field": "stem_logo",
+          "match": [
+            "gold dot",
+            "dot by s",
+            "dot next to s"
+          ],
+          "era_start": 1995,
+          "era_end": 1998,
+          "confidence": "high",
+          "label": "gold dot beside S = early acrylic marker (pipephil: from 1995, later discontinued; mbsdpipes: 1995-1998)"
+        },
+        {
+          "field": "lettering",
+          "match": [
+            "script",
+            "italic",
+            "cursive"
+          ],
+          "era_start": 1945,
+          "era_end": 1948,
+          "confidence": "high",
+          "label": "script/italic 'Stanwell' = pre-registration (the make debuted 1945; 1942-45 pipes were 'Kyringe', not Stanwell -- mbsd guide). MEDIESTREAM AGGREGATE (2026-07-17, brand_research/stanwell_dating/mediestream_timeline_facts.md): 'Stanwell' first appears in DANISH newspapers Apr 1948 (zero 1945-47) -- consistent with export-first early years or a 1948 domestic launch; press absence never dates, both readings noted"
+        }
+      ]
+    },
+    "stamped_year": {
+      "_doc": "Stanwell stamps LITERAL years: competition pipes DM (Danish champ.) / NM (Nordic) / FM (Frederikshavn) / RM (Roskilde) + year; jubilee pipes '1942-1982' (SECOND year = year of manufacture); Pipe of the Year = year in the silverwork. Generic channel reads the LAST 4-digit year in the evidence."
+    },
+    "shape_chart": {
+      "_doc": "Farid's convergence doctrine (2026-07-16): the SHAPE NUMBER dates the pipe -- a pipe cannot predate its shape's design. Chart parsed from the local Bas Stevens/McNally list: 162 shapes (76 with explicit design eras, 88 via the designer's collaboration-start floor: S.Ivarsson 1950, L.Ivarsson/Chonowitsch/Bang 1970, Anne Julie 1975, Eltang 1980, Winsløw 1986, N.Ivarsson 2009).",
+      "chart_ref": "C:\\Users\\hadid\\FaridOS\\data\\hub\\pipes\\brand_research\\stanwell_dating\\stanwell_shape_dating_chart.json"
+    }
+  },
+  "shape_design": {
+    "_doc": "NOT a dating channel yet (design years not systematically listed per shape). The shape->designer chart is LOCAL: staging/pipedia/Stanwell_Shape_Numbers_and_Designers.json (Bas Stevens/McNally) + the shape-eye chart data/hub/pipes/shape_reference/charts/stanwell.json. Future enrichment: shape design-year floors (a shape cannot predate its design). Also: 3-4 digit model codes = late 1950s and earlier (first digits = finish code, e.g. GR14 = polished Altgold); shape-code-only stamps = later."
+  },
+  "region": {
+    "country": "Denmark",
+    "school": "danish"
+  }
+}

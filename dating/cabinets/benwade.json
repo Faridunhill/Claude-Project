@@ -1,0 +1,167 @@
+{
+ "_doc": "BEN WADE dating cabinet (#20, built 2026-07-18 — completes Tier-1 English except the two web-check brands). THE FOUR-LIVES BRAND, dated by ORIGIN STAMPS: (1) FAMILY ERA Leeds 1860-1965 ('Made in Leeds, England' = hard ceiling 1965 — Lane bought 1962, Leeds factory closed 1965); (2) CHARATAN/LANE SECOND, London Prescott St ~1965-1978 (machine-made; 'Made in London England' or 'London'; pipedia: the 'not earlier than 1973' claim is DISPROVEN by catalogues; Lane heirs sold to Dunhill 1978, Prescott St closed by Mar 1982); (3) ★ DANISH ERA: Preben Holm freehands for Lane, 'Ben Wade Handmade Denmark' 1971-1989 (Feb-1971 Lane-Holm meeting; 1986 downsizing; ended at Holm's death June 1989) — the estate-market cult items; (4) RESURRECTION 1998+: Peter Wilson/Duncan Briars bought the rights from Dunhill, made at the Walthamstow Parker-Hardcastle/Dunhill plant, stamped 'Ben Wade, Made in London, England' AGAIN -> that stamp is TWO-ERA AMBIGUOUS (1965-78 vs 1998+), encoded wide with distinguishers (modern = deep-black blast, ring-grain-suspicious, LASER engraving on latest). SOURCE (local-first): staging/pipedia/Ben_Wade.json (Hacker refs, Valitchka nomenclature gallery, Dreyer collection).",
+ "brand": "Ben Wade",
+ "region": {
+  "country": "England",
+  "school": "english"
+ },
+ "aliases": [
+  "ben wade",
+  "benwade",
+  "bw",
+  "bwl",
+  "ben wade handmade denmark"
+ ],
+ "max_year": 2026,
+ "history_anchors": {
+  "_doc": "1860 Benjamin Wade founds the firm in LEEDS, Yorkshire (trader -> 1860s workshop); classic small-dimension English shapes, high grade, no fills. Pre-WWII 3-tier system: 'BEN WADE' top (Larnix, Super Grain, Selected Grain) / 'BW' mid (Statesman, Natural Grain, County) / 'BWL' budget (Hurlingham, Adelphi, Tense Grain, Champion — 2/6 in the 1930s). WWII: Leeds factory DESTROYED by air raids, rebuilt after the war; Champion vanished in the wartime slim-down (name lingers in directories to the early 60s, production unclear). 1962 Lane Ltd (Herman G. Lane, NY) buys Ben Wade AND Charatan; 1965 Leeds factory closed. London machine-made era at Charatan's Prescott Street. 1971: Preben Holm (Copenhagen, in crisis after Snug Harbour default) meets Lane Feb-1971 -> Danish handmade freehand era under the Ben Wade name (whole-page Seven Day's Set ads); huge success; 1986 Holm downsizes; June 1989 Holm dies = third end. 1998: Peter Wilson (Duncan Briars, est. 1899) buys the brand rights from Dunhill -> current Walthamstow production (32 St Andrews Rd — same building+phone as Dunhill pipes). 1890s exemplar: silver-mounted amber-stem cased pipes exist (hallmark-datable via generic router)."
+ },
+ "brand_marks": {
+  "stem_logos": [],
+  "wordmarks": [
+   "ben wade",
+   "made in leeds",
+   "handmade denmark",
+   "made in london",
+   "london",
+   "larnix",
+   "super grain",
+   "selected grain",
+   "statesman",
+   "natural grain",
+   "county",
+   "hurlingham",
+   "adelphi",
+   "tense grain",
+   "champion",
+   "special collection",
+   "prominence",
+   "majestic",
+   "royal grain",
+   "matt original",
+   "reflection",
+   "spiral",
+   "seven day"
+  ],
+  "physical": "Danish-era = hand-carved freehands/fancies (Holm workmanship). Modern (1998+) = deep-black blasts with suspiciously perfect straight/ring grain (rusticated-then-blasted per multiple sources) + LASER-engraved nomenclature on latest production + German vulcanite."
+ },
+ "fusion_order": [
+  "line_years",
+  "com_stamp",
+  "feature_era",
+  "stamped_year"
+ ],
+ "channels": {
+  "com_stamp": {
+   "table": [
+    {
+     "match": [
+      "made in leeds england",
+      "made in leeds",
+      "leeds"
+     ],
+     "era_start": 1860,
+     "era_end": 1965,
+     "confidence": "high",
+     "note": "the FAMILY-ERA stamp — Leeds factory closed 1965 = hard ceiling (Lane ownership from 1962 inside the bracket)"
+    },
+    {
+     "match": [
+      "handmade denmark",
+      "denmark"
+     ],
+     "era_start": 1971,
+     "era_end": 1989,
+     "confidence": "high",
+     "note": "Preben Holm era — Feb-1971 Lane agreement to Holm's death June-1989; the cult freehands"
+    },
+    {
+     "match": [
+      "made in london england",
+      "made in london",
+      "london"
+     ],
+     "era_start": 1965,
+     "era_end": 2026,
+     "confidence": "low",
+     "note": "TWO-ERA AMBIGUOUS: Charatan/Lane machine-made 1965-1978 AND the 1998+ Duncan/Wilson resurrection use this stamp (gap 1989-1998 when no Ben Wades were made). Distinguish by build: coarse machine-made + masked fills = 60s-70s London; deep-black perfect-grain blast / laser engraving = 1998+. Never guess between them without features"
+    }
+   ]
+  },
+  "line_years": {
+   "modern_floor_year": 2000,
+   "years": {
+    "larnix": [
+     1860,
+     1965
+    ],
+    "selected grain": [
+     1860,
+     1965
+    ],
+    "statesman": [
+     1860,
+     1965
+    ],
+    "natural grain": [
+     1860,
+     1965
+    ],
+    "hurlingham": [
+     1860,
+     1965
+    ],
+    "adelphi": [
+     1860,
+     1965
+    ],
+    "tense grain": [
+     1860,
+     1965
+    ],
+    "champion": [
+     1860,
+     1962
+    ],
+    "special collection": [
+     1971,
+     1989
+    ]
+   },
+   "_notes": "Family-tier models -> the Leeds era bracket (1860 wide floor — most are 20th-c; enrichment may tighten). champion: BWL budget line, 2/6 in the 1930s, VANISHED in the WWII slim-down but listed in directories to the early 60s (production unverified) -> honest wide end 1962 with the war story in _doc. special collection: Danish-era freehand (Dreyer exemplar) -> Holm bracket. NOT encoded: super grain (Hardcastle 'Supergrain' collision — cross-brand trap!), county (generic), majestic/prominence/royal grain/reflection/spiral/sitter/matt original (gallery shows them but ERA UNCLEAR — several read Charatan-era, some possibly modern; confirm-flow), seven day sets (Danish-era ads but also generic phrase)."
+  },
+  "feature_era": {
+   "table": [
+    {
+     "field": "lettering",
+     "match": [
+      "bwl"
+     ],
+     "era_start": 1860,
+     "era_end": 1965,
+     "confidence": "medium",
+     "label": "BWL tier stamp (budget tier, Leeds) = family era"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "laser"
+     ],
+     "era_start": 1998,
+     "era_end": 2026,
+     "confidence": "medium",
+     "label": "laser-engraved nomenclature = the Duncan/Wilson resurrection (latest production)"
+    }
+   ]
+  },
+  "stamped_year": {
+   "_doc": "Generic channel."
+  }
+ },
+ "channels_future": {
+  "assay_hallmark": "1890s silver-mounted cased exemplars exist -> hallmark routes to generic.json charts for EXACT years.",
+  "danish_grading": "Holm-era Ben Wades share Preben Holm's grading logic — cross-wire when prebenholm.json (Wave D) is built (his own brand closed 1985/died 1989).",
+  "western_puzzle": "The 'Western' model: pipedia itself asks 'pre-Lane era or modern?' — unresolved, confirm-flow."
+ },
+ "_note_preben_holm_closure_2026_07_17": "Preben Holm's own 1983-84 autobiography (pipedia Preben_Holm mirror): staff dismissed END 1985, factory closed EARLY 1986 (brief re-entry attempt failed), died 1989. The 'Handmade Denmark' 1971-1989 bracket here keeps the death-year ceiling (wide/honest), but Danish Ben Wade PRODUCTION realistically ceased 1986 — lean accordingly. See prebenholm.json (#30)."
+}

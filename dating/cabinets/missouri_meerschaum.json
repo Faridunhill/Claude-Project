@@ -1,0 +1,37 @@
+{
+  "_doc": "MISSOURI MEERSCHAUM dating cabinet (#38, Wave E, built 2026-07-17-eve; roster #44). The corncob house of Washington, Missouri — world's oldest+largest corncob maker. Mostly an IDENTIFICATION cabinet (cobs are consumables; few dated marks): the one hard cliff = the 1907 company rename H. Tibbe & Son -> Missouri Meerschaum Company. SOURCES: staging/pipedia/Missouri_Meerschaum.json (+ Factory_Tour + Corncob_Buying_Guide mirrors, unmined -> future).",
+  "brand": "Missouri Meerschaum",
+  "region": {"country": "USA", "school": "american"},
+  "aliases": ["missouri meerschaum", "h. tibbe", "tibbe", "corncob"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1869: Henry Tibbe (Dutch immigrant woodworker) begins turning corncob pipes in Washington, MO (the farmer-whittler legend). 1878: Tibbe patents the plaster-of-Paris bowl-coating process ('Missouri Meerschaum' coined — likening the porous cool smoke to Turkish meerschaum). Nationwide distribution follows; by 1925 ~a dozen corncob companies in Franklin County — Missouri Meerschaum is the sole survivor. 1907: H. TIBBE & SON CO becomes MISSOURI MEERSCHAUM COMPANY. Factory at 400 West Front Street (riverfront) since the early days; 1904 St. Louis World's Fair display (museum holds it). Famous smokers: Gen. Douglas MacArthur (the WWII icon — drove the postwar corncob boom; see also Tsuge history). College class pipes (1906 Harvard example known)."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["missouri meerschaum", "h. tibbe", "washington mo"],
+    "physical": "Plaster-coated corncob bowls, wood or plastic (later) shanks/bits. Paper labels + stamps vary by era; most cobs carry little datable nomenclature — dating leans on construction details (bit material, band, label typography) not yet systematized."
+  },
+
+  "fusion_order": ["feature_era", "stamped_year"],
+
+  "channels": {
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["missouri meerschaum"], "era_start": 1907, "era_end": 2026, "confidence": "high", "label": "'Missouri Meerschaum Company' naming = 1907+ (rename from H. Tibbe & Son)"},
+        {"field": "lettering", "match": ["h. tibbe", "tibbe & son", "tibbe"], "era_start": 1869, "era_end": 1907, "confidence": "high", "label": "H. Tibbe / H. Tibbe & Son marks = pre-1907"},
+        {"field": "stem_material", "match": ["plastic bit", "plastic stem"], "era_start": 1945, "era_end": 2026, "confidence": "low", "label": "plastic bits = post-war era production (approx; earlier bits reed/wood/vulcanite — unverified split)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel (commemoratives/anniversary cobs read exact)."}
+  },
+
+  "channels_future": {
+    "buying_guide": "Missouri_Meerschaum_Corncob_Buying_Guide.json (mirrored, 14KB) = model-name identification layer (Legend, General, Diplomat, Country Gentleman...) — mine on a corncob session.",
+    "label_typography": "Paper-label + stamp typography eras — collector-forum material, unresearched.",
+    "other_franklin_county": "Pre-1925 rival cob makers (Buescher etc.) = attribution traps for unmarked cobs."
+  }
+}

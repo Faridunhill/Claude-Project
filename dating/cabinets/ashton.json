@@ -1,0 +1,58 @@
+{
+  "_doc": "ASHTON dating cabinet (#14, built 2026-07-16). The easiest premium English brand to date: a REAL DATE CODE -- the suffix after 'Made in England' = 1980 + n (documented: no.3 = 1983 first year ... no.25 = 2005; used from 1983 to at least 2005). Uses the ENGINE'S EXISTING date_code channel with base_year 1980 (zero engine change -- the registry design pays off). SOURCE: staging/pipedia/Ashton.json (incl. R.D. Field's Ashton Pipe Story refs + Mike Ahmadi's 1983 stamping photos) + The_Ashton_Pipe_Story.json (mirrored).",
+  "brand": "Ashton",
+  "region": {"country": "England", "school": "english"},
+  "aliases": ["ashton", "ashton-taylor", "william ashton-taylor", "bill taylor"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "William 'Bill' Ashton-Taylor: joined DUNHILL 1959 at 15 (capstan lathe; mentored by Harry Saigrott on mouthpiece work) -> left in the early 1980s to found ASHTON; FIRST PIPE 1983 (only 31 pipes made that year -- rare, collectors' grail). British patent on his oil-curing method (8h heat + 8h 3-oil steep + 14 days on heated brass pegs -> 12-14% lighter pipes). Calabrian briar for smooths, Tuscan for the deep Dunhill-Shell-style blasts he revived. DIED 2009-09-16; JIMMY CRAIG continues the marque (his work for Bill dates from 2008-09; no documented stamp change -- Craig-era attribution = confirm-flow). R.D. Field = the US partner/chronicler."
+  },
+
+  "brand_marks": {
+    "stem_logos": [],
+    "wordmarks": ["ashton", "made in england", "made in london england", "pebble grain", "old church", "sovereign", "claret", "gilt edge", "oak", "achievement"],
+    "physical": "First-year 1983: simple BLOCK lettering, NO finish stamp, origin 'MADE IN LONDON ENGLAND'. Later: finish names stamped + 'Made in England' + the date-code suffix number. Sizes X, XX, XXX, LX, ELX, Magnum (magnums from Bill's personal briar privileges). Sovereign SG graded 1-5."
+  },
+
+  "fusion_order": ["line_years", "com_stamp", "date_code", "feature_era", "stamped_year"],
+
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {"match": ["made in london england"], "era_start": 1983, "era_end": 1983, "confidence": "high", "note": "FIRST-YEAR origin stamp -- only used 1983 (31 pipes; block lettering, no finish stamp -- Ahmadi photos)"},
+        {"match": ["made in england", "england"], "era_start": 1983, "era_end": 2026, "confidence": "high", "note": "brand floor -- first pipe 1983"}
+      ]
+    },
+
+    "date_code": {
+      "_doc": "Suffix after 'Made in England' = 1980 + n. Documented no.3 (1983) through no.25 (2005); article says 'at least up to 2002' pipes were stamped so -- post-2005 usage unverified -> a suffix >26 or absence = confirm-flow. The engine's generic runner handles it; suffixes 5-9 disambiguate via the com floor (1985-89 beat the phantom 195x candidates).",
+      "base_year": 1980
+    },
+
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "pebble grain": [1984, 2026],
+        "old church": [1984, 2026],
+        "sovereign": [1984, 2026],
+        "claret": [1984, 2026],
+        "gilt edge": [1984, 2026],
+        "achievement": [1984, 2026]
+      },
+      "_notes": "1983 pipes carried NO finish stamp ('pre-Pebble Grain' -- Ahmadi) -> any finish name = 1984+ floor. Finish names ran the brand's life; the date code does the precise work. Oak NOT encoded ('oak' = generic wood word, collision risk -> confirm-flow)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["block lettering, no finish", "no finish stamp"], "era_start": 1983, "era_end": 1983, "confidence": "medium", "label": "block lettering + no finish stamp = first-year 1983 profile (corroborate with MADE IN LONDON ENGLAND)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "craig_era": "Jimmy Craig pipes (2008+) -- no documented stamp difference from Bill's; attribution via seller/provenance = artisan-registry career windows, confirm-flow only."
+  }
+}

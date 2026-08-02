@@ -1,0 +1,52 @@
+{
+  "_doc": "FALCON dating cabinet (#40, Wave E, built 2026-07-17-eve; roster #46). The metal-stem/screw-bowl system pipe: created 1936 by US engineer Kenly Bugg; George Hunt took over production+marketing 1949 (6M sold in the US by 1954); ENGLAND production from 1961; US (Chicago) production STOPPED 1968 -> the USA/England COM split is the spine. SOURCES: staging/pipedia/Falcon.json (+ K.A. Worth's book 'Back From The Ashes' referenced = BUY-LIST candidate).",
+  "brand": "Falcon",
+  "region": {"country": "USA", "school": "american"},
+  "aliases": ["falcon", "alco", "brentford", "falcon international"],
+  "max_year": 2026,
+
+  "history_anchors": {
+    "_doc": "1936: Kenly Bugg (American engineer) creates the Falcon — metal stem, humidome moisture trap, screw-on interchangeable briar bowls. WWII limits production. 1949: George Hunt (G.L. Hunt) takes over; by 1954 six million sold in the USA. 1961: production starts in ENGLAND ('the' English pipe of its era). 1964: ALCO launched. 1967: BRENTFORD launched (withdrawn 1979). 1968: US Chicago production STOPS -> all Falcons after = English. 1977: FALCON INTERNATIONAL introduced (removable mouthpiece + filter). Today: BPM International (UK), falconpipes.co.uk."
+  },
+
+  "brand_marks": {
+    "stem_logos": ["falcon bird"],
+    "wordmarks": ["falcon", "alco", "brentford", "international", "made in usa", "made in england"],
+    "physical": "Aluminium stem + humidome; interchangeable screw bowls (bowls date poorly — swapped freely; DATE THE STEM, not the bowl). Straight/bent stems; Shillelagh twisted-stem variant (c.1968 example known)."
+  },
+
+  "fusion_order": ["line_years", "com_stamp", "feature_era", "stamped_year"],
+
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {"match": ["made in usa", "u.s.a", "chicago"], "era_start": 1936, "era_end": 1968, "confidence": "high", "note": "US-made Falcon stems = 1936-1968 (Chicago production stopped 1968)"},
+        {"match": ["made in england", "england"], "era_start": 1961, "era_end": 2026, "confidence": "high", "note": "English production = 1961+"}
+      ]
+    },
+
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "alco": [1964, 2026],
+        "brentford": [1967, 1979],
+        "international": [1977, 2026]
+      },
+      "_notes": "brentford: launched 1967, withdrawn 1979 = a CLOSED window (strong). alco: 1964 floor, end undocumented. international: 1977 floor (removable mouthpiece + filter = its tells)."
+    },
+
+    "feature_era": {
+      "table": [
+        {"field": "lettering", "match": ["falcon"], "era_start": 1936, "era_end": 2026, "confidence": "medium", "label": "Falcon brand window 1936+ (WWII production limited; the 1949-54 Hunt boom = the US mass era)"}
+      ]
+    },
+
+    "stamped_year": {"_doc": "Generic channel."}
+  },
+
+  "channels_future": {
+    "worth_book": "K.A. Worth, 'Back From The Ashes: G.L. Hunt and the Falcon Pipe' (2008) = the definitive history -> BUY LIST (would refine stem-stamp eras).",
+    "bowl_traps": "Bowls interchange freely across decades — never date a Falcon by its bowl.",
+    "shillelagh": "Twisted-stem Shillelagh c.1968 — single dated example, unencoded."
+  }
+}

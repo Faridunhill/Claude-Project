@@ -1,0 +1,165 @@
+{
+ "_doc": "BBB dating cabinet (#12, built 2026-07-16). THE OLDEST ENGLISH PIPE TRADEMARK (rhombus BBB = UK trade mark No. 39, filed 1876-01-01 -- the first pipe mark ever registered). Dates by: stem-logo generation (metal diamond rondel vs post-Cadogan stamped logo -- the GBD rondelle pattern again), line/patent years (Glokar 1905, Guardsman 1962), and hallmarked silver mounts (generic.json Birmingham/London charts -- BBB mounted heavily in silver). SOURCE: pipedia mirror staging/pipedia/BBB.json (incl. the translated fumeursdepipe.net history + 1912 catalog No.XX excerpts); pipephil logo-bbb.html in mirror. A 1960 BBB Catalog PDF exists (DiCuccio, linked on pipedia) -> FARID-FETCH.",
+ "brand": "BBB",
+ "region": {
+  "country": "England",
+  "school": "english"
+ },
+ "aliases": [
+  "bbb",
+  "blumfeld's best briars",
+  "britain's best briars",
+  "adolph frankau",
+  "a. frankau"
+ ],
+ "max_year": 2026,
+ "history_anchors": {
+  "_doc": "1847 Adolph Frankau founds A. Frankau & Co, London (meerschaum importer); dies 1856; LOUIS BLUMFELD (18, on Thomas Carlyle's advice!) takes over -> BBB = Blumfeld's Best Briars, later understood as Britain's Best Briars. 1876-01-01: rhombus BBB = UK trademark No. 39 (+ No. 40 'B'). Own London factory at Homerton from 1898 (before that, low lines imported from Saint-Claude). 1920s: absorbed into A. Oppenheimer & Co; Cadogan Investments formed (this article says the Thirties, the GBD article says early 1920s -- sources disagree, noted). Homerton ran under Marechal Ruchon & Co (renamed Fairfax Traders in the 1970s) until Cadogan consolidated manufacture at SOUTHEND-ON-SEA after buying Orlik in 1980. Strong markets: British Empire + DENMARK (the most popular foreign brand there). Sub-brands/2nd marks (own rules): Capt. Kidd, Fairway ('F' in white), Frankau's, Glokar, Major Daff, Snap-Fit, Ultonia, Last Word, Mackenzie (filter brand, possibly Irish-made). Dunhill link: BBB turned Dunhill's Bent Magnum bowls until ~1923 (Esserman)."
+ },
+ "brand_marks": {
+  "stem_logos": [
+   "diamond rondel",
+   "metal rondel",
+   "rhombus",
+   "stamped logo"
+  ],
+  "wordmarks": [
+   "bbb",
+   "own make",
+   "best make",
+   "london made",
+   "made in england",
+   "virgin",
+   "thorneycroft"
+  ],
+  "physical": "Earlier pipes: METAL diamond/rhombus rondel with BBB embedded in the stem top; post-Cadogan-consolidation: STAMPED-ON logo (same evolution as GBD's rondelle). Heavy silver mounting tradition (hallmarked examples 1882-1920 documented) -> generic.json hallmark charts date them EXACTLY. Thirties: top lines got metal BBB inlay, bottom lines engraved only."
+ },
+ "fusion_order": [
+  "line_years",
+  "com_stamp",
+  "patent_number",
+  "feature_era",
+  "stamped_year"
+ ],
+ "channels": {
+  "com_stamp": {
+   "table": [
+    {
+     "match": [
+      "london made",
+      "made in england",
+      "england",
+      "london"
+     ],
+     "era_start": 1876,
+     "era_end": 2026,
+     "confidence": "high",
+     "note": "trademark floor 1876; own London production from 1898 (earlier + low lines = Saint-Claude imports)"
+    }
+   ]
+  },
+  "line_years": {
+   "modern_floor_year": 2000,
+   "years": {
+    "glokar": [
+     1905,
+     1935
+    ],
+    "mackenzie": [
+     1891,
+     1969
+    ],
+    "carlton": [
+     1938,
+     1975
+    ],
+    "london dry": [
+     1935,
+     1975
+    ],
+    "rare grain": [
+     1950,
+     1975
+    ],
+    "thorneycroft": [
+     1950,
+     1975
+    ],
+    "guardsman": [
+     1962,
+     1985
+    ],
+    "best make": [
+     1930,
+     2026
+    ],
+    "own make": [
+     1890,
+     2026
+    ],
+    "two star": [
+     1930,
+     1980
+    ]
+   },
+   "_notes": "glokar: patent 1905 (hallmarked 1905 example = 'first year of the Glokar Patent'), BBB's Peterson-system answer, examples through 1913 -> end approx 1935 flagged. mackenzie: paper-filter brand pre-1900 (1891 Morell Mackenzie letter) -> 'survived until the Sixties'. carlton: metal-system pipe, retail 8/6 in 1938 -> floor 1938, end approx. rare grain/virgin/walnut/thorneycroft: the stable mid-1950s-60s Own Make lines -> [1950,1975] approx ('virgin'/'walnut' NOT encoded as keys -- collide with Comoy's Virgin Briar + generic finish words; confirm-flow). guardsman: UK PAT 35054/62 (filed 1962-09-14) -> floor 1962. best make: replaced Own Make at top in the Thirties AND survives as a Cadogan grade -> floor. own make: existed by ~1900 (1910 pricing documented), floor 1890 approx. two star (**) = Thirties bottom range, end approx. NOT encoded: Chubby/Golfer/Dreadnought/Bellerophon/Cutty (pre-1914 specials, no solid brackets -- Dreadnought suggests 1906+ but NOT sourced), Highland/Lovat sizes (Lovat = BBB-coined shape name, pre-1914), Ultonia Thule, Blue Peter (= Ultonia, not BBB-stamped), Super Stopping."
+  },
+  "patent_number": {
+   "any_patent_era": [
+    1905,
+    1985
+   ],
+   "table": [
+    {
+     "match": [
+      "35054/62",
+      "35054"
+     ],
+     "era_start": 1962,
+     "era_end": 1985,
+     "confidence": "medium",
+     "note": "Guardsman two-part-stem patent, filed 1962-09-14, granted 1963"
+    }
+   ]
+  },
+  "feature_era": {
+   "table": [
+    {
+     "field": "stem_logo",
+     "match": [
+      "diamond rondel",
+      "metal rondel",
+      "rhombus",
+      "metal diamond",
+      "inlaid bbb"
+     ],
+     "era_start": 1876,
+     "era_end": 1985,
+     "confidence": "medium",
+     "label": "metal diamond BBB rondel in stem = pre-Cadogan-consolidation (ended when manufacture moved to Southend after 1980 -- approx, mirrors the GBD rondelle rule)"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "stamped logo",
+      "printed logo",
+      "stamped bbb"
+     ],
+     "era_start": 1980,
+     "era_end": 2026,
+     "confidence": "medium",
+     "label": "stamped-on BBB logo = post-Cadogan consolidation (like late GBD)"
+    }
+   ]
+  },
+  "stamped_year": {
+   "_doc": "Generic channel. BBB's silver mounts carry Birmingham/London hallmarks (documented 1882, 1905, 1907, 1908 'i', 1911, 1912, 1920 examples) -> route to generic.json charts for EXACT years."
+  }
+ },
+ "channels_future": {
+  "catalogues": "1912 catalog No.XX (450 pages! Briar Books Press reproduction) + 1960 catalog PDF (DiCuccio, pipedia-linked -> FARID-FETCH) = shape/line bracket sources.",
+  "assay_hallmark": "BBB = the most silver-mounted English factory brand; once perception reads hallmarks, generic.json dates most early BBBs exactly."
+ },
+ "_note_bna_1873_1881_image_verified_2026_07_18": "TILE-OCR + VISUAL VERIFICATION DONE (clips in brand_research/bna_clips/, hit tiles kept in tile_ocr/): (1) ★★ 1873-12-26 Manchester Evening News p.4 (Withecomb's, 32 Victoria St): 'BRIAR PIPES, G.B.D. B.B.B. L.H.E. The above briars kept in stock, all from the best French makers' — B.B.B. pipes IN UK COMMERCE 3 years BEFORE the 1876 Trade Mark No. 40 registration, and explicitly FRENCH-MADE (pre-London-production era corroborated). Brand-predates-registration pattern (same as Civic 1919 vs 1921). The 1876 floors in this cabinet are TRADEMARK floors and stay; a BBB pipe cannot predate the brand's commerce (~1873 earliest print). 'L.H.E.' = third briar mark in the ad, unidentified — lead. (2) ★ 1881-06-29 Leeds Mercury p.1: four-ad slogan run each tagged 'BBB': 'BEST BRIAR PIPES always bear Trade Mark. Inquire of your Tobacconist — three B's in a diamond' + 'BRIAR ROOT PIPES are the BEST PIPES' + 'Warranted not to crack or burn' — the DIAMOND trademark described in print 1881 (earliest description we hold).",
+ "_note_pipe_book_2026_07_18": "BBB's own 'English Pipe Book' intaken (catalogues/bbb/, facts in brand_research/bbb_dating/bbb_pipe_book_facts.md; booklet window ~1947-1965 by internal evidence: '100 years know-how' + ALGERIAN briar + US-market $): (1) CORROBORATION x2 for the trademark story — the booklet reproduces the English Trade Mark Owners Association letter: 'Trade Mark No. 40 (for BBB Pipes) was the first to be registered as a Trade Mark in respect to Tobacco Pipes'. (2) Identification vocabulary: 'Own Make Virgin' = top grade, red-label gift box, inlaid metal emblem, natural finish; 'Own Make Thorneycroft' = value line, orange-label box (example shape 414); 24-shape chart at 1/2 size. No bracket changes (booklet undated — single internal-evidence window)."
+}

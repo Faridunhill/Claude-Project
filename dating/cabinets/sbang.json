@@ -1,0 +1,152 @@
+{
+ "_doc": "S. BANG dating cabinet (#31, Wave D, built 2026-07-17-eve; roster #37). Copenhagen's high-grade two-man house: Svend Bang's shop opened 1968, brand pipes from 1970 (Per Hansen 1970 + Ulf Noltensmeier 1971), Hansen+Noltensmeier took over 1984, retirement announced November 2019 (no continuation planned) = ceiling 2020. TWO strong levers: (1) the 1984 stamp switch COPENHAGEN (English) -> KØBENHAVN (Danish); (2) US-market pipes carry YEAR+NUMBER codes + carver stamp: '9736'+PH = 36th pipe by Per Hansen in 1997 -> PERCEPTION RULE: pass the FIRST TWO digits of the 4-digit US stamp as date_code_suffix (engine code_table decodes to an EXACT year; unknown code -> honest None). SOURCES: staging/pipedia/S__Bang.json (Danish Pipemakers article, detailed) + smokingpipes 'End of an Era' (Stanion, Nov-2019, cited therein) + artisan registry (s-bang-workshop).",
+ "brand": "S. Bang",
+ "region": {
+  "country": "Denmark",
+  "school": "danish"
+ },
+ "aliases": [
+  "s. bang",
+  "s bang",
+  "bang",
+  "sbang",
+  "löfberg",
+  "lofberg"
+ ],
+ "max_year": 2026,
+ "history_anchors": {
+  "_doc": "Svend Bang: tobacco trade from 1941 (wartime); after the war at W.Ø. LARSEN where he BUILT the Larsen pipe workshop (bedrock of Danish freehand fame — wo_larsen link). 1968: own shop opens (Astley's tobacco agency financed it); repairs first, then hires carvers: Peter Rafn (~6 months), Ivan Holst Nielsen, Jan Windelov, Ph. Vigen (short stays, mostly ex-Nørding). 1970 PER HANSEN (b.1948, ex-Hartmann + ~2 months Preben Holm) stays; 1971 ULF NOLTENSMEIER (b.1948, German, ex-Preben Holm 1970 + 15 months Anne Julie). Grading system introduced by Svend Bang 1970. End 1975 workshop overflows -> 1976 move to Struenseegade 9 (Copenhagen N, still there). ~1976/77: Svend Bang personally makes the LÖFBERG pipes (his wife's maiden name) — rejected by distributor Otto & Kopp, forgotten ~28 years, surfaced 2005 via Oliver Kopp/Volker Bier; authenticity confirmed by Hansen+Noltensmeier: Löfberg = made by Svend Bang IN PERSON. 1978 Piber & Tobak magazine co-founded by Bang. 1984 Svend Bang retires; Hansen+Noltensmeier take over, KEEP the name, switch the stamp COPENHAGEN -> KØBENHAVN. Svend Bang dies 1993. November 2019: retirement announced after ~50 years — no continuation. Process: all-handwork, black hand-cut vulcanite stems, double staining; Hansen does all sandblasting AT STANWELL's facility (stanwell link); own silverwork."
+ },
+ "brand_marks": {
+  "stem_logos": [],
+  "wordmarks": [
+   "s. bang",
+   "copenhagen",
+   "kobenhavn",
+   "københavn",
+   "löfberg"
+  ],
+  "physical": "Shank: S. BANG + city. EUROPEAN-market grades ascending: Black blast, Tan blast, 5, 6, 7, 8, 9, A, B, C, rare D. US-market: NO grade — year+serial code + carver stamp (PH = Per Hansen, UN = Ulf Noltensmeier). All stems black hand-cut vulcanite."
+ },
+ "fusion_order": [
+  "date_code",
+  "line_years",
+  "feature_era",
+  "stamped_year"
+ ],
+ "channels": {
+  "date_code": {
+   "_doc": "US-market S. Bang code: 4-digit 'YYnn' (YY = year, nn = that carver's pipe number) + PH/UN stamp. Perception passes YY (first two digits) as date_code_suffix -> exact year via the table (1970-2019 production window). A full 4-digit passed whole misses the table -> honest None.",
+   "code_table": {
+    "70": 1970,
+    "71": 1971,
+    "72": 1972,
+    "73": 1973,
+    "74": 1974,
+    "75": 1975,
+    "76": 1976,
+    "77": 1977,
+    "78": 1978,
+    "79": 1979,
+    "80": 1980,
+    "81": 1981,
+    "82": 1982,
+    "83": 1983,
+    "84": 1984,
+    "85": 1985,
+    "86": 1986,
+    "87": 1987,
+    "88": 1988,
+    "89": 1989,
+    "90": 1990,
+    "91": 1991,
+    "92": 1992,
+    "93": 1993,
+    "94": 1994,
+    "95": 1995,
+    "96": 1996,
+    "97": 1997,
+    "98": 1998,
+    "99": 1999,
+    "00": 2000,
+    "01": 2001,
+    "02": 2002,
+    "03": 2003,
+    "04": 2004,
+    "05": 2005,
+    "06": 2006,
+    "07": 2007,
+    "08": 2008,
+    "09": 2009,
+    "10": 2010,
+    "11": 2011,
+    "12": 2012,
+    "13": 2013,
+    "14": 2014,
+    "15": 2015,
+    "16": 2016,
+    "17": 2017,
+    "18": 2018,
+    "19": 2019
+   }
+  },
+  "line_years": {
+   "modern_floor_year": 2000,
+   "years": {
+    "löfberg": [
+     1975,
+     1978
+    ],
+    "lofberg": [
+     1975,
+     1978
+    ]
+   },
+   "_notes": "löfberg: Svend Bang's personal pipes, made ~1976/77 -> [1975,1978] with slack; surfaced for sale 2005 (sale date is NOT the making date). Grade letters/numbers span eras -> never encoded as lines."
+  },
+  "feature_era": {
+   "table": [
+    {
+     "field": "lettering",
+     "match": [
+      "copenhagen"
+     ],
+     "era_start": 1970,
+     "era_end": 1984,
+     "confidence": "high",
+     "label": "English 'COPENHAGEN' stamp = the Svend Bang era (1970 first brand pipes -> 1984 takeover)"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "kobenhavn",
+      "københavn"
+     ],
+     "era_start": 1984,
+     "era_end": 2020,
+     "confidence": "high",
+     "label": "Danish 'KØBENHAVN' stamp = Hansen+Noltensmeier era (the ONLY change they made at the 1984 takeover); ceiling 2020 (retirement announced Nov-2019)"
+    },
+    {
+     "field": "lettering",
+     "match": [
+      "s. bang",
+      "s bang"
+     ],
+     "era_start": 1970,
+     "era_end": 2020,
+     "confidence": "medium",
+     "label": "S. Bang brand window 1970-2019/20"
+    }
+   ]
+  },
+  "stamped_year": {
+   "_doc": "Generic channel (the US YYnn code is handled by date_code)."
+  }
+ },
+ "channels_future": {
+  "carver_split": "PH vs UN stamps = per-carver attribution (value layer; both windows 1970/71-2019).",
+  "code_start_year": "When exactly did US year-codes begin? Assumed from early on; verify earliest known coded pipe.",
+  "grade_evolution": "Any grade-letter changes over eras? Unverified."
+ }
+}

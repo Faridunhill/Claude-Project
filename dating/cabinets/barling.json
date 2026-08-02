@@ -1,0 +1,182 @@
+{
+  "_doc": "BARLING dating cabinet = DATA only (cabinet #8, built 2026-07-16 following control/CABINET_METHOD.md incl. step-1b sweep). Barling dates by ERA CLIFFS: Pre-Transition (family, -1962) / Transition (1963-c.1970) / Post-Transition (Denmark, 1970s+) / Kopp revival (2020+, lion's-head stem). Sharpest rules: 4-digit shape starting '1' = Pre-Transition, other 4-digit = Transition+; 'EB WB' hallmarked silver = exact year (generic.json charts pending). SOURCES: smokingpipes.com 'About Barling Pipes: A Pocket Guide' (2022, updated 2020 -- Farid's link, extract mirrored to brand_research/barling_dating/) leaning on Tad Gage (P&T Spring 2000); pipedia mirror staging/pipedia/Barling.json + Loring_s_Barling_Collection.json; pipephil logo-barling.html. ⚠️ THE KOPP TRAP: the 2020 revival reuses the old grade names (Fossil/Ye Olde Wood/TVF/Guinea Grain) as FINISHES -> grade names alone never date a Barling; the lion's-head stem inlay = modern, its absence + old nomenclature = vintage.",
+  "brand": "Barling",
+  "aliases": [
+    "barling",
+    "barling's make",
+    "barlings make",
+    "b. barling & sons"
+  ],
+  "max_year": 2026,
+  "history_anchors": {
+    "_doc": "1812 Benjamin Barling (silversmith) opens in Portland Place, Marylebone -- silver-mounting meerschaums, then briars from the mid-1800s. EARLY 1900s: own briar production begins (Camden Town). Montague Barling after WWI (mainly straight shapes -- Billiards/Pots). 1940s: Barling Nichols era -- US expansion, 'Ye Olde Wood' + 'The Very Finest' popularized, grade/size/shape stamps added post-WWII. 1960 sold to FINLAY; family control until LATE 1962 = PRE-TRANSITION END. 1963 Imperial Tobacco full control = TRANSITION (end disputed: late '60s or 1970). 1970s+: Isle of Man HQ, pipes MADE IN DENMARK = POST-TRANSITION. Then dormant. 2020: KOPP PIPES revival (lion's-head sterling stem inlay; series Admiral/Trafalgar/Nelson/Ivory/Marylebone; Bark finish = aluminum accents). Factory records thin (fire). Filter lines: Trotube, CYG-Smoker. Quaints = hand-carved partial rustication (1930s+), never stamped 'Quaint'."
+  },
+  "brand_marks": {
+    "stem_logos": [
+      "lion's head",
+      "cross"
+    ],
+    "wordmarks": [
+      "barling",
+      "barling's make",
+      "ye olde wood",
+      "the very finest",
+      "t.v.f.",
+      "fossil",
+      "guinea grain",
+      "special",
+      "straight grain",
+      "birds eye",
+      "eb wb"
+    ],
+    "physical": "Vintage: 'BARLING'S MAKE' with Barling's ARCHED over Make; sizes SS/S/S-M/L/EL/EXEL/EXEXEL; LF/LLF Canadians; silver 'EB WB' + London hallmarks; pre-WWII stems (vulcanite/horn/amber) have a SMALL ROUND smoke hole, post-WWII = elongated slot. Kopp revival: sterling LION'S HEAD inlaid in the stem (Bark finish = aluminum accents instead of silver)."
+  },
+  "fusion_order": [
+    "line_years",
+    "com_stamp",
+    "feature_era",
+    "stamped_year"
+  ],
+  "channels": {
+    "com_stamp": {
+      "table": [
+        {
+          "match": [
+            "denmark",
+            "made in denmark"
+          ],
+          "era_start": 1970,
+          "era_end": 2019,
+          "confidence": "low",
+          "note": "Post-Transition production moved to Denmark from the 1970s; end unknown (brand went dormant before the 2020 revival) -- approx, verify"
+        },
+        {
+          "match": [
+            "london",
+            "made in london",
+            "made in england",
+            "england"
+          ],
+          "era_start": 1812,
+          "era_end": 1970,
+          "confidence": "low",
+          "note": "English production through the Transition; Post-Transition made in Denmark -> England wording = pre-c.1970 hint (LOW: revival/late stamps unverified)"
+        }
+      ]
+    },
+    "line_years": {
+      "modern_floor_year": 2000,
+      "years": {
+        "trafalgar": [
+          2020,
+          2026
+        ],
+        "admiral": [
+          2020,
+          2026
+        ],
+        "nelson": [
+          2020,
+          2026
+        ],
+        "marylebone": [
+          2020,
+          2026
+        ],
+        "fossil": [
+          1946,
+          2026
+        ],
+        "ye olde wood": [
+          1946,
+          2026
+        ],
+        "guinea grain": [
+          1946,
+          2026
+        ],
+        "birds eye": [
+          1950,
+          2026
+        ],
+        "straight grain": [
+          1946,
+          2026
+        ]
+      },
+      "_notes": "KOPP series (Trafalgar/Admiral/Nelson/Marylebone + Ivory meerschaums) = 2020+ HIGH. Vintage grade names are FLOORS ONLY (guide: the 1946-1962 grading system = YOW/Fossil/Special/Birds Eye/Guinea Grain/Straight Grain, SOME continued into Transition/Post-Transition, and ALL the names were revived by Kopp 2020 as finishes) -> never a ceiling from the name; the era comes from shape-number pattern / lion's head / hallmark / COM. birds eye: introduced 'during the later years when the company was still family owned' -> floor 1950 approx. 'special' NOT encoded (single generic word -- too collision-prone; confirm-flow). Trotube / CYG-Smoker / Quaint (never stamped) -> notes only. Pre-1946 pipes usually carry NO grade/shape stamps at all -- minimal nomenclature + round smoke hole + arched BARLING'S MAKE = pre-1946 profile (confirm-flow, not auto)."
+    },
+    "feature_era": {
+      "table": [
+        {
+          "field": "shape_number",
+          "regex": "^1\\d{3}$",
+          "era_start": 1946,
+          "era_end": 1962,
+          "confidence": "medium",
+          "label": "4-digit shape starting with 1 = Pre-Transition (numbering began post-WWII under Nichols; family era ends late 1962)"
+        },
+        {
+          "field": "shape_number",
+          "regex": "^[02-9]\\d{3}$",
+          "era_start": 1962,
+          "era_end": 2026,
+          "confidence": "medium",
+          "label": "4-digit shape NOT starting with 1 = 'almost always' Transition era or later (guide)"
+        },
+        {
+          "field": "shape_number",
+          "regex": "^\\d{1,3}$",
+          "era_start": 1946,
+          "era_end": 2026,
+          "confidence": "low",
+          "label": "1-3 digit Nichols number = post-WWII floor (even-ending = tapered, odd = saddle -- inconsistent, hint only)"
+        },
+        {
+          "field": "stem_logo",
+          "match": [
+            "lion's head",
+            "lion head",
+            "lions head"
+          ],
+          "era_start": 2020,
+          "era_end": 2026,
+          "confidence": "high",
+          "label": "sterling lion's-head stem inlay = the Kopp revival marker (2020+)"
+        },
+        {
+          "field": "lettering",
+          "match": [
+            "eb wb"
+          ],
+          "era_start": 1812,
+          "era_end": 1962,
+          "confidence": "medium",
+          "label": "'EB WB' silver maker's mark = Pre-Transition silverwork; the London hallmark beside it gives the EXACT year (generic.json charts pending -> confirm-flow)"
+        },
+        {
+          "field": "bit_style",
+          "match": [
+            "round smoke hole",
+            "small round hole"
+          ],
+          "era_start": 1812,
+          "era_end": 1946,
+          "confidence": "medium",
+          "label": "small round smoke hole in the button = pre-WWII (elongated slot = post-war)"
+        }
+      ]
+    },
+    "stamped_year": {
+      "_doc": "Generic channel; Barling rarely stamps years, but hallmarked EB WB silver = exact year once UK charts land."
+    }
+  },
+  "channels_future": {
+    "assay_hallmark": "London hallmarks beside 'EB WB' -> EXACT year (the guide calls silver-fitted Barlings 'significantly easier to date'). Wire when generic.json UK date-letter charts land.",
+    "shape_chart": "shape_reference/charts/barling.json exists (eye chart). Nichols numbers + the 4-digit era patterns above are the dating layer; no design-year chart yet."
+  },
+  "region": {
+    "country": "England",
+    "school": "english"
+  }
+}

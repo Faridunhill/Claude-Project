@@ -1,0 +1,217 @@
+{
+ "_doc": "GBD dating cabinet = DATA only (cabinet #6, built 2026-07-16 following control/CABINET_METHOD.md). GBD dates by CONVERGENCE of: COM-stamp wording (linear 'London England' pre-merger vs round 'Made in London England' post-1981) + stem rondelle generations (metal vs painted) + line/grade years + French-vs-English production marks. THE CLIFF = the 1981 merger with Comoy's (single Cadogan factory since). SOURCES (local-first): pipedia mirror staging/pipedia/GBD.json (history + G.L. Pease dating post, 1996) + pipephil mirror logos/en/logo-gbd.html (corroborates rondelle + linear-stamp rules). DISAGREEMENT noted: pipephil says Cadogan took over 'sometime in the 1970s'; pipedia says the GBD-Comoy's production merger = 1981 -- the STAMP/rondelle cliff is tied to the 1981 merger (both sources) and that is what is encoded. HALLMARKED silver bands date exactly (Birmingham/London) -- channel waits for generic.json UK charts; note pipephil's 1913-vs-1938 'o'/'O' example: same escutcheon, honest ambiguity.",
+ "brand": "GBD",
+ "aliases": [
+  "gbd",
+  "ganneval bondier donninger"
+ ],
+ "max_year": 2026,
+ "history_anchors": {
+  "_doc": "1850 founded in PARIS (Ganneval, Bondier & Donninger -- meerschaum first, briar early). Company names over time: Ganneval Bondier & Donninger -> Bondier Ulrich & Cie -> Bine Marechal & Cie -> A. Marechal Ruchon & Cie. 1902 sold to A. Oppenheimer & Co (London); London factory opens 1903; Saint-Claude plant (Sina + Verguet merger) operating 1906. Dual production LONDON + PARIS between the wars (London dominant from WWI). 1920s: Cadogan Investments holding formed over Oppenheimer's brands (BBB 1920, Loewe, Comoy's shares). 1952: the Paris factory MOVES to Saint-Claude. 1981: GBD merges with Comoy's -- one English factory for both = the collector cliff (pre-1981 = the good era; Smokers' Haven was the main US supplier until the early 1980s). SECONDS (own rules -- do NOT date by this cabinet's lines): Beau Nash, Brentwood, City Gold Star, Country Club, Digby, Irwin's, Peter Kent, Samuel Pepys, Theydon, Town Club, Jameson's (pipephil/pipedia); SEPARATE brands from the same house: Dr. Plumb's (1925, France/Canada market), Peter Piper, Marcee (French market). HONESTY WARNING from pipedia itself: Saint-Claude-made sub-brand pipes were routinely stamped 'London made'/'London England' -- COM wording on cheap lines is not fully trustworthy. FAMILY LINE FACT (BNA primary, 2026-07-17): CITY DE LUXE = Oppenheimer house line LAUNCHED July 1921 (national campaign, 60-years-of-pipemaking, 101 shapes, push-in stem, 5/6; Bystander ad signed OPPENHEIMER'S PIPES WITH A PEDIGREE; 38 Finsbury Square) -> any City de Luxe pipe = floor 1921; still retailed 1931 (5/6) and Dec 1939. See brand_research/gbd_dating/bna_city_de_luxe_facts.md. GBD-Unique note: 'GBD Unique' has ZERO hits in all of BNA (2026-07-17) -> the 1940-vs-1965 mystery stays on US-paper evidence."
+ },
+ "brand_marks": {
+  "stem_logos": [
+   "rondelle",
+   "metal rondelle",
+   "brass rondelle",
+   "silver rondelle",
+   "painted rondelle",
+   "star"
+  ],
+  "wordmarks": [
+   "gbd",
+   "london england",
+   "made in london england",
+   "london made",
+   "made in france",
+   "saint-claude",
+   "xtra",
+   "new era",
+   "pedigree",
+   "prehistoric",
+   "city de luxe"
+  ],
+  "physical": "GBD-in-oval shank stamp (International/Himalaya also used a rounded-rectangle variant). Stem rondelle = inserted metal plate with GBD initials, introduced from Paris in the late 1920s; discontinued after the 1981 merger; late pipes got a PAINTED rondelle; brass rondelles REAPPEARED on recent Cadogan production. City de Luxe (1921) wore an inserted STAR on the stem."
+ },
+ "fusion_order": [
+  "line_years",
+  "com_stamp",
+  "feature_era",
+  "stamped_year"
+ ],
+ "channels": {
+  "com_stamp": {
+   "table": [
+    {
+     "match": [
+      "made in london england"
+     ],
+     "era_start": 1981,
+     "era_end": 2026,
+     "confidence": "medium",
+     "note": "the ROUND Comoy-style stamp replaced GBD's linear stamp after the 1981 merger (G.L. Pease)"
+    },
+    {
+     "match": [
+      "london england"
+     ],
+     "era_start": 1903,
+     "era_end": 1981,
+     "confidence": "medium",
+     "note": "linear 'London England' = pre-merger English GBD (pipephil: 'prior to this time... stamped London England in a straight line, even if sometimes crafted in France' -- so England wording, French wood possible)"
+    },
+    {
+     "match": [
+      "london made"
+     ],
+     "era_start": 1903,
+     "era_end": 1981,
+     "confidence": "low",
+     "note": "'London Made' became 'Standard London Made' after WWI as a LINE name; also appears alongside 'London. England' on later pipes (pipephil International example) -> wide, low-conf"
+    },
+    {
+     "match": [
+      "saint-claude",
+      "saint claude",
+      "st claude"
+     ],
+     "era_start": 1906,
+     "era_end": 1981,
+     "confidence": "medium",
+     "note": "Oppenheimer's Saint-Claude plant ran from 1906; French GBD production ends with the 1981 single-factory merger"
+    },
+    {
+     "match": [
+      "made in france",
+      "france"
+     ],
+     "era_start": 1850,
+     "era_end": 1981,
+     "confidence": "medium",
+     "note": "French-made GBD: Paris 1850-1952, Saint-Claude 1906-1981"
+    },
+    {
+     "match": [
+      "paris"
+     ],
+     "era_start": 1850,
+     "era_end": 1952,
+     "confidence": "medium",
+     "note": "the Paris factory moved to Saint-Claude in 1952"
+    }
+   ]
+  },
+  "line_years": {
+   "modern_floor_year": 2000,
+   "years": {
+    "xtra": [
+     1895,
+     1937
+    ],
+    "pedigree": [
+     1936,
+     2026
+    ],
+    "new era": [
+     1925,
+     2026
+    ],
+    "prehistoric": [
+     1930,
+     2026
+    ],
+    "extra dry": [
+     1927,
+     2026
+    ],
+    "city de luxe": [
+     1921,
+     2026
+    ],
+    "marcee": [
+     1902,
+     1947
+    ],
+    "riseagle": [
+     1920,
+     1947
+    ],
+    "collector": [
+     1965,
+     1985
+    ],
+    "unique": [
+     1965,
+     1985
+    ],
+    "century": [
+     1960,
+     2026
+    ],
+    "autumn gold": [
+     1981,
+     2026
+    ],
+    "bermuda": [
+     1981,
+     2026
+    ],
+    "facet": [
+     1981,
+     2026
+    ]
+   },
+   "_notes": "xtra: one of the earliest named models (late 19th c, start approx 1895 flagged); 'Xtras haven't been made since the 1930's... discontinued 1937' (Pease + pipedia editor). pedigree: sketched ~1926 but 'not produced until the later 1930s' -> FLOOR 1936; no documented end. new era: existed by 1931 ('in 1931 the top model') -> floor 1925 approx. prehistoric: 'entirely new' in the interwar paragraph -> floor 1930 approx. extra dry: metal-filter line introduced late 1920s in France -> floor 1927 approx. city de luxe: introduced 1921 (star stem inlay); pipephil lists it under SECONDS -> floor only. marcee: French-market brand offered until WWII + 1-2 years after -> [1902,1947] low. riseagle: Paris-made 1-Shilling line killed by the post-war excise tax -> [1920,1947] low approx. collector + unique: introduced late 1960s-late 1970s (Horry Jamieson freehands) -> [1965,1985] approx. century: 'first introduced some time in the 1960s or 1970s as I recall' (Pease, scant literature) -> FLOOR 1960 low. autumn gold/bermuda/facet: post-merger Cadogan lines. NOT encoded (thin): Camelia ('only around for a few years', London 2.5-Shilling interwar), Pub + CW churchwarden (names too short/generic to match safely -- confirm-flow), New Standard (1930s intro approx but 'standard' matches too much), Tanganyika meerschaum collab (1970s, note only), International/Universe/Speciale/Granitan/Sauvage/Sierra/Legacy/Concorde/Virgin/Prestige/Varichrome/Bronze Velvet/Straight Grain/Prodigy/Jubilee/Tapestry/Ebony (grade list exists but no intro years documented)."
+  },
+  "feature_era": {
+   "table": [
+    {
+     "field": "stem_logo",
+     "match": [
+      "painted rondelle",
+      "painted gbd"
+     ],
+     "era_start": 1981,
+     "era_end": 2026,
+     "confidence": "medium",
+     "label": "painted (not inlaid) GBD rondelle = post-merger (Pease: 'you can be assured... late-model, made after the merge')"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "silver rondelle"
+     ],
+     "era_start": 1927,
+     "era_end": 1981,
+     "confidence": "medium",
+     "label": "inlaid SILVER rondelle = late 1920s until the 1981 merger"
+    },
+    {
+     "field": "stem_logo",
+     "match": [
+      "brass rondelle",
+      "metal rondelle",
+      "inlaid rondelle"
+     ],
+     "era_start": 1927,
+     "era_end": 2026,
+     "confidence": "low",
+     "label": "metal rondelle: introduced late 1920s, discontinued after the 1981 merger BUT brass rondelles reappeared on recent Cadogan production (sources disagree on finality) -> weak pre-1981 hint only. NOTE: bare 'rondelle' deliberately NOT matched (could be the painted kind -> confirm-flow)"
+    }
+   ]
+  },
+  "stamped_year": {
+   "_doc": "Commemoratives carry literal years (150 Year Celebration billiard ~2000). Generic channel reads the last 4-digit year."
+  }
+ },
+ "channels_future": {
+  "assay_hallmark": "Silver-banded GBDs hallmarked Birmingham/London -> EXACT year once generic.json UK date-letter charts land. Encode pipephil's caution: Birmingham lower-case 'o' (1913) vs capital 'O' (1938) share the same escutcheon -> honest ambiguity, offer both candidates.",
+  "shape_chart": "GBD shape numbers exist (4-digit, e.g. 9242 bent Rhodesian; 'GBD Shapes/Numbers' pipedia page is in the mirror) -- no design-year chart yet; Pease: shapes changed almost yearly, so old catalogs could bracket a pipe. Future enrichment.",
+  "_farid_fetch": "perardua.net/pipes/GBDlines.html (the GBD line/grade reference pipedia cites) is 403-blocked to both WebFetch AND the in-app browser -- hand the link to FARID to fetch (proven flow), then encode line years from it."
+ },
+ "region": {
+  "country": "England/France",
+  "school": "english-french"
+ },
+ "_note_bna_1873_image_verified_2026_07_18": "1873-12-26 Manchester Evening News p.4 (Withecomb's tobacconist, 32 Victoria St): 'BRIAR PIPES, G.B.D. B.B.B. L.H.E. The above briars kept in stock, all from the best French makers' — image-verified (tile in brand_research/bna_clips/tile_ocr/). EARLIEST G.B.D.-in-England print evidence we hold: GBD briars retailed in Manchester by Dec 1873, sold as FRENCH-made (Paris-era production, pre-London factory). No bracket changes (com/feature floors unaffected); corroborates the Paris-origin story."
+}
