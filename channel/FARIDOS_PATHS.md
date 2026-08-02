@@ -73,3 +73,24 @@ Suggested search, same method that found the hub:
 Get-ChildItem C:\ -Recurse -Directory -Filter "*ashcombe*" -ErrorAction SilentlyContinue |
   Select-Object -First 5 FullName
 ```
+
+---
+## WHAT THE 2026-07-18 CAPACITY REPORT PROVES (filed in NEW_UPLOADS)
+17 pipes tested · 5 dated · **12 UNDATED** · 5 of 55 cabinets exercised.
+
+**The engine is not broken — it is starving.** Its only inputs were the listing title,
+the brand field and a short note. Every "undated (no readable mark)" means *no mark
+appeared in the TEXT*, not that the pipe has no mark. Abstaining was correct: a blank
+beats a lie.
+
+**But look at what the 5 "successes" actually returned:** Vauen 1909–2026 ·
+Oldenkott 1926–2026 · Generic 1934–2026. Those are not dating brackets — they are
+"this brand has existed since". A collector learns nothing from them.
+
+**The missing input is a macro photograph of the stamp.** The Peterson cabinet's whole
+power — the country line, the hallmark cycle, the forked-tail vs script P — needs the
+mark READ off the pipe. A listing title can never carry it.
+
+**Conclusion, and it converges with everything else in this session:** stamp macros are
+not a nice-to-have for the museum tier. They are the fuel the dating engine runs on, and
+they can only be captured while the pipe is in hand.
