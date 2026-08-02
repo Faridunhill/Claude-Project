@@ -317,8 +317,10 @@ def _dedupe_key(row: dict) -> tuple:
             str(row.get("sold_at") or "")[:10], row.get("price"))
 
 
+# Order matters for the ambiguous ones: 03/04/2026 is 4 March on a US eBay
+# account and 3 April on a UK one. Farid's account is US, so US patterns win.
 DATE_FORMATS = (
-    "%Y-%m-%d", "%Y/%m/%d", "%d/%m/%Y", "%m/%d/%Y", "%m-%d-%Y",
+    "%Y-%m-%d", "%Y/%m/%d", "%m/%d/%Y", "%m/%d/%y", "%d/%m/%Y", "%m-%d-%Y",
     "%b-%d-%y", "%b-%d-%Y", "%d-%b-%y", "%d-%b-%Y", "%b %d, %Y", "%d %b %Y",
 )
 

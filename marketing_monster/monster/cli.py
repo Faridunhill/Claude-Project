@@ -253,7 +253,12 @@ def cmd_auto(args) -> int:
     print(f"AUTOPILOT — {args.clone} — {len(pilot.config['watch'])} folder(s) watched")
     print(f"  new export files read : {r['files_ingested']}")
     print(f"  new sales into the Well: {r['rows_added']}")
-    print(f"  sales recorded         : {r['sales_recorded']}")
+    span = f"  {r['sales_span'][0]} to {r['sales_span'][1]}" if r.get("sales_span") else ""
+    print(f"  sales recorded         : {r['sales_recorded']}{span}")
+    if r["sales_recorded"] > 100:
+        days = int(pilot.config["record_sales_within_days"])
+        print(f"  ** {r['sales_recorded']} sales in {days} days is a lot. If that looks "
+              "wrong, the dates may have been misread — send me this screen.")
     print(f"  listings written       : {r['twins_made']}")
     print(f"  lessons proposed       : {r['lessons_proposed']}")
     for bad in r["files_failed"]:

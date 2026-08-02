@@ -206,7 +206,9 @@ class Autopilot:
         pending_path = pending.write(self.root)
         report_path = write_report(self.root)
         waiting = pending_path.read_text(encoding="utf-8")
+        stamps = sorted(r["ts"][:10] for r in sales if r.get("ts"))
         return {
+            "sales_span": (stamps[0], stamps[-1]) if stamps else None,
             "files_ingested": len([x for x in ingested if "error" not in x]),
             "files_failed": [x for x in ingested if "error" in x],
             "rows_added": sum(x.get("added", 0) for x in ingested),

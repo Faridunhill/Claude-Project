@@ -758,3 +758,14 @@ class T22_EveryExportWritesDatesDifferently(MonsterCase):
         Well(self.root).load(path)
         dates = sorted(r["sold_at"] for r in Well(self.root).transactions())
         self.assertEqual(dates, ["2025-10-21", "2026-07-14"])
+
+
+class T23_AmbiguousDatesFollowTheAccount(MonsterCase):
+    """03/04/2026 is 4 March on a US eBay account and 3 April on a UK one.
+    Guessing wrong does not fail — it files a sale in the wrong month, which
+    is how a cohort quietly becomes a lie."""
+
+    def test_us_order_wins(self):
+        from monster.well import iso_date
+        self.assertEqual(iso_date("03/04/2026"), "2026-03-04")   # 4 March
+        self.assertEqual(iso_date("12/31/2025"), "2025-12-31")   # unambiguous
