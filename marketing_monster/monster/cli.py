@@ -330,6 +330,39 @@ def cmd_schedule(args) -> int:
     return 0
 
 
+def cmd_explain(args) -> int:
+    """Show the working. When a number looks wrong, this is how we find out
+    why — the rows behind it, not a summary of them."""
+    from .report import _age_days
+    from .well import Well
+    root = root_for(pathlib.Path(args.base), args.clone)
+    rows = [r for r in Scale(root).rows()
+            if r["event"] == "sale" and r.get("ts") and _age_days(r["ts"]) <= args.days]
+    print(f"{len(rows)} sale rows in the last {args.days} days\n")
+    print(f"  {'recorded date':<12} {'surface':<7} {'value':>8}  item")
+    for row in sorted(rows, key=lambda r: r["ts"])[:args.limit]:
+        print(f"  {row['ts'][:10]:<12} {row['surface']:<7} "
+              f"{(row['value'] or 0):>8,.0f}  {row['asset_id'][:40]}")
+    if len(rows) > args.limit:
+        print(f"  ... and {len(rows) - args.limit} more")
+
+    # what the Well says those same items were
+    well = {str(r.get("item_id")): r for r in Well(root).transactions()}
+    mismatched = [r for r in rows
+                  if str(r["asset_id"]) in well
+                  and (well[str(r["asset_id"])].get("sold_at") or "")[:10] != r["ts"][:10]]
+    print(f"\n  rows whose recorded date differs from the Well's sale date: "
+          f"{len(mismatched)}")
+    for row in mismatched[:10]:
+        source = well[str(row["asset_id"])]
+        print(f"    {row['asset_id'][:30]:<32} scale={row['ts'][:10]}  "
+              f"well={source.get('sold_at') or '(none)'}")
+    if mismatched:
+        print("  ** a difference here means the sale date was lost and the row was "
+              "stamped with the day it was loaded. That is a bug, not a sale.")
+    return 0
+
+
 def cmd_verify(args) -> int:
     base = pathlib.Path(args.base)
     root = root_for(base, args.clone)
@@ -445,6 +478,11 @@ def main(argv=None) -> int:
     sp = clone_arg(sub.add_parser("schedule", help="make it run every day by itself"))
     sp.add_argument("--at", default="08:00")
     sp.set_defaults(fn=cmd_schedule)
+
+    sp = clone_arg(sub.add_parser("explain", help="show the rows behind a number"))
+    sp.add_argument("--days", type=int, default=7)
+    sp.add_argument("--limit", type=int, default=25)
+    sp.set_defaults(fn=cmd_explain)
 
     clone_arg(sub.add_parser("pending")).set_defaults(fn=cmd_pending)
     clone_arg(sub.add_parser("verify")).set_defaults(fn=cmd_verify)
