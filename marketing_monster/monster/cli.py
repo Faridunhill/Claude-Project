@@ -240,6 +240,74 @@ def cmd_daily(args) -> int:
     return 0
 
 
+def cmd_auto(args) -> int:
+    """One turn of the whole loop, with no typing. This is the daily job."""
+    from .auto import Autopilot
+    base = pathlib.Path(args.base)
+    pilot = Autopilot(base, args.clone)
+    if not pilot.config["watch"]:
+        print("No watch folders configured yet. Run:\n"
+              f"  python -m monster setup {args.clone}", file=sys.stderr)
+        return 2
+    r = pilot.run()
+    print(f"AUTOPILOT — {args.clone} — {len(pilot.config['watch'])} folder(s) watched")
+    print(f"  new export files read : {r['files_ingested']}")
+    print(f"  new sales into the Well: {r['rows_added']}")
+    print(f"  sales recorded         : {r['sales_recorded']}")
+    print(f"  listings written       : {r['twins_made']}")
+    print(f"  lessons proposed       : {r['lessons_proposed']}")
+    for bad in r["files_failed"]:
+        print(f"  ** could not read {bad['path'].name}: {bad['error']}")
+    print(f"\n  report : {r['report']}")
+    if r["waiting_for_farid"]:
+        print(f"\n  ** {r['waiting_for_farid']} question(s) waiting for you: {r['pending']}")
+    else:
+        print("\n  nothing needs you today.")
+    return 0
+
+
+def cmd_setup(args) -> int:
+    """Ask once where the exports land, then never ask again."""
+    from .auto import DEFAULT_CONFIG, load_config, write_config
+    base = pathlib.Path(args.base)
+    config = load_config(base)
+    if args.watch:
+        config["watch"] = sorted(set(config["watch"]) | set(args.watch))
+    if args.ebay_category:
+        config["ebay_category"] = args.ebay_category
+    if args.ebay_location:
+        config["ebay_location"] = args.ebay_location
+    path = write_config(base, config)
+    print(f"saved: {path}")
+    for folder in config["watch"]:
+        exists = "ok" if pathlib.Path(folder).expanduser().is_dir() else "** NOT FOUND"
+        print(f"  watching {folder}  {exists}")
+    if not config["watch"]:
+        print("  no folders yet — pass --watch \"C:/Users/you/Downloads\"")
+    return 0
+
+
+def cmd_schedule(args) -> int:
+    """Write the daily job, and print the one line that registers it."""
+    base = pathlib.Path(args.base).resolve()
+    home = pathlib.Path(__file__).resolve().parent.parent
+    bat = base / "monster_daily.bat"
+    bat.write_text(
+        "@echo off\r\n"
+        f"set \"PYTHONPATH={home}\"\r\n"
+        f"cd /d \"{base}\"\r\n"
+        f"python -m monster auto {args.clone} >> \"{base}\\autopilot.log\" 2>&1\r\n",
+        encoding="utf-8")
+    print(f"wrote: {bat}\n")
+    print("Paste this ONCE to make it run every day automatically:\n")
+    print(f'  schtasks /create /tn "Marketing Monster" /tr "{bat}" '
+          f'/sc daily /st {args.at} /f\n')
+    print(f"After that it runs by itself at {args.at}. Its output goes to "
+          f"{base}\\autopilot.log")
+    print("To stop it:  schtasks /delete /tn \"Marketing Monster\" /f")
+    return 0
+
+
 def cmd_verify(args) -> int:
     base = pathlib.Path(args.base)
     root = root_for(base, args.clone)
@@ -338,6 +406,19 @@ def main(argv=None) -> int:
     sp = clone_arg(sub.add_parser("daily", help="the whole day's routine"))
     sp.add_argument("--propose", action="store_true", default=True)
     sp.set_defaults(fn=cmd_daily)
+
+    clone_arg(sub.add_parser("auto", help="one full turn of the loop, no typing")
+              ).set_defaults(fn=cmd_auto)
+
+    sp = clone_arg(sub.add_parser("setup", help="tell it once where exports land"))
+    sp.add_argument("--watch", action="append", default=[])
+    sp.add_argument("--ebay-category", dest="ebay_category", default="")
+    sp.add_argument("--ebay-location", dest="ebay_location", default="")
+    sp.set_defaults(fn=cmd_setup)
+
+    sp = clone_arg(sub.add_parser("schedule", help="make it run every day by itself"))
+    sp.add_argument("--at", default="08:00")
+    sp.set_defaults(fn=cmd_schedule)
 
     clone_arg(sub.add_parser("pending")).set_defaults(fn=cmd_pending)
     clone_arg(sub.add_parser("verify")).set_defaults(fn=cmd_verify)

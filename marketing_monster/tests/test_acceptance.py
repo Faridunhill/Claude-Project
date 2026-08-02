@@ -655,3 +655,64 @@ class T20_NoCryingWolf(MonsterCase):
         from monster.report import ledger_health
         digger = next(h for h in ledger_health(self.root) if h["organ"] == "DIGGER")
         self.assertEqual(digger["state"], "not_started")
+
+
+class T21_TheMachineFillsItsOwnLedgers(MonsterCase):
+    """doc 004 §2, Amendment A: "Farid supplies verdicts. The machine supplies
+    rows. He never types the second one, ever." The first build broke this —
+    a typed command per sale, per twin, per publish. The autopilot is the
+    correction, and it must be safe to run every day."""
+
+    def setUp(self):
+        super().setUp()
+        from datetime import date
+        self.drop = self.base / "drop"
+        self.drop.mkdir()
+        today = date.today().isoformat()
+        (self.drop / "ebay_sold.csv").write_text(
+            "Item Id,Listing Title,Price,Date\n"
+            f"9001,Peterson System 307 Bent Apple,95.00,{today}\n"
+            f"9002,Dunhill Shell Billiard Group 4,340.00,{today}\n",
+            encoding="utf-8")
+        from monster.auto import Autopilot, write_config
+        write_config(self.base, {"watch": [str(self.drop)]})
+        self.pilot = Autopilot(self.base, "pipes")
+
+    def test_one_run_does_everything(self):
+        r = self.pilot.run()
+        self.assertEqual(r["files_ingested"], 1)
+        self.assertEqual(r["rows_added"], 2)
+        self.assertEqual(r["sales_recorded"], 2)
+        self.assertEqual(r["twins_made"], 2)
+
+    def test_running_again_changes_nothing(self):
+        """A daily job that double-counts is worse than no daily job."""
+        self.pilot.run()
+        again = self.pilot.run()
+        self.assertEqual(again["files_ingested"], 0)
+        self.assertEqual(again["sales_recorded"], 0)
+        self.assertEqual(again["twins_made"], 0)
+        sales = [r for r in Scale(self.root).rows() if r["event"] == "sale"]
+        self.assertEqual(len(sales), 2)
+
+    def test_a_renamed_copy_is_not_loaded_twice(self):
+        self.pilot.run()
+        import shutil
+        shutil.copy(self.drop / "ebay_sold.csv", self.drop / "ebay_sold_COPY.csv")
+        again = self.pilot.run()
+        self.assertEqual(again["files_ingested"], 0)   # same content, same fingerprint
+
+    def test_a_broken_file_does_not_stop_the_run(self):
+        (self.drop / "junk.csv").write_text("not,a,sales,file\n1,2,3,4\n", encoding="utf-8")
+        r = self.pilot.run()
+        self.assertTrue(r["files_failed"])
+        self.assertEqual(r["sales_recorded"], 2)       # the good file still landed
+
+    def test_reserved_powers_are_never_automated(self):
+        """v1.0: "Farid alone holds category picks, floor prices, spend
+        ceilings, anything crossing a wall." The autopilot writes rows; it
+        never writes those verdicts."""
+        self.pilot.run()
+        from monster.judge import Judge
+        for row in Judge(self.root).rows():
+            self.assertEqual(row["needs_farid"], "none")
