@@ -1000,3 +1000,48 @@ class T27_TheBridge(MonsterCase):
         result = self._pilot().run()
         self.assertFalse(result["pulled"]["pulled"])
         self.assertEqual(len(result["dossiers"]), 1)   # the rest still ran
+
+
+class T28_TheDashboard(MonsterCase):
+    """A page instead of a command line — for every business, not just the one
+    that happens to be built."""
+
+    def test_every_kitchen_is_listed_even_unbuilt_ones(self):
+        """The plan is three businesses. A dashboard showing only the built one
+        would quietly redefine the plan as one."""
+        from monster.dashboard import list_kitchens
+        (self.root / "well").mkdir(parents=True)
+        kitchens = list_kitchens(self.base)
+        self.assertEqual([k["name"] for k in kitchens],
+                         ["pipes", "groundtruth", "ashcombe"])
+        self.assertTrue(kitchens[0]["ready"])
+        self.assertFalse(kitchens[1]["ready"])
+
+    def test_an_unbuilt_kitchen_explains_itself(self):
+        from monster.dashboard import build_state
+        state = build_state(self.base, "groundtruth")
+        self.assertFalse(state["ready"])
+        self.assertIn("CONFIRMED", state["why"])
+
+    def test_a_built_kitchen_reports_its_blind_spot(self):
+        from monster.dashboard import build_state
+        scale = Scale(self.root)
+        (self.root / "well").mkdir(parents=True)
+        scale.record("sale", "a", value=100)
+        scale.record("sale", "b", value=100, attribution="direct", reason="asked")
+        state = build_state(self.base, "pipes")
+        self.assertTrue(state["ready"])
+        self.assertEqual(state["tiles"]["unattributable"], "50%")
+
+    def test_kitchens_are_never_added_together(self):
+        """A combined figure across businesses is exactly the cross-business
+        fact the wall forbids. Each tab reads one kitchen."""
+        from monster.dashboard import build_state
+        (self.root / "well").mkdir(parents=True)
+        other = self.base / "clones" / "ashcombe"
+        (other / "well").mkdir(parents=True)
+        Scale(self.root).record("sale", "pipe-1", value=100)
+        Scale(other).record("sale", "pen-1", value=999)
+        pipes = build_state(self.base, "pipes")
+        self.assertEqual(pipes["tiles"]["sales"], 1)
+        self.assertEqual(pipes["tiles"]["value"], "100")

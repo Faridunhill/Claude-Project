@@ -316,6 +316,16 @@ def cmd_setup(args) -> int:
         config["dossier_folder"] = args.dossiers
     path = write_config(base, config)
     print(f"saved: {path}")
+
+    # a double-click launcher — the dashboard should not need a command line
+    home = pathlib.Path(__file__).resolve().parent.parent
+    launcher = base / "MARKETING DASHBOARD.bat"
+    launcher.write_text(
+        "@echo off\r\n"
+        f"set \"PYTHONPATH={home}\"\r\n"
+        f"cd /d \"{base.resolve()}\"\r\n"
+        "python -m monster dashboard\r\n", encoding="utf-8")
+    print(f"launcher: {launcher}  (double-click it)")
     for folder in config["watch"]:
         exists = "ok" if pathlib.Path(folder).expanduser().is_dir() else "** NOT FOUND"
         print(f"  watching {folder}  {exists}")
@@ -495,6 +505,14 @@ def cmd_answer(args) -> int:
     return 0
 
 
+def cmd_dashboard(args) -> int:
+    """A page instead of a command line — for every kitchen at once."""
+    from .dashboard import serve
+    serve(pathlib.Path(args.base), args.clone, port=args.port,
+          open_browser=not args.no_browser)
+    return 0
+
+
 def cmd_verify(args) -> int:
     base = pathlib.Path(args.base)
     root = root_for(base, args.clone)
@@ -640,6 +658,12 @@ def main(argv=None) -> int:
     sp.add_argument("verdict", choices=["yes", "no", "later"])
     sp.add_argument("--reason", default="")
     sp.set_defaults(fn=cmd_answer)
+
+    sp = sub.add_parser("dashboard", help="open the dashboard for all businesses")
+    sp.add_argument("clone", nargs="?", default="pipes", choices=CLONES)
+    sp.add_argument("--port", type=int, default=8765)
+    sp.add_argument("--no-browser", action="store_true")
+    sp.set_defaults(fn=cmd_dashboard)
 
     clone_arg(sub.add_parser("pending")).set_defaults(fn=cmd_pending)
     clone_arg(sub.add_parser("verify")).set_defaults(fn=cmd_verify)
