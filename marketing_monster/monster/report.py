@@ -106,8 +106,16 @@ def weekly_report(clone_root: str | pathlib.Path, today: date | None = None) -> 
         recent = [r for r in scale.rows() if r.get("ts") and _age_days(r["ts"]) <= 7]
         sales = [r for r in recent if r["event"] == "sale"]
         value = sum(r["value"] or 0 for r in sales)
-        lines.append(f"  {len(sales)} sales, {value:,.2f} recorded, "
-                     f"{len(recent)} events across {len({r['surface'] for r in recent}) or 0} surfaces.")
+        lines.append(f"  {len(sales)} sales, {value:,.2f} recorded.")
+        by_surface: dict[str, list] = {}
+        for row in sales:
+            by_surface.setdefault(row["surface"], []).append(row["value"] or 0)
+        for surface, values in sorted(by_surface.items(), key=lambda kv: -len(kv[1])):
+            lines.append(f"    {surface:<8}{len(values):>4} sales  "
+                         f"{sum(values):>10,.2f}  avg {sum(values)/len(values):,.0f}")
+        if sales:
+            lines.append("  Does that match what you actually sold this week? If not, "
+                         "the dates in one export are being read wrong — say so.")
         if total and unattr / total > 0.5:
             lines.append(f"  {share} of outcomes have no known cause. That is expected on "
                          "organic-only ground; it is not a measurement.")
