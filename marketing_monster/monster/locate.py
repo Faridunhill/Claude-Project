@@ -70,7 +70,29 @@ def human(size: int) -> str:
     return f"{size:.1f}GB"
 
 
-def scan(base: str | pathlib.Path, *, limit: int = 25, max_depth: int = 6) -> list[dict]:
+QUICK_FOLDERS = ("Desktop", "Documents", "Downloads", "OneDrive", "Dropbox",
+                 "OneDrive - Personal", "Google Drive")
+
+
+def quick_scan(home: str | pathlib.Path, *, limit: int = 25) -> list[dict]:
+    """The folders data actually lives in, shallow. Seconds, not minutes."""
+    home = pathlib.Path(home).expanduser()
+    found, seen = [], set()
+    for name in QUICK_FOLDERS:
+        target = home / name
+        if target.is_dir():
+            for hit in scan(target, limit=limit, max_depth=4, enrich=False):
+                if hit["path"] not in seen:
+                    seen.add(hit["path"])
+                    found.append(hit)
+    found.sort(key=lambda f: (-f["score"], -f["size"]))
+    for item in found[:limit]:
+        item["header"] = header_of(item["path"])
+    return found[:limit]
+
+
+def scan(base: str | pathlib.Path, *, limit: int = 25, max_depth: int = 6,
+         progress=None, enrich: bool = True) -> list[dict]:
     """os.walk, not rglob: on Windows a home folder is full of directories the
     user cannot enter, and this must skip them rather than die on them."""
     import os
@@ -78,8 +100,12 @@ def scan(base: str | pathlib.Path, *, limit: int = 25, max_depth: int = 6) -> li
     base = pathlib.Path(base).expanduser()
     found = []
     base_depth = len(base.parts)
+    walked = 0
     for dirpath, dirnames, filenames in os.walk(base, onerror=lambda e: None):
         here = pathlib.Path(dirpath)
+        walked += 1
+        if progress and walked % 200 == 0:
+            progress(walked, len(found))
         if len(here.parts) - base_depth >= max_depth:
             dirnames[:] = []
         # prune in place — never descend into these at all
@@ -98,13 +124,16 @@ def scan(base: str | pathlib.Path, *, limit: int = 25, max_depth: int = 6) -> li
                 "modified": datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d"),
             })
     found.sort(key=lambda f: (-f["score"], -f["size"]))
-    for item in found[:limit]:
-        item["header"] = header_of(item["path"])
+    if enrich:
+        for item in found[:limit]:
+            item["header"] = header_of(item["path"])
     return found[:limit]
 
 
-def render(base: str | pathlib.Path, limit: int = 25) -> str:
-    hits = scan(base, limit=limit)
+def render(base: str | pathlib.Path, limit: int = 25, *, quick: bool = False,
+           progress=None) -> str:
+    hits = quick_scan(base, limit=limit) if quick else scan(base, limit=limit,
+                                                            progress=progress)
     if not hits:
         return (f"No data-shaped files found under {base}.\n"
                 "Try a different folder — Desktop, Documents, or wherever the\n"

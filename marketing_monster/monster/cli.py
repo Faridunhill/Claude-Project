@@ -105,7 +105,15 @@ def cmd_pending(args) -> int:
 
 def cmd_locate(args) -> int:
     from .locate import render
-    print(render(args.path, limit=args.limit))
+
+    def progress(dirs, hits):
+        print(f"  ...{dirs:,} folders scanned, {hits} candidates so far",
+              end="\r", file=sys.stderr, flush=True)
+
+    body = render(args.path, limit=args.limit, quick=args.quick,
+                  progress=None if args.quick else progress)
+    print(" " * 60, end="\r", file=sys.stderr)
+    print(body)
     return 0
 
 
@@ -174,6 +182,8 @@ def main(argv=None) -> int:
     sp = sub.add_parser("locate", help="find candidate data files (reads no records)")
     sp.add_argument("path", nargs="?", default="~")
     sp.add_argument("--limit", type=int, default=25)
+    sp.add_argument("--quick", action="store_true",
+                    help="only Desktop/Documents/Downloads/OneDrive, shallow — seconds")
     sp.set_defaults(fn=cmd_locate)
 
     sp = clone_arg(sub.add_parser("dig"))
