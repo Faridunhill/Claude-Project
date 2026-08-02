@@ -164,6 +164,9 @@ export default function Navigation() {
               <Link href="/blog" className="nav-link-underline text-parchment/80 hover:text-gold font-lora text-sm tracking-wide transition-colors">
                 The Journal
               </Link>
+              <Link href="/references" className="nav-link-underline text-parchment/80 hover:text-gold font-lora text-sm tracking-wide transition-colors">
+                References
+              </Link>
               <Link href="/about" className="nav-link-underline text-parchment/80 hover:text-gold font-lora text-sm tracking-wide transition-colors">
                 Our Story
               </Link>
@@ -241,6 +244,13 @@ export default function Navigation() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 The Journal
+              </Link>
+              <Link
+                href="/references"
+                className="block px-6 py-3.5 font-lora text-parchment/70 hover:text-gold hover:bg-gold/5 transition-colors text-sm"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                References
               </Link>
               <Link
                 href="/about"

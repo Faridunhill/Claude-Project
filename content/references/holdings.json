@@ -1,0 +1,1217 @@
+{
+  "generated_from": "channel/NEW_UPLOADS/ark_manifest.csv",
+  "totals": {
+    "files": 19180,
+    "gigabytes": 2.28,
+    "catalogued_items": 227,
+    "dated_span": [
+      1857,
+      2022
+    ]
+  },
+  "mirrors": [
+    {
+      "key": "pipephil_mirror",
+      "title": "pipephil.eu — complete mirror",
+      "note": "Mirrored in full when the site announced its closure, so the knowledge survives the source. Held for reference only.",
+      "files": 15556,
+      "gigabytes": 0.56
+    },
+    {
+      "key": "pipedia",
+      "title": "Pipedia — reference capture",
+      "note": "Held for reference and cross-checking. Pipedia is live-lookup first; we cite it, we never republish it.",
+      "files": 2704,
+      "gigabytes": 0.01
+    }
+  ],
+  "shelves": [
+    {
+      "key": "catalogue",
+      "title": "Manufacturers’ catalogues & shape charts",
+      "blurb": "The documents that decide a dating question at level two. Where a catalogue exists, a guess is not needed.",
+      "items": [
+        {
+          "title": "Peterson s 1896 Pipe Catalog",
+          "year": 1896,
+          "format": "PDF"
+        },
+        {
+          "title": "1922 1932 Chapuis Comoy Catalog",
+          "year": 1922,
+          "format": "PDF"
+        },
+        {
+          "title": "Kaywoodie Pipe Catalog 1937",
+          "year": 1937,
+          "format": "PDF"
+        },
+        {
+          "title": "Kaywoodie Pipe Catalog 1947",
+          "year": 1947,
+          "format": "PDF"
+        },
+        {
+          "title": "1951 Charatan Pipes",
+          "year": 1951,
+          "format": "PDF"
+        },
+        {
+          "title": "Kaywoodie Pipe Catalog 1955",
+          "year": 1955,
+          "format": "PDF"
+        },
+        {
+          "title": "Barling Denture Pipe 1957",
+          "year": 1957,
+          "format": "PDF"
+        },
+        {
+          "title": "1962 Barling Catalog",
+          "year": 1962,
+          "format": "PDF"
+        },
+        {
+          "title": "1962 Barling Retailer Catalog",
+          "year": 1962,
+          "format": "PDF"
+        },
+        {
+          "title": "1964 Lane Era Charatan Flyer",
+          "year": 1964,
+          "format": "PDF"
+        },
+        {
+          "title": "Kaywoodie Pipe Catalog 1964",
+          "year": 1964,
+          "format": "PDF"
+        },
+        {
+          "title": "1965 Lane Era Charatan Flyer",
+          "year": 1965,
+          "format": "PDF"
+        },
+        {
+          "title": "Kaywoodie Pipe Catalog 1970",
+          "year": 1970,
+          "format": "PDF"
+        },
+        {
+          "title": "1975 Comoys of London Catalog",
+          "year": 1975,
+          "format": "PDF"
+        },
+        {
+          "title": "Carey s Pipe Tobacco Shop Catalogue 112 Spring 2013",
+          "year": 2013,
+          "format": "PDF"
+        },
+        {
+          "title": "Carey s Pipe Tobacco Shop Catalogue 115 Winter 2013",
+          "year": 2013,
+          "format": "PDF"
+        },
+        {
+          "title": "Carey s Pipe and Tobacco Shop Spring 2014 Catalogue no 116",
+          "year": 2014,
+          "format": "PDF"
+        },
+        {
+          "title": "Carey s Pipe and Tobacco Shop Summer 2014 Catalogue no 117",
+          "year": 2014,
+          "format": "PDF"
+        },
+        {
+          "title": "Catalogo Savinelli 2015",
+          "year": 2015,
+          "format": "PDF"
+        },
+        {
+          "title": "2016 Brebbia Catalog",
+          "year": 2016,
+          "format": "PDF"
+        },
+        {
+          "title": "Brebbia Catalog 2016",
+          "year": 2016,
+          "format": "PDF"
+        },
+        {
+          "title": "Dan Pipe The Catalogue 2019",
+          "year": 2019,
+          "format": "PDF"
+        },
+        {
+          "title": "1960s Comoys Catalog Shape Chart",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "A Stanwell Catalogue with a great shape guide rebornpipes",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Bari Smoking Pipes Catalog",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Barling Buclet",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "BBB English Pipe Book c1950s own make catalogue",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Brebbia MPB Catalog",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "ButzChoquin Pipe Catalog",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Catalogue Peterson pipes",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Chacom Smoking Pipes Catalog",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Chacom Smoking Pipes Catalog 2",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Comoys Flayr",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Danpipe Catalog",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "kaywoodie",
+          "year": null,
+          "format": "SCAN",
+          "pages": 5
+        },
+        {
+          "title": "Peterson s Pipes Catalog 20s 30s",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Stanwell Catalog 80s",
+          "year": null,
+          "format": "PDF"
+        }
+      ]
+    },
+    {
+      "key": "trade",
+      "title": "Trade price lists",
+      "blurb": "Dated dealer and trade lists — often the only surviving record of a model year.",
+      "items": [
+        {
+          "title": "CIVIC 1921 Trade Price List NPA Adler",
+          "year": 1921,
+          "format": "PDF"
+        },
+        {
+          "title": "CIVIC 1922 Trade Price List NPA Adler",
+          "year": 1922,
+          "format": "PDF"
+        },
+        {
+          "title": "1975 Comoys Smoking Pipes Price List",
+          "year": 1975,
+          "format": "PDF"
+        }
+      ]
+    },
+    {
+      "key": "book",
+      "title": "Books, monographs & papers",
+      "blurb": "Scholarship on pipes, clay-pipe chronology and the briar trade, including archaeological dating literature.",
+      "items": [
+        {
+          "title": "MILTON 1857 Death in the Pipe Great Smoking Question",
+          "year": 1857,
+          "format": "PDF"
+        },
+        {
+          "title": "HAMILTON 1889 Odd Volume for Smokers Prayse of Tobacco",
+          "year": 1889,
+          "format": "PDF"
+        },
+        {
+          "title": "146. A Guide to System Shapes, 1896 – 2019, Part 1 (The 300 Shape Group) – Peterson Pipe Notes",
+          "year": 1896,
+          "format": "PDF"
+        },
+        {
+          "title": "147. A Guide to Peterson System Shapes, 1896 – 2019 Part 2 (House Pipes, Straights & Peculiars) – Peterson Pipe Notes",
+          "year": 1896,
+          "format": "PDF"
+        },
+        {
+          "title": "MCGUIRE 1899 Pipes and Smoking Customs American Aborigines",
+          "year": 1899,
+          "format": "PDF"
+        },
+        {
+          "title": "Brigham Pipes Makers Of Fine Pipes Since 1906",
+          "year": 1906,
+          "format": "PDF"
+        },
+        {
+          "title": "St Nicotine of the Peace Pipe 1909",
+          "year": 1909,
+          "format": "PDF"
+        },
+        {
+          "title": "Bertram Pipes 1950 WashingtonDC",
+          "year": 1950,
+          "format": "PDF"
+        },
+        {
+          "title": "Oswald 1961 Evolution and Chronology of English Clay Pipes",
+          "year": 1961,
+          "format": "PDF"
+        },
+        {
+          "title": "AYTO 1979 Clay Tobacco Pipes Shire Album 37",
+          "year": 1979,
+          "format": "PDF"
+        },
+        {
+          "title": "Oswald LIVNP 2012 makers",
+          "year": 2012,
+          "format": "PDF"
+        },
+        {
+          "title": "PIPEMANS HANDBOOK 2013 Revision",
+          "year": 2013,
+          "format": "PDF"
+        },
+        {
+          "title": "DP 2013 E",
+          "year": 2013,
+          "format": "PDF"
+        },
+        {
+          "title": "MINNAAR 2020 Pipe Smoking Philatelic Exhibit StampsSA",
+          "year": 2020,
+          "format": "PDF"
+        },
+        {
+          "title": "Peeters OldDongola SmokingPipes 2022",
+          "year": 2022,
+          "format": "PDF"
+        },
+        {
+          "title": "American Indian Stone Tubes and Tobacco Pipes",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "An Evaluation of Tobacco Pipe Stem Dating Formulas",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "BBB English Pipe Book",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "BBB London Made Briar Pipes",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Butz Choquin Pipe",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Charatan Pipes by Tad Gage",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Charatan Smoking Pipes",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Clay tobacco pipe",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Different Tobacco Smoking Pipe Types",
+          "year": null,
+          "format": "DOCX"
+        },
+        {
+          "title": "DP 2018e web",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "dunhill shape guide",
+          "year": null,
+          "format": "WEBP"
+        },
+        {
+          "title": "House Of Bewlay Pipes",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Kaufmann CPF Colossus Pipe Factory",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "oswald book",
+          "year": null,
+          "format": "SCAN",
+          "pages": 16
+        },
+        {
+          "title": "peterson shape chart",
+          "year": null,
+          "format": "JPG"
+        },
+        {
+          "title": "Peterson Shape Chart Smokingpipes.com",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Pipe Shape Chart",
+          "year": null,
+          "format": "JPG"
+        },
+        {
+          "title": "Pipe shape chart credit tobaccodays.com 900x549",
+          "year": null,
+          "format": "JPG"
+        },
+        {
+          "title": "Savinelli Production All Pipes Considered",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "savinelli shape chart 1 gqtobaccos com",
+          "year": null,
+          "format": "WEBP"
+        },
+        {
+          "title": "savinelli shape chart 2 gqtobaccos com",
+          "year": null,
+          "format": "JPG"
+        },
+        {
+          "title": "sheet 01",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "sheet 02",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "sheet 03",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "sheet 04",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "sheet 05",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "sheet 06",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "sheet 07",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "sheet 08",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "sheet 09",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "sheet 10",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "sheet 11",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "sheet 12",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "sheet 13",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "St Nicotine of the Peace Pipe",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Stanwell Dating Pricing Information by Basil D Stevens",
+          "year": null,
+          "format": "DOC"
+        },
+        {
+          "title": "test capture",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "The Pipe Herment Georges",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Thepipe opslag",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Tobacco Smoking Pipe Shape",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Tobacco Tobacco Pipes and Smoking",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "u001",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u002",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u003",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u004",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u005",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u006",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u007",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u008",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u009",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u010",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u011",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u012",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u013",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u014",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u015",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u016",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u017",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u018",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u019",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u020",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u021",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u022",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u023",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u024",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u025",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u026",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u027",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u028",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u029",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u030",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u031",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u032",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u033",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u034",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u035",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u036",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u037",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u038",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u039",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u040",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u041",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u042",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u043",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u044",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u045",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u046",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u047",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u048",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u049",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u050",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u051",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u052",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u053",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u054",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u055",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u056",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u057",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u058",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u059",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u060",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u061",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u062",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u063",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u064",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u065",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u066",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u067",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u068",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u069",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u070",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u071",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u072",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u073",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u074",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u075",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u076",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u077",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u078",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u079",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u080",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u081",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u082",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u083",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u084",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u085",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u086",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u087",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u088",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u089",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u090",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u091",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u092",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u093",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u094",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u095",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u096",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u097",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u098",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u099",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u100",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u101",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u102",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u103",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u104",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u105",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u106",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u107",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u108",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u109",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u110",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u111",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "u112",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "win test",
+          "year": null,
+          "format": "PNG"
+        }
+      ]
+    },
+    {
+      "key": "magazine",
+      "title": "Periodicals",
+      "blurb": "Trade and collector magazines, read for maker news, advertisements and dated announcements.",
+      "items": [
+        {
+          "title": "The Tobacco World Vol 52 1932",
+          "year": 1932,
+          "format": "PDF"
+        },
+        {
+          "title": "Pipe Lovers Magazine 1946 1",
+          "year": 1946,
+          "format": "PDF"
+        },
+        {
+          "title": "PIPECOLLECTORFEB2025",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Pipes and Tobaccos 1",
+          "year": null,
+          "format": "PDF"
+        },
+        {
+          "title": "Pipes and Tobaccos 3",
+          "year": null,
+          "format": "PDF"
+        }
+      ]
+    },
+    {
+      "key": "advertising",
+      "title": "Period advertising",
+      "blurb": "Original advertisements — frequently the earliest dated appearance of a shape or a finish.",
+      "items": [
+        {
+          "title": "1950s wilke apple shape pouch ad",
+          "year": null,
+          "format": "WEBP"
+        },
+        {
+          "title": "1950s wilke english bulldog blend72 ad",
+          "year": null,
+          "format": "WEBP"
+        },
+        {
+          "title": "1950s wilke squatty bulldog prince of wales ad A",
+          "year": null,
+          "format": "WEBP"
+        },
+        {
+          "title": "1950s wilke squatty bulldog prince of wales ad A dupe",
+          "year": null,
+          "format": "WEBP"
+        },
+        {
+          "title": "1950s wilke tipped billiard catalogN ad",
+          "year": null,
+          "format": "WEBP"
+        }
+      ]
+    },
+    {
+      "key": "museum",
+      "title": "Museum & institutional catalogue pages",
+      "blurb": "Pages from institutional collection catalogues, used as dated third-party anchors.",
+      "items": [
+        {
+          "title": "gothenburg ethnographic catalogue 1903 chorotes p26",
+          "year": 1903,
+          "format": "JPEG"
+        },
+        {
+          "title": "gothenburg ethnographic catalogue inv4916 p39",
+          "year": null,
+          "format": "JPEG"
+        }
+      ]
+    },
+    {
+      "key": "social",
+      "title": "Social-history photography",
+      "blurb": "Photographs of pipes in daily use — dated evidence of what was carried, and when.",
+      "items": [
+        {
+          "title": "bolton worktown bus pipe smokers 1",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "bolton worktown bus pipe smokers 2",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "bolton worktown man lighting pipe",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "bolton worktown pipe seller basket",
+          "year": null,
+          "format": "PNG"
+        },
+        {
+          "title": "Europeana & Mass-Observation — pipe smokers photographed, 1900s–1950s",
+          "year": null,
+          "format": "SCAN",
+          "pages": 14
+        },
+        {
+          "title": "topfoto pipe smoking contest churchwardens",
+          "year": null,
+          "format": "JPG"
+        }
+      ]
+    }
+  ]
+}
