@@ -43,9 +43,31 @@ law's name on it.
 
 ## Start here, on the PC
 
-```bash
-python -m monster locate ~            # or: locate "C:/Users/<you>/Desktop"
+**Windows / PowerShell** — one command, from any folder:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File "<repo>\marketing_monster\FARID_START.ps1"
 ```
+
+It finds Python, sets the path, creates `%USERPROFILE%\FARIDOS\marketing`
+for the ledgers, and runs the scan. After that, `monster.cmd` runs any command
+from anywhere:
+
+```powershell
+cd $HOME\FARIDOS\marketing
+& "<repo>\marketing_monster\monster.cmd" locate $HOME
+```
+
+**Mac / Linux:**
+
+```bash
+export PYTHONPATH=/path/to/marketing_monster
+python3 -m monster locate ~
+```
+
+`python -m monster` only works when Python can see the `monster` package —
+that is what PYTHONPATH (or the launcher) is for. Running it from an unrelated
+folder gives *No module named monster*.
 
 Walks the folder, ranks every file that could be a Well, and prints the header
 row of each candidate. **It reads names, sizes and one header line — never a
@@ -55,9 +77,7 @@ one command instead of a conversation.
 Then:
 
 ```bash
-cd <wherever the marketing root should live>          # e.g. FARIDOS/marketing
-export PYTHONPATH=/path/to/marketing_monster
-
+cd <wherever the ledgers should live>                 # e.g. FARIDOS/marketing
 python -m monster init pipes                          # builds the tree, mints the salt
 python -m monster inspect pipes ~/…/ebay_sold.csv     # READS HEADERS ONLY, writes nothing
 python -m monster load    pipes ~/…/ebay_sold.csv     # derived features only

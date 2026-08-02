@@ -71,24 +71,32 @@ def human(size: int) -> str:
 
 
 def scan(base: str | pathlib.Path, *, limit: int = 25, max_depth: int = 6) -> list[dict]:
+    """os.walk, not rglob: on Windows a home folder is full of directories the
+    user cannot enter, and this must skip them rather than die on them."""
+    import os
+
     base = pathlib.Path(base).expanduser()
     found = []
     base_depth = len(base.parts)
-    for path in base.rglob("*"):
-        try:
-            if len(path.parts) - base_depth > max_depth:
+    for dirpath, dirnames, filenames in os.walk(base, onerror=lambda e: None):
+        here = pathlib.Path(dirpath)
+        if len(here.parts) - base_depth >= max_depth:
+            dirnames[:] = []
+        # prune in place — never descend into these at all
+        dirnames[:] = [d for d in dirnames
+                       if d not in SKIP_DIRS and not d.startswith("~$")]
+        for name in filenames:
+            path = here / name
+            if path.suffix.lower() not in DATA_SUFFIXES:
                 continue
-            if any(part in SKIP_DIRS for part in path.parts):
+            try:
+                stat = path.stat()
+            except OSError:
                 continue
-            if not path.is_file() or path.suffix.lower() not in DATA_SUFFIXES:
-                continue
-            stat = path.stat()
-        except OSError:
-            continue
-        found.append({
-            "path": path, "size": stat.st_size, "score": score(path),
-            "modified": datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d"),
-        })
+            found.append({
+                "path": path, "size": stat.st_size, "score": score(path),
+                "modified": datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d"),
+            })
     found.sort(key=lambda f: (-f["score"], -f["size"]))
     for item in found[:limit]:
         item["header"] = header_of(item["path"])
