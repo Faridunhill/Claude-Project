@@ -542,3 +542,41 @@ class T17_TwinObeysTheLaws(MonsterCase):
         body = (result["out_dir"] / "site.md").read_text()
         self.assertIn("status: sold", body)
         self.assertIn("current", body.lower())     # points at current stock
+
+
+class T18_DigFeedsThePlaybook(MonsterCase):
+    """The loop was broken here: the dig printed candidate lessons and nothing
+    carried them into the playbook, so Scale -> playbook -> Maker never closed.
+    A lesson nobody records is a lesson nobody learns."""
+
+    def setUp(self):
+        super().setUp()
+        rows, n = [], 0
+        for brand in ("Dunhill", "Peterson", "Stanwell", "Comoy"):
+            for j in range(30):
+                boxed = j % 2 == 0
+                n += 1
+                rows.append(f"{n},{brand} Billiard {'Boxed' if boxed else ''},"
+                            f"{100 * (1.3 if boxed else 1):.2f},2026-01-0{j % 9 + 1}\n")
+        path = self.base / "ebay_sales.csv"
+        path.write_text("Item Id,Listing Title,Price,Date\n" + "".join(rows),
+                        encoding="utf-8")
+        Well(self.root).load(path)
+        from monster.dig import Dig
+        self.dig = Dig(self.root)
+        self.book = Playbook(self.root)
+
+    def test_proposals_land_in_the_playbook_as_proposed(self):
+        for line in self.dig.proposals():
+            self.book.add_line(line)
+        lines = self.book.lines()
+        self.assertTrue(lines)
+        self.assertTrue(all(x.status == "PROPOSED" for x in lines))
+        self.assertEqual(self.book.for_maker(), [])      # Maker reads none of it yet
+
+    def test_rerunning_a_dig_does_not_stack_duplicates(self):
+        for _ in range(3):
+            for line in self.dig.proposals():
+                self.book.add_line(line)
+        claims = [x.claim for x in self.book.lines()]
+        self.assertEqual(len(claims), len(set(claims)))

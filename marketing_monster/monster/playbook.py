@@ -108,6 +108,18 @@ class Playbook:
         self._write(self.lines() + [line])
         return line
 
+    def add_line(self, text: str) -> Line | None:
+        """Take a fully-formed line (from a dig) into the playbook as PROPOSED.
+        Returns None if the claim is already present — a dig re-run must not
+        stack duplicates of the same lesson."""
+        line = Line.parse(text)
+        line.status = "PROPOSED"
+        existing = self.lines()
+        if any(x.claim == line.claim for x in existing):
+            return None
+        self._write(existing + [line])
+        return line
+
     def promote(self, claim: str, cohorts: list[str], *, src: str | None = None,
                 today: date | None = None) -> Line:
         """PROPOSED -> CONFIRMED. B2: two non-overlapping cohorts, or Farid's

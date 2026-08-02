@@ -129,6 +129,15 @@ def cmd_dig(args) -> int:
     from .dig import Dig
     root = root_for(pathlib.Path(args.base), args.clone)
     dig = Dig(root)
+    if args.propose:
+        book = Playbook(root)
+        added = [book.add_line(line) for line in dig.proposals()]
+        kept = [x for x in added if x]
+        print(f"playbook: {len(kept)} new PROPOSED line(s), "
+              f"{len(added) - len(kept)} already present")
+        for line in kept:
+            print(f"  + {line.claim}")
+        print("  none is CONFIRMED — each needs a second, non-overlapping cohort.\n")
     if args.save:
         path = dig.write()
         print(dig.report())
@@ -231,6 +240,8 @@ def main(argv=None) -> int:
 
     sp = clone_arg(sub.add_parser("dig"))
     sp.add_argument("--save", action="store_true")
+    sp.add_argument("--propose", action="store_true",
+                    help="write the dig's candidate lessons into the playbook as PROPOSED")
     sp.set_defaults(fn=cmd_dig)
 
     sp = clone_arg(sub.add_parser("decide"))
