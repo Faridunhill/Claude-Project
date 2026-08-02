@@ -1,7 +1,29 @@
-<!doctype html>
+/**
+ * STAGE 5 — ASSEMBLE, EVIDENCE FORMAT
+ *
+ * The rough cut with no art in it at all: a real photograph, a slow push, a
+ * text card, the caption, the brand frame. What you watch here is what the
+ * finished video is — the only thing the renderer adds later is the voice
+ * track and an mp4 container.
+ *
+ * Layers are the same five as always, so nothing downstream changed:
+ *   5 frame + caption · 4 the card · 3 THE PHOTOGRAPH · 2 (empty — no
+ *   characters) · 1 the ground.
+ */
+import { writeFileSync } from 'node:fs'
+import { join } from 'node:path'
+
+const esc = (s) =>
+  String(s ?? '').replace(/[<>&"]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' })[c])
+
+export function writeEvidenceStoryboard(episode, { outDir }) {
+  const p = episode.panels
+  const photo = episode.photo
+
+  const html = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Charatan: what a tapered bit really tells you</title>
+<title>${esc(episode.title)}</title>
 <style>
   :root { color-scheme: dark; --gold:#c9a227; --parch:#f0e5d2; --ground:#160e0a; }
   * { box-sizing:border-box; }
@@ -54,18 +76,22 @@
   @media (prefers-reduced-motion: reduce) { .stage .photo { transition:none !important; } }
 </style>
 <header>
-  <h1>Charatan: what a tapered bit really tells you</h1>
-  <div class="meta">6 panels · 29.2s · no characters, no drawings · fact charatan.feature_era.0</div>
+  <h1>${esc(episode.title)}</h1>
+  <div class="meta">${p.length} panels · ${episode.runtime}s · no characters, no drawings · fact ${esc(episode.fact_id)}</div>
 </header>
 <main>
   <div class="stage">
-    <img class="photo" id="photo" src="https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg" alt="">
+    ${
+      photo
+        ? `<img class="photo" id="photo" src="${esc(photo.file)}" alt="">`
+        : `<div class="photo" id="photo" style="display:grid;place-items:center;color:rgba(240,229,210,.4)">no photograph of this brand in the catalogue yet</div>`
+    }
     <div class="vignette"></div>
     <div class="rule"></div>
     <div class="wordmark">FARIDUNHILL</div>
     <div class="card" id="card"><span class="lab" id="lab"></span><span class="val" id="val"></span></div>
     <div class="cap" id="cap"></div>
-    <div class="credit">Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive</div>
+    <div class="credit">${esc(photo ? photo.citation : 'photograph pending')}</div>
   </div>
 
   <div class="controls">
@@ -80,14 +106,14 @@
   <div class="note">
     <b>This is the whole format.</b> A real pipe from the archive, a slow push, the words, your voice.
     No character, no drawings, nothing to commission — so nothing here is waiting on anybody.
-    <br><br>The photograph illustrates the <b>brand</b>, never the claim: we show a real Charatan
-    while explaining how Charatans are dated, and we never suggest this particular pipe carries
+    <br><br>The photograph illustrates the <b>brand</b>, never the claim: we show a real ${esc(episode.brand)}
+    while explaining how ${esc(episode.brand)}s are dated, and we never suggest this particular pipe carries
     the mark under discussion. Every word spoken comes from the cabinet, and the source is on screen.
     <br><br><b>Add the voice and this is the finished video.</b>
   </div>
 </main>
 <script>
-const P = [{"n":1,"d":4,"t":"Charatan. Look at the bit — this one is tapered.","c":{"kind":"mark","text":"bit style: tapered"},"r":"hook"},{"n":2,"d":6,"t":"Most collectors never check it. It is one of the quieter clues on the pipe.","c":{"kind":"plain","label":"the clue most people skip","text":"bit style: tapered"},"r":"overlooked"},{"n":3,"d":4.4,"t":"A tapered bit points to 1863–1960. A window, not a birthday.","c":{"kind":"right","label":"what the evidence supports","text":"1863–1960"},"r":"correction"},{"n":4,"d":4,"t":"tapered mouthpiece = definitely pre-Lane (Ferrara: 'never tapered' after 1960).","c":{"kind":"warn","label":"why the obvious answer fails","text":"tapered mouthpiece = definitely pre-Lane (Ferrara: 'never tapered' after 1960)."},"r":"caveat"},{"n":5,"d":4.4,"t":"The marks are clear, so we will put that in writing.","c":{"kind":"note","label":"our confidence","text":"high"},"r":"honesty"},{"n":6,"d":6.4,"t":"This is not opinion. It is Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock.","c":{"kind":"citation","label":"source","text":"pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)"},"r":"source"}];
+const P = ${JSON.stringify(p.map((x) => ({ n: x.panel, d: x.duration, t: x.narration, c: x.card, r: x.role })))};
 const photo = document.getElementById('photo'), card = document.getElementById('card'),
       lab = document.getElementById('lab'), val = document.getElementById('val'),
       cap = document.getElementById('cap'), pos = document.getElementById('pos'),
@@ -145,3 +171,6 @@ document.getElementById('next').onclick = () => { stop(); show(i + 1); };
 document.getElementById('prev').onclick = () => { stop(); show(i - 1); };
 show(0);
 </script>
+`
+  writeFileSync(join(outDir, 'storyboard.html'), html)
+}

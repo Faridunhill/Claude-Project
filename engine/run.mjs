@@ -16,6 +16,9 @@ import { harvestJsonFacts, loadJsonCabinet, harvestAll } from './cabinets-json.m
 import { writeEpisode } from './script.mjs'
 import { loadLibrary, resolvePanels } from './panels.mjs'
 import { writeStoryboard, writeLedger } from './assemble.mjs'
+import { writeEvidenceEpisode } from './script-evidence.mjs'
+import { writeEvidenceStoryboard } from './assemble-evidence.mjs'
+import { buildPhotoIndex, photoForBrand } from './photos.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const arg = (k, d) => {
@@ -68,23 +71,55 @@ const fact = pickFact(facts, pick)
 console.log(`              picked ${fact.id}`)
 console.log(`              "${String(fact.reads).slice(0, 68)}" → ${fact.era}`)
 
-// ── 2. SCRIPT ───────────────────────────────────────────────────────────────
-const episode = writeEpisode(fact)
-console.log(`  2 SCRIPT    ${episode.panels.length} panels · ${episode.runtime}s · ${episode.slug}`)
+// EVIDENCE is the default format since 2026-08-02: no characters, no drawings,
+// nothing to commission. Pass --format characters for the illustrated version.
+const format = arg('format', 'evidence')
 
-// ── 3. PANELS ───────────────────────────────────────────────────────────────
-const outDir = join(outRoot, episode.slug)
-mkdirSync(outDir, { recursive: true })
-const library = loadLibrary(join(ROOT, 'engine/assets/library.json'))
-const resolved = resolvePanels(episode, library, { outDir })
-console.log(`  3 PANELS    ${resolved.panels.length} rendered · ${resolved.missing.length} asset ids unfilled`)
+let episode, outDir, resolved
 
-// ── 4. VOICE ────────────────────────────────────────────────────────────────
-console.log(`  4 VOICE     skipped — narration written, awaiting the ElevenLabs step`)
+if (format === 'evidence') {
+  // ── 2. SCRIPT ─────────────────────────────────────────────────────────────
+  const index = buildPhotoIndex(join(ROOT, 'content/products'))
+  const photo = photoForBrand(index, fact.brand)
+  episode = writeEvidenceEpisode(fact, { photo })
+  console.log(`  2 SCRIPT    ${episode.panels.length} panels · ${episode.runtime}s · one narrator`)
 
-// ── 5. ASSEMBLE ─────────────────────────────────────────────────────────────
-writeStoryboard(episode, resolved, { outDir, missing: resolved.missing })
-console.log(`  5 ASSEMBLE  storyboard.html (plays on its narration timings)`)
+  // ── 3. PICTURE ────────────────────────────────────────────────────────────
+  outDir = join(outRoot, episode.slug)
+  mkdirSync(outDir, { recursive: true })
+  console.log(
+    photo
+      ? `  3 PICTURE   real photograph · ${photo.slug}`
+      : `  3 PICTURE   no ${fact.brand} photograph in the catalogue yet — slot left open`
+  )
+
+  // ── 4. VOICE ──────────────────────────────────────────────────────────────
+  console.log(`  4 VOICE     narration written — awaiting an ElevenLabs voice id`)
+
+  // ── 5. ASSEMBLE ───────────────────────────────────────────────────────────
+  writeEvidenceStoryboard(episode, { outDir })
+  console.log(`  5 ASSEMBLE  storyboard.html — the finished format, minus the voice`)
+
+  resolved = { panels: episode.panels, missing: photo ? [] : [`photo:${fact.cabinet}`] }
+} else {
+  // ── 2. SCRIPT ─────────────────────────────────────────────────────────────
+  episode = writeEpisode(fact)
+  console.log(`  2 SCRIPT    ${episode.panels.length} panels · ${episode.runtime}s · ${episode.slug}`)
+
+  // ── 3. PANELS ─────────────────────────────────────────────────────────────
+  outDir = join(outRoot, episode.slug)
+  mkdirSync(outDir, { recursive: true })
+  const library = loadLibrary(join(ROOT, 'engine/assets/library.json'))
+  resolved = resolvePanels(episode, library, { outDir })
+  console.log(`  3 PANELS    ${resolved.panels.length} rendered · ${resolved.missing.length} asset ids unfilled`)
+
+  // ── 4. VOICE ──────────────────────────────────────────────────────────────
+  console.log(`  4 VOICE     skipped — narration written, awaiting the ElevenLabs step`)
+
+  // ── 5. ASSEMBLE ───────────────────────────────────────────────────────────
+  writeStoryboard(episode, resolved, { outDir, missing: resolved.missing })
+  console.log(`  5 ASSEMBLE  storyboard.html (plays on its narration timings)`)
+}
 
 // ── 7. LEDGER ───────────────────────────────────────────────────────────────
 writeLedger(episode, resolved, { outDir, missing: resolved.missing, refused, builtAt })

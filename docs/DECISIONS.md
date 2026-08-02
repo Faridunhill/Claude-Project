@@ -66,3 +66,48 @@ the design once feeds v1 this month and v2 whenever Farid calls for it.
 - **Subscriptions: LATER.** Free core until collectors come and value it. Farid's gate.
 - **Launches, the domain, the museum brand list: Farid's decision alone.**
 - **LAW 1 honesty · LAW 2 buy-don't-pirate** sit above everything on this page.
+
+---
+
+## 2026-08-02 — FARID CANCELS THE FACE, THE ARTIST, THE LETTERS AND THE CALLS
+
+> *"That wasn't right to hire an artist, it will cost, and we depend in our projects on
+> ourselves as much as we can… so if I dropped the face, will this make it more easy?
+> …ance the letters and the calls to zero, and let us go."*
+> *"No need to upgrade — we can start with 3D or higher quality."*
+
+**All four cancelled, and the answer to his question is YES — dropping the face does not
+make it harder, it removes the only blocked stage in the entire engine.**
+
+| Cancelled | Consequence |
+|---|---|
+| **The character / the face** | Stage 3 was the ONLY station waiting on anyone. It is now closed |
+| **The designer commission** | `outreach/DESIGNER_COMMISSION.md` is kept as a record, **not to be sent** |
+| **The Bill Burney letter** | Kept on file. Not sent. We cite the charts, we never reproduce them |
+| **The X-ray calls** | Parked. `docs/XRAY_EVIDENCE_TRACK.md` stands as research for whenever he wants it |
+
+### What replaces it — THE EVIDENCE FORMAT (now the default)
+A real photograph from our own archive · a slow push · a text card · Farid's voice · the
+brand frame. Seven beats, one narrator, no dialogue, **nothing drawn and nothing
+commissioned.** `engine/run.mjs` now defaults to `--format evidence`.
+
+**It is not a downgrade. It is the honest form of the same show**, and it always was:
+this repo already ruled that facts must be photographed and never drawn (the EVIDENCE vs
+KNOWLEDGE rule). The characters only ever carried the *story*. Losing them costs the
+story frame; it costs **zero** evidence — which is the part collectors came for.
+
+**Also settled: there is no v1 → v2 upgrade ladder any more.** The ink-now/3D-later plan
+existed only to stage the character spend. With no character, the ceiling on quality is
+our own photography, which is already good. If 3D ever returns it will be for the
+anatomy cutaway alone — an optional prop, not a person, and not a dependency.
+
+### Two script rules this format forced, both honesty rules
+1. **A feature is not a mark.** A tapered bit is spoken as *"look at the bit — this one
+   is tapered"*, never *"the mark reads…"*.
+2. **No straw men.** The "what you will usually be told" beat only appears when the
+   cabinet's caveat names a year the real era excludes — i.e. when a wrong belief
+   genuinely exists. Otherwise the episode becomes *"here is a clue most people skip"*.
+   Inventing a wrong belief in order to correct it would be a small lie.
+
+### The only input left in the whole engine
+**One ElevenLabs voice id.** That is the last open field. Everything else runs.

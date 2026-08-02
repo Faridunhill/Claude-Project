@@ -1,6 +1,7 @@
 {
+  "format": "evidence",
   "slug": "charatan-feature-era-1863-1960",
-  "title": "Charatan: what \"bit style: tapered\" really tells you",
+  "title": "Charatan: what a tapered bit really tells you",
   "brand": "Charatan",
   "fact_id": "charatan.feature_era.0",
   "claim": {
@@ -12,377 +13,178 @@
   "sources": [
     "pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)"
   ],
-  "runtime": 41.2,
+  "photo": {
+    "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
+    "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite",
+    "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
+    "brand": "Charatan"
+  },
+  "runtime": 29.2,
   "panels": [
     {
       "panel": 1,
       "role": "hook",
-      "speaker": "assistant",
-      "background": "bg-bench-a",
-      "characters": [
-        "assistant-holding-pipe-3q"
-      ],
+      "speaker": "narrator",
       "object": {
-        "slot": "stamp-macro",
-        "hint": "macro photograph of the stamp being read"
+        "kind": "photo",
+        "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
+        "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
+        "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite"
       },
-      "overlays": [
-        {
-          "type": "label",
-          "text": "bit style: tapered"
-        }
-      ],
-      "narration": "Look — it says bit style: tapered. So that tells us exactly when it was made, doesn't it?",
-      "duration": 7.2,
+      "card": {
+        "kind": "mark",
+        "text": "bit style: tapered"
+      },
+      "narration": "Charatan. Look at the bit — this one is tapered.",
+      "duration": 4,
       "motion": {
         "zoom": [
           1,
-          1.06
-        ]
-      },
-      "layers": {
-        "background": {
-          "id": "bg-bench-a",
-          "kind": "background",
-          "status": "placeholder",
-          "file": null
-        },
-        "characters": [
-          {
-            "id": "assistant-holding-pipe-3q",
-            "kind": "character",
-            "status": "placeholder",
-            "file": null
-          }
+          1.08
         ],
-        "object": {
-          "kind": "photo-slot",
-          "slot": "stamp-macro",
-          "hint": "macro photograph of the stamp being read",
-          "status": "awaiting photograph"
-        },
-        "overlays": [
-          {
-            "type": "label",
-            "text": "bit style: tapered"
-          }
+        "pan": [
+          0,
+          0
         ]
       }
     },
     {
       "panel": 2,
-      "role": "mistake",
-      "speaker": "assistant",
-      "background": "bg-bench-a",
-      "characters": [
-        "assistant-confident-front",
-        "prof-listening-3q"
-      ],
-      "object": null,
-      "overlays": [
-        {
-          "type": "label",
-          "text": "1863–1960, exactly",
-          "tone": "wrong"
-        }
-      ],
-      "narration": "1863–1960, exactly. The book says so, and the stamp is right there in front of me.",
-      "duration": 6.4,
+      "role": "overlooked",
+      "speaker": "narrator",
+      "object": {
+        "kind": "photo",
+        "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
+        "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
+        "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite"
+      },
+      "card": {
+        "kind": "plain",
+        "label": "the clue most people skip",
+        "text": "bit style: tapered"
+      },
+      "narration": "Most collectors never check it. It is one of the quieter clues on the pipe.",
+      "duration": 6,
       "motion": {
         "zoom": [
-          1.05,
+          1.08,
           1
-        ]
-      },
-      "layers": {
-        "background": {
-          "id": "bg-bench-a",
-          "kind": "background",
-          "status": "placeholder",
-          "file": null
-        },
-        "characters": [
-          {
-            "id": "assistant-confident-front",
-            "kind": "character",
-            "status": "placeholder",
-            "file": null
-          },
-          {
-            "id": "prof-listening-3q",
-            "kind": "character",
-            "status": "placeholder",
-            "file": null
-          }
         ],
-        "object": null,
-        "overlays": [
-          {
-            "type": "label",
-            "text": "1863–1960, exactly",
-            "tone": "wrong"
-          }
+        "pan": [
+          0,
+          0
         ]
       }
     },
     {
       "panel": 3,
-      "role": "turn",
-      "speaker": "professor",
-      "background": "bg-bench-a",
-      "characters": [
-        "prof-explaining-3q",
-        "assistant-listening-front"
-      ],
-      "object": null,
-      "overlays": [],
-      "narration": "Nearly. And that is the trap almost everyone falls into.",
-      "duration": 4,
+      "role": "correction",
+      "speaker": "narrator",
+      "object": {
+        "kind": "photo",
+        "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
+        "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
+        "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite"
+      },
+      "card": {
+        "kind": "right",
+        "label": "what the evidence supports",
+        "text": "1863–1960"
+      },
+      "narration": "A tapered bit points to 1863–1960. A window, not a birthday.",
+      "duration": 4.4,
       "motion": {
         "zoom": [
           1,
-          1.06
-        ]
-      },
-      "layers": {
-        "background": {
-          "id": "bg-bench-a",
-          "kind": "background",
-          "status": "placeholder",
-          "file": null
-        },
-        "characters": [
-          {
-            "id": "prof-explaining-3q",
-            "kind": "character",
-            "status": "placeholder",
-            "file": null
-          },
-          {
-            "id": "assistant-listening-front",
-            "kind": "character",
-            "status": "placeholder",
-            "file": null
-          }
+          1.08
         ],
-        "object": null,
-        "overlays": []
+        "pan": [
+          0,
+          0
+        ]
       }
     },
     {
       "panel": 4,
-      "role": "correction",
-      "speaker": "professor",
-      "background": "bg-bench-a",
-      "characters": [
-        "prof-explaining-front"
-      ],
+      "role": "caveat",
+      "speaker": "narrator",
       "object": {
-        "slot": "stamp-macro",
-        "hint": "the same stamp, larger"
+        "kind": "photo",
+        "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
+        "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
+        "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite"
       },
-      "overlays": [
-        {
-          "type": "label",
-          "text": "1863–1960",
-          "tone": "right"
-        }
-      ],
-      "narration": "bit style: tapered points to 1863–1960. That is the bracket — a window, not a birthday.",
-      "duration": 6.4,
+      "card": {
+        "kind": "warn",
+        "label": "why the obvious answer fails",
+        "text": "tapered mouthpiece = definitely pre-Lane (Ferrara: 'never tapered' after 1960)."
+      },
+      "narration": "tapered mouthpiece = definitely pre-Lane (Ferrara: 'never tapered' after 1960).",
+      "duration": 4,
       "motion": {
         "zoom": [
-          1.05,
+          1.08,
           1
-        ]
-      },
-      "layers": {
-        "background": {
-          "id": "bg-bench-a",
-          "kind": "background",
-          "status": "placeholder",
-          "file": null
-        },
-        "characters": [
-          {
-            "id": "prof-explaining-front",
-            "kind": "character",
-            "status": "placeholder",
-            "file": null
-          }
         ],
-        "object": {
-          "kind": "photo-slot",
-          "slot": "stamp-macro",
-          "hint": "the same stamp, larger",
-          "status": "awaiting photograph"
-        },
-        "overlays": [
-          {
-            "type": "label",
-            "text": "1863–1960",
-            "tone": "right"
-          }
+        "pan": [
+          0,
+          0
         ]
       }
     },
     {
       "panel": 5,
-      "role": "caveat",
-      "speaker": "professor",
-      "background": "bg-shelf",
-      "characters": [
-        "prof-stern-3q"
-      ],
-      "object": null,
-      "overlays": [
-        {
-          "type": "label",
-          "text": "why the obvious answer fails",
-          "tone": "warn"
-        }
-      ],
-      "narration": "tapered mouthpiece = definitely pre-Lane (Ferrara: 'never tapered' after 1960).",
-      "duration": 4,
+      "role": "honesty",
+      "speaker": "narrator",
+      "object": {
+        "kind": "photo",
+        "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
+        "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
+        "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite"
+      },
+      "card": {
+        "kind": "note",
+        "label": "our confidence",
+        "text": "high"
+      },
+      "narration": "The marks are clear, so we will put that in writing.",
+      "duration": 4.4,
       "motion": {
         "zoom": [
           1,
-          1.06
-        ]
-      },
-      "layers": {
-        "background": {
-          "id": "bg-shelf",
-          "kind": "background",
-          "status": "placeholder",
-          "file": null
-        },
-        "characters": [
-          {
-            "id": "prof-stern-3q",
-            "kind": "character",
-            "status": "placeholder",
-            "file": null
-          }
+          1.08
         ],
-        "object": null,
-        "overlays": [
-          {
-            "type": "label",
-            "text": "why the obvious answer fails",
-            "tone": "warn"
-          }
+        "pan": [
+          0,
+          0
         ]
       }
     },
     {
       "panel": 6,
-      "role": "honesty",
-      "speaker": "professor",
-      "background": "bg-bench-a",
-      "characters": [
-        "prof-warm-front",
-        "assistant-thinking-3q"
-      ],
-      "object": null,
-      "overlays": [
-        {
-          "type": "label",
-          "text": "confidence: high",
-          "tone": "note"
-        }
-      ],
-      "narration": "I would put that in writing. When the marks are this clear, we say so.",
-      "duration": 6,
-      "motion": {
-        "zoom": [
-          1.05,
-          1
-        ]
-      },
-      "layers": {
-        "background": {
-          "id": "bg-bench-a",
-          "kind": "background",
-          "status": "placeholder",
-          "file": null
-        },
-        "characters": [
-          {
-            "id": "prof-warm-front",
-            "kind": "character",
-            "status": "placeholder",
-            "file": null
-          },
-          {
-            "id": "assistant-thinking-3q",
-            "kind": "character",
-            "status": "placeholder",
-            "file": null
-          }
-        ],
-        "object": null,
-        "overlays": [
-          {
-            "type": "label",
-            "text": "confidence: high",
-            "tone": "note"
-          }
-        ]
-      }
-    },
-    {
-      "panel": 7,
       "role": "source",
-      "speaker": "professor",
-      "background": "bg-shelf",
-      "characters": [
-        "prof-closing-book-3q"
-      ],
+      "speaker": "narrator",
       "object": {
-        "slot": "source-page",
-        "hint": "the reference itself, on the shelf"
+        "kind": "photo",
+        "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
+        "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
+        "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite"
       },
-      "overlays": [
-        {
-          "type": "citation",
-          "text": "pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)"
-        }
-      ],
-      "narration": "And that is not my opinion. It is Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock.",
-      "duration": 7.2,
+      "card": {
+        "kind": "citation",
+        "label": "source",
+        "text": "pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)"
+      },
+      "narration": "This is not opinion. It is Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock.",
+      "duration": 6.4,
       "motion": {
         "zoom": [
-          1,
-          1.06
-        ]
-      },
-      "layers": {
-        "background": {
-          "id": "bg-shelf",
-          "kind": "background",
-          "status": "placeholder",
-          "file": null
-        },
-        "characters": [
-          {
-            "id": "prof-closing-book-3q",
-            "kind": "character",
-            "status": "placeholder",
-            "file": null
-          }
+          1.08,
+          1
         ],
-        "object": {
-          "kind": "photo-slot",
-          "slot": "source-page",
-          "hint": "the reference itself, on the shelf",
-          "status": "awaiting photograph"
-        },
-        "overlays": [
-          {
-            "type": "citation",
-            "text": "pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)"
-          }
+        "pan": [
+          0,
+          0
         ]
       }
     }

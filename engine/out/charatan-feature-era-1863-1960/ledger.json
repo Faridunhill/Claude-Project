@@ -1,6 +1,6 @@
 {
   "slug": "charatan-feature-era-1863-1960",
-  "title": "Charatan: what \"bit style: tapered\" really tells you",
+  "title": "Charatan: what a tapered bit really tells you",
   "built_at": "2026-07-31",
   "fact_id": "charatan.feature_era.0",
   "claim": {
@@ -12,22 +12,9 @@
   "sources": [
     "pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)"
   ],
-  "runtime_seconds": 41.2,
-  "panel_count": 7,
-  "assets_missing": [
-    "assistant-confident-front",
-    "assistant-holding-pipe-3q",
-    "assistant-listening-front",
-    "assistant-thinking-3q",
-    "bg-bench-a",
-    "bg-shelf",
-    "prof-closing-book-3q",
-    "prof-explaining-3q",
-    "prof-explaining-front",
-    "prof-listening-3q",
-    "prof-stern-3q",
-    "prof-warm-front"
-  ],
+  "runtime_seconds": 29.2,
+  "panel_count": 6,
+  "assets_missing": [],
   "facts_refused_this_run": [],
   "changelog": [
     {
