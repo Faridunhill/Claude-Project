@@ -10,11 +10,27 @@
  * captions — is the only thing that changes when the art and the voice land.
  * The panel list itself does not change.
  */
-import { writeFileSync } from 'node:fs'
+import { writeFileSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
+
+/**
+ * Inline every panel as a data URI so the storyboard is ONE file that plays
+ * anywhere — emailed, opened from a phone, dropped in a folder. A rough cut
+ * that only works in its own directory is a rough cut nobody watches.
+ */
+function inlinePanels(outDir, panels) {
+  const map = {}
+  for (const p of panels) {
+    const name = `panel-${String(p.panel).padStart(2, '0')}.svg`
+    const svg = readFileSync(join(outDir, 'panels', name), 'utf8')
+    map[p.panel] = 'data:image/svg+xml;base64,' + Buffer.from(svg, 'utf8').toString('base64')
+  }
+  return map
+}
 
 export function writeStoryboard(episode, resolved, { outDir, missing }) {
   const panels = resolved.panels
+  const SRC = inlinePanels(outDir, panels)
   const html = `<!doctype html>
 <meta charset="utf-8">
 <title>${esc(episode.title)} — storyboard</title>
@@ -58,7 +74,7 @@ export function writeStoryboard(episode, resolved, { outDir, missing }) {
   </div>
 </header>
 <main>
-  <div class="stage"><img id="frame" src="panels/panel-01.svg" alt=""></div>
+  <div class="stage"><img id="frame" src="${SRC[1]}" alt=""></div>
   <div class="controls">
     <button id="play">▶ Play the episode</button>
     <button id="prev">‹ Prev</button>
@@ -72,7 +88,7 @@ export function writeStoryboard(episode, resolved, { outDir, missing }) {
     ${panels
       .map(
         (p) => `<figure data-i="${p.panel - 1}">
-        <img src="panels/panel-${String(p.panel).padStart(2, '0')}.svg" alt="">
+        <img src="${SRC[p.panel]}" alt="">
         <figcaption>${p.panel}. ${esc(p.role)} · ${p.duration}s</figcaption></figure>`
       )
       .join('\n    ')}
@@ -89,7 +105,7 @@ export function writeStoryboard(episode, resolved, { outDir, missing }) {
 </main>
 <script>
 const P = ${JSON.stringify(
-    panels.map((p) => ({ n: p.panel, d: p.duration, s: p.speaker, t: p.narration }))
+    panels.map((p) => ({ n: p.panel, d: p.duration, s: p.speaker, t: p.narration, src: SRC[p.panel] }))
   )};
 const frame = document.getElementById('frame'), line = document.getElementById('line'),
       who = document.getElementById('who'), pos = document.getElementById('pos'),
@@ -98,7 +114,7 @@ let i = 0, playing = false, timer = null, t0 = 0, raf = null;
 
 function show(n) {
   i = (n + P.length) % P.length;
-  frame.src = 'panels/panel-' + String(P[i].n).padStart(2, '0') + '.svg';
+  frame.src = P[i].src;
   line.textContent = P[i].t;
   who.textContent = P[i].s;
   pos.textContent = 'panel ' + P[i].n + ' of ' + P.length + ' · ' + P[i].d + 's';
