@@ -366,6 +366,86 @@ def cmd_explain(args) -> int:
     return 0
 
 
+def cmd_new(args) -> int:
+    """THE MAIN JOB — you are about to list a pipe. Here is what to ask for it,
+    what to call it, and the copy for every channel."""
+    from .listing import ListingDesk
+    root = root_for(pathlib.Path(args.base), args.clone)
+    desk = ListingDesk(root)
+
+    comps = desk.comparables(args.title)
+    print(f"\n{args.title}\n" + "-" * min(len(args.title), 70))
+    read = ", ".join(f"{k}={v}" for k, v in
+                     (("brand", comps["brand"]), ("shape", comps["shape"]),
+                      ("material", comps["material"])) if v)
+    print(f"  read from your title: {read or '** nothing recognised'}")
+
+    print("\nPRICE")
+    if comps["advice"]:
+        print(f"  ask between {comps['low']:,.0f} and {comps['high']:,.0f}  "
+              f"(middle {comps['median']:,.0f}, best ever {comps['best']:,.0f})")
+        print(f"  based on {comps['n']} past sales of {comps['basis']} "
+              f"— evidence is {comps['confidence']}")
+    else:
+        print(f"  no advice. {comps['why']}")
+
+    title = desk.title_advice(args.title)
+    print("\nTITLE")
+    if title["lessons"]:
+        for lesson in title["lessons"]:
+            print(f"  - {lesson}")
+        print(f"  {title['why']}")
+    else:
+        print(f"  {title['why']}")
+
+    if args.price:
+        from .auto import STANDING_DECISION, Autopilot
+        Autopilot(pathlib.Path(args.base), args.clone).standing_order()
+        result = desk.open_listing(args.title, args.price, args.sku,
+                                   decision_id=STANDING_DECISION,
+                                   channel=args.channel)
+        print(f"\nWRITTEN  {result['artifacts']['out_dir']}")
+        for name in result["artifacts"]["files"]:
+            print(f"  - {name}")
+        if result["artifacts"]["needs_filling"]:
+            print(f"  ebay.csv still needs: "
+                  f"{', '.join(result['artifacts']['needs_filling'])}")
+        if result["clock_started"]:
+            print("\n  clock started. When it sells, the agent will know exactly "
+                  "how many days it took — and if it never sells, it will say so.")
+    else:
+        print("\n  (add --price and --sku to write the listing files and start "
+              "the clock)")
+    return 0
+
+
+def cmd_stock(args) -> int:
+    """What is live, what has not sold, and how fast things move."""
+    from .listing import ListingDesk
+    desk = ListingDesk(root_for(pathlib.Path(args.base), args.clone))
+    speeds = desk.days_to_sale()
+    unsold = desk.still_unsold()
+    print("HOW FAST THINGS SELL")
+    if speeds:
+        import statistics
+        days = sorted(x["days"] for x in speeds)
+        print(f"  {len(speeds)} pipes listed and sold — median "
+              f"{statistics.median(days):.0f} days, fastest {days[0]}, "
+              f"slowest {days[-1]}")
+    else:
+        print("  nothing yet. Every pipe you list with `new` starts a clock; "
+              "this fills in as they sell.")
+    print(f"\nSTILL LIVE ({len(unsold)})")
+    for item in unsold[:15]:
+        asked = f"{item['asked']:,.0f}" if item["asked"] else "—"
+        print(f"  {item['days_live']:>4}d  {asked:>8}  {item['sku'][:44]}")
+    if len(unsold) > 15:
+        print(f"  ... and {len(unsold) - 15} more")
+    if unsold:
+        print("\n  These are the pipes a sold-item export can never show you.")
+    return 0
+
+
 def cmd_verify(args) -> int:
     base = pathlib.Path(args.base)
     root = root_for(base, args.clone)
@@ -486,6 +566,16 @@ def main(argv=None) -> int:
     sp.add_argument("--days", type=int, default=7)
     sp.add_argument("--limit", type=int, default=25)
     sp.set_defaults(fn=cmd_explain)
+
+    sp = clone_arg(sub.add_parser("new", help="listing a pipe: price, title, copy"))
+    sp.add_argument("title")
+    sp.add_argument("--price", type=float)
+    sp.add_argument("--sku", default="")
+    sp.add_argument("--channel", default="ebay", choices=["ebay", "etsy", "site"])
+    sp.set_defaults(fn=cmd_new)
+
+    clone_arg(sub.add_parser("stock", help="what is live and how fast it moves")
+              ).set_defaults(fn=cmd_stock)
 
     clone_arg(sub.add_parser("pending")).set_defaults(fn=cmd_pending)
     clone_arg(sub.add_parser("verify")).set_defaults(fn=cmd_verify)

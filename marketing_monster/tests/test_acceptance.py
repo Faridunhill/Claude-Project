@@ -876,3 +876,66 @@ class T25_SpotItsOwnSuspiciousClusters(MonsterCase):
         recorded = {r["ts"][:10] for r in Scale(self.root).rows() if r["event"] == "sale"}
         self.assertNotIn("2026-07-26", recorded)
         self.assertEqual(len(Well(self.root).transactions()), 50)   # Well keeps all
+
+
+class T26_TheListingDesk(MonsterCase):
+    """The main job. Everything before this reacted to sales; the moment that
+    decides a sale is the moment the listing is written."""
+
+    def setUp(self):
+        super().setUp()
+        rows = []
+        for i in range(20):
+            rows.append(f"{300000000 + i},Dunhill Shell Bulldog {i},"
+                        f"{300 + i * 10}.00,2026-05-{i % 28 + 1:02d}\n")
+        for i in range(3):
+            rows.append(f"{400000000 + i},Castello Sea Rock Apple {i},"
+                        f"{500 + i}.00,2026-05-1{i}\n")
+        path = self.base / "sales.csv"
+        path.write_text("Item Id,Listing Title,Price,Date\n" + "".join(rows),
+                        encoding="utf-8")
+        Well(self.root).load(path)
+        from monster.listing import ListingDesk
+        self.desk = ListingDesk(self.root)
+
+    def test_it_prices_from_real_comparables(self):
+        comps = self.desk.comparables("Dunhill Shell Bulldog Estate Pipe")
+        self.assertEqual(comps["advice"], "range")
+        self.assertEqual(comps["n"], 20)
+        self.assertLess(comps["low"], comps["median"])
+        self.assertLess(comps["median"], comps["high"])
+
+    def test_it_refuses_to_price_from_too_few(self):
+        """Three sales is not a price. Saying so is worth more than a number."""
+        comps = self.desk.comparables("Castello Sea Rock Apple")
+        self.assertIsNone(comps["advice"])
+        self.assertIn("too few", comps["why"])
+
+    def test_it_invents_no_title_advice_before_a_lesson_is_confirmed(self):
+        advice = self.desk.title_advice("Dunhill Shell Bulldog")
+        self.assertEqual(advice["lessons"], [])
+        self.assertIsNone(advice["suggestion"])
+
+    def test_listing_starts_a_clock_and_selling_stops_it(self):
+        from datetime import datetime, timedelta, timezone
+        self.desk.open_listing("Dunhill Shell Bulldog", 385.0, "sku-1",
+                               decision_id="D-001")
+        self.assertEqual(len(self.desk.still_unsold()), 1)
+        later = (datetime.now(timezone.utc) + timedelta(days=12)
+                 ).isoformat().replace("+00:00", "Z")
+        Scale(self.root).record("sale", "sku-1", surface="ebay", value=385.0, ts=later)
+        speeds = self.desk.days_to_sale()
+        self.assertEqual(len(speeds), 1)
+        self.assertEqual(speeds[0]["days"], 12)
+        self.assertEqual(self.desk.still_unsold(), [])
+
+    def test_one_pipe_on_three_channels_is_one_pipe(self):
+        self.desk.open_listing("Dunhill Shell Bulldog", 385.0, "sku-1",
+                               decision_id="D-001")
+        scale = Scale(self.root)
+        for surface in ("etsy", "site"):
+            scale.record("published", "sku-1", surface=surface, value=385.0,
+                         attribution="direct", reason="twinned")
+        unsold = self.desk.still_unsold()
+        self.assertEqual(len(unsold), 1)
+        self.assertEqual(unsold[0]["channels"], 3)
