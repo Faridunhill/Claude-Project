@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#2b1a12"/>
+  <rect x="26" y="26" width="1228" height="668" fill="#3a2418" stroke="#c9a227" stroke-opacity="0.55" stroke-width="2"/>
+  <text x="640" y="62" text-anchor="middle" font-family="Georgia, serif" font-size="15"
+        letter-spacing="5" fill="#c9a227" fill-opacity="0.85">F A R I D U N H I L L</text>
+  <text x="70" y="250" font-family="Georgia, serif" font-size="13" fill="#efe3cf" fill-opacity="0.4">
+    background: bg-bench-a · placeholder
+  </text>
+  
+    <g>
+      <rect x="310" y="290" width="300" height="360" rx="6"
+            fill="none" stroke="#c9a227" stroke-opacity="0.5" stroke-dasharray="8 6"/>
+      <text x="460" y="470" text-anchor="middle"
+            font-family="Georgia, serif" font-size="19" fill="#efe3cf" fill-opacity="0.85">prof-explaining-3q</text>
+      <text x="460" y="498" text-anchor="middle"
+            font-family="Georgia, serif" font-size="14" fill="#c9a227" fill-opacity="0.7">placeholder</text>
+    </g>
+    <g>
+      <rect x="670" y="290" width="300" height="360" rx="6"
+            fill="none" stroke="#c9a227" stroke-opacity="0.5" stroke-dasharray="8 6"/>
+      <text x="820" y="470" text-anchor="middle"
+            font-family="Georgia, serif" font-size="19" fill="#efe3cf" fill-opacity="0.85">assistant-listening-front</text>
+      <text x="820" y="498" text-anchor="middle"
+            font-family="Georgia, serif" font-size="14" fill="#c9a227" fill-opacity="0.7">placeholder</text>
+    </g>
+  
+  
+  <rect x="26" y="602" width="1228" height="92" fill="#000" fill-opacity="0.45"/>
+  <text x="640" y="642" text-anchor="middle" font-family="Georgia, serif" font-size="21" fill="#efe3cf">Nearly. And that is the trap almost everyone falls into.</text>
+  <text x="1236" y="684" text-anchor="end" font-family="Georgia, serif" font-size="12"
+        fill="#c9a227" fill-opacity="0.6">panel 3 · turn · 4s</text>
+  <text x="44" y="684" font-family="Georgia, serif" font-size="12" fill="#efe3cf" fill-opacity="0.35">PLACEHOLDER ART — awaiting the design commission</text>
+</svg>

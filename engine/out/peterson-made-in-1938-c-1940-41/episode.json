@@ -1,0 +1,390 @@
+{
+  "slug": "peterson-made-in-1938-c-1940-41",
+  "title": "Peterson: what \"MADE IN EIRE / EIRE\" really tells you",
+  "brand": "Peterson",
+  "fact_id": "peterson.shank_nomenclature.made_in.3",
+  "claim": {
+    "reads": "MADE IN EIRE / EIRE (circle: \"Made\" & \"Eire\" around the ring, \"in\" in the centre)",
+    "era": "1938–c.1940/41",
+    "confidence": "high"
+  },
+  "caveat": "Refinement per Leverette — the EIRE stamp itself is short-lived (~1938–41), NOT used all the way to 1949.",
+  "sources": [
+    "Era formats & windows per Leverette (Pipedia, 2006, rule of thumb)."
+  ],
+  "runtime": 46.4,
+  "panels": [
+    {
+      "panel": 1,
+      "role": "hook",
+      "speaker": "assistant",
+      "background": "bg-bench-a",
+      "characters": [
+        "assistant-holding-pipe-3q"
+      ],
+      "object": {
+        "slot": "stamp-macro",
+        "hint": "macro photograph of the stamp being read"
+      },
+      "overlays": [
+        {
+          "type": "label",
+          "text": "MADE IN EIRE / EIRE"
+        }
+      ],
+      "narration": "Look — it says MADE IN EIRE / EIRE. So that tells us exactly when it was made, doesn't it?",
+      "duration": 8,
+      "motion": {
+        "zoom": [
+          1,
+          1.06
+        ]
+      },
+      "layers": {
+        "background": {
+          "id": "bg-bench-a",
+          "kind": "background",
+          "status": "placeholder",
+          "file": null
+        },
+        "characters": [
+          {
+            "id": "assistant-holding-pipe-3q",
+            "kind": "character",
+            "status": "placeholder",
+            "file": null
+          }
+        ],
+        "object": {
+          "kind": "photo-slot",
+          "slot": "stamp-macro",
+          "hint": "macro photograph of the stamp being read",
+          "status": "awaiting photograph"
+        },
+        "overlays": [
+          {
+            "type": "label",
+            "text": "MADE IN EIRE / EIRE"
+          }
+        ]
+      }
+    },
+    {
+      "panel": 2,
+      "role": "mistake",
+      "speaker": "assistant",
+      "background": "bg-bench-a",
+      "characters": [
+        "assistant-confident-front",
+        "prof-listening-3q"
+      ],
+      "object": null,
+      "overlays": [
+        {
+          "type": "label",
+          "text": "1938–1949, exactly",
+          "tone": "wrong"
+        }
+      ],
+      "narration": "1938–1949, exactly. The book says so, and the stamp is right there in front of me.",
+      "duration": 6.4,
+      "motion": {
+        "zoom": [
+          1.05,
+          1
+        ]
+      },
+      "layers": {
+        "background": {
+          "id": "bg-bench-a",
+          "kind": "background",
+          "status": "placeholder",
+          "file": null
+        },
+        "characters": [
+          {
+            "id": "assistant-confident-front",
+            "kind": "character",
+            "status": "placeholder",
+            "file": null
+          },
+          {
+            "id": "prof-listening-3q",
+            "kind": "character",
+            "status": "placeholder",
+            "file": null
+          }
+        ],
+        "object": null,
+        "overlays": [
+          {
+            "type": "label",
+            "text": "1938–1949, exactly",
+            "tone": "wrong"
+          }
+        ]
+      }
+    },
+    {
+      "panel": 3,
+      "role": "turn",
+      "speaker": "professor",
+      "background": "bg-bench-a",
+      "characters": [
+        "prof-explaining-3q",
+        "assistant-listening-front"
+      ],
+      "object": null,
+      "overlays": [],
+      "narration": "Nearly. And that is the trap almost everyone falls into.",
+      "duration": 4,
+      "motion": {
+        "zoom": [
+          1,
+          1.06
+        ]
+      },
+      "layers": {
+        "background": {
+          "id": "bg-bench-a",
+          "kind": "background",
+          "status": "placeholder",
+          "file": null
+        },
+        "characters": [
+          {
+            "id": "prof-explaining-3q",
+            "kind": "character",
+            "status": "placeholder",
+            "file": null
+          },
+          {
+            "id": "assistant-listening-front",
+            "kind": "character",
+            "status": "placeholder",
+            "file": null
+          }
+        ],
+        "object": null,
+        "overlays": []
+      }
+    },
+    {
+      "panel": 4,
+      "role": "correction",
+      "speaker": "professor",
+      "background": "bg-bench-a",
+      "characters": [
+        "prof-explaining-front"
+      ],
+      "object": {
+        "slot": "stamp-macro",
+        "hint": "the same stamp, larger"
+      },
+      "overlays": [
+        {
+          "type": "label",
+          "text": "1938–c.1940/41",
+          "tone": "right"
+        }
+      ],
+      "narration": "MADE IN EIRE / EIRE points to 1938–c.1940/41. That is the bracket — a window, not a birthday.",
+      "duration": 7.2,
+      "motion": {
+        "zoom": [
+          1.05,
+          1
+        ]
+      },
+      "layers": {
+        "background": {
+          "id": "bg-bench-a",
+          "kind": "background",
+          "status": "placeholder",
+          "file": null
+        },
+        "characters": [
+          {
+            "id": "prof-explaining-front",
+            "kind": "character",
+            "status": "placeholder",
+            "file": null
+          }
+        ],
+        "object": {
+          "kind": "photo-slot",
+          "slot": "stamp-macro",
+          "hint": "the same stamp, larger",
+          "status": "awaiting photograph"
+        },
+        "overlays": [
+          {
+            "type": "label",
+            "text": "1938–c.1940/41",
+            "tone": "right"
+          }
+        ]
+      }
+    },
+    {
+      "panel": 5,
+      "role": "caveat",
+      "speaker": "professor",
+      "background": "bg-shelf",
+      "characters": [
+        "prof-stern-3q"
+      ],
+      "object": null,
+      "overlays": [
+        {
+          "type": "label",
+          "text": "why the obvious answer fails",
+          "tone": "warn"
+        }
+      ],
+      "narration": "Refinement per Leverette — the EIRE stamp itself is short-lived (~1938–41), NOT used all the way to 1949.",
+      "duration": 7.2,
+      "motion": {
+        "zoom": [
+          1,
+          1.06
+        ]
+      },
+      "layers": {
+        "background": {
+          "id": "bg-shelf",
+          "kind": "background",
+          "status": "placeholder",
+          "file": null
+        },
+        "characters": [
+          {
+            "id": "prof-stern-3q",
+            "kind": "character",
+            "status": "placeholder",
+            "file": null
+          }
+        ],
+        "object": null,
+        "overlays": [
+          {
+            "type": "label",
+            "text": "why the obvious answer fails",
+            "tone": "warn"
+          }
+        ]
+      }
+    },
+    {
+      "panel": 6,
+      "role": "honesty",
+      "speaker": "professor",
+      "background": "bg-bench-a",
+      "characters": [
+        "prof-warm-front",
+        "assistant-thinking-3q"
+      ],
+      "object": null,
+      "overlays": [
+        {
+          "type": "label",
+          "text": "confidence: high",
+          "tone": "note"
+        }
+      ],
+      "narration": "I would put that in writing. When the marks are this clear, we say so.",
+      "duration": 6,
+      "motion": {
+        "zoom": [
+          1.05,
+          1
+        ]
+      },
+      "layers": {
+        "background": {
+          "id": "bg-bench-a",
+          "kind": "background",
+          "status": "placeholder",
+          "file": null
+        },
+        "characters": [
+          {
+            "id": "prof-warm-front",
+            "kind": "character",
+            "status": "placeholder",
+            "file": null
+          },
+          {
+            "id": "assistant-thinking-3q",
+            "kind": "character",
+            "status": "placeholder",
+            "file": null
+          }
+        ],
+        "object": null,
+        "overlays": [
+          {
+            "type": "label",
+            "text": "confidence: high",
+            "tone": "note"
+          }
+        ]
+      }
+    },
+    {
+      "panel": 7,
+      "role": "source",
+      "speaker": "professor",
+      "background": "bg-shelf",
+      "characters": [
+        "prof-closing-book-3q"
+      ],
+      "object": {
+        "slot": "source-page",
+        "hint": "the reference itself, on the shelf"
+      },
+      "overlays": [
+        {
+          "type": "citation",
+          "text": "Era formats & windows per Leverette (Pipedia, 2006, rule of thumb)."
+        }
+      ],
+      "narration": "And that is not my opinion. It is Era formats & windows per Leverette (Pipedia, 2006, rule of thumb).",
+      "duration": 7.6,
+      "motion": {
+        "zoom": [
+          1,
+          1.06
+        ]
+      },
+      "layers": {
+        "background": {
+          "id": "bg-shelf",
+          "kind": "background",
+          "status": "placeholder",
+          "file": null
+        },
+        "characters": [
+          {
+            "id": "prof-closing-book-3q",
+            "kind": "character",
+            "status": "placeholder",
+            "file": null
+          }
+        ],
+        "object": {
+          "kind": "photo-slot",
+          "slot": "source-page",
+          "hint": "the reference itself, on the shelf",
+          "status": "awaiting photograph"
+        },
+        "overlays": [
+          {
+            "type": "citation",
+            "text": "Era formats & windows per Leverette (Pipedia, 2006, rule of thumb)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Peterson: what "MADE IN EIRE / EIRE" really tells you — storyboard</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin:0; background:#1d120c; color:#efe3cf; font-family:Georgia,'Times New Roman',serif; }
+  header { padding:28px 32px 22px; border-bottom:1px solid rgba(201,162,39,.28); }
+  h1 { margin:0 0 6px; font-size:26px; font-weight:600; }
+  .meta { color:rgba(239,227,207,.5); font-size:14px; }
+  .claim { margin-top:14px; padding:12px 16px; border-left:3px solid #c9a227; background:rgba(201,162,39,.07); font-size:14px; }
+  .claim b { color:#c9a227; font-weight:600; }
+  main { max-width:1120px; margin:0 auto; padding:26px 20px 80px; }
+  .stage { position:relative; background:#000; border:1px solid rgba(201,162,39,.3); }
+  .stage img { display:block; width:100%; }
+  .controls { display:flex; gap:14px; align-items:center; margin:16px 0 8px; flex-wrap:wrap; }
+  button { background:transparent; border:1px solid rgba(201,162,39,.55); color:#c9a227;
+           font-family:inherit; font-size:15px; padding:9px 20px; cursor:pointer; }
+  button:hover { background:rgba(201,162,39,.12); }
+  .bar { height:3px; background:rgba(201,162,39,.18); margin-top:10px; }
+  .bar i { display:block; height:100%; background:#c9a227; width:0; }
+  .narr { margin-top:16px; font-size:17px; line-height:1.55; min-height:3.2em; }
+  .narr small { display:block; color:rgba(239,227,207,.45); font-size:13px; margin-bottom:5px;
+                text-transform:uppercase; letter-spacing:.14em; }
+  .grid { margin-top:44px; display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; }
+  .grid figure { margin:0; border:1px solid rgba(201,162,39,.18); cursor:pointer; }
+  .grid figure.on { border-color:#c9a227; }
+  .grid img { display:block; width:100%; }
+  .grid figcaption { padding:8px 10px; font-size:12px; color:rgba(239,227,207,.55); }
+  .notice { margin-top:44px; padding:16px 18px; border:1px dashed rgba(201,162,39,.4); font-size:13.5px;
+            line-height:1.6; color:rgba(239,227,207,.72); }
+  .notice b { color:#c9a227; }
+  code { font-family:ui-monospace,Menlo,monospace; font-size:12.5px; color:rgba(239,227,207,.85); }
+</style>
+<header>
+  <h1>Peterson: what "MADE IN EIRE / EIRE" really tells you</h1>
+  <div class="meta">7 panels · 46.4s · fact <code>peterson.shank_nomenclature.made_in.3</code></div>
+  <div class="claim">
+    <b>Claim:</b> MADE IN EIRE / EIRE (circle: "Made" &amp; "Eire" around the ring, "in" in the centre) → <b>1938–c.1940/41</b>
+    · confidence: high<br>
+    <b>Source:</b> Era formats &amp; windows per Leverette (Pipedia, 2006, rule of thumb).
+  </div>
+</header>
+<main>
+  <div class="stage"><img id="frame" src="panels/panel-01.svg" alt=""></div>
+  <div class="controls">
+    <button id="play">▶ Play the episode</button>
+    <button id="prev">‹ Prev</button>
+    <button id="next">Next ›</button>
+    <span class="meta" id="pos"></span>
+  </div>
+  <div class="bar"><i id="prog"></i></div>
+  <div class="narr"><small id="who"></small><span id="line"></span></div>
+
+  <div class="grid" id="grid">
+    <figure data-i="0">
+        <img src="panels/panel-01.svg" alt="">
+        <figcaption>1. hook · 8s</figcaption></figure>
+    <figure data-i="1">
+        <img src="panels/panel-02.svg" alt="">
+        <figcaption>2. mistake · 6.4s</figcaption></figure>
+    <figure data-i="2">
+        <img src="panels/panel-03.svg" alt="">
+        <figcaption>3. turn · 4s</figcaption></figure>
+    <figure data-i="3">
+        <img src="panels/panel-04.svg" alt="">
+        <figcaption>4. correction · 7.2s</figcaption></figure>
+    <figure data-i="4">
+        <img src="panels/panel-05.svg" alt="">
+        <figcaption>5. caveat · 7.2s</figcaption></figure>
+    <figure data-i="5">
+        <img src="panels/panel-06.svg" alt="">
+        <figcaption>6. honesty · 6s</figcaption></figure>
+    <figure data-i="6">
+        <img src="panels/panel-07.svg" alt="">
+        <figcaption>7. source · 7.6s</figcaption></figure>
+  </div>
+
+  <div class="notice">
+    <b>This is a rough cut made from placeholder art.</b> Every box on a panel is a real
+    asset id waiting for the design commission — the engine already knows what it needs.
+    <br><br><b>12 asset ids are unfilled:</b> <code>assistant-confident-front, assistant-holding-pipe-3q, assistant-listening-front, assistant-thinking-3q, bg-bench-a, bg-shelf, prof-closing-book-3q, prof-explaining-3q, prof-explaining-front, prof-listening-3q, prof-stern-3q, prof-warm-front</code>
+    <br><br>Nothing above states a fact the cabinet did not carry, and the source line is
+    generated from the cabinet, not written by hand. When the art lands, the same panel
+    list renders in the finished style — <b>this file does not get rewritten.</b>
+  </div>
+</main>
+<script>
+const P = [{"n":1,"d":8,"s":"assistant","t":"Look — it says MADE IN EIRE / EIRE. So that tells us exactly when it was made, doesn't it?"},{"n":2,"d":6.4,"s":"assistant","t":"1938–1949, exactly. The book says so, and the stamp is right there in front of me."},{"n":3,"d":4,"s":"professor","t":"Nearly. And that is the trap almost everyone falls into."},{"n":4,"d":7.2,"s":"professor","t":"MADE IN EIRE / EIRE points to 1938–c.1940/41. That is the bracket — a window, not a birthday."},{"n":5,"d":7.2,"s":"professor","t":"Refinement per Leverette — the EIRE stamp itself is short-lived (~1938–41), NOT used all the way to 1949."},{"n":6,"d":6,"s":"professor","t":"I would put that in writing. When the marks are this clear, we say so."},{"n":7,"d":7.6,"s":"professor","t":"And that is not my opinion. It is Era formats & windows per Leverette (Pipedia, 2006, rule of thumb)."}];
+const frame = document.getElementById('frame'), line = document.getElementById('line'),
+      who = document.getElementById('who'), pos = document.getElementById('pos'),
+      prog = document.getElementById('prog'), figs = [...document.querySelectorAll('#grid figure')];
+let i = 0, playing = false, timer = null, t0 = 0, raf = null;
+
+function show(n) {
+  i = (n + P.length) % P.length;
+  frame.src = 'panels/panel-' + String(P[i].n).padStart(2, '0') + '.svg';
+  line.textContent = P[i].t;
+  who.textContent = P[i].s;
+  pos.textContent = 'panel ' + P[i].n + ' of ' + P.length + ' · ' + P[i].d + 's';
+  figs.forEach((f, k) => f.classList.toggle('on', k === i));
+}
+function tick() {
+  const pct = Math.min(1, (performance.now() - t0) / (P[i].d * 1000));
+  prog.style.width = (pct * 100) + '%';
+  if (playing) raf = requestAnimationFrame(tick);
+}
+function step() {
+  if (!playing) return;
+  t0 = performance.now(); tick();
+  timer = setTimeout(() => {
+    if (i === P.length - 1) { stop(); return; }
+    show(i + 1); step();
+  }, P[i].d * 1000);
+}
+function stop() {
+  playing = false; clearTimeout(timer); cancelAnimationFrame(raf);
+  prog.style.width = '0'; document.getElementById('play').textContent = '▶ Play the episode';
+}
+document.getElementById('play').onclick = () => {
+  if (playing) { stop(); return; }
+  playing = true; document.getElementById('play').textContent = '❚❚ Pause';
+  if (i === P.length - 1) show(0);
+  step();
+};
+document.getElementById('next').onclick = () => { stop(); show(i + 1); };
+document.getElementById('prev').onclick = () => { stop(); show(i - 1); };
+figs.forEach((f) => (f.onclick = () => { stop(); show(+f.dataset.i); }));
+show(0);
+</script>

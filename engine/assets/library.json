@@ -1,0 +1,19 @@
+{
+  "_comment": "The asset library. Every panel layer is resolved BY ID against this file. Ink art today, 3D renders later — only the 'file' values change, never the ids, and never any other stage. See docs/DECISIONS.md.",
+  "style_version": "v1-ink",
+  "assets": {
+    "bg-bench-a": { "kind": "background", "status": "placeholder", "file": null, "note": "the workbench, 3/4 view" },
+    "bg-shelf": { "kind": "background", "status": "placeholder", "file": null, "note": "the shelf of finished restorations" },
+    "prof-explaining-3q": { "kind": "character", "status": "placeholder", "file": null },
+    "prof-explaining-front": { "kind": "character", "status": "placeholder", "file": null },
+    "prof-listening-3q": { "kind": "character", "status": "placeholder", "file": null },
+    "prof-stern-3q": { "kind": "character", "status": "placeholder", "file": null },
+    "prof-warm-front": { "kind": "character", "status": "placeholder", "file": null },
+    "prof-closing-book-3q": { "kind": "character", "status": "placeholder", "file": null, "note": "he closes a book and names it — the sign-off pose" },
+    "assistant-holding-pipe-3q": { "kind": "character", "status": "placeholder", "file": null },
+    "assistant-confident-front": { "kind": "character", "status": "placeholder", "file": null },
+    "assistant-listening-front": { "kind": "character", "status": "placeholder", "file": null },
+    "assistant-thinking-3q": { "kind": "character", "status": "placeholder", "file": null }
+  },
+  "photos": {}
+}
