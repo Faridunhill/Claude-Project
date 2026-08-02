@@ -481,6 +481,20 @@ def cmd_research(args) -> int:
     return 0
 
 
+def cmd_answer(args) -> int:
+    """Farid's word, written into the ledger by the machine (doc 004 §2.1)."""
+    root = root_for(pathlib.Path(args.base), args.clone)
+    judge = Judge(root)
+    verdict = {"yes": "DO", "no": "REJECT", "later": "DEFER"}[args.verdict]
+    row = judge.answer(args.decision_id, verdict,
+                       args.reason or f"Farid answered {args.verdict}")
+    print(f"{row['decision_id']}  {row['verdict']}  — {row['proposal']}")
+    remaining = judge.open_items()
+    print(f"  {len(remaining)} question(s) still waiting"
+          if remaining else "  nothing else needs you.")
+    return 0
+
+
 def cmd_verify(args) -> int:
     base = pathlib.Path(args.base)
     root = root_for(base, args.clone)
@@ -620,6 +634,12 @@ def main(argv=None) -> int:
     sp.add_argument("--edge", default="audience")
     sp.add_argument("--recommend", default="DO")
     sp.set_defaults(fn=cmd_research)
+
+    sp = clone_arg(sub.add_parser("answer", help="answer a pending question with a word"))
+    sp.add_argument("decision_id")
+    sp.add_argument("verdict", choices=["yes", "no", "later"])
+    sp.add_argument("--reason", default="")
+    sp.set_defaults(fn=cmd_answer)
 
     clone_arg(sub.add_parser("pending")).set_defaults(fn=cmd_pending)
     clone_arg(sub.add_parser("verify")).set_defaults(fn=cmd_verify)
