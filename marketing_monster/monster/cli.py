@@ -22,7 +22,7 @@ from .playbook import Playbook
 from .report import weekly_report, write_report
 from .scale import Scale
 from .wall import Cookbook
-from .well import Well, dropped_columns, propose_mapping
+from .well import Well, dropped_columns, propose_mapping, read_headers
 
 CLONES = ("pipes", "groundtruth", "ashcombe")
 TREE = ("well/raw", "well/derived", "digger/digs", "judge", "playbook",
@@ -52,9 +52,7 @@ def cmd_init(args) -> int:
 
 def cmd_inspect(args) -> int:
     """Wave 2's first move — reads headers, writes nothing, touches no data."""
-    import csv
-    with open(args.csv, encoding="utf-8-sig", newline="") as fh:
-        headers = next(csv.reader(fh))
+    headers = read_headers(args.csv)
     mapping = propose_mapping(headers)
     print(f"{len(headers)} columns found in {args.csv}\n")
     print("proposed mapping:")
@@ -69,9 +67,12 @@ def cmd_inspect(args) -> int:
 def cmd_load(args) -> int:
     root = root_for(pathlib.Path(args.base), args.clone)
     mapping = json.loads(pathlib.Path(args.mapping).read_text()) if args.mapping else None
-    stats = Well(root).load_csv(args.csv, mapping)
-    print(f"loaded {stats['transactions']} transactions, {stats['buyers']} buyers "
-          f"({stats['repeat_buyers']} repeat)")
+    stats = Well(root).load(args.csv, mapping, append=args.append,
+                            channel=args.channel)
+    print(f"loaded {stats['added']} new rows from channel '{stats['channel']}' "
+          f"({stats['duplicates_skipped']} duplicates skipped)")
+    print(f"Well now holds {stats['transactions']} transactions, "
+          f"{stats['buyers']} buyers ({stats['repeat_buyers']} repeat)")
     print(f"dropped columns: {', '.join(stats['dropped_columns']) or 'none'}")
     print("no names, no emails, no addresses were written (M4).")
     return 0
@@ -163,6 +164,9 @@ def main(argv=None) -> int:
     sp = clone_arg(sub.add_parser("load"))
     sp.add_argument("csv")
     sp.add_argument("--mapping")
+    sp.add_argument("--append", action="store_true",
+                    help="merge into the existing Well instead of replacing it")
+    sp.add_argument("--channel", help="ebay / etsy / site (default: from filename)")
     sp.set_defaults(fn=cmd_load)
 
     sp = clone_arg(sub.add_parser("record"))

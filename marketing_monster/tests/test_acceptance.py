@@ -358,3 +358,62 @@ class T13_LocateReadsNoRecords(MonsterCase):
         hits = scan(self.base)
         self.assertTrue(hits)
         self.assertEqual(hits[0]["path"].name, "ebay_sold_orders.csv")
+
+
+class T14_ManySourcesOneWell(MonsterCase):
+    """The sales history lives across eBay and Etsy, in CSV and JSONL. One
+    Well holds all of it, and loading the same file twice adds nothing."""
+
+    CSV = ("Date,Item Id,Listing Title,Price,Quantity,Shipping Fee,Currency\n"
+           "2026-07-02,123,Dunhill Shell Billiard,340.00,1,12.00,USD\n"
+           "2026-07-09,124,Charatan Dublin,210.00,1,10.00,USD\n")
+    JSONL = ('{"listing_id": 900, "title": "Peterson System", '
+             '"price": {"amount": 95.0, "currency": "USD"}, "date": "2026-07-20"}\n'
+             '{"listing_id": 901, "title": "Comoy Bulldog", '
+             '"price": {"amount": 130.0, "currency": "USD"}, "date": "2026-07-22"}\n')
+
+    def test_plain_date_column_maps(self):
+        """A file whose only date column is called 'Date' must still load —
+        the specific aliases win, 'date' is the last resort."""
+        from monster.well import propose_mapping
+        mapping = propose_mapping(["Date", "Item Id", "Listing Title", "Price"])
+        self.assertEqual(mapping["sold_at"], "Date")
+        self.assertEqual(mapping["item_id"], "Item Id")
+        self.assertEqual(mapping["title"], "Listing Title")
+
+    def test_jsonl_with_nested_price(self):
+        path = self.base / "etsy_sold_manifest.jsonl"
+        path.write_text(self.JSONL, encoding="utf-8")
+        well = Well(self.root)
+        stats = well.load(path)
+        self.assertEqual(stats["transactions"], 2)
+        self.assertEqual(stats["channel"], "etsy")
+        prices = sorted(r["price"] for r in well.transactions())
+        self.assertEqual(prices, [95.0, 130.0])
+
+    def test_append_merges_channels_and_skips_duplicates(self):
+        csv_path = self.base / "ebay_sales.csv"
+        csv_path.write_text(self.CSV, encoding="utf-8")
+        jsonl_path = self.base / "etsy_sold.jsonl"
+        jsonl_path.write_text(self.JSONL, encoding="utf-8")
+
+        well = Well(self.root)
+        well.load(csv_path)
+        stats = well.load(jsonl_path, append=True)
+        self.assertEqual(stats["transactions"], 4)
+        self.assertEqual({r["channel"] for r in well.transactions()}, {"ebay", "etsy"})
+
+        again = well.load(jsonl_path, append=True)
+        self.assertEqual(again["added"], 0)
+        self.assertEqual(again["duplicates_skipped"], 2)
+        self.assertEqual(again["transactions"], 4)
+
+    def test_load_without_append_replaces(self):
+        csv_path = self.base / "ebay_sales.csv"
+        csv_path.write_text(self.CSV, encoding="utf-8")
+        well = Well(self.root)
+        well.load(csv_path)
+        jsonl_path = self.base / "etsy_sold.jsonl"
+        jsonl_path.write_text(self.JSONL, encoding="utf-8")
+        stats = well.load(jsonl_path)
+        self.assertEqual(stats["transactions"], 2)

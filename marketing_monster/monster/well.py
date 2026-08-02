@@ -25,7 +25,7 @@ from .ledger import LedgerError
 TRANSACTION_FIELDS = {
     "item_id", "title", "brand", "shape", "category", "condition", "surface",
     "listed_at", "sold_at", "days_to_sale", "price", "currency", "quantity",
-    "buyer_key",
+    "buyer_key", "channel",
 }
 BUYER_FIELDS = {"buyer_key", "purchases", "first_seen", "last_seen",
                 "categories", "total_value", "repeat"}
@@ -51,8 +51,11 @@ ALIASES = {
     "price": ("sold for", "sale price", "price", "total price", "sold price"),
     "currency": ("currency", "currency code"),
     "quantity": ("quantity", "qty"),
-    "sold_at": ("sale date", "sold date", "date sold", "paid on"),
-    "listed_at": ("start date", "listed date", "listing date"),
+    # order matters — the specific names win, "date" is the last resort so a
+    # file whose only date column is called "Date" still maps
+    "sold_at": ("sale date", "sold date", "date sold", "paid on",
+                "transaction date", "order date", "date"),
+    "listed_at": ("start date", "listed date", "listing date", "created"),
     "category": ("category", "ebay category", "leaf category"),
     "condition": ("condition",),
     "_buyer_raw": ("buyer username", "buyer id", "buyer user id", "username", "buyer"),
@@ -61,6 +64,70 @@ ALIASES = {
 
 def _norm(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", s.strip().lower()).strip()
+
+
+def _flatten(record: dict, prefix: str = "") -> dict:
+    """JSONL records nest. One level of flattening is enough to expose the
+    fields that matter (price.amount, listing.title) without inventing a
+    schema language."""
+    out = {}
+    for key, value in record.items():
+        name = f"{prefix}{key}"
+        if isinstance(value, dict):
+            out.update(_flatten(value, f"{name}_"))
+        elif isinstance(value, list):
+            out[name] = ", ".join(str(v) for v in value if not isinstance(v, (dict, list)))
+        else:
+            out[name] = value
+    return out
+
+
+def read_rows(path: str | pathlib.Path) -> tuple[list[str], list[dict]]:
+    """CSV, TSV or JSONL — one reader, so every command speaks all of them."""
+    path = pathlib.Path(path)
+    suffix = path.suffix.lower()
+    if suffix in (".jsonl", ".ndjson"):
+        rows = []
+        with path.open(encoding="utf-8") as fh:
+            for line in fh:
+                line = line.strip()
+                if line:
+                    try:
+                        rows.append(_flatten(json.loads(line)))
+                    except json.JSONDecodeError:
+                        continue
+        if not rows:
+            raise LedgerError(f"{path.name} has no readable JSON records")
+        headers, seen = [], set()
+        for row in rows[:500]:            # union of the first 500 records
+            for key in row:
+                if key not in seen:
+                    seen.add(key)
+                    headers.append(key)
+        return headers, rows
+    if suffix == ".json":
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if isinstance(data, dict):        # {"items": [...]} or similar
+            data = next((v for v in data.values() if isinstance(v, list)), [])
+        rows = [_flatten(r) for r in data if isinstance(r, dict)]
+        if not rows:
+            raise LedgerError(f"{path.name} holds no list of records")
+        return list(rows[0]), rows
+    delimiter = "\t" if suffix == ".tsv" else ","
+    with path.open(encoding="utf-8-sig", newline="") as fh:
+        reader = csv.DictReader(fh, delimiter=delimiter)
+        return list(reader.fieldnames or []), list(reader)
+
+
+def read_headers(path: str | pathlib.Path) -> list[str]:
+    """Header row / record keys only — `inspect` must not pull the whole file
+    into memory for a CSV just to show its columns."""
+    path = pathlib.Path(path)
+    if path.suffix.lower() in (".csv", ".tsv"):
+        delimiter = "\t" if path.suffix.lower() == ".tsv" else ","
+        with path.open(encoding="utf-8-sig", newline="") as fh:
+            return next(csv.reader(fh, delimiter=delimiter), [])
+    return read_rows(path)[0]
 
 
 def propose_mapping(headers: list[str]) -> dict[str, str | None]:
@@ -113,57 +180,84 @@ class Well:
                     )
 
     # -- loading ----------------------------------------------------------
-    def load_csv(self, csv_path: str | pathlib.Path,
-                 mapping: dict | None = None) -> dict:
-        """Turn a sold-item export into derived features. Anything not
-        whitelisted is dropped on the floor, silently and on purpose."""
-        csv_path = pathlib.Path(csv_path)
-        with csv_path.open(encoding="utf-8-sig", newline="") as fh:
-            reader = csv.DictReader(fh)
-            headers = reader.fieldnames or []
-            mapping = mapping or propose_mapping(headers)
-            missing = [f for f in ("item_id", "price", "sold_at") if not mapping.get(f)]
-            if missing:
-                raise LedgerError(
-                    f"cannot map required fields {missing} from {headers!r} — "
-                    "run `inspect` and supply a mapping.json"
-                )
-            transactions, buyers = [], defaultdict(lambda: {
-                "purchases": 0, "total_value": 0.0, "categories": set(),
-                "first_seen": None, "last_seen": None})
+    def load(self, source: str | pathlib.Path, mapping: dict | None = None, *,
+             append: bool = False, channel: str | None = None) -> dict:
+        """Turn a sold-item export into derived features. CSV, TSV or JSONL.
+        Anything not whitelisted is dropped on the floor, on purpose.
 
-            for raw in reader:
-                row = {}
-                for field, column in mapping.items():
-                    if not column or field.startswith("_"):
-                        continue
-                    if field in TRANSACTION_FIELDS:
-                        row[field] = (raw.get(column) or "").strip()
-                buyer_col = mapping.get("_buyer_raw")
-                buyer_raw = (raw.get(buyer_col) or "").strip() if buyer_col else ""
-                row["buyer_key"] = self.buyer_key(buyer_raw) if buyer_raw else ""
-                row["price"] = _to_float(row.get("price"))
-                row["days_to_sale"] = _days(row.get("listed_at"), row.get("sold_at"))
-                self.assert_clean(row)
-                transactions.append(row)
+        `append` merges a second source into the same Well — the sales history
+        lives across eBay and Etsy exports, and one Well should hold both.
+        """
+        source = pathlib.Path(source)
+        channel = channel or _guess_channel(source)
+        headers, raw_rows = read_rows(source)
+        mapping = mapping or propose_mapping(headers)
+        missing = [f for f in ("item_id", "price", "sold_at") if not mapping.get(f)]
+        if missing:
+            raise LedgerError(
+                f"cannot map required fields {missing} from {headers!r} — "
+                "run `inspect` and supply a mapping.json"
+            )
 
-                if row["buyer_key"]:
-                    b = buyers[row["buyer_key"]]
-                    b["purchases"] += 1
-                    b["total_value"] += row["price"] or 0.0
-                    if row.get("category"):
-                        b["categories"].add(row["category"])
-                    for key, when in (("first_seen", min), ("last_seen", max)):
-                        sold = row.get("sold_at") or ""
-                        b[key] = sold if not b[key] else when(b[key], sold)
+        transactions = list(self.transactions()) if append else []
+        before = len(transactions)
+        seen = {_dedupe_key(t) for t in transactions}
+        skipped = 0
+
+        for raw in raw_rows:
+            row = {"channel": channel}
+            for field, column in mapping.items():
+                if not column or field.startswith("_"):
+                    continue
+                if field in TRANSACTION_FIELDS:
+                    value = raw.get(column)
+                    row[field] = str(value).strip() if value is not None else ""
+            buyer_col = mapping.get("_buyer_raw")
+            buyer_raw = str(raw.get(buyer_col) or "").strip() if buyer_col else ""
+            row["buyer_key"] = self.buyer_key(buyer_raw) if buyer_raw else ""
+            row["price"] = _to_float(row.get("price"))
+            row["days_to_sale"] = _days(row.get("listed_at"), row.get("sold_at"))
+            self.assert_clean(row)
+            key = _dedupe_key(row)
+            if key in seen:                 # same sale, loaded twice
+                skipped += 1
+                continue
+            seen.add(key)
+            transactions.append(row)
 
         out_tx = self.root / "derived" / "transactions.jsonl"
         with out_tx.open("w", encoding="utf-8") as fh:
             for row in transactions:
                 fh.write(json.dumps(row, sort_keys=True) + "\n")
 
-        out_buyers = self.root / "derived" / "buyers.jsonl"
-        with out_buyers.open("w", encoding="utf-8") as fh:
+        buyers = self._rebuild_buyers(transactions)
+        return {"transactions": len(transactions), "added": len(transactions) - before,
+                "duplicates_skipped": skipped, "channel": channel,
+                "buyers": len(buyers),
+                "repeat_buyers": sum(1 for b in buyers.values() if b["purchases"] > 1),
+                "dropped_columns": dropped_columns(headers, mapping)}
+
+    # kept so existing callers and tests keep working
+    load_csv = load
+
+    def _rebuild_buyers(self, transactions: list[dict]) -> dict:
+        buyers = defaultdict(lambda: {"purchases": 0, "total_value": 0.0,
+                                      "categories": set(), "first_seen": None,
+                                      "last_seen": None})
+        for row in transactions:
+            if not row.get("buyer_key"):
+                continue
+            b = buyers[row["buyer_key"]]
+            b["purchases"] += 1
+            b["total_value"] += row.get("price") or 0.0
+            if row.get("category"):
+                b["categories"].add(row["category"])
+            for key, when in (("first_seen", min), ("last_seen", max)):
+                sold = row.get("sold_at") or ""
+                b[key] = sold if not b[key] else when(b[key], sold)
+
+        out = self.root / "derived" / "buyers.jsonl"
+        with out.open("w", encoding="utf-8") as fh:
             for key, b in buyers.items():
                 rec = {"buyer_key": key, "purchases": b["purchases"],
                        "total_value": round(b["total_value"], 2),
@@ -172,16 +266,27 @@ class Well:
                        "repeat": b["purchases"] > 1}
                 self.assert_clean(rec)
                 fh.write(json.dumps(rec, sort_keys=True) + "\n")
-
-        return {"transactions": len(transactions), "buyers": len(buyers),
-                "repeat_buyers": sum(1 for b in buyers.values() if b["purchases"] > 1),
-                "dropped_columns": dropped_columns(headers, mapping)}
+        return buyers
 
     def transactions(self) -> list[dict]:
         path = self.root / "derived" / "transactions.jsonl"
         if not path.exists():
             return []
         return [json.loads(ln) for ln in path.read_text(encoding="utf-8").splitlines() if ln.strip()]
+
+
+def _guess_channel(path: pathlib.Path) -> str:
+    blob = str(path).lower()
+    for name in ("etsy", "ebay", "shopify", "amazon", "site"):
+        if name in blob:
+            return name
+    return "unknown"
+
+
+def _dedupe_key(row: dict) -> tuple:
+    """Same item, same day, same price, same channel = the same sale."""
+    return (row.get("channel"), str(row.get("item_id") or ""),
+            str(row.get("sold_at") or "")[:10], row.get("price"))
 
 
 def _to_float(value) -> float | None:
