@@ -716,3 +716,45 @@ class T21_TheMachineFillsItsOwnLedgers(MonsterCase):
         from monster.judge import Judge
         for row in Judge(self.root).rows():
             self.assertEqual(row["needs_farid"], "none")
+
+
+class T22_EveryExportWritesDatesDifferently(MonsterCase):
+    """The autopilot crashed on the real Well: eBay ships "Oct-21-25", Etsy
+    ships "2026-07-14". Mixed formats do not fail loudly — they sort wrong,
+    cohort wrong and compare wrong against a cutoff, which is a far worse way
+    to be wrong than a crash."""
+
+    def test_the_formats_a_real_export_uses(self):
+        from monster.well import iso_date
+        self.assertEqual(iso_date("Oct-21-25"), "2025-10-21")
+        self.assertEqual(iso_date("Oct 21, 2025"), "2025-10-21")
+        self.assertEqual(iso_date("2015-09-28 13:15:00"), "2015-09-28")
+        self.assertEqual(iso_date("2026-07-14"), "2026-07-14")
+        self.assertIsNone(iso_date("garbage"))
+        self.assertIsNone(iso_date(""))
+
+    def test_two_digit_years_stay_in_the_past(self):
+        from monster.well import iso_date
+        self.assertEqual(iso_date("Oct-21-25")[:4], "2025")   # not 1925, not 2125
+
+    def test_a_well_written_before_the_fix_reads_correctly(self):
+        """Normalised on the way out too, so 8,042 rows already on disk do not
+        need reloading."""
+        import json
+        derived = self.root / "well" / "derived"
+        derived.mkdir(parents=True)
+        (derived / "transactions.jsonl").write_text(
+            json.dumps({"item_id": "1", "title": "Peterson", "price": 95.0,
+                        "sold_at": "Oct-21-25", "channel": "ebay"}) + "\n",
+            encoding="utf-8")
+        row = Well(self.root).transactions()[0]
+        self.assertEqual(row["sold_at"], "2025-10-21")
+
+    def test_mixed_formats_load_and_sort_together(self):
+        path = self.base / "mixed.csv"
+        path.write_text("Item Id,Listing Title,Price,Date\n"
+                        "1,Peterson System,95.00,Oct-21-25\n"
+                        "2,Dunhill Shell,340.00,2026-07-14\n", encoding="utf-8")
+        Well(self.root).load(path)
+        dates = sorted(r["sold_at"] for r in Well(self.root).transactions())
+        self.assertEqual(dates, ["2025-10-21", "2026-07-14"])

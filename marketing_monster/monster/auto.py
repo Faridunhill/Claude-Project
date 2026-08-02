@@ -127,13 +127,17 @@ class Autopilot:
         for row in Well(self.root).transactions():
             item_id = str(row.get("item_id") or "").strip()
             sold_at = str(row.get("sold_at") or "")[:10]
-            if not item_id or item_id in known or sold_at < cutoff:
+            if not item_id or item_id in known:
+                continue
+            if not sold_at or sold_at < cutoff:
                 continue
             surface = row.get("channel") if row.get("channel") in (
                 "ebay", "etsy", "site") else "other"
+            from .well import iso_date
+            stamped = iso_date(sold_at)
             written.append(scale.record(
                 "sale", item_id, surface=surface, value=row.get("price"),
-                ts=f"{sold_at}T12:00:00Z" if len(sold_at) == 10 else None,
+                ts=f"{stamped}T12:00:00Z" if stamped else None,
                 note=(f"buyer={row['buyer_key']}" if row.get("buyer_key") else ""),
             ))
             known.add(item_id)

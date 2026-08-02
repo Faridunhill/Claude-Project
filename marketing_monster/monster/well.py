@@ -230,6 +230,9 @@ class Well:
             buyer_raw = str(raw.get(buyer_col) or "").strip() if buyer_col else ""
             row["buyer_key"] = self.buyer_key(buyer_raw) if buyer_raw else ""
             row["price"] = _to_float(row.get("price"))
+            for field in ("sold_at", "listed_at"):
+                if row.get(field):
+                    row[field] = iso_date(row[field]) or row[field]
             row["days_to_sale"] = _days(row.get("listed_at"), row.get("sold_at"))
             self.assert_clean(row)
             key = _dedupe_key(row)
@@ -283,10 +286,21 @@ class Well:
         return buyers
 
     def transactions(self) -> list[dict]:
+        """Normalised on the way out too, so a Well loaded before this fix
+        existed reads correctly without being rebuilt."""
         path = self.root / "derived" / "transactions.jsonl"
         if not path.exists():
             return []
-        return [json.loads(ln) for ln in path.read_text(encoding="utf-8").splitlines() if ln.strip()]
+        out = []
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            for field in ("sold_at", "listed_at"):
+                if row.get(field):
+                    row[field] = iso_date(row[field]) or ""
+            out.append(row)
+        return out
 
 
 def _guess_channel(path: pathlib.Path) -> str:
@@ -301,6 +315,40 @@ def _dedupe_key(row: dict) -> tuple:
     """Same item, same day, same price, same channel = the same sale."""
     return (row.get("channel"), str(row.get("item_id") or ""),
             str(row.get("sold_at") or "")[:10], row.get("price"))
+
+
+DATE_FORMATS = (
+    "%Y-%m-%d", "%Y/%m/%d", "%d/%m/%Y", "%m/%d/%Y", "%m-%d-%Y",
+    "%b-%d-%y", "%b-%d-%Y", "%d-%b-%y", "%d-%b-%Y", "%b %d, %Y", "%d %b %Y",
+)
+
+
+def iso_date(value) -> str | None:
+    """Every export writes dates differently — eBay ships "Oct-21-25", Etsy
+    ships "2026-07-14". One stored format or nothing works: string comparison,
+    cohorts, spans and cutoffs all silently misread mixed formats rather than
+    failing, which is the worst way to be wrong."""
+    from datetime import datetime
+    if not value:
+        return None
+    text = str(value).strip().replace("T", " ").strip()
+    if not text:
+        return None
+    # try the whole string first — "Oct 21, 2025" must not be cut at the space —
+    # then the part before the time, for "2015-09-28 13:15:00"
+    candidates = [text]
+    if " " in text:
+        candidates.append(text.split(" ")[0])
+    for candidate, fmt in ((c, f) for c in candidates for f in DATE_FORMATS):
+        try:
+            parsed = datetime.strptime(candidate, fmt)
+        except ValueError:
+            continue
+        # two-digit years: a pipe sale is not from 2070
+        if "%y" in fmt and parsed.year > datetime.now().year + 1:
+            parsed = parsed.replace(year=parsed.year - 100)
+        return parsed.date().isoformat()
+    return None
 
 
 def _to_float(value) -> float | None:
