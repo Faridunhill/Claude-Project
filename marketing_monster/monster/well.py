@@ -44,6 +44,14 @@ PII_PATTERNS = {
 PII_COLUMN_HINTS = ("name", "email", "e-mail", "address", "street", "city", "state",
                     "zip", "postcode", "postal", "phone", "tel", "contact", "buyer")
 
+# Fields that hold OUR OWN listing copy, not customer data. A pipe title is
+# full of things that look like addresses — "4 Star Dr Grabow", "2 Ring St
+# Charatan" — so the street pattern is not applied to them; it would refuse
+# the whole catalogue to guard against a risk that is not there. Email and
+# phone patterns are specific enough to keep everywhere.
+PRODUCT_TEXT_FIELDS = {"title", "brand", "shape", "category", "condition", "channel"}
+ADDRESS_PATTERNS = {"street"}
+
 # --- default column aliases (eBay-ish exports; override with a mapping) ---
 ALIASES = {
     "item_id": ("item number", "item id", "itemid", "listing id", "sku"),
@@ -172,11 +180,17 @@ class Well:
         for key, value in row.items():
             if any(h in key.lower() for h in PII_COLUMN_HINTS) and key != "buyer_key":
                 raise LedgerError(f"refusing to write column {key!r} — M4: derived features only")
+            if not isinstance(value, str):
+                continue
             for label, pattern in PII_PATTERNS.items():
-                if isinstance(value, str) and pattern.search(value):
+                if label in ADDRESS_PATTERNS and key in PRODUCT_TEXT_FIELDS:
+                    continue          # our own listing copy — see PRODUCT_TEXT_FIELDS
+                hit = pattern.search(value)
+                if hit:
+                    snippet = hit.group(0)[:60]
                     raise LedgerError(
-                        f"refusing to write {label} found in {key!r} — the Well holds "
-                        "no personal data (M4)"
+                        f"refusing to write {label} found in {key!r}: {snippet!r} — "
+                        "the Well holds no personal data (M4)"
                     )
 
     # -- loading ----------------------------------------------------------

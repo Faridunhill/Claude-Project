@@ -417,3 +417,34 @@ class T14_ManySourcesOneWell(MonsterCase):
         jsonl_path.write_text(self.JSONL, encoding="utf-8")
         stats = well.load(jsonl_path)
         self.assertEqual(stats["transactions"], 2)
+
+
+class T15_ProductTitlesAreNotAddresses(MonsterCase):
+    """The M4 guard must not refuse the catalogue. Pipe titles are full of
+    address-shaped noise — '4 Star Dr Grabow', '2 Ring St' — and blocking on
+    them stops the whole load while protecting nothing: a listing title is our
+    own marketing copy, not customer data."""
+
+    TRICKY = [
+        "Vintage 4 Star Dr Grabow Duke Billiard Estate Pipe",
+        "Dunhill 2 Ring St Shell Briar Group 4",
+        "Peterson 999 Sterling Way Rustic Bent",
+        "Charatan 3 Oak Lane Selected Dublin",
+    ]
+
+    def test_titles_load(self):
+        rows = "".join(f"{i},{t},100.00,2026-07-0{i}\n"
+                       for i, t in enumerate(self.TRICKY, 1))
+        path = self.base / "ebay_sales.csv"
+        path.write_text("Item Id,Listing Title,Price,Date\n" + rows, encoding="utf-8")
+        stats = Well(self.root).load(path)
+        self.assertEqual(stats["transactions"], len(self.TRICKY))
+
+    def test_a_real_address_field_is_still_refused(self):
+        with self.assertRaises(LedgerError):
+            Well(self.root).assert_clean({"note": "ships to 12 Oak Street"})
+
+    def test_email_still_refused_even_in_a_title(self):
+        with self.assertRaises(LedgerError) as ctx:
+            Well(self.root).assert_clean({"title": "Pipe lot, contact me at a@b.com"})
+        self.assertIn("a@b.com", str(ctx.exception))
