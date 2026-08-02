@@ -80,11 +80,18 @@ def cmd_load(args) -> int:
 
 def cmd_record(args) -> int:
     root = root_for(pathlib.Path(args.base), args.clone)
+    note = args.note
+    if args.buyer:
+        # hashed on the way in, never stored raw (M4) — this is what makes
+        # "who bought twice" answerable going forward
+        note = (note + " " if note else "") + f"buyer={Well(root).buyer_key(args.buyer)}"
     row = Scale(root).record(args.event, args.asset_id, surface=args.surface,
                              value=args.value, attribution=args.attribution or None,
-                             reason=args.reason, asset_version=args.asset_version)
+                             reason=args.reason, asset_version=args.asset_version,
+                             note=note)
     print(f"{row['id']}  {row['event']}  cohort={row['cohort']}  "
-          f"attribution={row['attribution']}")
+          f"attribution={row['attribution']}"
+          + ("  buyer=hashed" if args.buyer else ""))
     return 0
 
 
@@ -128,6 +135,36 @@ def cmd_dig(args) -> int:
         print(f"\nsaved: {path}")
     else:
         print(dig.report())
+    return 0
+
+
+def cmd_decide(args) -> int:
+    root = root_for(pathlib.Path(args.base), args.clone)
+    row = Judge(root).decide(args.proposal, edge=args.edge, verdict=args.verdict,
+                             reason=args.reason, needs_farid=args.needs_farid,
+                             resupply=args.resupply)
+    print(f"{row['decision_id']}  {row['verdict']}  edge={row['edge']}  "
+          f"channel={row['channel_flag']}")
+    return 0
+
+
+def cmd_twin(args) -> int:
+    """Twin a proven listing onto owned ground first, borrowed second."""
+    from .twin import Twin
+    root = root_for(pathlib.Path(args.base), args.clone)
+    result = Twin(root).build(args.title, args.price, args.sku,
+                              decision_id=args.decision, sold_on=args.sold_on,
+                              source_channel=args.source)
+    facts = result["facts"]
+    named = ", ".join(f"{k}={v}" for k, v in facts.items() if v)
+    print(f"twinned {result['sku'] or '(no sku)'}")
+    print(f"  read from the title: {named or 'nothing recognised — check the vocabulary'}")
+    print(f"  stamped: {result['asset_version']}  decision: {result['decision_id']}")
+    print(f"  lessons applied: {len(result['lessons_applied'])}")
+    print(f"  written: {result['out_dir']}")
+    for name in result["files"]:
+        print(f"    - {name}")
+    print("  owned ground first: publish site.md before the Etsy copy (Mouth law).")
     return 0
 
 
@@ -177,6 +214,8 @@ def main(argv=None) -> int:
     sp.add_argument("--attribution", default="")
     sp.add_argument("--reason", default="")
     sp.add_argument("--asset-version", dest="asset_version")
+    sp.add_argument("--buyer", default="", help="username — hashed on the way in, never stored raw")
+    sp.add_argument("--note", default="")
     sp.set_defaults(fn=cmd_record)
 
     sp = clone_arg(sub.add_parser("report"))
@@ -193,6 +232,24 @@ def main(argv=None) -> int:
     sp = clone_arg(sub.add_parser("dig"))
     sp.add_argument("--save", action="store_true")
     sp.set_defaults(fn=cmd_dig)
+
+    sp = clone_arg(sub.add_parser("decide"))
+    sp.add_argument("proposal")
+    sp.add_argument("--edge", default="expertise")
+    sp.add_argument("--verdict", default="DO")
+    sp.add_argument("--reason", required=True)
+    sp.add_argument("--needs-farid", dest="needs_farid", default="none")
+    sp.add_argument("--resupply", default="")
+    sp.set_defaults(fn=cmd_decide)
+
+    sp = clone_arg(sub.add_parser("twin", help="twin a sold listing to owned + borrowed ground"))
+    sp.add_argument("title")
+    sp.add_argument("price", type=float)
+    sp.add_argument("--sku", default="")
+    sp.add_argument("--decision", required=True)
+    sp.add_argument("--sold-on", dest="sold_on", required=True)
+    sp.add_argument("--source", default="ebay")
+    sp.set_defaults(fn=cmd_twin)
 
     clone_arg(sub.add_parser("pending")).set_defaults(fn=cmd_pending)
     clone_arg(sub.add_parser("verify")).set_defaults(fn=cmd_verify)

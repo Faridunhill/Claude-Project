@@ -490,3 +490,55 @@ class T16_ProposalsRankByEvidenceNotEffect(MonsterCase):
         self.assertIsNotNone(broad)
         if narrow is not None:
             self.assertLess(broad, narrow)
+
+
+class T17_TwinObeysTheLaws(MonsterCase):
+    """Twinning a sold listing is a translation, not an embellishment, and it
+    goes to owned ground before borrowed."""
+
+    TITLE = "Savinelli 920 KS Bent Dublin Estate Pipe, Burgundy Finish"
+
+    def _twin(self, title=None, price=125.0):
+        from monster.twin import Twin
+        return Twin(self.root).build(title or self.TITLE, price,
+                                     "savinelli-920-ks-d4b01",
+                                     decision_id="D-001", sold_on="2026-08-01")
+
+    def test_requires_a_judge_decision(self):
+        from monster.twin import Twin
+        with self.assertRaises(LedgerError):
+            Twin(self.root).build(self.TITLE, 125.0, "sku", decision_id="",
+                                  sold_on="2026-08-01")
+
+    def test_never_invents_a_date(self):
+        result = self._twin()
+        body = (result["out_dir"] / "site.md").read_text()
+        self.assertIn("UNDATED", body)
+        for invented in ("1960s", "1970s", "circa", "c.19"):
+            self.assertNotIn(invented, body)
+
+    def test_reads_only_what_the_title_says(self):
+        result = self._twin()
+        self.assertEqual(result["facts"]["brand"], "savinelli")
+        self.assertEqual(result["facts"]["shape"], "dublin")
+        self.assertFalse(result["facts"]["unsmoked"])   # the title does not say so
+
+    def test_etsy_limits_are_respected(self):
+        from monster.twin import (ETSY_TAG_COUNT, ETSY_TAG_MAX_CHARS,
+                                  ETSY_TITLE_MAX, etsy_tags, etsy_title, classify)
+        long_title = ("Savinelli 920 KS Bent Dublin Estate Pipe Burgundy Finish "
+                      "9mm Filter Unsmoked Italian Handmade Briar Collectible " * 3)
+        title = etsy_title(long_title)
+        self.assertLessEqual(len(title), ETSY_TITLE_MAX)
+        self.assertFalse(title.endswith(" "))
+        tags = etsy_tags(long_title, classify(long_title))
+        self.assertLessEqual(len(tags), ETSY_TAG_COUNT)
+        for tag in tags:
+            self.assertLessEqual(len(tag), ETSY_TAG_MAX_CHARS)
+
+    def test_output_is_stamped_and_sold_entry_stays_live(self):
+        result = self._twin()
+        self.assertTrue(result["asset_version"].startswith("pb-"))
+        body = (result["out_dir"] / "site.md").read_text()
+        self.assertIn("status: sold", body)
+        self.assertIn("current", body.lower())     # points at current stock
