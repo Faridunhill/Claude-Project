@@ -37,3 +37,5 @@ next-env.d.ts
 /marketing_monster/clones/
 /marketing_monster/cookbook/
 **/.salt
+__pycache__/
+*.py[cod]
