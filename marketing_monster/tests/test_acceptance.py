@@ -448,3 +448,45 @@ class T15_ProductTitlesAreNotAddresses(MonsterCase):
         with self.assertRaises(LedgerError) as ctx:
             Well(self.root).assert_clean({"title": "Pipe lot, contact me at a@b.com"})
         self.assertIn("a@b.com", str(ctx.exception))
+
+
+class T16_ProposalsRankByEvidenceNotEffect(MonsterCase):
+    """The real dig exposed this: ranking candidates by lift and taking the
+    top three hands every slot to the noisiest finding. A +176% effect seen in
+    2 brands beat a +30% effect seen in 11, because small groups swing harder.
+    Breadth first, volume second, size last."""
+
+    def setUp(self):
+        super().setUp()
+        rows, n = [], 0
+        # 'broad' appears across 6 brands with a modest, consistent +25%.
+        # 'narrow' appears in 2 brands with a wild +150%.
+        brands = ["Dunhill", "Peterson", "Stanwell", "Comoy", "GBD", "Savinelli"]
+        for i, brand in enumerate(brands):
+            for j in range(30):
+                broad = j % 2 == 0
+                narrow = i < 2 and j % 3 == 0
+                price = 100 * (1.25 if broad else 1.0) * (2.5 if narrow else 1.0)
+                words = " ".join(w for w, on in
+                                 (("broadword", broad), ("narrowword", narrow)) if on)
+                n += 1
+                rows.append(f"{n},{brand} Billiard {words},{price:.2f},2026-01-0{j % 9 + 1}\n")
+        path = self.base / "ebay_sales.csv"
+        path.write_text("Item Id,Listing Title,Price,Date\n" + "".join(rows),
+                        encoding="utf-8")
+        Well(self.root).load(path)
+        from monster.dig import Dig
+        self.dig = Dig(self.root)
+
+    def test_the_broad_finding_is_proposed_first(self):
+        lines = self.dig.proposals()
+        self.assertTrue(lines, "expected at least one proposal")
+        self.assertIn("broadword", lines[0])
+
+    def test_a_two_brand_spike_never_outranks_a_six_brand_pattern(self):
+        lines = self.dig.proposals()
+        broad = next((i for i, x in enumerate(lines) if "broadword" in x), None)
+        narrow = next((i for i, x in enumerate(lines) if "narrowword" in x), None)
+        self.assertIsNotNone(broad)
+        if narrow is not None:
+            self.assertLess(broad, narrow)

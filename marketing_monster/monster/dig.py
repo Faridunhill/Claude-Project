@@ -35,18 +35,47 @@ STOPWORDS = {
     "pipe", "pipes", "smoking", "tobacco", "briar", "lot", "free", "shipping",
     "l", "k", "s", "x", "mm", "cm", "inch", "inches",
 }
+# Longer names first: "missouri meerschaum" must win over "meerschaum", and
+# "dr grabow" over "grabow", or the specific brand is swallowed by the generic.
 BRANDS = [
-    "dunhill", "charatan", "upshall", "peterson", "castello", "sasieni",
-    "comoy", "gbd", "barling", "stanwell", "savinelli", "chacom", "radice",
-    "ser jacopo", "ashton", "ferndown", "northern briars", "rattray", "parker",
-    "bbb", "loewe", "butz-choquin", "nording", "winslow", "bang", "ivarsson",
-    "chonowitsch", "tsuge", "kaywoodie", "yello-bole", "missouri meerschaum",
-    "falcon", "hardcastle", "orlik", "ropp", "vauen", "meerschaum", "dr grabow",
-    "brebbia", "caminetto", "il ceppo", "mastro de paja", "becker", "former",
+    # British
+    "dunhill", "charatan", "upshall", "barling", "comoy", "gbd", "sasieni",
+    "loewe", "bbb", "orlik", "parker", "hardcastle", "astley", "ferndown",
+    "ashton", "northern briars", "james upshall", "dr plumb", "civic",
+    "falcon", "rattray", "millville",
+    # Irish
+    "peterson",
+    # Danish / Scandinavian
+    "stanwell", "erik nording", "nording", "preben holm", "karl erik", "bjarne",
+    "winslow", "s bang", "tom eltang", "teddy knudsen", "jess chonowitsch",
+    "ivarsson", "neerup", "former", "ben wade", "royal danish",
+    # Italian
+    "castello", "savinelli", "brebbia", "radice", "ser jacopo", "caminetto",
+    "il ceppo", "mastro de paja", "ardor", "don carlos", "il duca", "le nuvole",
+    "rossi", "lorenzo", "amorelli", "mastro geppetto",
+    # French
+    "chacom", "butz-choquin", "ropp", "jeantet", "genod", "chapuis", "longchamp",
+    # German / Dutch / Belgian
+    "vauen", "peter heinrichs", "design berlin", "big ben", "hilson", "elysee",
+    "amphora", "wiedemann", "rattrays",
+    # American
+    "kaywoodie", "yello-bole", "yello bole", "dr grabow", "grabow", "custombilt",
+    "medico", "weber", "missouri meerschaum", "tinder box", "jobey", "willmer",
+    # Japanese / other
+    "tsuge", "becker",
 ]
+BRANDS.sort(key=len, reverse=True)
+
 SHAPES = ["billiard", "bulldog", "rhodesian", "dublin", "apple", "bent",
           "canadian", "lovat", "prince", "pot", "author", "poker", "zulu",
-          "calabash", "churchwarden", "freehand", "blowfish", "cutty", "egg"]
+          "calabash", "churchwarden", "freehand", "blowfish", "cutty", "egg",
+          "acorn", "brandy", "chimney", "devil anse", "horn", "oom paul",
+          "panel", "sitter", "tomato", "volcano", "bulldog rhodesian"]
+
+# Material is not a brand. Keeping "meerschaum" in the brand list made a
+# material look like a house and hid whatever house actually made the pipe.
+MATERIALS = ["meerschaum", "briar", "clay", "corncob", "corn cob", "morta",
+             "olivewood", "olive wood", "cherrywood", "pear wood", "gourd"]
 
 TOKEN_RE = re.compile(r"[a-z0-9][a-z0-9'\-]{1,}")
 
@@ -130,6 +159,41 @@ class Dig:
                 "confidence": confidence(len(group)),
             })
         return sorted(out, key=lambda d: -d["n"])
+
+    def by_channel(self) -> list[dict]:
+        """eBay and Etsy are different markets; one Well should not hide that."""
+        groups: dict[str, list[dict]] = defaultdict(list)
+        for r in self.rows:
+            groups[r.get("channel") or "unknown"].append(r)
+        out = []
+        for channel, group in groups.items():
+            prices = [r["price"] for r in group if r.get("price")]
+            out.append({"channel": channel, "n": len(group),
+                        "median_price": _median(prices),
+                        "revenue": round(sum(prices), 2) if prices else 0.0,
+                        "span": (min((r.get("sold_at") or "" for r in group), default=""),
+                                 max((r.get("sold_at") or "" for r in group), default="")),
+                        "confidence": confidence(len(group))})
+        return sorted(out, key=lambda d: -d["n"])
+
+    def vocabulary_gap(self, top: int = 15) -> dict:
+        """How much of the catalogue the brand list cannot name.
+
+        A dig that classifies half the Well and says nothing about the other
+        half is quietly reporting on a biased sample. This section makes the
+        blind spot countable, and names the words that would close it.
+        """
+        unknown = [r for r in self.rows if not find_in(r.get("title", ""), BRANDS)]
+        counts = Counter()
+        known = {w for name in BRANDS + SHAPES + MATERIALS for w in name.split()}
+        for r in unknown:
+            counts.update(set(tokens(r.get("title", ""))) - known)
+        return {
+            "unclassified": len(unknown),
+            "share": len(unknown) / len(self.rows) if self.rows else 0,
+            "median_price": _median([r["price"] for r in unknown if r.get("price")]),
+            "candidates": counts.most_common(top),
+        }
 
     def title_words(self, min_n: int = NOT_EVIDENCE, min_stratum: int = 5) -> list[dict]:
         """Which title words travel with better outcomes — WITHIN BRAND.
@@ -235,6 +299,18 @@ class Dig:
             "",
         ]
 
+        channels = self.by_channel()
+        if len(channels) > 1:
+            L += ["## Channels in this Well"]
+            L += ["| channel | n | median | revenue | span | confidence |",
+                  "|---|---|---|---|---|---|"]
+            for c in channels:
+                med = f"{c['median_price']:,.0f}" if c["median_price"] else "—"
+                L += [f"| {c['channel']} | {c['n']} | {med} | {c['revenue']:,.0f} | "
+                      f"{c['span'][0][:10]} → {c['span'][1][:10]} | {c['confidence']} |"]
+            L += ["", "*Different markets. A lesson from one is not automatically true "
+                  "of the other — that is a second cohort, not a bigger one.*", ""]
+
         speed = self.speed()
         L += ["## Q1 · What sold fastest"]
         if speed:
@@ -306,6 +382,22 @@ class Dig:
                   "computable. **What would fix it:** an export including the buyer "
                   "username column — it is hashed on the way in and never stored raw.", ""]
 
+        gap = self.vocabulary_gap()
+        L += ["## The blind spot — what the brand list cannot name"]
+        L += [f"- {gap['unclassified']:,} of {len(self.rows):,} listings "
+              f"({gap['share']*100:.0f}%) match no known brand.",
+              f"- their median price is {gap['median_price']:,.0f}"
+              if gap["median_price"] else "- no prices among them",
+              "",
+              "Every brand table above describes only the classified remainder, so it "
+              "is a report on a biased sample until this share comes down. The most "
+              "common words in the unnamed listings — the vocabulary that would close "
+              "the gap:", ""]
+        L += ["| word | listings |", "|---|---|"]
+        L += [f"| {word} | {count} |" for word, count in gap["candidates"]]
+        L += ["", "*Add the real brand names among these to the vocabulary and re-run; "
+              "the rest are descriptive words that belong nowhere.*", ""]
+
         L += ["## What this dig does NOT show",
               "- Cause. Nothing here is an experiment; every number is what happened, "
               "not why.",
@@ -327,17 +419,26 @@ class Dig:
         return "\n".join(L)
 
     def proposals(self) -> list[str]:
-        """Candidate lines — evidence attached, status PROPOSED, expiry set."""
+        """Candidate lines — evidence attached, status PROPOSED, expiry set.
+
+        Ranked by EVIDENCE, not by effect size. Sorting candidates by lift and
+        taking the top three hands the slots to the noisiest findings: a +176%
+        effect seen in two brands beats a +30% effect seen in eleven, every
+        time, because small groups swing harder. Breadth first, volume second,
+        size last — the same instinct as B2, applied to the proposer itself.
+        """
         today = date.today()
         out = []
-        for w in self.title_words(min_n=WEAK)[:3]:
-            if w["price_lift"] and w["price_lift"] > 0.15 and w["brands"] >= 3:
-                out.append(
-                    f"[STRUCT][PROPOSED] Test '{w['word']}' in listing titles where it is "
-                    f"true of the pipe. :: n={w['n']} listings across {w['brands']} brands :: "
-                    f"effect={w['price_lift']*100:+.0f}% median price within brand (correlational) :: "
-                    f"born={today} :: review={today.replace(year=today.year + 1)} :: src=dig-001"
-                )
+        qualified = [w for w in self.title_words(min_n=WEAK)
+                     if w["price_lift"] and w["price_lift"] > 0.15 and w["brands"] >= 3]
+        qualified.sort(key=lambda w: (-w["brands"], -w["n"], -w["price_lift"]))
+        for w in qualified[:3]:
+            out.append(
+                f"[STRUCT][PROPOSED] Test '{w['word']}' in listing titles where it is "
+                f"true of the pipe. :: n={w['n']} listings across {w['brands']} brands :: "
+                f"effect={w['price_lift']*100:+.0f}% median price within brand (correlational) :: "
+                f"born={today} :: review={today.replace(year=today.year + 1)} :: src=dig-001"
+            )
         rb = self.repeat_buyers()
         if rb["repeat"] >= NOT_EVIDENCE and (rb["revenue_share"] or 0) > 0.2:
             out.append(
