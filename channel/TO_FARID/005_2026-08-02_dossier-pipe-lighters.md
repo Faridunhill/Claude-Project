@@ -1,3 +1,8 @@
+<!-- monster
+category: pipe and cigar lighters, mid tier + consumables
+edge: audience
+recommend: DO
+-->
 # DOSSIER 001 — PIPE & CIGAR LIGHTERS
 ### The outward Digger's first quality-gap dig
 

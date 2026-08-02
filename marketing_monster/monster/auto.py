@@ -26,6 +26,7 @@ import json
 import pathlib
 
 from .dig import Dig
+from .digger import Digger
 from .judge import Judge
 from .ledger import AppendOnlyLog, LedgerError, now_iso
 from .playbook import Playbook
@@ -40,6 +41,9 @@ DEFAULT_CONFIG = {
     "ebay_category": "",
     "ebay_location": "",
     "auto_twin": True,
+    "repo": "",                     # the bridge — pulled before every run
+    "dossier_folder": "",           # where the cloud drops its research
+    "git_pull": True,
 }
 STANDING_DECISION = "D-AUTO"
 
@@ -57,6 +61,30 @@ def write_config(base: pathlib.Path, config: dict) -> pathlib.Path:
     path = base / CONFIG_NAME
     path.write_text(json.dumps(config, indent=2), encoding="utf-8")
     return path
+
+
+def parse_dossier_header(path: pathlib.Path) -> dict:
+    """Dossiers carry a small machine-readable block the reader never sees:
+
+        <!-- monster
+        category: pipe and cigar lighters
+        edge: audience
+        recommend: DO
+        -->
+    """
+    try:
+        text = path.read_text(encoding="utf-8", errors="replace")[:4000]
+    except OSError:
+        return {}
+    if "<!-- monster" not in text:
+        return {}
+    block = text.split("<!-- monster", 1)[1].split("-->", 1)[0]
+    out = {}
+    for line in block.splitlines():
+        if ":" in line:
+            key, _, value = line.partition(":")
+            out[key.strip().lower()] = value.strip()
+    return out
 
 
 def file_fingerprint(path: pathlib.Path) -> str:
@@ -238,8 +266,69 @@ class Autopilot:
         added = [book.add_line(x) for x in Dig(self.root).proposals()]
         return {"expired": len(expired), "proposed": len([x for x in added if x])}
 
+    # -- 0: cross the bridge ----------------------------------------------
+    def pull(self) -> dict:
+        """Bring down whatever the cloud half wrote since yesterday.
+
+        This is the line that makes the two halves one system. Without it a
+        human carries files between them, and a system that needs a courier is
+        not automatic.
+        """
+        import subprocess
+        repo = self.config.get("repo") or ""
+        if not repo or not self.config.get("git_pull", True):
+            return {"pulled": False, "why": "no repo configured"}
+        path = pathlib.Path(repo).expanduser()
+        if not (path / ".git").is_dir():
+            return {"pulled": False, "why": f"{path} is not a git checkout"}
+        try:
+            done = subprocess.run(
+                ["git", "-C", str(path), "pull", "--ff-only"],
+                capture_output=True, text=True, timeout=120)
+        except (OSError, subprocess.SubprocessError) as exc:
+            # the network is not a reason to skip the day's work
+            return {"pulled": False, "why": str(exc)[:120]}
+        message = (done.stdout or done.stderr).strip().splitlines()
+        return {"pulled": done.returncode == 0,
+                "why": message[-1] if message else "", "repo": str(path)}
+
+    # -- 0b: research the cloud sent down ---------------------------------
+    def read_dossiers(self) -> list[dict]:
+        """A new dossier queues its own category decision.
+
+        The dossier carries a machine-readable header written by the cloud
+        side. Farid still decides — the row lands in PENDING.md as a question,
+        because v1.0 reserves category picks for him.
+        """
+        folder = self.config.get("dossier_folder") or ""
+        if not folder:
+            return []
+        path = pathlib.Path(folder).expanduser()
+        if not path.is_dir():
+            return []
+        digger, judge = Digger(self.root), Judge(self.root)
+        done = {r.get("url") for r in digger.log.rows()}
+        out = []
+        for item in sorted(path.glob("*.md")):
+            if str(item) in done:
+                continue
+            header = parse_dossier_header(item)
+            if not header.get("category"):
+                continue          # not a dossier, just a note
+            try:
+                out.append(digger.take_dossier(
+                    item, category=header["category"],
+                    edge=header.get("edge", "audience"),
+                    recommend=header.get("recommend", "DO"), judge=judge))
+            except LedgerError:
+                continue
+        return out
+
     def run(self) -> dict:
         """One full turn of the loop. Safe to run every day; does nothing twice."""
+        pulled = self.pull()
+        self.config = load_config(self.base)     # a pull may have changed it
+        dossiers = self.read_dossiers()
         ingested = self.ingest()
         sales = self.record_new_sales()
         twins = self.twin_new()
@@ -259,6 +348,8 @@ class Autopilot:
         except Exception:
             spikes = []
         return {
+            "pulled": pulled,
+            "dossiers": dossiers,
             "quarantined_days": spikes,
             "sales_span": (stamps[0], stamps[-1]) if stamps else None,
             "files_ingested": len([x for x in ingested if "error" not in x]),

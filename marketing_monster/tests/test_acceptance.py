@@ -939,3 +939,64 @@ class T26_TheListingDesk(MonsterCase):
         unsold = self.desk.still_unsold()
         self.assertEqual(len(unsold), 1)
         self.assertEqual(unsold[0]["channels"], 3)
+
+
+class T27_TheBridge(MonsterCase):
+    """Two halves on timers, git between them. A system that needs a human to
+    carry files between its halves is not automated — Farid said so three
+    times before I heard it."""
+
+    DOSSIER = ("<!-- monster\n"
+               "category: pipe and cigar lighters, mid tier\n"
+               "edge: audience\nrecommend: DO\n-->\n"
+               "# DOSSIER 001 — LIGHTERS\nresearch body\n")
+
+    def setUp(self):
+        super().setUp()
+        self.dossiers = self.base / "dossiers"
+        self.dossiers.mkdir()
+        (self.dossiers / "005_dossier-lighters.md").write_text(self.DOSSIER,
+                                                              encoding="utf-8")
+        from monster.auto import write_config
+        write_config(self.base, {"watch": [], "git_pull": False,
+                                 "dossier_folder": str(self.dossiers)})
+
+    def _pilot(self):
+        from monster.auto import Autopilot
+        return Autopilot(self.base, "pipes")
+
+    def test_a_dossier_queues_its_own_category_question(self):
+        taken = self._pilot().read_dossiers()
+        self.assertEqual(len(taken), 1)
+        from monster.judge import Judge
+        pending = Judge(self.root).open_items()
+        self.assertEqual(len(pending), 1)
+        self.assertEqual(pending[0]["needs_farid"], "category")
+        self.assertIn("lighters", pending[0]["proposal"])
+
+    def test_the_machine_still_does_not_pick_the_category(self):
+        """v1.0 reserves category picks for Farid. Automation does not move
+        that line — it only delivers the question faster."""
+        self._pilot().read_dossiers()
+        from monster.judge import Judge
+        for row in Judge(self.root).rows():
+            if row["needs_farid"] == "category":
+                self.assertEqual(row["verdict"], "PENDING")
+
+    def test_a_dossier_is_not_taken_twice(self):
+        self._pilot().read_dossiers()
+        self.assertEqual(self._pilot().read_dossiers(), [])
+
+    def test_a_note_without_a_header_is_ignored(self):
+        (self.dossiers / "just_a_note.md").write_text("# hello", encoding="utf-8")
+        self.assertEqual(len(self._pilot().read_dossiers()), 1)
+
+    def test_a_failed_pull_does_not_stop_the_days_work(self):
+        """The network is not a reason to skip the morning."""
+        from monster.auto import write_config
+        write_config(self.base, {"watch": [], "git_pull": True,
+                                 "repo": str(self.base / "not-a-repo"),
+                                 "dossier_folder": str(self.dossiers)})
+        result = self._pilot().run()
+        self.assertFalse(result["pulled"]["pulled"])
+        self.assertEqual(len(result["dossiers"]), 1)   # the rest still ran

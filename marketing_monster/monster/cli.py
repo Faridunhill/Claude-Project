@@ -251,6 +251,14 @@ def cmd_auto(args) -> int:
         return 2
     r = pilot.run()
     print(f"AUTOPILOT — {args.clone} — {len(pilot.config['watch'])} folder(s) watched")
+    if r["pulled"].get("pulled"):
+        print(f"  bridge crossed         : {r['pulled']['why']}")
+    elif r["pulled"].get("why"):
+        print(f"  ** could not pull      : {r['pulled']['why']}")
+    for item in r["dossiers"]:
+        print(f"  new research           : {item['dossier'].name}")
+        print(f"    queued {item['decision']['decision_id']} — a category pick, "
+              "waiting for your yes or no")
     print(f"  new export files read : {r['files_ingested']}")
     print(f"  new sales into the Well: {r['rows_added']}")
     span = f"  {r['sales_span'][0]} to {r['sales_span'][1]}" if r.get("sales_span") else ""
@@ -302,11 +310,20 @@ def cmd_setup(args) -> int:
         config["ebay_category"] = args.ebay_category
     if args.ebay_location:
         config["ebay_location"] = args.ebay_location
+    if args.repo:
+        config["repo"] = args.repo
+    if args.dossiers:
+        config["dossier_folder"] = args.dossiers
     path = write_config(base, config)
     print(f"saved: {path}")
     for folder in config["watch"]:
         exists = "ok" if pathlib.Path(folder).expanduser().is_dir() else "** NOT FOUND"
         print(f"  watching {folder}  {exists}")
+    for label, key in (("repo (pulled daily)", "repo"),
+                       ("cloud research", "dossier_folder")):
+        if config.get(key):
+            exists = "ok" if pathlib.Path(config[key]).expanduser().is_dir() else "** NOT FOUND"
+            print(f"  {label}: {config[key]}  {exists}")
     if not config["watch"]:
         print("  no folders yet — pass --watch \"C:/Users/you/Downloads\"")
     return 0
@@ -321,6 +338,7 @@ def cmd_schedule(args) -> int:
         "@echo off\r\n"
         f"set \"PYTHONPATH={home}\"\r\n"
         f"cd /d \"{base}\"\r\n"
+        "rem the run pulls the repo itself — see monster.config.json \"repo\"\r\n"
         f"python -m monster auto {args.clone} >> \"{base}\\autopilot.log\" 2>&1\r\n",
         encoding="utf-8")
     print(f"wrote: {bat}\n")
@@ -573,6 +591,8 @@ def main(argv=None) -> int:
     sp.add_argument("--watch", action="append", default=[])
     sp.add_argument("--ebay-category", dest="ebay_category", default="")
     sp.add_argument("--ebay-location", dest="ebay_location", default="")
+    sp.add_argument("--repo", default="", help="the git checkout to pull each morning")
+    sp.add_argument("--dossiers", default="", help="folder where cloud research lands")
     sp.set_defaults(fn=cmd_setup)
 
     sp = clone_arg(sub.add_parser("schedule", help="make it run every day by itself"))
