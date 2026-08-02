@@ -169,6 +169,13 @@ ACTIVE_LISTING_MARKERS = ("available quantity", "auction buy it now price",
                           "listing duration", "relist")
 
 
+# An eBay File Exchange upload — the file that CREATES listings. It is the
+# opposite of a sales record: it describes stock going out, not money coming
+# in. Refusing it needs to say that, not complain about missing columns.
+def looks_like_an_upload_file(headers: list[str]) -> bool:
+    return any("action" in _norm(h) and "siteid" in _norm(h) for h in headers)
+
+
 def looks_like_active_listings(headers: list[str]) -> str | None:
     """Returns the marker found, or None. Active listings are the DENOMINATOR
     — valuable, but they are not sales and must never be counted as sales."""

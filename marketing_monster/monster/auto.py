@@ -131,8 +131,14 @@ class Autopilot:
             if fingerprint in done:
                 continue
             try:
-                from .well import looks_like_active_listings, read_headers
-                marker = looks_like_active_listings(read_headers(path))
+                from .well import (looks_like_active_listings,
+                                   looks_like_an_upload_file, read_headers)
+                headers = read_headers(path)
+                if looks_like_an_upload_file(headers):
+                    raise LedgerError(
+                        "this is an eBay upload file — it creates listings, it does "
+                        "not record sales. Nothing to learn from it")
+                marker = looks_like_active_listings(headers)
                 if marker:
                     raise LedgerError(
                         f"looks like an active-listings report (column {marker!r}) — "
@@ -202,6 +208,11 @@ class Autopilot:
             return []
         decision = self.standing_order()
         maker_out = self.root / "maker" / "out"
+        try:
+            quarantined = {s["day"] for s in Dig(self.root).suspicious_days()
+                           if s["consecutive"]}
+        except Exception:
+            quarantined = set()
         twin, made = Twin(self.root), []
         for row in Well(self.root).transactions():
             if len(made) >= limit:
@@ -216,7 +227,8 @@ class Autopilot:
             from datetime import date, timedelta
             cutoff = (date.today() - timedelta(
                 days=int(self.config["record_sales_within_days"]))).isoformat()
-            if str(row.get("sold_at") or "")[:10] < cutoff:
+            sold_at = str(row.get("sold_at") or "")[:10]
+            if sold_at < cutoff or sold_at in quarantined:
                 continue
             made.append(twin.build(
                 title, float(price), item_id, decision_id=decision,
