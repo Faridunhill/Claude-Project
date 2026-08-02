@@ -13,12 +13,8 @@
   "sources": [
     "pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)"
   ],
-  "photo": {
-    "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
-    "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite",
-    "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
-    "brand": "Charatan"
-  },
+  "photo": null,
+  "shot_needed": "a Charatan showing: tapered",
   "runtime": 29.2,
   "panels": [
     {
@@ -26,10 +22,9 @@
       "role": "hook",
       "speaker": "narrator",
       "object": {
-        "kind": "photo",
-        "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
-        "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
-        "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite"
+        "kind": "photo-needed",
+        "shot": "a Charatan showing: tapered",
+        "status": "SHOT NEEDED"
       },
       "card": {
         "kind": "mark",
@@ -53,10 +48,9 @@
       "role": "overlooked",
       "speaker": "narrator",
       "object": {
-        "kind": "photo",
-        "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
-        "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
-        "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite"
+        "kind": "photo-needed",
+        "shot": "a Charatan showing: tapered",
+        "status": "SHOT NEEDED"
       },
       "card": {
         "kind": "plain",
@@ -81,10 +75,9 @@
       "role": "correction",
       "speaker": "narrator",
       "object": {
-        "kind": "photo",
-        "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
-        "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
-        "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite"
+        "kind": "photo-needed",
+        "shot": "a Charatan showing: tapered",
+        "status": "SHOT NEEDED"
       },
       "card": {
         "kind": "right",
@@ -109,10 +102,9 @@
       "role": "caveat",
       "speaker": "narrator",
       "object": {
-        "kind": "photo",
-        "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
-        "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
-        "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite"
+        "kind": "photo-needed",
+        "shot": "a Charatan showing: tapered",
+        "status": "SHOT NEEDED"
       },
       "card": {
         "kind": "warn",
@@ -137,17 +129,16 @@
       "role": "honesty",
       "speaker": "narrator",
       "object": {
-        "kind": "photo",
-        "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
-        "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
-        "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite"
+        "kind": "photo-needed",
+        "shot": "a Charatan showing: tapered",
+        "status": "SHOT NEEDED"
       },
       "card": {
         "kind": "note",
         "label": "our confidence",
         "text": "high"
       },
-      "narration": "The marks are clear, so we will put that in writing.",
+      "narration": "The evidence is clear, so we will put that in writing.",
       "duration": 4.4,
       "motion": {
         "zoom": [
@@ -165,10 +156,9 @@
       "role": "source",
       "speaker": "narrator",
       "object": {
-        "kind": "photo",
-        "file": "https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg",
-        "citation": "Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive",
-        "slug": "charatan-of-london-grosvenor-shape-2109-rhodesian-sandblast-fishtail-vulcanite"
+        "kind": "photo-needed",
+        "shot": "a Charatan showing: tapered",
+        "status": "SHOT NEEDED"
       },
       "card": {
         "kind": "citation",

@@ -59,13 +59,13 @@
 </header>
 <main>
   <div class="stage">
-    <img class="photo" id="photo" src="https://i.etsystatic.com/34479460/r/il/b638f2/7771295153/il_fullxfull.7771295153_5yx6.jpg" alt="">
+    <div class="photo" id="photo" style="display:grid;place-items:center;color:rgba(240,229,210,.4)">no photograph of this brand in the catalogue yet</div>
     <div class="vignette"></div>
     <div class="rule"></div>
     <div class="wordmark">FARIDUNHILL</div>
     <div class="card" id="card"><span class="lab" id="lab"></span><span class="val" id="val"></span></div>
     <div class="cap" id="cap"></div>
-    <div class="credit">Charatan of London Grosvenor Shape 2109 Rhodesian Sandblast Fishtail Vulcanite Stem — Faridunhill archive</div>
+    <div class="credit">photograph pending</div>
   </div>
 
   <div class="controls">
@@ -87,7 +87,7 @@
   </div>
 </main>
 <script>
-const P = [{"n":1,"d":4,"t":"Charatan. Look at the bit — this one is tapered.","c":{"kind":"mark","text":"bit style: tapered"},"r":"hook"},{"n":2,"d":6,"t":"Most collectors never check it. It is one of the quieter clues on the pipe.","c":{"kind":"plain","label":"the clue most people skip","text":"bit style: tapered"},"r":"overlooked"},{"n":3,"d":4.4,"t":"A tapered bit points to 1863–1960. A window, not a birthday.","c":{"kind":"right","label":"what the evidence supports","text":"1863–1960"},"r":"correction"},{"n":4,"d":4,"t":"tapered mouthpiece = definitely pre-Lane (Ferrara: 'never tapered' after 1960).","c":{"kind":"warn","label":"why the obvious answer fails","text":"tapered mouthpiece = definitely pre-Lane (Ferrara: 'never tapered' after 1960)."},"r":"caveat"},{"n":5,"d":4.4,"t":"The marks are clear, so we will put that in writing.","c":{"kind":"note","label":"our confidence","text":"high"},"r":"honesty"},{"n":6,"d":6.4,"t":"This is not opinion. It is Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock.","c":{"kind":"citation","label":"source","text":"pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)"},"r":"source"}];
+const P = [{"n":1,"d":4,"t":"Charatan. Look at the bit — this one is tapered.","c":{"kind":"mark","text":"bit style: tapered"},"r":"hook"},{"n":2,"d":6,"t":"Most collectors never check it. It is one of the quieter clues on the pipe.","c":{"kind":"plain","label":"the clue most people skip","text":"bit style: tapered"},"r":"overlooked"},{"n":3,"d":4.4,"t":"A tapered bit points to 1863–1960. A window, not a birthday.","c":{"kind":"right","label":"what the evidence supports","text":"1863–1960"},"r":"correction"},{"n":4,"d":4,"t":"tapered mouthpiece = definitely pre-Lane (Ferrara: 'never tapered' after 1960).","c":{"kind":"warn","label":"why the obvious answer fails","text":"tapered mouthpiece = definitely pre-Lane (Ferrara: 'never tapered' after 1960)."},"r":"caveat"},{"n":5,"d":4.4,"t":"The evidence is clear, so we will put that in writing.","c":{"kind":"note","label":"our confidence","text":"high"},"r":"honesty"},{"n":6,"d":6.4,"t":"This is not opinion. It is Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock.","c":{"kind":"citation","label":"source","text":"pipedia mirror staging/pipedia/Dating_of_Charatans.json (Fabio Ferrara study of 2000+ pipes from the Basciano/Lubinski stock -- THE master reference) + Charatan.json (main article; its 'Memories of Charatan Pipes' (Ivy Ryan) is flagged BY PIPEDIA as containing misinformation -- do NOT source from it)"},"r":"source"}];
 const photo = document.getElementById('photo'), card = document.getElementById('card'),
       lab = document.getElementById('lab'), val = document.getElementById('val'),
       cap = document.getElementById('cap'), pos = document.getElementById('pos'),

@@ -14,7 +14,9 @@
   ],
   "runtime_seconds": 29.2,
   "panel_count": 6,
-  "assets_missing": [],
+  "assets_missing": [
+    "photo:charatan"
+  ],
   "facts_refused_this_run": [],
   "changelog": [
     {

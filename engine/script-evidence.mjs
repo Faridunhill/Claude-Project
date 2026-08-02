@@ -28,7 +28,7 @@ function speakable(value) {
     .trim()
 }
 
-export function writeEvidenceEpisode(fact, { photo = null, slug } = {}) {
+export function writeEvidenceEpisode(fact, { photo = null, needed = null, slug } = {}) {
   const read = describeRead(fact.reads)
   const era = String(fact.era).replace(/\s*—\s*/g, ' — ')
   const naive = naiveReading(fact)
@@ -99,7 +99,7 @@ export function writeEvidenceEpisode(fact, { photo = null, slug } = {}) {
     // Layer 3 is always the same real photograph — the object we are discussing.
     object: photo
       ? { kind: 'photo', file: photo.file, citation: photo.citation, slug: photo.slug }
-      : { kind: 'photo-slot', slot: `${fact.cabinet}-pipe`, status: 'awaiting photograph' },
+      : { kind: 'photo-needed', shot: needed || `a ${fact.brand}`, status: 'SHOT NEEDED' },
     card: b.card,
     narration: b.line,
     duration: secondsFor(b.line),
@@ -117,6 +117,7 @@ export function writeEvidenceEpisode(fact, { photo = null, slug } = {}) {
     caveat: fact.caveat || null,
     sources: [fact.sourceFull || fact.source],
     photo: photo || null,
+    shot_needed: photo ? null : needed || `a ${fact.brand}`,
     runtime: Number(panels.reduce((s, p) => s + p.duration, 0).toFixed(1)),
     panels,
   }

@@ -42,6 +42,45 @@ export function buildPhotoIndex(productsDir) {
 }
 
 /**
+ * ★ THE FEATURE-MATCH RULE (added 2026-08-02, after Farid caught the engine out)
+ *
+ * The engine built an episode about a TAPERED Charatan bit and illustrated it
+ * with a Charatan that has a SADDLE stem. Farid spotted it instantly — as any
+ * level-3 collector would, which is the whole audience we are chasing.
+ *
+ * "The photograph illustrates the brand, never the claim" was too weak. When
+ * the claim is about a visible FEATURE, a photograph showing a different
+ * feature reads as evidence against us, however carefully it is captioned.
+ *
+ * The rule now: a feature claim may only be illustrated by a photograph
+ * TAGGED with that feature. We have no such tags yet, so the engine returns
+ * the shot that is needed instead of a picture that contradicts the words.
+ * Same discipline as the source law — no matching photograph, no illustration.
+ */
+export function photoForFeature(index, brand, feature) {
+  const want = String(feature || '').toLowerCase().trim()
+  if (!want) return { photo: photoForBrand(index, brand), needed: null }
+
+  // Only a photograph whose own description states the feature may be used.
+  const hit = index.find(
+    (i) => i.haystack.includes(want) && matchesBrand(i, brand)
+  )
+  if (hit) return { photo: toPhoto(hit, brand), needed: null }
+
+  return {
+    photo: null,
+    needed: `a ${brand} showing: ${feature}`,
+  }
+}
+
+function matchesBrand(item, brand) {
+  const needle = String(brand || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').trim()
+  if (!needle || needle === 'generic') return false
+  const words = needle.split(/\s+/).filter((w) => w.length > 3)
+  return words.length ? words.every((w) => item.haystack.includes(w)) : item.haystack.includes(needle)
+}
+
+/**
  * Find a photograph of this brand. Returns null rather than a wrong pipe —
  * an unrelated photograph beside a dating claim is a small lie.
  */

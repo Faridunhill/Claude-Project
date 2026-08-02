@@ -18,7 +18,7 @@ import { loadLibrary, resolvePanels } from './panels.mjs'
 import { writeStoryboard, writeLedger } from './assemble.mjs'
 import { writeEvidenceEpisode } from './script-evidence.mjs'
 import { writeEvidenceStoryboard } from './assemble-evidence.mjs'
-import { buildPhotoIndex, photoForBrand } from './photos.mjs'
+import { buildPhotoIndex, photoForBrand, photoForFeature } from './photos.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const arg = (k, d) => {
@@ -80,8 +80,12 @@ let episode, outDir, resolved
 if (format === 'evidence') {
   // ── 2. SCRIPT ─────────────────────────────────────────────────────────────
   const index = buildPhotoIndex(join(ROOT, 'content/products'))
-  const photo = photoForBrand(index, fact.brand)
-  episode = writeEvidenceEpisode(fact, { photo })
+  // A feature claim needs a photograph OF THAT FEATURE — see photos.mjs.
+  const featureMatch = String(fact.reads).match(/^[^:]+:\s*(.+)$/)
+  const { photo, needed } = featureMatch
+    ? photoForFeature(index, fact.brand, featureMatch[1])
+    : { photo: photoForBrand(index, fact.brand), needed: null }
+  episode = writeEvidenceEpisode(fact, { photo, needed })
   console.log(`  2 SCRIPT    ${episode.panels.length} panels · ${episode.runtime}s · one narrator`)
 
   // ── 3. PICTURE ────────────────────────────────────────────────────────────
@@ -90,7 +94,7 @@ if (format === 'evidence') {
   console.log(
     photo
       ? `  3 PICTURE   real photograph · ${photo.slug}`
-      : `  3 PICTURE   no ${fact.brand} photograph in the catalogue yet — slot left open`
+      : `  3 PICTURE   REFUSED — no photograph shows this. SHOT NEEDED: ${episode.shot_needed}`
   )
 
   // ── 4. VOICE ──────────────────────────────────────────────────────────────
