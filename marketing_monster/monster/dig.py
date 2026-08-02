@@ -52,7 +52,8 @@ BRANDS = [
     # Italian
     "castello", "savinelli", "brebbia", "radice", "ser jacopo", "caminetto",
     "il ceppo", "mastro de paja", "ardor", "don carlos", "il duca", "le nuvole",
-    "rossi", "lorenzo", "amorelli", "mastro geppetto",
+    "rossi", "lorenzo", "amorelli", "mastro geppetto", "stefano santambrogio",
+    "stefano", "cesare barontini", "viprati", "tonino jacono",
     # French
     "chacom", "butz-choquin", "ropp", "jeantet", "genod", "chapuis", "longchamp",
     # German / Dutch / Belgian
