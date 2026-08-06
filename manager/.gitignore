@@ -1,0 +1,6 @@
+# Machine-local. Never commit — this is the Manager's memory of one specific PC.
+state/
+config.json
+__pycache__/
+*.pyc
+.pytest_cache/
