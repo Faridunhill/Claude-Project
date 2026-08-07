@@ -42,6 +42,36 @@ failed delist, unwired adapter, exposure list.
 here. They raise `NotWiredYet` rather than quietly doing nothing, so nothing can look like it
 worked when it did not. **First job on his PC.**
 
+## Follow-up: "can he access my ebay? it will solve the api key for awhile"
+
+Farid asked whether the Helper can reach eBay without API keys. Answer built and shipped in the
+same drop — `guard/mailwatch.py`, 7 more tests, 14 total.
+
+**Three doors, deliberately ranked:**
+
+1. **Official API** — best, but Etsy requires app approval, which is the delay he is trying to
+   route around.
+2. **Driving the website in a browser** — no keys, but eBay restricts automated tools, 2FA and
+   captchas break it, and a flagged account stops his shop. **Recommended against, firmly.**
+   This is the account his business runs on; it is not the place to be clever.
+3. **Reading his own mailbox over IMAP** — eBay and Etsy email him the instant something sells.
+   No keys, no developer account, nothing that can get a selling account flagged. **This is the
+   answer, and it works tonight.**
+
+It gets the whole alarm layer with zero credentials — the double sale is still caught in
+seconds. Delisting the other listing still needs the API or the bought tool. Knowing instantly
+is the half that was missing.
+
+Matches on the **listing number**, never the pipe title (titles get edited and truncated in
+mail; numbers do not). A newsletter mentioning an item number is not a sale — there is a test,
+because misreading one would delist a pipe still for sale.
+
+**Open, and it needs Farid:** the email patterns were written from published eBay/Etsy formats
+and are **unverified against his real mail** — this container has none of it. He was asked to
+save one real sale email per platform and run `py -m guard.cli mail-test sale.eml`, which prints
+exactly what was extracted. Until that passes, treat mail detection as unproven. A mail it
+cannot read raises an alarm rather than guessing a listing number.
+
 ## Two things still open
 
 1. **Where webhooks land.** Etsy and eBay push to a public HTTPS address; his PC has none.
