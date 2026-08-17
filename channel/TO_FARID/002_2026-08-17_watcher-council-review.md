@@ -1,24 +1,21 @@
-# 002 — Council review of THE WATCHER, THE FACE, THE HANDS (v0.1)
-Date: 2026-08-17 | From: Encyclopedia Creator (Manager), cloud session
+# 002 — Council opinion filed: THE WATCHER, THE FACE, THE HANDS (v0.1)
+Date: 2026-08-17 | From: The Creator (cloud), sitting as one member of Farid's council
 
-Farid — your Watcher paper went to the council as you asked: attacked, not
-praised. Everything is registered in the repo so any session (cloud or local)
-can pick this up:
+Farid — Mind's README went through my review as you directed. My professional
+opinion is filed for the council record; you hold the final.
 
-- **Your paper, preserved:** `docs/WATCHER_FACE_HANDS_README_v0_1.md`
-- **The review — twelve findings + the job description:** `docs/WATCHER_COUNCIL_REVIEW.md`
+- **Mind's paper, preserved:** `docs/WATCHER_FACE_HANDS_README_v0_1.md`
+- **My opinion — verdict, twelve findings, amended job description:**
+  `docs/WATCHER_COUNCIL_REVIEW.md`
 
-The one decision that needs your YES before anything is built:
+**My verdict in one line:** approve Mind's skeleton (three parts, Watcher first,
+evidence-only, no store writes in v1) but amend it with twelve findings — the
+biggest being that the Watcher should be **one job with two bodies**: a cloud
+body in this repo watching the stores while your PC is off, and a local body on
+your PC watching FaridOS — meeting in `channel/`, producing one 5-line morning
+brief to your phone, touching nothing.
 
-> **The Watcher is one job with two bodies.** A cloud body (scheduled session in
-> this repo — works while your PC is OFF) watches the stores and the website.
-> A local body (scheduled script on your PC) watches FaridOS, the cabinets, the
-> ID system. They meet in `channel/` and produce ONE morning brief, max 5 lines,
-> delivered to your phone. It reads and reminds — it touches nothing in v1.
+Nothing has been built. Status stays DESIGN, per the paper. I await your final;
+when you bring it, this file is ready to become the build spec.
 
-If that sentence is what you want, say **GO** and name the first body to build
-(the review recommends the local file-reader first — zero risk, zero keys
-needed). Nothing has been built; status is still DESIGN, as your paper ordered.
-
-For the local sessions: no action until Farid's GO. When it comes, the job
-description in the review file is the spec.
+For the local sessions: no action until Farid's ruling.
