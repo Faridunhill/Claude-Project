@@ -51,6 +51,13 @@ audio is refused for an English professional clone. Thirty minutes is the floor,
 three hours is the target; the pack is ~25 min, so read it twice on two days, or add the
 episode scripts as extra sections.
 
+## Addendum — the reference kit is filled (same day)
+Seven of ten slots filled from your Drive folders; the five photos for the master portrait
+are chosen (IMG_3935, IMG_2084, IMG_2021, IMG_2035, IMG_2112 — `docs/professor/REF_KIT_MANIFEST.md`).
+Three photos are missing and nobody can generate them: **a left profile, you looking down at
+a pipe in your hands, and a real laugh with eyes open.** Daylight from a window, glasses on.
+Two minutes. Drop them in `Faces/11/`.
+
 ## Your one word
 **GO** — or the word you want changed.
 

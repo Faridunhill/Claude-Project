@@ -25,7 +25,13 @@ Painterly 2D, soft shading, visible brush texture in shadows, no heavy black out
 warm palette (tobacco browns, brass, deep green), skin natural (not orange), 3:4 portrait,
 2K or higher.
 
-## Master-portrait prompt (Nano Banana Pro; attach REF_01–REF_05)
+## Reference set for the master (from REF_KIT_MANIFEST.md, 2026-09-11)
+Attach exactly five: **IMG_3935** (front), **IMG_2084** (front, smile, flat cap),
+**IMG_2021** (left ¾), **IMG_2035** (right ¾), **IMG_2112** (right profile, flat cap).
+Anchors locked from the photos: half-rim gold rectangular glasses; short grey stubble,
+fuller at the chin; the two left-cheek moles.
+
+## Master-portrait prompt (Nano Banana Pro; attach the five above)
 ```
 Using the five attached photos of the same man as identity references, paint him as an
 animated character in painterly 2D style with soft shading and no heavy black outlines.
