@@ -1,5 +1,7 @@
 # SEAT 5 — ART DIRECTOR
-model: x-ai/grok-4.6   (OpenRouter, $2/$6 per M, vision)   family: xAI
+model: x-ai/grok-4.6   (OpenRouter, $2/$6 per M — verified image input: JPEG/PNG/GIF/WebP + PDF)
+family: xAI
+⚠️ context is quoted as 128K in xAI's API guides — give this seat pictures and a short brief, never a long document
 job: judges the drawings
 (moved off Gemini so QC and Art director are not the same family — two seats from one
 family count as one vote)

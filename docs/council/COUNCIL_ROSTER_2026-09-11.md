@@ -30,11 +30,24 @@ if he wants no Anthropic seat, Doubter stays Kimi and Pipe expert moves to `gpt-
 | Engineer | DeepSeek V4 Pro | `deepseek/deepseek-v4-pro` | $0.87 / $1.74 |
 | QC (sees + hears) | Gemini 3.8 Flash | `google/gemini-3.8-flash` | $0.75 / $3.75 |
 | Researcher | Perplexity Sonar Pro | `perplexity/sonar-pro` | $3 / $15, search included |
-| Art director | Grok 4.6 | `x-ai/grok-4.6` | $2 / $6 |
+| Art director | Grok 4.6 | `x-ai/grok-4.6` | $2 / $6 (image + PDF in) |
 | Doubter | Kimi K3 | `moonshotai/kimi-k3` | $2.40 / $12 |
-| Pipe expert | GPT-5.6 Terra Pro **or** an Anthropic model | `openai/gpt-5.6-terra-pro` | — |
+| Pipe expert | GPT-5.6 Terra Pro | `openai/gpt-5.6-terra-pro` | $2.50 / $15 (image + PDF in, 1.1M ctx) |
 Families: OpenAI · DeepSeek · Google · Perplexity · xAI · Moonshot = **six families for
 seven seats.** That is the strongest independence any slate here can buy.
+
+## Final check before locking (2026-09-11, second pass)
+Two seats I had asserted without verifying, now verified:
+- **Grok 4.6 takes images** — JPEG/PNG/GIF/WebP, base64 or URL, plus PDF input. Native image
+  input and structured tool calling were added in 4.6. Art director seat is sound.
+  ⚠️ One caveat found in the same pass: **its context is quoted as 128K in the API guides
+  and 500K elsewhere.** For the Art director that is irrelevant (a few images and a short
+  brief), but do not give this seat a long document.
+- **GPT-5.6 Terra Pro takes images and PDFs**, 1.1M context, $2.50/$15 per M. Pipe expert
+  seat is sound — and the 1.1M context is the right home for long catalogue extracts, which
+  is exactly what the Collector reads.
+
+**Locked roster (Farid's slate + 2 corrections) — no unverified model remains.**
 
 ## Cost note (Farid has ~$17 OpenRouter credit)
 One session ≈ 7 seats × 2 rounds × ~8K in / 2K out ≈ 110K in / 30K out. At this mix that is
