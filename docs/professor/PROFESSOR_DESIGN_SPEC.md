@@ -1,5 +1,8 @@
 # The Professor — written design spec (locked BEFORE any pixel; v1, 2026-09-11)
 
+> Road C only. Under Road A/B this spec governs the co-characters' style and the drawn
+> world, not Farid's face. Master record: FaridOS `control\` (this is the cloud mirror).
+
 This is the "words that cannot drift". Every master-portrait take is generated from the
 reference kit + this text. Change the text first, then regenerate — never the other way.
 
@@ -26,8 +29,10 @@ warm palette (tobacco browns, brass, deep green), skin natural (not orange), 3:4
 2K or higher.
 
 ## Reference set for the master (from REF_KIT_MANIFEST.md, 2026-09-11)
-Attach exactly five: **IMG_3935** (front), **IMG_2084** (front, smile, flat cap),
-**IMG_2021** (left ¾), **IMG_2035** (right ¾), **IMG_2112** (right profile, flat cap).
+Attach exactly five (folder 5 excluded per the local Builder): **IMG_3935** (front),
+**IMG_4253** (front, smile), **IMG_2021** (left ¾), **IMG_2035** (right ¾), **IMG_5696**
+(right profile, colour-corrected). The local kit from FACES_0902 overrides this list.
+**Applies only under Road C (PROFESSOR_RESTART §0.5).**
 Anchors locked from the photos: half-rim gold rectangular glasses; short grey stubble,
 fuller at the chin; the two left-cheek moles.
 

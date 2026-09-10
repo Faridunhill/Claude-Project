@@ -1,4 +1,10 @@
-# Professor REF_KIT — manifest (photos stay in Drive; this repo holds names only)
+# Professor REF_KIT — manifest (photos stay in Drive / on the PC; this repo holds names only)
+
+> **2026-09-11, from the local Builder:** the master copy of all Faces files is on the PC
+> (`master\references\FACES_0902`, SHA-256 manifest) and the kit is picked THERE.
+> **Folder 5 contains Farid's grandson and is excluded** — the folder-5 picks below
+> (IMG_2084, IMG_2112) are STRUCK. Everything below is the cloud's proposal only.
+> The kit is only needed at all under Road C (see PROFESSOR_RESTART §0.5).
 
 Source: `My Drive/Downloads/Faces/1…10` (uploaded 2026-09-02) — **139 files**.
 Rule: the identity photos never enter git (repo may be public). Only this manifest does.
@@ -7,11 +13,11 @@ Rule: the identity photos never enter git (repo may be public). Only this manife
 | Slot | Need | Chosen | Backup | Status |
 |---|---|---|---|---|
 | REF_01 | frontal, eyes to camera, neutral | Faces/1 **IMG_3935** (evening, black cap, half-rim gold, waistcoat) | Faces/2 IMG_5710 (overcast, baseball cap, neutral even light) | ✅ |
-| REF_02 | frontal, slight smile | Faces/5 **IMG_2084** (brown tweed **flat cap ON**, closed-lip smile, even cabin light; crop the child at right) | Faces/6 IMG_4253 (seated, warm lamp, red beanie) | ✅ |
+| REF_02 | frontal, slight smile | ~~Faces/5 IMG_2084~~ STRUCK (folder 5 excluded) → Faces/6 **IMG_4253** (seated, warm lamp, red beanie, mild smile) | Faces/2 IMG_5710 | ⚠️ weaker |
 | REF_03 | left ¾ | Faces/4 **IMG_2021** (~45°, no cap, soft post-sunset light — best single face in the set) | Faces/8 IMG_6779 (~60°, tweed flat cap, warm sun) | ✅ |
 | REF_04 | right ¾ | Faces/4 **IMG_2035** (~50°, soft light) | Faces/10 IMG_5045 (pipe in mouth — structure only); Faces/3 IMG_1330 | ✅ |
 | REF_05 | left profile | — none true profile seen | Faces/8 IMG_6779 (~60°) | ⚠️ **shoot one** |
-| REF_06 | right profile | Faces/5 **IMG_2112** (~80°, tweed flat cap, ear visible, sharp) | Faces/2 IMG_5696 (~70°, orange cast) | ✅ |
+| REF_06 | right profile | ~~Faces/5 IMG_2112~~ STRUCK (folder 5 excluded) → Faces/2 **IMG_5696** (~70°, orange cast — colour-correct) | — | ⚠️ weaker |
 | REF_07 | looking down at hands | — none seen | Faces/6 IMG_4256 (hands clasped, eyes up-left) | ⚠️ **shoot one** |
 | REF_08 | laughing | — Faces/6 IMG_4248 is a real laugh but eyes closed = out | — | ⚠️ **shoot one** |
 | REF_09 | flat-cap detail | Faces/8 IMG_6768 / IMG_6773 (green check tweed cap; 6773 squints) | | ✅ spare |

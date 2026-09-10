@@ -53,7 +53,19 @@ model is worth about two votes — that is measured, not opinion (§8).
 5. **Proof before adoption:** a recommendation is adopted only when QC has a `RAN`/`SEEN` proof or the Researcher has a `SOURCE`. Otherwise it goes to the decision log as *open*.
 6. **Register:** the synthesis is saved to `docs/council/YYYY-MM-DD_<topic>.md` and a two-line note goes to `channel/TO_FARID/`.
 
-## 4. Setting it up on Hermes (Bot Mode)
+## 3b. Additions from the local Builder (2026-09-11, adopted)
+- **QC must see and hear the actual output**: image seats get a face crop of at least 512 px
+  (August's seats judged a 140-px head); audio is attached to the seat, not described.
+- **"Nothing unfinished reaches Farid" needs a receipt**: every artifact in a session carries
+  a file hash in the synthesis.
+- **Farid picks the model per chair** from `control\RESEARCH\COUNCIL_CANDIDATES_2026-09-09.md`
+  (verified OpenRouter ids and prices). The Chair/Red-Team "strongest model, different
+  family" line is a recommendation, not a rule.
+- **Runs on the existing OpenRouter scripts on the PC first.** Hermes is not installed;
+  §4 below is kept only for the day it earns its place.
+- First session's acceptance criteria: channel note `005` §4 Q3.
+
+## 4. Setting it up on Hermes (Bot Mode) — deferred; not installed on the PC
 1. Hermes Desktop → **Bots** → New Agent, seven times. Name = the seat name (e.g. `Chair`, `RedTeam`). Paste the seat charter (§6) as the profile's system prompt / persona.
 2. Per bot, **Advanced settings → model/provider** — follow the vendor rule in §2. Give the Researcher web-search tools; give the Art Director a vision-capable model; give QC a terminal.
 3. Create a **group chat** named `Council — <project>`; add the seven bots. One project = one room, so sessions don't blur.

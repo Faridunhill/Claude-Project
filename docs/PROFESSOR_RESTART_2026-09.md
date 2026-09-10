@@ -7,6 +7,44 @@
 > Everything in it was **researched online on 2026-09-10** (§9, Sources) under the new
 > standing law `.claude/skills/research-first/SKILL.md`.
 
+> **MIRROR NOTICE (2026-09-11):** the master record of this project lives on Farid's PC in
+> `FaridOS\control\` (records law). This file is the cloud mirror. Corrections from the
+> local Builder (channel note 005) are folded in below; where they conflict with older text,
+> the local facts win.
+
+## 0.5 DECISION ZERO — Farid's face law (added 2026-09-11)
+Farid's standing law: **his face is never generated; his face is his pixels.** Steps C–D of
+this plan (a drawn Professor from his photos) would open that law. That is his decision
+alone and it comes **before any tool is bought**. Three roads, one 15-second test each, same
+line in VOICE_1, same scene, side by side, cost cap $10 total, his eye decides:
+- **Road A (keep the law):** Farid on camera, cut out into a drawn workshop; the four
+  co-characters drawn and rigged. Professional standard for a real host; his real hands
+  solve the hands problem for free. **Default while undecided.**
+- **Road B (keep the law):** layered puppet from one real photo, mouths from his pixels,
+  voice-driven. Local and cheap; weak on mouths and turns.
+- **Road C (open the law):** this document's Steps C–D — illustrated Farid from five real
+  photos, spec-locked likeness, his eye as the gate. History: drawn faces were rejected
+  Aug 31 and Sep 3 (face-matcher 0.63–0.67 against his photos).
+Under A or B, Steps C–D apply to the four co-characters only; everything else in this plan
+is unchanged.
+
+## 0.6 Corrections from the local side (2026-09-11) — facts the cloud could not see
+- Photos: all Faces files are already on the PC (`master\references\FACES_0902`, SHA-256
+  manifest, 281 files by the local count); **folder 5 contains Farid's grandson and is
+  excluded**; the reference kit is picked locally. Ask 3 withdrawn.
+- The retired portraits: six files moved to `master\concepts\RETIRED_0909\` (fingerprinted,
+  not erased). Ask 2 done.
+- Voice: VOICE_1 (`1zXuOXOwN0vBqtS2MYTC`), chosen by blind test Aug 31; 61 own takes + a
+  36-min reading set on disk. **The PVC road already failed on Aug 31 (verification
+  deadlock; law: no support tickets ever). Ask 4 withdrawn.** MOSS-TTS benched locally.
+- Paid tools: ElevenLabs Creator, Adobe Firefly Pro, ~$17 OpenRouter. **HeyGen, Hedra,
+  Kling, Runway are NOT paid** — all four are new spend, Farid's gate. Road tests run on
+  free tiers (HeyGen 3 videos/month ≤1 min watermarked; Hedra ≈15 s free) and on
+  OpenRouter `google/gemini-3-pro-image` (~$0.15–0.25 per 2K image).
+- Council: Hermes is not installed; the council runs as OpenRouter scripts per seat + a
+  chat room + the ledger. Build the protocol there. QC must see and hear real output;
+  receipts carry file hashes; Farid picks the model per chair.
+
 ## 0. Scoreboard (read this first)
 
 | Item | State on 2026-09-10 |

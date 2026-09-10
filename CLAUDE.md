@@ -76,7 +76,16 @@ master portrait from up to 5 real photos → turnaround/expression/hands sheets 
 animation chosen per shot type. Cast = 5 (Professor, Madame of the Cabinet, the
 Assistant, the Third Chair, Alfred). Farid judges EVERY look (his-likeness law);
 character = elegant, slim, small Irish cap, glasses, pipe-in-hand NEVER lit.
-Identity photos live in Drive `Downloads/Faces/1…10` (never in this repo).
+**DECISION ZERO (open, Farid's alone): his face law — "his face is never generated,
+his face is his pixels." Road A (him on camera in a drawn world, default) / Road B
+(photo puppet) / Road C (drawn Farid). One 15-s test per road, ≤$10, his eye decides,
+before any tool is bought.** Paid tools on record: ElevenLabs Creator (VOICE_1
+`1zXuOXOwN0vBqtS2MYTC`), Firefly Pro, ~$17 OpenRouter — HeyGen/Hedra/Kling/Runway are
+NOT paid. PVC road failed Aug 31 (no support tickets ever) — do not re-propose it.
+Identity photos: Drive `Downloads/Faces/1…10` and PC `master\references\FACES_0902`
+(folder 5 excluded — grandson); never in this repo. **Records law: FaridOS `control\`
+is the master record; repo docs are mirrors.** Council runs on the PC's OpenRouter
+seat scripts, not Hermes.
 Read: `docs/PROFESSOR_RESTART_2026-09.md` + `docs/professor/CAST.yaml`
 (+ `docs/PROFESSOR_PROJECT.md` for the concept history).
 
