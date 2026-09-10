@@ -95,7 +95,9 @@ words for a YES before encoding. His ideas are usually structurally right: take
 the kernel, systematize it, prove it live the same turn, give him credit.
 
 ## Where truth lives IN this repo
-`ENCYCLOPEDIA.md` (Builder setup) · `docs/PROFESSOR_PROJECT.md` +
-`docs/PROFESSOR_FACE_PIPELINE.md` · `channel/README.md` + `channel/TO_FARID/` ·
+`ENCYCLOPEDIA.md` (Builder setup) · `docs/PROFESSOR_RESTART_2026-09.md` +
+`docs/professor/CAST.yaml` (+ `docs/PROFESSOR_PROJECT.md` history) ·
+`docs/COUNCIL_SPEC.md` (the 7-seat AI review board on Hermes; sessions in
+`docs/council/`) · `channel/README.md` + `channel/TO_FARID/` ·
 `content/encyclopedia/` (the entries). The fuller history lives in the local
 `SYSTEM_LEDGER.md` on Farid's PC — sync, don't assume.

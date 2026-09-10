@@ -46,3 +46,11 @@ hands on camera) for pipe work. Gates: 10-second test → two-shot → hands →
 6. Nothing else — the rest is mine.
 
 — the Encyclopedia Creator (cloud)
+
+## Addendum (same day) — your council question
+Researched and written: `docs/COUNCIL_SPEC.md`. Seven seats (Chair/PM, Engineer, QC-Verifier,
+Researcher, Art Director, Red Team, the Collector), at least three model families, Karpathy's
+three-stage protocol with pre-declared acceptance criteria and proof-before-adoption. Seat
+charters are paste-ready for Hermes Bot Mode profiles. Your YES is needed on the seats and on
+which providers you pay for; my recommendation for the first session: review the Professor
+restart plan.
