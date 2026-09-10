@@ -1,0 +1,45 @@
+# The Professor show — cast (one source of truth; the bible in
+# docs/PROFESSOR_RESTART_2026-09.md §5 follows this file).
+# Status: DRAFT 2026-09-10, awaiting Farid's verdict. Names are working names.
+house_style: "painterly 2D, soft shading, no heavy black outlines, warm workshop light"
+house_rules:
+  - "pipes are handled, admired, repaired — never lit"
+  - "only the Professor carries a real person's likeness (Farid)"
+  - "every dating claim spoken on screen comes from the cabinet engine's bracket"
+  - "final names are Farid's decision; avoid brand-adjacent names"
+characters:
+  - id: professor
+    working_name: "The Professor"
+    likeness: farid
+    role: "master of pipes, accessories, restoration, dating; the encyclopedia is his life's work; scholar, closes a book and names it each episode"
+    look: "60s, elegant, slim, short grey hair under a small dark-tweed Irish flat cap, gold rectangular half-rim glasses, short grey stubble, two cheek moles kept, waistcoat over dark shirt, sleeves rolled, pipe in hand never lit"
+    voice: "ElevenLabs locked clone (best of 13) -> Professional Voice Clone when the reading pack is recorded"
+    never: ["lights the pipe", "guesses a date", "mocks the Assistant"]
+  - id: cabinet
+    working_name: "Madame of the Cabinet"
+    likeness: none
+    role: "keeper of the cabinet and the Archive; brings the catalogue page that proves the claim; voice of the References Corner"
+    look: "60s, silver hair pinned up, reading glasses on a chain, cardigan, ring of keys"
+    voice_design_prompt: "Elderly British woman, warm and wise, unhurried, slightly amused, like a museum keeper who loves her collection; clear diction; perfect audio quality."
+    never: ["contradicts the engine's bracket", "invents a source"]
+  - id: assistant
+    working_name: "The Assistant"
+    likeness: none
+    role: "beautiful, cheeky, mischievous young assistant; her mistakes are the episodes; owns the Book of Mistakes; arc employee -> craftswoman -> her own episodes"
+    look: "late 20s, bright eyes, workshop apron over a smart blouse, hair tied back, one tool in the wrong pocket"
+    voice_design_prompt: "Young woman, late twenties, bright and playful, quick mischievous energy with a warm laugh, light British-international accent, confident, perfect audio quality."
+    never: ["vulgar", "stupid — she asks the questions the viewer is too shy to ask"]
+  - id: third_chair
+    working_name: "The Third Chair"
+    likeness: none
+    role: "the guest chair; brings doubt — an unidentified pipe, a forum claim, a catalogue nobody else has; the level-3 collector who tests us and leaves to testify"
+    variant: "fixed sceptic first (one design, one voice); rotating guests later"
+    look: "50s, bow tie, tweed, loupe on a cord, leather pipe case on his knee"
+    voice_design_prompt: "Middle-aged man, dry, sceptical, precise, refined British accent, a collector who has seen every fake, perfect audio quality."
+  - id: alfred
+    working_name: "Alfred"
+    likeness: none
+    role: "the house's old hand: receives the patients (broken pipes), keeps their drawer, announces guests, brings tea, discharges finished restorations to the shelf; opens and closes the workshop"
+    look: "70s, tall and straight, waistcoat and sleeve garters, cloth over the arm"
+    voice_design_prompt: "Elderly English butler, deep, calm, dignified, dry humour, very slow pacing, perfect audio quality."
+    note: "ordinary name, fine to use; do not copy the famous comic-book butler's look or story"

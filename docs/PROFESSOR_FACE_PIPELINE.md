@@ -1,3 +1,7 @@
+> **SUPERSEDED 2026-09-10.** This July pipeline (one approved portrait → talking photo) is
+> retired by Farid's blank-page order. The current plan is `docs/PROFESSOR_RESTART_2026-09.md`.
+> Kept for history only — do not follow it.
+
 # The Professor's Face — Character-Bible Pipeline
 
 > Companion to `PROFESSOR_PROJECT.md`. Goal: a cartoon professor with **Farid's face** that stays

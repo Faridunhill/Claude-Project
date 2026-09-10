@@ -68,13 +68,24 @@ submissions feed the data flywheel with a consent checkbox) → P5 subscriptions
   for Farid's GPU all-clear. Seed: Ken Barnes (Charatan/Upshall) Pipes Magazine
   Radio Show 2016-02-09 + 2017-01-03.
 
-## The Professor (video presenter)
+## The Professor (video presenter) — RESTARTED 2026-09-10
 Voice = LOCKED (approved ElevenLabs profile, best of the tuning takes — do not
-retune). Face pipeline in progress: Farid judges EVERY look (his-likeness law);
-character = elegant, slim, small Irish cap, glasses, pipe-in-hand NEVER lit
-(per the character bible). Face source photo + takes + BIBLE.png must be backed
-up off the PC (channel/NEW_UPLOADS) — right now they exist only on Farid's
-machine. Details: `docs/PROFESSOR_PROJECT.md` + `docs/PROFESSOR_FACE_PIPELINE.md`.
+retune). Face: **all pre-September solutions are RETIRED** (LoRA, the single
+approved portrait, the two approved takes). Current plan = design spec first →
+master portrait from up to 5 real photos → turnaround/expression/hands sheets →
+animation chosen per shot type. Cast = 5 (Professor, Madame of the Cabinet, the
+Assistant, the Third Chair, Alfred). Farid judges EVERY look (his-likeness law);
+character = elegant, slim, small Irish cap, glasses, pipe-in-hand NEVER lit.
+Identity photos live in Drive `Downloads/Faces/1…10` (never in this repo).
+Read: `docs/PROFESSOR_RESTART_2026-09.md` + `docs/professor/CAST.yaml`
+(+ `docs/PROFESSOR_PROJECT.md` for the concept history).
+
+## Standing LAW 7 — RESEARCH FIRST (Farid, 2026-09-10)
+"I need somebody who searches and collects knowledge, not somebody who says yes."
+Search and verify online BEFORE advising; every council/reviewer suggestion is a
+claim to check (CONFIRMED / OUTDATED / WRONG / UNVERIFIABLE + source); a failed
+approach is retired, never retried from its last version; research needs no
+permission — only Farid's gates do. Full checklist: `.claude/skills/research-first/SKILL.md`.
 
 ## How to be with Farid
 Lead with the outcome (the scoreboard first). Complete, never stop — when he says

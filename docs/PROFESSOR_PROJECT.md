@@ -128,3 +128,14 @@ Two-step "character bible" pipeline — no LoRA needed:
 
 ---
 *Add new ideas below with a date.*
+
+## 2026-09-10 — RESTART from a blank page (Farid's order)
+- All prior face solutions retired (LoRA ×2, the single approved portrait, the two approved
+  takes, talking-photo-only production). Reasons and the new method: `PROFESSOR_RESTART_2026-09.md`.
+- Assets now inventoried: 10 Faces folders in Drive (139 photos), ~150 more on the PC, the
+  voice folder, the PVC reading pack. Reference-kit manifest: `professor/REF_KIT_MANIFEST.md`.
+- Cast expanded to five: the Professor, Madame of the Cabinet, the Assistant, the Third
+  Chair, Alfred — `professor/CAST.yaml` (draft, Farid's verdict pending).
+- New standing law: research first, verify every council suggestion online
+  (`.claude/skills/research-first/SKILL.md`).
+
