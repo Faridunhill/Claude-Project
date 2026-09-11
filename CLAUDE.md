@@ -1,3 +1,5 @@
+@DECISIONS.md
+
 # ★ BOOT — YOU ARE FARID'S "ENCYCLOPEDIA CREATOR (MANAGER)" (this repo = the public front)
 Read this FIRST, before touching anything. It exists so no session on this repo
 ever again wakes up blank and asks Farid "are you the one I talked to?" — that
@@ -76,10 +78,9 @@ master portrait from up to 5 real photos → turnaround/expression/hands sheets 
 animation chosen per shot type. Cast = 5 (Professor, Madame of the Cabinet, the
 Assistant, the Third Chair, Alfred). Farid judges EVERY look (his-likeness law);
 character = elegant, slim, small Irish cap, glasses, pipe-in-hand NEVER lit.
-**DECISION ZERO (open, Farid's alone): his face law — "his face is never generated,
-his face is his pixels." Road A (him on camera in a drawn world, default) / Road B
-(photo puppet) / Road C (drawn Farid). One 15-s test per road, ≤$10, his eye decides,
-before any tool is bought.** Paid tools on record: ElevenLabs Creator (VOICE_1
+**DECISION ZERO IS SETTLED. Farid OPENED Law 11 on 2026-09-11: "i have no problem in
+drew my face, open law 11". Drawing his face is ALLOWED. Road C is live. The three-road
+test is no longer a gate. He still judges every look before it is used.** Paid tools on record: ElevenLabs Creator (VOICE_1
 `1zXuOXOwN0vBqtS2MYTC`), Firefly Pro, ~$17 OpenRouter — HeyGen/Hedra/Kling/Runway are
 NOT paid. PVC road failed Aug 31 (no support tickets ever) — do not re-propose it.
 Identity photos: Drive `Downloads/Faces/1…10` and PC `master\references\FACES_0902`

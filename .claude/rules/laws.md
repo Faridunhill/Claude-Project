@@ -65,9 +65,20 @@ wrong answer costs more than a blunt right one.
 We solve it ourselves or we choose another road. Never propose a road that ends in a support
 queue. The ElevenLabs professional-clone road already failed this way. Do not re-propose it.
 
-## LAW 11 — DECISION ZERO: HIS FACE  (open, Farid's alone)
-"His face is never generated. His face is his pixels." Nothing draws Farid's face until he
-opens this law himself. Road A (him on camera in a drawn world) is the default meanwhile.
+## LAW 11 — HIS FACE  (OPENED BY FARID, 2026-09-11)
+**Farid opened this law himself on 2026-09-11.** His words: "i have no problem in drew my
+face, open law 11". Drawing his face is allowed from that date.
+
+What this changes:
+- Road C is allowed. The drawn Professor may be built from his photos.
+- The three-road test is no longer a gate. It was only there to protect a closed law.
+- Road A, Farid filmed on camera in a drawn world, stays available as a choice.
+- The mouth video he approved still stands: 14 mouth shapes, closed eyes, 5 head angles.
+
+What does NOT change:
+- **He still judges every look.** No drawing of him is used until he says it is him.
+- Spending is still his gate. Law 5 is untouched.
+- The old approach is still retired. Never train on his photos to make a cartoon.
 
 ## THE RECORDS LAW
 The master record lives on the PC in `FaridOS\control\`. Cloud repo documents are mirrors.

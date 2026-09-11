@@ -12,7 +12,14 @@
 > local Builder (channel note 005) are folded in below; where they conflict with older text,
 > the local facts win.
 
-## 0.5 DECISION ZERO — Farid's face law (added 2026-09-11)
+## 0.5 DECISION ZERO — ★ SETTLED 2026-09-11. Farid opened the law.
+**Farid, 2026-09-11: "i have no problem in drew my face, open law 11."**
+Drawing his face is allowed. Road C is live. The three-road test below is cancelled — it
+existed only to protect a closed law. Road A stays available as a production choice, not as
+a default. He still judges every look before it is used, and spending is still his gate.
+The text below is kept as the record of why the question was asked.
+
+### (historical) The question as it stood before he answered
 Farid's standing law: **his face is never generated; his face is his pixels.** Steps C–D of
 this plan (a drawn Professor from his photos) would open that law. That is his decision
 alone and it comes **before any tool is bought**. Three roads, one 15-second test each, same
