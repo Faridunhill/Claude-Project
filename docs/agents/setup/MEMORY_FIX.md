@@ -17,6 +17,21 @@ Memory needs the same move. Asking an agent to "always record decisions" fails f
 reason "always write short sentences" failed. It judges its own performance, decides it did
 fine, and carries on.
 
+## ★ CORRECTION, 2026-09-11 — my first version of this did not work
+The Builder found two faults on the PC and both were mine.
+1. My hook script called **`jq`, which is not installed on Farid's PC.** The command failed,
+   the script printed nothing, and it exited 0. It would have installed clean and done
+   nothing, silently. He replaced it with `.claude/hooks/capture_decision.py` — Python 3.11
+   is already on the machine. **His version is the one to use.** Mine is deleted.
+2. **Windows.** Shell scripts are not reliable there. Python is the right choice, not a
+   second choice.
+3. My install step said "copy the example to `.claude/settings.json`". Read one way that
+   overwrites Farid's home settings file, which already held a `permissions.deny` block and
+   `defaultMode`. He merged by hand and kept a backup.
+**New rule, written into `.claude/hooks/README.md`: a hook that cannot do its job must say
+so — a log line, a message, or a non-zero exit. A silent hook is worse than none, because it
+buys false confidence.** And never tell anyone to copy a file over a settings file.
+
 ## The fix — three layers, same shape as the writing fix
 
 ### Layer 1 — catch the decision at the moment it is made  ★ the main one
@@ -33,10 +48,9 @@ new rule, stop, cancel, I want — it injects one instruction into that turn:
 The agent cannot skip it, because it is not relying on memory. The reminder arrives with the
 message itself.
 
-**Install**
-1. Copy `capture-decision.sh` to `.claude/hooks/capture-decision.sh` on the PC.
-2. `chmod +x .claude/hooks/capture-decision.sh`
-3. In `.claude/settings.json`:
+**Install** (use the Builder's Python version — the shell version is deleted)
+1. `.claude/hooks/capture_decision.py` is already on the branch.
+2. Merge into the PROJECT `.claude/settings.json` — never overwrite, always back up first:
 ```json
 {
   "hooks": {
