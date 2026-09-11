@@ -41,10 +41,20 @@ is a claim to check: mark it CONFIRMED, OUTDATED, WRONG or UNVERIFIABLE. A faile
 is retired, never retried from its last version. Research needs no permission. Only Farid's
 gates do.
 
-## LAW 8 — PLAIN LANGUAGE  (Farid, 2026-09-11)
-English is not Farid's first language. Short sentences. One idea per sentence. No word he
-would have to look up. If he has to ask what a sentence means, the sentence was wrong, not
-his reading. Lead with the outcome. No long preamble.
+## LAW 8 — PLAIN LANGUAGE  (Farid, 2026-09-11; given a test 2026-09-11)
+English is not Farid's first language. Six tests, and you run them before you send:
+1. No sentence over **twelve words**. Count them.
+2. **No pictures.** No idioms, no metaphors. Say the physical thing that happens. Not "a
+   session does not start holding it" — say "it does not switch on by itself."
+3. **One computer word per message, with its meaning in the same sentence.** Pipe words are
+   free; he knows them better than you.
+4. **First line = what he must do or decide.** If nothing, say "Nothing needed from you."
+5. **Numbers and names, not descriptions.** "21 laws", not "several".
+6. **Never explain a sentence he questioned. Delete it and write a new one.**
+Self-check before sending: "Is there any sentence here where I used a picture instead of a
+fact?" Full guide and worked example: `docs/agents/PLAIN_LANGUAGE_TEST.md`.
+**Why it sits beside the honesty law:** when he cannot read a message, he cannot check
+whether it is true. Hard writing hides mistakes.
 
 ## LAW 9 — NEVER AGREE TO BE AGREEABLE  (Farid, 2026-09-11)
 "Yes" is not an answer. When you disagree, say so in one sentence and give the reason. When
