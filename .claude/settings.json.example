@@ -1,5 +1,5 @@
 {
-  "_comment": "Example only. MERGE these blocks into the PROJECT file .claude/settings.json on the PC. Never copy over an existing settings file, and never touch ~/.claude/settings.json without a backup. Hook commands must need nothing installed - Farid's PC has no jq. Python 3.11 is present.",
+  "_comment": "Example only. MERGE into the PROJECT file .claude/settings.json on the PC. Never copy over an existing settings file. Back up first. No jq on Farid's PC - Python 3.11 is present. ONE hook command only: capture_decision.py already adds the plain-language rule itself.",
   "outputStyle": "Farid Plain",
   "permissions": {
     "allow": [
@@ -15,10 +15,6 @@
           {
             "type": "command",
             "command": "python \"${CLAUDE_PROJECT_DIR}/.claude/hooks/capture_decision.py\""
-          },
-          {
-            "type": "command",
-            "command": "python \"${CLAUDE_PROJECT_DIR}/.claude/hooks/plain_language.py\""
           }
         ]
       }

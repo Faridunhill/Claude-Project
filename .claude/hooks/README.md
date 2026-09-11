@@ -37,3 +37,19 @@ first," always, even when you think the target is empty.**
 Both my commands called `jq` only to produce text that never changes. `printf` does that with
 nothing installed. Adding a dependency for a constant is a mistake on any machine, and on
 this one it was fatal.
+
+## THIRD FIX, same day — I nearly made the rule fire twice
+The Builder's `capture_decision.py` already adds the plain-language rule to every message.
+I had written a second script, `plain_language.py`, doing the same thing, and listed both in
+the settings example. Two hooks, one rule, injected twice per message.
+
+Deleted. **One hook command only: `capture_decision.py`.** It carries both jobs.
+
+Lesson for the next session: before adding a hook, read the hooks already installed.
+
+## STILL OPEN — the field name (install step 7)
+`last_input.json` currently holds `{"someOtherField":"hello just a question"}`. That is a
+test string, not a real message from Farid. So the real field name is still unknown.
+It gets answered on the next real session: the script saves whatever Claude Code sends.
+Until then the script falls back to the longest string it can find, and reminds anyway when
+it finds nothing. Nothing is lost while we wait.
