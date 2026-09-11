@@ -76,6 +76,41 @@ Two rules that came out of it:
   rate rose to 51% as accuracy rose to 46%; its charter now forbids factual assertions and
   routes every claim to the Researcher.
 
+## 3d. ★ DEGRADED COUNCIL — what to do when a seat cannot be filled (added 2026-09-11)
+Written because the 2026-09-11 session hit it and the spec had no answer. The vendor rule
+said "no two seats from one family" but never said what to do when the money runs out. That
+gap is the spec's fault, not the operator's. It is closed now.
+
+**Before a session starts**
+1. Check the credit and list, in writing, which seats can actually run today.
+2. If a seat's model is unavailable, its stand-in must come from a **family not already
+   seated**. Inside one account there is usually more than one model — use different ones.
+3. **Never seat the same model twice.** Two identical seats are one vote wearing two hats,
+   and they make agreement look stronger than it is. If no distinct family or model is left,
+   the seat runs **EMPTY** and is reported empty. An empty seat is honest. A duplicate is not.
+4. **The Researcher seat is mandatory for any session that grades sources.** If it cannot
+   run, the session does not run — a sourcing exam graded without opening a source proves
+   nothing. Reschedule instead.
+
+**Header every session must carry, at the TOP, before any seat's opinion**
+```
+COUNCIL HEALTH: <n> seats answered · <m> distinct companies · seats empty: <list>
+STATUS: FULL (4+ companies) / DEGRADED (2-3) / NOT A COUNCIL (1)
+```
+A DEGRADED session's verdict is **advisory, not binding**. A NOT-A-COUNCIL session is one
+model talking to itself; do not present it as a council at all.
+
+**Why this is not bureaucracy.** The whole panel design rests on one measured finding: a
+group of near-identical models is worth about two independent votes, not seven. A council
+that silently loses its diversity keeps all the ceremony and loses the entire benefit, and
+its agreement then *feels* like confirmation while being nothing of the kind. The health
+header exists so nobody — Farid included — reads a degraded verdict as a full one.
+
+**Operator's duty when the rule cannot be met.** Say so **before** running, not in a
+footnote after. "The council cannot run as designed today because X. I can run it degraded,
+or wait. Which?" That is one sentence, and it is the difference between a disclosed
+limitation and a misleading result.
+
 ## 4. Setting it up on Hermes (Bot Mode) — deferred; not installed on the PC
 1. Hermes Desktop → **Bots** → New Agent, seven times. Name = the seat name (e.g. `Chair`, `RedTeam`). Paste the seat charter (§6) as the profile's system prompt / persona.
 2. Per bot, **Advanced settings → model/provider** — follow the vendor rule in §2. Give the Researcher web-search tools; give the Art Director a vision-capable model; give QC a terminal.
