@@ -1,0 +1,24 @@
+{
+  "_comment": "Rename to settings.json on the PC. If settings.json already exists, MERGE the hooks block into it - do not overwrite the file.",
+  "outputStyle": "Farid Plain",
+  "permissions": {
+    "allow": ["WebSearch", "WebFetch"]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/capture-decision.sh"
+          },
+          {
+            "type": "command",
+            "command": "jq -n '{hookSpecificOutput:{hookEventName:\"UserPromptSubmit\",additionalContext:\"Write for Farid. Max 12 words per sentence. No idioms or metaphors - say the physical thing. One computer word per message, with its meaning. First line = what he must do. Numbers not descriptions. Never explain a questioned sentence - rewrite it.\"}}'"
+          }
+        ]
+      }
+    ]
+  }
+}
