@@ -1,0 +1,20 @@
+{
+  "_comment": "Installed on Farid's PC 2026-09-11. CHANGED FROM settings.json.example: the hook is the PYTHON script, not the bash one. jq is not installed on this PC and is not on the path, so both jq commands would have failed silently and the hook would have done nothing while looking installed.",
+  "outputStyle": "Farid Plain",
+  "permissions": {
+    "allow": ["WebSearch", "WebFetch"]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PROJECT_DIR}/.claude/hooks/capture_decision.py\""
+          }
+        ]
+      }
+    ]
+  }
+}
