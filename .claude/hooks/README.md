@@ -53,3 +53,27 @@ test string, not a real message from Farid. So the real field name is still unkn
 It gets answered on the next real session: the script saves whatever Claude Code sends.
 Until then the script falls back to the longest string it can find, and reminds anyway when
 it finds nothing. Nothing is lost while we wait.
+
+## ★ STEP 7 ANSWERED — 2026-09-11, from a real message on Farid's PC
+
+The field is **`prompt`**. Your first guess was right.
+
+The full object the hook receives on stdin, captured live from Claude Code on Windows:
+
+| field | what it holds |
+|---|---|
+| `prompt` | **Farid's message text.** This is the one. |
+| `session_id` | the session's id |
+| `session_title` | the title shown in the app |
+| `transcript_path` | full path to this session's transcript |
+| `cwd` | the working folder |
+| `scratchpad_dir` | a temp folder for this session |
+| `prompt_id` | id of this one message |
+| `permission_mode` | e.g. `acceptEdits` |
+| `hook_event_name` | `UserPromptSubmit` |
+
+So `.prompt` alone is enough. `capture_decision.py` keeps the other guesses and the
+longest-string fallback anyway — they cost nothing and they cover a future rename.
+
+Confirmed working: the hook fired on Farid's real messages in session
+`5d8ac762-…`, and the reminder text arrived in the agent's context.
