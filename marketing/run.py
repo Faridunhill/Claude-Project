@@ -81,12 +81,21 @@ def load_control(path: str | Path) -> dict:
         return yaml.safe_load(fh) or {}
 
 
-def get_publisher() -> Tier1Publisher:
-    """WIRING POINT for live posting. Return a real Meta API publisher
-    here when credentials exist on the machine (env vars only — never
-    in the repo, never shared across businesses). Until then every run
-    is a dry run that still produces all the content."""
-    return DryRunPublisher()
+def get_publisher(out_root: Optional[Path] = None) -> Tier1Publisher:
+    """Live Meta publisher when the environment supplies credentials,
+    DryRunPublisher otherwise.
+
+    Credentials are read from env vars only — never the repo, never
+    shared across businesses (LAW 06). With nothing set, every run is a
+    dry run that still produces all the content, so the system can be
+    trusted before it is ever pointed at a live account.
+    """
+    from .social.meta import MetaConfig, MetaPublisher
+
+    config = MetaConfig.from_env_or_none()
+    if config is None:
+        return DryRunPublisher()
+    return MetaPublisher(config, out_root or DEFAULTS["out"])
 
 
 # ── the daily run ────────────────────────────────────────────────────
@@ -144,7 +153,7 @@ def run_daily(
 
     rotation = Rotation(out_root / "rotation.db", cooldown_days=cooldown)
     engine = SocialEngine(
-        out_root / "social.db", publisher or get_publisher(),
+        out_root / "social.db", publisher or get_publisher(out_root),
         max_posts_per_group_per_day=group_wall,
     )
     expression = ExpressionStore(out_root / "expression.db")
@@ -410,7 +419,7 @@ def run_doctor(
     except OSError as exc:
         checks.append(("TODO", "Standing walls", f"cannot read control.yaml: {exc}"))
 
-    publisher = get_publisher()
+    publisher = get_publisher(out_root)
     checks.append((
         "WARN" if isinstance(publisher, DryRunPublisher) else "OK",
         "Publishing",
@@ -442,6 +451,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     daily.add_argument("--no-download", action="store_true", help="skip photo download")
 
     sub.add_parser("doctor", help="report what is ready and what is missing")
+    sub.add_parser("meta-check", help="ask the Graph API what the token can actually do")
 
     args = parser.parse_args(argv)
     command = args.command or "doctor"
@@ -452,6 +462,23 @@ def main(argv: Optional[list[str]] = None) -> int:
             print(f"  [{status:4}] {subject}")
             print(f"         {detail}\n")
         return 0
+
+    if command == "meta-check":
+        from .social.meta import MetaConfig, NotConfigured, diagnose
+
+        print("\nMETA GRAPH API - what this token can actually do\n")
+        try:
+            config = MetaConfig.from_env()
+        except NotConfigured as exc:
+            print(f"  [FAIL] Configuration\n         {exc}\n")
+            return 1
+        failed = 0
+        for status, subject, detail in diagnose(config):
+            if status == "FAIL":
+                failed += 1
+            print(f"  [{status:4}] {subject}")
+            print(f"         {detail}\n")
+        return 1 if failed else 0
 
     run_date = datetime.strptime(args.date, "%Y-%m-%d").date() if args.date else date.today()
     result = run_daily(

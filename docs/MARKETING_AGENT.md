@@ -177,17 +177,66 @@ These are walls, not gaps:
 
 ---
 
-## 7. Turning on live posting
+## 7. Live posting — and why Facebook refuses while Instagram works
 
-Everything works in dry run now. When you want Tier 1 live:
+Live publishing is **built** (`marketing/social/meta.py`). Set four
+environment variables and the runner switches from dry run to live by
+itself — no code change:
 
-1. Get a Meta Business page + Instagram Business account with API access.
-2. Put the credentials in **environment variables on the PC** — never in
-   this repo, never shared with another business (firewall, LAW 06).
-3. Implement one class and return it from `get_publisher()` in
-   `marketing/run.py`. That is the only line that changes.
+```bash
+META_ACCESS_TOKEN=...     # long-lived user token
+META_PAGE_ID=...          # the Facebook Page id
+META_IG_USER_ID=...       # optional - discovered from the Page
+MEDIA_BASE_URL=...        # public url serving marketing/out/
+```
 
-Until then `DryRunPublisher` records what would have been posted.
+Never in the repo, never shared with another business (LAW 06). With
+nothing set, `get_publisher()` returns `DryRunPublisher`.
+
+### Diagnosing the Facebook refusal
+
+```bash
+python -m marketing.run meta-check
+```
+
+This asks the Graph API what the token can actually do. The likely
+cause is structural, not a bug in your setup — **the two surfaces need
+different permissions**:
+
+| Surface | Permissions |
+|---|---|
+| Instagram publishing | `instagram_basic`, `instagram_content_publish`, `pages_show_list` |
+| Facebook Page posting | **`pages_manage_posts`**, `pages_read_engagement`, `pages_show_list` |
+
+`pages_manage_posts` is the one Instagram never needed and Facebook
+cannot post without. A token can publish to Instagram perfectly and be
+refused by Facebook for exactly this reason. `meta-check` prints which
+scopes are actually granted, so this is confirmed or killed in seconds.
+
+Two other causes it checks for:
+
+- **The token trap.** Facebook Page publishing must use the **Page**
+  access token (minted from `/me/accounts`), not the User token. Using
+  the User token fails in a way that reads like a permissions problem
+  but is not one. The publisher always exchanges for the Page token.
+- **Page role.** The token holder needs `CREATE_CONTENT` on the Page.
+  An Analyst role can read everything and post nothing.
+
+### The constraint that surprises people
+
+**Instagram does not accept file uploads.** The Content Publishing API
+takes a `video_url` that *Meta's servers fetch themselves*. A video
+sitting on your PC cannot be posted to Instagram until it is reachable
+on the public internet.
+
+Facebook can take a local upload, but this module uses `file_url` for
+both so there is one hosting story instead of two. That is what
+`MEDIA_BASE_URL` is: wherever `marketing/out/` is served from. Until it
+is set, `meta-check` reports Public media url as FAIL and live posting
+refuses with a clear message rather than a confusing Meta error.
+
+**This is worth deciding before anything else** — it is the difference
+between "the agent posts by itself" and "the agent prepares and I tap".
 
 ---
 
@@ -195,11 +244,12 @@ Until then `DryRunPublisher` records what would have been posted.
 
 ```bash
 python -m marketing.run doctor          # readiness: what is ready, what needs you
+python -m marketing.run meta-check      # what the Meta token can actually do
 python -m marketing.run daily           # today's content
 python -m marketing.run daily --items 5 # more items this run
 python -m marketing.run daily --date 2026-09-14
 python -m marketing.run daily --no-download   # offline: captions + plan only
-python -m pytest marketing/tests/ -q    # 123 tests
+python -m pytest marketing/tests/ -q    # 142 tests
 ```
 
 Outputs land in `marketing/out/`:
