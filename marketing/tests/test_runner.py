@@ -298,3 +298,83 @@ def test_rerun_with_a_higher_count_tops_up_the_same_day(tmp_path):
     second = rotation.select(_candidates(), day, 2)
     assert second[: len(first)] == first
     assert len(second) == 2
+
+
+# ── a new listing must not wait behind the backlog ───────────────────
+
+def test_a_new_listing_is_posted_before_the_backlog(tmp_path):
+    """Adding a pipe in the admin should put it on social within a day,
+    not behind 200 older items waiting their turn."""
+    rotation = Rotation(tmp_path / "r.db")
+    today = date(2026, 9, 12)
+    backlog = Candidate("OLD", 500.0, True, True, added=date(2026, 1, 1))
+    fresh = Candidate("NEW", 30.0, True, True, added=date(2026, 9, 11))
+    assert rotation.select([backlog, fresh], today, 1) == ["NEW"]
+
+
+def test_newest_listing_wins_among_several_new_ones(tmp_path):
+    """Needs a settled catalog around them: freshness only counts when
+    it distinguishes a few items from the rest."""
+    rotation = Rotation(tmp_path / "r.db")
+    today = date(2026, 9, 12)
+    backlog = [
+        Candidate(f"B-{i}", 100.0, True, True, added=date(2026, 1, 1))
+        for i in range(20)
+    ]
+    older = Candidate("A", 900.0, True, True, added=date(2026, 9, 5))
+    newest = Candidate("N", 10.0, True, True, added=date(2026, 9, 11))
+    assert rotation.select([*backlog, older, newest], today, 1) == ["N"]
+
+
+def test_backlog_still_sorts_by_price(tmp_path):
+    """Once nothing is new, the money at stake breaks the tie again."""
+    rotation = Rotation(tmp_path / "r.db")
+    cheap = Candidate("C", 20.0, True, True, added=date(2026, 1, 1))
+    dear = Candidate("D", 500.0, True, True, added=date(2026, 1, 2))
+    assert rotation.select([cheap, dear], date(2026, 9, 12), 1) == ["D"]
+
+
+def test_undated_items_are_treated_as_backlog(tmp_path):
+    rotation = Rotation(tmp_path / "r.db")
+    undated = Candidate("U", 900.0, True, True, added=None)
+    fresh = Candidate("N", 10.0, True, True, added=date(2026, 9, 11))
+    assert rotation.select([undated, fresh], date(2026, 9, 12), 1) == ["N"]
+
+
+def test_the_admin_brand_field_is_used_directly(tmp_path):
+    """Keystatic has a Brand field. A maker typed there needs no guessing
+    from the title, and is not limited to the allowlist."""
+    from marketing.catalog import load_brands, to_effective
+
+    root = Path(__file__).resolve().parent.parent
+    effective = to_effective(
+        {"name": "Unsigned Straight Billiard", "sku": "X",
+         "brand": "Some Maker Not In The Allowlist"},
+        load_brands(root / "brands.yaml"),
+    )
+    assert effective["brand"] == "Some Maker Not In The Allowlist"
+
+
+def test_allowlist_still_covers_an_empty_admin_field(tmp_path):
+    from marketing.catalog import load_brands, to_effective
+
+    root = Path(__file__).resolve().parent.parent
+    effective = to_effective(
+        {"name": "Chacom Gentleman 836 Dublin", "sku": "X", "brand": ""},
+        load_brands(root / "brands.yaml"),
+    )
+    assert effective["brand"] == "Chacom"
+
+
+def test_a_bulk_import_is_not_treated_as_new(tmp_path):
+    """After a fresh clone every file carries today's date. If everything
+    looks new, nothing is — otherwise the whole backlog would sort by
+    filesystem timestamp instead of by value."""
+    rotation = Rotation(tmp_path / "r.db")
+    today = date(2026, 9, 12)
+    imported = [
+        Candidate(f"I-{i}", float(i), True, True, added=date(2026, 9, 12))
+        for i in range(20)
+    ]
+    # highest price wins, not an arbitrary same-day timestamp
+    assert rotation.select(imported, today, 1) == ["I-19"]

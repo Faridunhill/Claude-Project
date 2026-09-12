@@ -41,12 +41,23 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_sel_unique ON selections (sku, run_date);
 """
 
 
+#: A listing added within this many days counts as "new" and is posted
+#: before the backlog. Beyond it, an item is just part of the catalog.
+NEW_LISTING_DAYS = 14
+
+#: If more than this fraction of eligible items look new, they are not
+#: new — it is a fresh clone or a bulk import, and every file carries
+#: the same date. Freshness is then ignored.
+FRESH_SIGNAL_LIMIT = 0.2
+
+
 @dataclass(frozen=True)
 class Candidate:
     sku: str
     price: float
     has_photo: bool
     in_stock: bool
+    added: Optional[date] = None      # when the listing file appeared
 
 
 class Rotation:
@@ -111,10 +122,29 @@ class Rotation:
                 continue          # still inside its cooldown window
             eligible.append((cand, last))
 
+        fresh_after = run_date - timedelta(days=NEW_LISTING_DAYS)
+
+        def is_fresh(cand: Candidate) -> bool:
+            return cand.added is not None and cand.added >= fresh_after
+
+        # "New" only means something when it distinguishes a few items
+        # from the rest. After a fresh clone or a bulk import every file
+        # carries today's date, so everything looks new and the signal is
+        # noise — fall back to price, which still ranks sensibly.
+        fresh_count = sum(1 for cand, _ in eligible if is_fresh(cand))
+        freshness_meaningful = 0 < fresh_count <= max(1, len(eligible) * FRESH_SIGNAL_LIMIT)
+
         def sort_key(pair: tuple[Candidate, Optional[str]]):
             cand, last = pair
             never_posted = 0 if last is None else 1     # never-posted first
-            return (never_posted, last or "", -cand.price, cand.sku)
+            # A listing added this week goes out before the backlog:
+            # adding a pipe to the shop should put it on social within a
+            # day, not behind 200 older items. Newest first among those.
+            if freshness_meaningful and is_fresh(cand):
+                freshness = (0, -cand.added.toordinal())
+            else:
+                freshness = (1, 0)
+            return (never_posted, *freshness, last or "", -cand.price, cand.sku)
 
         eligible.sort(key=sort_key)
         return already + [cand.sku for cand, _ in eligible[: count - len(already)]]

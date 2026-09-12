@@ -177,6 +177,7 @@ def run_daily(
             price=item.price or 0.0,
             has_photo=item.image_count > 0 or item.sku in photo_map,
             in_stock=item.effective.get("in_stock", True),
+            added=item.added,
         )
         for item in catalog
     ]

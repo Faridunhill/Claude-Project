@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 from typing import Iterator, Optional
 
@@ -217,6 +218,7 @@ class CatalogItem:
     price: Optional[float]
     source_path: str
     effective: dict
+    added: Optional[date] = None       # when the listing file appeared
 
     @property
     def image_count(self) -> int:
@@ -240,7 +242,11 @@ def to_effective(product: dict, brands: list[str]) -> dict:
     department = str(product.get("department") or "").strip()
     price = _to_float(product.get("price"))
 
-    brand = extract_brand(name, brands)
+    # The admin (Keystatic) has a Brand field. When Farid fills it in,
+    # that is the maker stated directly by a human and needs no guessing
+    # from the title at all. The allowlist is only the fallback for the
+    # imported catalog, where the field is empty.
+    brand = str(product.get("brand") or "").strip() or extract_brand(name, brands)
     shape = extract_shape(name)
     origin = extract_origin(name)
     era = extract_era(name)
@@ -302,6 +308,11 @@ def load_item(path: str | Path, brands: list[str]) -> Optional[CatalogItem]:
     if not effective["sku"]:
         return None
 
+    try:
+        added = date.fromtimestamp(path.stat().st_mtime)
+    except OSError:
+        added = None
+
     return CatalogItem(
         sku=effective["sku"],
         name=effective["catalog_name"],
@@ -309,6 +320,7 @@ def load_item(path: str | Path, brands: list[str]) -> Optional[CatalogItem]:
         price=effective["list_price"],
         source_path=str(path),
         effective=effective,
+        added=added,
     )
 
 
