@@ -9,6 +9,12 @@ overlay:
   font: DejaVuSerif             # must exist on the render machine
   title_color: "#F5EDE0"        # parchment
   brand_color: "#C9A227"        # gold
+  title_size: 44
+  brand_size: 28
+  # Distance from the bottom edge to the FIRST title line. Instagram and
+  # TikTok draw the caption, handle and buttons over the lower part of a
+  # vertical video, so anything below this is covered up in the app.
+  title_bottom_margin: 430
 formats:
   vertical: {width: 1080, height: 1920}   # reels / stories / tiktok
   square: {width: 1080, height: 1080}     # feed

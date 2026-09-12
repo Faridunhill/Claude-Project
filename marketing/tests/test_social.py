@@ -65,12 +65,24 @@ def test_video_command_built_with_style_and_overlays(tmp_path):
 
 
 def test_video_manifest_logs_license_and_is_not_synthetic(tmp_path):
+    """The manifest is the licence and placement record: no manifest, no
+    post, and `is_synthetic: False` is what keeps a real photograph in a
+    listing slot legal (Addendum V1)."""
+    from marketing.social.video import resolve_ffmpeg
+    from marketing.tests.test_runner import _TINY_JPEG
+
+    photo = tmp_path / "a.jpg"
+    photo.write_bytes(_TINY_JPEG)
+
     style = load_style(STYLE_PATH)
-    spec = VideoSpec(sku="FH-1", photos=["a.jpg"], title_overlay="X", fmt="square")
-    result = build_video(spec, style, tmp_path)   # no ffmpeg here -> not rendered
+    spec = VideoSpec(sku="FH-1", photos=[str(photo)], title_overlay="X", fmt="square")
+    result = build_video(spec, style, tmp_path)
+
     assert result.manifest["music_license_source"] == "meta_sound_collection"
     assert result.manifest["is_synthetic"] is False   # real photos, placement-law safe
-    assert result.rendered is False and result.command
+    assert result.command
+    # Whether it rendered here depends on the machine, not on the code.
+    assert result.rendered is (resolve_ffmpeg() is not None)
 
 
 # ------------------------------------------------------------ tiers + walls

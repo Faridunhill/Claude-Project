@@ -134,3 +134,61 @@ def test_square_format_uses_square_dimensions(style, tmp_path):
     spec = VideoSpec(sku="S", photos=["a.jpg"], title_overlay="t", fmt="square")
     graph = _filtergraph(build_command(spec, style, tmp_path)[0])
     assert "1080x1080" in graph
+
+
+# ── the overlay, as seen on a rendered frame ─────────────────────────
+
+def test_a_long_title_never_overflows_the_frame(style, tmp_path):
+    """ffmpeg does not clip a drawtext line - it centres it and lets it
+    run off both edges. On a rendered frame a 46-character title at size
+    42 was cut off on both sides and read as broken."""
+    from marketing.social.video import _chars_per_line, wrap_title
+
+    limit = _chars_per_line(1080, 44)
+    for title in (
+        "German Expandable Leather Tobacco Pouch Magic Box Medical Rubber Lined NOS",
+        "Big Ben Kingline 427 Sandblast Tomato Nosewarmer Dutch Briar Vulcanite Saddle",
+        "Rattray's Mary Sandblast Complete Set",
+    ):
+        lines = wrap_title(title, limit)
+        assert lines and all(len(line) <= limit for line in lines)
+        assert len(lines) <= 2
+
+
+def test_a_truncated_title_shows_that_it_was_cut():
+    from marketing.social.video import wrap_title
+
+    lines = wrap_title(" ".join(["word"] * 40), 20)
+    assert lines[-1].endswith("...")
+
+
+def test_a_short_title_is_left_alone():
+    from marketing.social.video import wrap_title
+
+    assert wrap_title("Short Name", 37) == ["Short Name"]
+
+
+def test_empty_title_does_not_crash():
+    from marketing.social.video import wrap_title
+
+    assert wrap_title("   ", 37) == [""]
+
+
+def test_title_sits_clear_of_the_platform_ui(style, tmp_path):
+    """Instagram and TikTok draw the caption, handle and buttons over the
+    bottom of a vertical video. A title at y=h-140 is simply covered."""
+    graph = _filtergraph(build_command(_spec(1), style, tmp_path)[0])
+    height = style["formats"]["vertical"]["height"]
+    import re
+
+    # ":y=" only - "shadowy=2" also contains "y=".
+    ys = [int(m) for m in re.findall(r":y=(\d+)", graph)]
+    title_ys = [y for y in ys if y > height / 2]
+    assert title_ys, "expected a title line in the lower half"
+    assert max(title_ys) < height - 300, "title would sit under the app UI"
+
+
+def test_overlay_has_a_shadow_for_legibility(style, tmp_path):
+    """Parchment text over a pale photograph is unreadable without it."""
+    graph = _filtergraph(build_command(_spec(1), style, tmp_path)[0])
+    assert graph.count("shadowcolor=") >= 2

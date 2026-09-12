@@ -18,12 +18,14 @@ from marketing.media import cache_name, fetch_all, fetch_photo
 from marketing.rotation import Candidate, Rotation
 from marketing.run import run_daily, run_doctor
 
-# A 1x1 JPEG — enough for the cache and command-building paths.
-_TINY_JPEG = bytes.fromhex(
-    "ffd8ffe000104a46494600010100000100010000ffdb004300ff"
-    "c00011080001000103011100021101031101ffc4001f0000010501"
-    "010101010100000000000000000102030405060708090a0bffda00"
-    "0c03010002110311003f00bfffd9"
+# A real 64x48 JPEG. It has to decode: with ffmpeg present the runner
+# actually renders, and a malformed fixture fails for the wrong reason.
+_TINY_JPEG = __import__("base64").b64decode(
+    "/9j/4AAQSkZJRgABAgAAAQABAAD//gAQTGF2YzYwLjMxLjEwMgD/2wBDAAgEBAQEBAUF"
+    "BQUFBQYGBgYGBgYGBgYGBgYHBwcICAgHBwcGBgcHCAgICAkJCQgICAgJCQoKCgwMCwsO"
+    "Dg4RERT/xABMAAEBAAAAAAAAAAAAAAAAAAAABgEBAQAAAAAAAAAAAAAAAAAAAAUQAQAA"
+    "AAAAAAAAAAAAAAAAAAARAQAAAAAAAAAAAAAAAAAAAAD/wAARCAAwAEADASIAAhEAAxEA"
+    "/9oADAMBAAIRAxEAPwCPATFIAAAAAAAAAAAAAAAAAAAAAB//2Q=="
 )
 
 
@@ -404,3 +406,40 @@ def test_windows_task_survives_a_pc_that_was_switched_off():
     assert "<StartWhenAvailable>true</StartWhenAvailable>" in _TASK_XML
     assert "<MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>" in _TASK_XML
     assert "-m marketing.run daily" in _TASK_XML
+
+
+def test_a_broken_photo_costs_one_item_not_the_whole_run(store, tmp_path):
+    """ffmpeg exits non-zero on a truncated photo. Before this, that
+    exception propagated and killed the night's entire run."""
+    import shutil as _shutil
+
+    if not _shutil.which("ffmpeg"):
+        pytest.skip("needs a real ffmpeg to fail on a corrupt photo")
+
+    def corrupt(url: str, dest: Path) -> None:
+        dest.write_bytes(b"\xff\xd8\xff not a jpeg")
+
+    result = _run(store, tmp_path, run_date=date(2026, 9, 12), items_wanted=2,
+                  downloader=corrupt)
+    assert len(result.items) == 2, "captions and plan must still be produced"
+    assert any("render failed" in w for w in result.warnings)
+    assert (result.out_dir / "plan.md").exists()
+
+
+def test_the_overlay_uses_the_item_name_not_the_search_tail():
+    """Marketplace titles carry a keyword tail after a colon. On screen
+    that reads as noise and gets cut mid-word."""
+    from marketing.social.captions import _subject_from_catalog_name
+
+    name = "Rattray's Mary Sandblast Complete Set: 161 Rhodesian, 162 Prince"
+    assert _subject_from_catalog_name(name, 90) == "Rattray's Mary Sandblast Complete Set"
+
+
+def test_apostrophes_survive_into_the_overlay():
+    """Deleting the apostrophe turned "Rattray's" into "Rattrays" on a
+    brand name; a typographic one also avoids filtergraph quoting."""
+    from marketing.run import _ffmpeg_safe
+
+    out = _ffmpeg_safe("Rattray's Mary")
+    assert "Rattray’s" in out
+    assert "'" not in out

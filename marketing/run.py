@@ -45,7 +45,11 @@ from .social.meta import find_meta_json, load_meta_json
 from .photovault import load_photo_map, photos_for, propose, scan_vault, write_proposal
 from .rotation import Candidate, Rotation
 from .storage import get_uploader, key_for
-from .social.captions import CAPTION_GENERATOR_VERSION, generate_caption
+from .social.captions import (
+    CAPTION_GENERATOR_VERSION,
+    _subject_from_catalog_name,
+    generate_caption,
+)
 from .social.publisher import (
     ChannelPaused,
     DryRunPublisher,
@@ -241,18 +245,30 @@ def run_daily(
         ))
 
         # -- video ------------------------------------------------------
-        overlay = item.name[:60]
+        overlay = _subject_from_catalog_name(item.name, max_len=90)
         video_path = ""
         video_note = ""
         if photos:
             spec = VideoSpec(sku=sku, photos=photos, title_overlay=_ffmpeg_safe(overlay), fmt="vertical")
-            video = build_video(spec, style, day_dir)
-            video_path = video.output_path
-            if video.rendered:
-                result.rendered += 1
-            else:
-                render_commands.append(video.command)
-                video_note = "queued for render (ffmpeg not on this machine)"
+            try:
+                video = build_video(spec, style, day_dir)
+            except Exception as exc:
+                # A corrupt or truncated photo makes ffmpeg exit non-zero.
+                # That must cost one item, not the whole night's run: the
+                # caption is already written and the rest still go out.
+                detail = getattr(exc, "stderr", b"") or b""
+                tail = detail.decode("utf-8", "replace").strip().splitlines()[-1:] or [str(exc)]
+                result.warnings.append(f"{sku}: video render failed - {tail[0][:200]}")
+                video_note = "render failed - caption only"
+                video = None
+
+            if video is not None:
+                video_path = video.output_path
+                if video.rendered:
+                    result.rendered += 1
+                else:
+                    render_commands.append(video.command)
+                    video_note = "queued for render (ffmpeg not on this machine)"
         else:
             # --no-download (offline preview) or a photo-less item:
             # captions and the plan still get produced.
@@ -329,8 +345,15 @@ def run_daily(
 
 
 def _ffmpeg_safe(text: str) -> str:
-    """drawtext breaks on quotes, colons and backslashes."""
-    for char, repl in (("\\", ""), ("'", ""), (":", " -"), ("%", " pct")):
+    """Make text safe for a drawtext filter argument.
+
+    A straight apostrophe cannot be quoted cleanly inside a filtergraph,
+    but deleting it turns "Rattray's" into "Rattrays" on a brand name.
+    The typographic apostrophe avoids the quoting problem entirely and
+    is what the name should look like anyway.
+    """
+    text = text.replace("'", "\u2019")
+    for char, repl in (("\\", ""), (":", " -"), ("%", " pct")):
         text = text.replace(char, repl)
     return text
 
@@ -544,6 +567,87 @@ def run_doctor(
     return checks
 
 
+# ── preview ──────────────────────────────────────────────────────────
+
+def _preview(sku: Optional[str]) -> int:
+    """Render one video on demand, for a human to look at.
+
+    `daily` is deliberately hard to repeat: once an item is posted it
+    sits in a 45-day cooldown, so re-running it produces nothing and
+    there is no new video to judge. That is right for the feed and
+    useless for "show me what this looks like". This command ignores
+    rotation entirely, records nothing, and posts nothing.
+    """
+    from .social.video import VideoSpec, build_video, load_style, resolve_ffmpeg
+
+    out_root = DEFAULTS["out"]
+    preview_dir = out_root / "preview"
+    catalog = load_catalog(DEFAULTS["products_dir"], DEFAULTS["brands"])
+    if not catalog:
+        print(f"\n  No products found in {DEFAULTS['products_dir']}\n")
+        return 1
+
+    if sku:
+        chosen = next((i for i in catalog if i.sku.lower() == sku.lower()), None)
+        if chosen is None:
+            print(f"\n  No item with SKU {sku!r}. Try `doctor` to confirm the catalog.\n")
+            return 1
+    else:
+        # The dearest item with photographs: the one most worth judging.
+        usable = [i for i in catalog if i.image_count or i.sku in
+                  load_photo_map(DEFAULTS["photo_map"])]
+        if not usable:
+            print("\n  No item in the catalog has a photo.\n")
+            return 1
+        chosen = max(usable, key=lambda i: i.price or 0)
+
+    print(f"\n  {chosen.sku}  {chosen.name[:60]}")
+
+    photos = photos_for(chosen.sku, load_photo_map(DEFAULTS["photo_map"]), limit=5)
+    if photos:
+        print(f"  {len(photos)} photos from the vault")
+    else:
+        urls = [m["url"] for m in chosen.effective.get("media", [])]
+        fetched = fetch_all(urls, out_root / "photos")
+        photos = [f.path for f in fetched if f.ok]
+        if not photos:
+            errors = "; ".join(f.error or "?" for f in fetched) or "no photos"
+            print(f"\n  Could not get a photo: {errors}\n")
+            return 1
+        print(f"  {len(photos)} photo(s) from the catalog")
+
+    binary = resolve_ffmpeg()
+    if not binary:
+        print("\n  ffmpeg not found, so nothing can be rendered here.")
+        print("  Set FFMPEG_BINARY to an existing copy, e.g.")
+        print("    FFMPEG_BINARY=C:/Users/hadid/FaridOS/voice/bin/ffmpeg.exe\n")
+        return 1
+    print(f"  ffmpeg: {binary}")
+
+    style = load_style(DEFAULTS["style"])
+    spec = VideoSpec(sku=chosen.sku, photos=photos,
+                     title_overlay=_ffmpeg_safe(
+                         _subject_from_catalog_name(chosen.name, max_len=90)),
+                     fmt="vertical")
+    try:
+        video = build_video(spec, style, preview_dir)
+    except Exception as exc:
+        print(f"\n  Render FAILED: {type(exc).__name__}: {exc}")
+        stderr = getattr(exc, "stderr", b"")
+        if stderr:
+            print("\n" + stderr.decode("utf-8", "replace")[-1500:])
+        print()
+        return 1
+
+    seconds = len(photos) * float(style["motion"]["seconds_per_photo"])
+    size = Path(video.output_path).stat().st_size if Path(video.output_path).exists() else 0
+    print(f"\n  VIDEO: {video.output_path}")
+    print(f"  {seconds:.0f} seconds, {size / 1_000_000:.1f} MB, {len(photos)} photo(s)")
+    print("\n  Open it and look. Nothing was posted and nothing was recorded,")
+    print("  so you can run this as many times as you like.\n")
+    return 0
+
+
 # ── scheduling ───────────────────────────────────────────────────────
 
 _TASK_XML = """<?xml version="1.0" encoding="UTF-16"?>
@@ -627,6 +731,12 @@ def main(argv: Optional[list[str]] = None) -> int:
     daily.add_argument("--no-download", action="store_true", help="skip photo download")
 
     sub.add_parser("doctor", help="report what is ready and what is missing")
+
+    preview = sub.add_parser(
+        "preview",
+        help="render ONE video now so you can look at it (ignores rotation, posts nothing)",
+    )
+    preview.add_argument("--sku", default=None, help="which item (default: best candidate)")
     sub.add_parser("meta-check", help="ask the Graph API what the token can actually do")
     sub.add_parser("meta-renew", help="exchange the current token for a fresh ~60-day one")
 
@@ -684,6 +794,9 @@ def main(argv: Optional[list[str]] = None) -> int:
         print("Nothing is live yet. Review it, then copy the entries you agree")
         print(f"with into {DEFAULTS['photo_map']} - that is the file the runner reads.\n")
         return 0
+
+    if command == "preview":
+        return _preview(args.sku)
 
     if command == "schedule":
         return _write_schedule(args.at)

@@ -116,6 +116,59 @@ def _escape_fontfile(path: str) -> str:
     return "'" + path.replace("\\", "/").replace(":", r"\:") + "'"
 
 
+#: Width of an average glyph as a fraction of the font size, for this
+#: serif face. Measured off a rendered 1080-wide frame where a 46
+#: character title at size 42 overran the frame: ~23px per character,
+#: i.e. 0.55 of the size. Rounded up so the estimate errs toward
+#: wrapping early rather than overflowing.
+_GLYPH_WIDTH_RATIO = 0.58
+
+#: Side margin kept clear at each edge.
+_SIDE_MARGIN = 60
+
+
+def _chars_per_line(width: int, font_size: int) -> int:
+    usable = max(1, width - 2 * _SIDE_MARGIN)
+    return max(12, int(usable / (font_size * _GLYPH_WIDTH_RATIO)))
+
+
+def wrap_title(title: str, max_chars: int, max_lines: int = 2) -> list[str]:
+    """Break a listing title into at most `max_lines` lines that fit.
+
+    Marketplace titles run to 80+ characters and a single drawtext line
+    is not clipped by ffmpeg - it is centred and simply runs off both
+    edges of the frame, which reads as broken rather than as cropped.
+    """
+    words = title.split()
+    if not words:
+        return [""]
+
+    lines: list[str] = []
+    current = ""
+    for word in words:
+        candidate = f"{current} {word}".strip()
+        if len(candidate) <= max_chars:
+            current = candidate
+            continue
+        if current:
+            lines.append(current)
+        current = word
+        if len(lines) == max_lines:
+            break
+    if current and len(lines) < max_lines:
+        lines.append(current)
+
+    # Anything that did not fit is dropped, with an ellipsis so the cut
+    # is visible rather than looking like a truncated thought.
+    used = len(" ".join(lines).split())
+    if used < len(words) and lines:
+        tail = lines[-1]
+        if len(tail) + 3 > max_chars:
+            tail = tail[: max_chars - 3].rstrip()
+        lines[-1] = tail + "..."
+    return lines
+
+
 def build_command(spec: VideoSpec, style: dict, out_dir: Path) -> tuple[list[str], Path]:
     fmt = style["formats"][spec.fmt]
     w, h = fmt["width"], fmt["height"]
@@ -156,13 +209,36 @@ def build_command(spec: VideoSpec, style: dict, out_dir: Path) -> tuple[list[str
 
     font = resolve_font(style)
     font_arg = f"fontfile={_escape_fontfile(font)}:" if font else ""
-    filters.append(
-        f"[slides]drawtext={font_arg}text='{spec.title_overlay}':"
-        f"fontcolor={style['overlay']['title_color']}:"
-        f"fontsize=42:x=(w-text_w)/2:y=h-140,"
-        f"drawtext={font_arg}text='{brand}':fontcolor={style['overlay']['brand_color']}:"
-        f"fontsize=28:x=w-text_w-40:y=40[vout]"
+    overlay = style["overlay"]
+    title_size = int(overlay.get("title_size", 44))
+    brand_size = int(overlay.get("brand_size", 28))
+
+    # Keep the title clear of the platform's own furniture. Instagram and
+    # TikTok draw the caption, the handle and the action buttons over the
+    # bottom of a vertical video, so text placed near the edge is simply
+    # covered up. Measured against a rendered frame, not guessed.
+    bottom_margin = int(overlay.get("title_bottom_margin", 430))
+    line_gap = int(title_size * 1.35)
+
+    lines_of_title = wrap_title(spec.title_overlay, _chars_per_line(w, title_size))
+    # A drop shadow, not a box: the overlay has to stay readable over a
+    # pale photograph without putting a slab across the product.
+    shadow = "shadowcolor=black@0.65:shadowx=2:shadowy=2:"
+
+    draws = []
+    for index, line in enumerate(lines_of_title):
+        y = h - bottom_margin + index * line_gap
+        draws.append(
+            f"drawtext={font_arg}{shadow}text='{line}':"
+            f"fontcolor={overlay['title_color']}:"
+            f"fontsize={title_size}:x=(w-text_w)/2:y={y}"
+        )
+    draws.append(
+        f"drawtext={font_arg}{shadow}text='{brand}':"
+        f"fontcolor={overlay['brand_color']}:"
+        f"fontsize={brand_size}:x=w-text_w-48:y=56"
     )
+    filters.append("[slides]" + ",".join(draws) + "[vout]")
 
     cmd = ["ffmpeg", "-y", *inputs]
     maps = ["-map", "[vout]"]
