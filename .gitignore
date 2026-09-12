@@ -41,3 +41,4 @@ __pycache__/
 
 # marketing runtime output (videos, photo cache, plans, local databases)
 /marketing/out/
+/marketing/photo_map.proposed.yaml

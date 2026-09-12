@@ -39,6 +39,7 @@ from .catalog import load_catalog
 from .expression.copy import GENERATOR_VERSION, generate_title
 from .expression.store import ExpressionRecord, ExpressionStore, inputs_hash
 from .media import fetch_all
+from .photovault import load_photo_map, photos_for, propose, scan_vault, write_proposal
 from .rotation import Candidate, Rotation
 from .social.captions import CAPTION_GENERATOR_VERSION, generate_caption
 from .social.publisher import (
@@ -60,6 +61,7 @@ DEFAULTS = {
     "brands": MARKETING / "brands.yaml",
     "control": MARKETING / "control.yaml",
     "style": MARKETING / "social" / "style_faridunhill.yaml",
+    "photo_map": MARKETING / "photo_map.yaml",
     "out": MARKETING / "out",
 }
 
@@ -139,6 +141,11 @@ def run_daily(
     group_wall = int(social_cfg.get("max_posts_per_group_per_day", 1))
     groups = [str(g) for g in (social_cfg.get("groups") or [])]
     want_profile = bool(social_cfg.get("profile", True))
+    max_photos = int(social_cfg.get("max_photos_per_video", 5))
+
+    # Confirmed vault mapping, if a human has reviewed one. Local photo
+    # sets beat the single catalog thumbnail and need no download.
+    photo_map = load_photo_map(DEFAULTS["photo_map"])
 
     day_dir = out_root / run_date.isoformat()
     day_dir.mkdir(parents=True, exist_ok=True)
@@ -163,7 +170,7 @@ def run_daily(
         Candidate(
             sku=item.sku,
             price=item.price or 0.0,
-            has_photo=item.image_count > 0,
+            has_photo=item.image_count > 0 or item.sku in photo_map,
             in_stock=item.effective.get("in_stock", True),
         )
         for item in catalog
@@ -181,14 +188,23 @@ def run_daily(
     for sku in selected:
         item = by_sku[sku]
         effective = item.effective
-        urls = [m["url"] for m in effective.get("media", [])]
 
-        fetched = fetch_all(urls, photo_cache, downloader) if download else []
-        photos = [f.path for f in fetched if f.ok]
-        if download and not photos:
-            errors = "; ".join(f.error or "?" for f in fetched) or "no photos"
-            result.skipped.append({"sku": sku, "name": item.name, "reason": f"photos unavailable ({errors})"})
-            continue
+        # The vault wins when it has this item: real shoots, already
+        # local, several angles instead of one thumbnail.
+        photos = photos_for(sku, photo_map, limit=max_photos)
+        photo_source = "vault" if photos else "catalog"
+
+        if not photos:
+            urls = [m["url"] for m in effective.get("media", [])]
+            fetched = fetch_all(urls, photo_cache, downloader) if download else []
+            photos = [f.path for f in fetched if f.ok]
+            if download and urls and not photos:
+                errors = "; ".join(f.error or "?" for f in fetched) or "no photos"
+                result.skipped.append({
+                    "sku": sku, "name": item.name,
+                    "reason": f"photos unavailable ({errors})",
+                })
+                continue
 
         # -- caption (through the QA-gate lock, versioned) -------------
         caption = generate_caption(effective, kind="new_arrival")
@@ -249,6 +265,7 @@ def run_daily(
             "taxonomy": effective.get("taxonomy"),
             "brand": effective.get("brand"),
             "photo_count": len(photos) or item.image_count,
+            "photo_source": photo_source,
             "video_path": video_path,
             "video_note": video_note,
             "caption": caption.full(),
@@ -333,10 +350,13 @@ def _write_plan(result: RunResult, path: Path, rotation: Rotation, catalog_size:
 
         if item["photo_count"] <= 1:
             lines += [
-                "> Only 1 photo. The video is a single slow zoom. Three or four",
-                "> photos would make a real reel - and lift the Etsy listing too.",
+                "> Only 1 photo, from the web catalog. The video is a single slow",
+                "> zoom. If this item has a real photo folder on the PC, map it:",
+                "> `python -m marketing.run vault-scan --vault <path>`.",
                 "",
             ]
+        elif item.get("photo_source") == "vault":
+            lines += [f"_{item['photo_count']} photos from the vault._", ""]
 
         lines += ["**Caption - copy from here:**", "", "```", item["caption"], "```", ""]
         if item["placements"]:
@@ -471,6 +491,14 @@ def main(argv: Optional[list[str]] = None) -> int:
     sub.add_parser("doctor", help="report what is ready and what is missing")
     sub.add_parser("meta-check", help="ask the Graph API what the token can actually do")
 
+    vault = sub.add_parser(
+        "vault-scan",
+        help="match catalog items to photo folders on this PC (proposes, never applies)",
+    )
+    vault.add_argument("--vault", required=True, help="root of the photo library")
+    vault.add_argument("--min-photos", type=int, default=2,
+                       help="ignore folders with fewer photos (default 2)")
+
     args = parser.parse_args(argv)
     command = args.command or "doctor"
 
@@ -479,6 +507,39 @@ def main(argv: Optional[list[str]] = None) -> int:
         for status, subject, detail in run_doctor():
             print(f"  [{status:4}] {subject}")
             print(f"         {detail}\n")
+        return 0
+
+    if command == "vault-scan":
+        try:
+            folders = scan_vault(args.vault, min_photos=args.min_photos)
+        except FileNotFoundError as exc:
+            print(f"\n  {exc}\n")
+            return 1
+
+        catalog = load_catalog(DEFAULTS["products_dir"], DEFAULTS["brands"])
+        matches = propose(catalog, folders)
+        confident = [m for m in matches if m.confident]
+        weak = [m for m in matches if m.folder and not m.confident]
+
+        proposal = MARKETING / "photo_map.proposed.yaml"
+        write_proposal(matches, proposal)
+
+        photos = sum(m.folder.photo_count for m in confident)
+        print(f"\nVAULT SCAN - {args.vault}\n")
+        print(f"  {len(folders)} folders with >= {args.min_photos} photos")
+        print(f"  {len(confident)} confident matches ({photos} photographs)")
+        print(f"  {len(weak)} weak matches (listed, commented out)")
+        print(f"  {len(matches) - len(confident) - len(weak)} items matched nothing\n")
+
+        for match in confident[:15]:
+            print(f"  {match.sku:12} {match.name[:44]:46} {match.folder.photo_count:>4} photos")
+            print(f"  {'':12} via {', '.join(match.evidence)}  (score {match.score:.1f})")
+        if len(confident) > 15:
+            print(f"  ... and {len(confident) - 15} more\n")
+
+        print(f"\nWritten: {proposal}")
+        print("Nothing is live yet. Review it, then copy the entries you agree")
+        print(f"with into {DEFAULTS['photo_map']} - that is the file the runner reads.\n")
         return 0
 
     if command == "meta-check":
