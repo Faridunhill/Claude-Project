@@ -38,3 +38,6 @@ __pycache__/
 *.pyc
 .pytest_cache/
 *.db
+
+# marketing runtime output (videos, photo cache, plans, local databases)
+/marketing/out/

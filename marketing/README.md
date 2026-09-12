@@ -48,6 +48,22 @@ pip install pydantic pytest pyyaml
 python -m pytest marketing/tests/ -v
 ```
 
+## Running it (P2.9a — the runner)
+
+```
+python -m marketing.run doctor    # readiness report
+python -m marketing.run daily     # today's videos, captions, post plan
+```
+
+`catalog.py` is the fuel line: it reads the real `content/products/*.yaml`
+(264 items) into effective-genome dicts, so the whole pipeline runs today
+without Priority 1 being wired. `run.py` is the ignition key — walls,
+rotation, photos, video, captions, publishing, and `plan.md` (the phone
+sheet, the only file Farid opens). Publishing defaults to DRY RUN.
+
+Full operating manual, ad-spend math and the vendor verdict:
+`docs/MARKETING_AGENT.md`.
+
 ## Build queue position
 
 P2.1 ✅ store hygiene · P2.2 ✅ genome layer · P2.3 ✅ intake pipeline
@@ -55,6 +71,11 @@ P2.1 ✅ store hygiene · P2.2 ✅ genome layer · P2.3 ✅ intake pipeline
 P2.5 ✅ five-event ledger (`phenotype/`) · P2.6 ✅ copy generators
 (`expression/`) · P2.7 ✅ social engine (`social/`) · P2.8 ✅
 encyclopedia flywheel (`encyclopedia/` + store `/archive` and
-`/collections/[brand]` routes) · P2.9 visual generation — **BLOCKED on
-Farid: vendor selection + spend-number re-set** (then: manifest,
-style values, depicts-checker, template lint; cohort-level assets only).
+`/collections/[brand]` routes) · P2.9a ✅ catalog adapter + runner
+(`catalog.py`, `media.py`, `rotation.py`, `run.py`) — the system now
+runs end-to-end on the real catalog · P2.9b visual generation —
+**BLOCKED on Farid: vendor selection + spend-number re-set** (then:
+manifest, style values, depicts-checker, template lint; cohort-level
+assets only). Note: text-to-image vendors are for brand furniture only —
+generated imagery may never occupy a listing-image slot for a
+one-of-a-kind item (Addendum V1).

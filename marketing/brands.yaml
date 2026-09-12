@@ -1,0 +1,88 @@
+# ═══════════════════════════════════════════════════════════════════
+# BRAND ALLOWLIST — the only names the catalog adapter may read out of
+# a listing title and assert as `brand`.
+#
+# WHY AN ALLOWLIST: the adapter must never guess a maker from a stray
+# word. A title says "Vintage German Leather Cigar Case" — "German" is
+# not a brand. Only names on this list are extracted, and only when the
+# whole phrase appears in the title Farid wrote himself. That makes the
+# claim human-sourced (FieldSource.HUMAN), which is what lets the copy
+# generators ASSERT it instead of hedging.
+#
+# TO ADD A BRAND: add the line. Longest match wins, so put multi-word
+# names in freely ("Butz-Choquin" beats "Butz"). Matching is
+# case-insensitive and ignores punctuation differences.
+#
+# TO REMOVE A CLAIM: delete the line. The next run regenerates every
+# caption without it — nothing is hand-edited, ever.
+# ═══════════════════════════════════════════════════════════════════
+version: 1
+
+brands:
+  # -- pipe makers ---------------------------------------------------
+  - Butz-Choquin
+  - Chacom
+  - Charatan
+  - Stanwell
+  - Savinelli
+  - Vauen
+  - Big Ben
+  - Hilson
+  - Nording
+  - Erik Nording
+  - Georg Jensen
+  - Mastro de Paja
+  - Lorenzo
+  - Bari
+  - Jarl
+  - Tsuge
+  - Peterson
+  - Dunhill
+  - Comoy's
+  - Comoy
+  - Ekoms
+  - Las Vegas
+  - Gavirate
+  - Egra
+  - Darvil
+  - Zenith
+  - Wessex
+  - Stefano
+  - Jurgen Moritz
+  - Kirsch
+  - Costa Smeralda
+  - Altay
+  - Arcadia
+  - Worobiec
+  - Showa
+  - Spitfire
+
+  # -- accessory / cutter / case makers ------------------------------
+  - CTS Wolfertz
+  - CTS
+  - Wolfertz
+  - Solingen
+  - Donatus
+  - Coltron
+  - Furmula
+  - Angelo
+  - Vegafina
+  - Don Croton
+  - Ubrique
+  - Offenbach
+  - Almer
+
+  # -- added after catalog review -------------------------------------
+  - Rattray's
+  - Rattray
+  - Erik Nordings
+  - Eriksen
+  - CHAP
+  - Ser Jacopo
+  - Rossi
+  - Brebbia
+  - Castello
+  - Radice
+  - Ardor
+  - Caminetto
+  - Molina
