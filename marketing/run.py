@@ -41,6 +41,7 @@ from .expression.store import ExpressionRecord, ExpressionStore, inputs_hash
 from .media import fetch_all
 from .photovault import load_photo_map, photos_for, propose, scan_vault, write_proposal
 from .rotation import Candidate, Rotation
+from .storage import get_uploader, key_for
 from .social.captions import CAPTION_GENERATOR_VERSION, generate_caption
 from .social.publisher import (
     ChannelPaused,
@@ -147,6 +148,10 @@ def run_daily(
     # sets beat the single catalog thumbnail and need no download.
     photo_map = load_photo_map(DEFAULTS["photo_map"])
 
+    # Present only when R2 is configured; without it Tier 1 has no url
+    # to hand Meta and the run prepares rather than publishes.
+    uploader = get_uploader()
+
     day_dir = out_root / run_date.isoformat()
     day_dir.mkdir(parents=True, exist_ok=True)
     photo_cache = out_root / "photos"
@@ -236,11 +241,26 @@ def run_daily(
             # captions and the plan still get produced.
             video_note = "no local photo - caption only"
 
+        # -- host the video so Meta can fetch it -------------------------
+        # Instagram does not accept uploads: it fetches `video_url`
+        # itself, so an unhosted render can be prepared but never posted.
+        public_video = video_path
+        if uploader and video_path and Path(video_path).exists():
+            upload = uploader.upload(video_path, key_for(video_path, out_root))
+            if upload.ok:
+                public_video = upload.url
+            else:
+                result.warnings.append(
+                    f"{sku}: upload failed ({upload.error}); Tier 1 cannot post "
+                    "an unhosted video, but the package is still queued."
+                )
+
         # -- publish / queue --------------------------------------------
         placements: list[str] = []
         queued: list[str] = []
         for target in ("page", "ig"):
-            request = PostRequest(sku=sku, target=target, video_path=video_path, caption=caption.full())
+            request = PostRequest(sku=sku, target=target, video_path=public_video,
+                                  caption=caption.full())
             try:
                 placements.append(f"{target}: {engine.publish_tier1(request)}")
             except ChannelPaused as exc:
@@ -456,6 +476,21 @@ def run_doctor(
             ))
     except OSError as exc:
         checks.append(("TODO", "Standing walls", f"cannot read control.yaml: {exc}"))
+
+    from .storage import get_uploader as _get_uploader
+
+    uploader = _get_uploader()
+    checks.append((
+        "OK" if uploader else "WARN",
+        "Video hosting",
+        "R2 configured - rendered videos are uploaded automatically"
+        if uploader else
+        "R2 is NOT configured, so nothing can be posted to Instagram: Meta "
+        "fetches the video from a url rather than accepting an upload. Set "
+        "R2_ENDPOINT_URL, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY and "
+        "MEDIA_BASE_URL (the bucket behind photos.faridunhill.com already "
+        "works - point at it rather than standing up a new host).",
+    ))
 
     publisher = get_publisher(out_root)
     checks.append((

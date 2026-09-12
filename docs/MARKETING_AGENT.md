@@ -100,25 +100,41 @@ posts every day, including the five days a week your ads are off.
 
 ---
 
-## 4. The single biggest lever you control
+## 4. The single biggest lever: the photo vault
 
+The web catalog carries **one thumbnail per item**. For FH-TP-110 that
+thumbnail is the *closed case* — the pipes are never shown — so the reel
+was a two-second zoom on a black rectangle. No overlay tuning fixes that.
+
+But the real shoots are already on the PC: **135 photographs** for that
+one Rattray's set, 32 pipes with folders, thousands more harvested. The
+agent was reading the thin catalog while the rich library sat on the
+same disk.
+
+`vault-scan` bridges them:
+
+```bash
+python -m marketing.run vault-scan --vault "C:/Users/hadid/FaridOS/photo_vault"
 ```
-264/264 items have exactly ONE photograph.
-```
 
-This is the real bottleneck, and no tool fixes it:
+Folder names are not SKUs, so it matches `_WRONG_SPLIT_rattrays_mega` to
+"Rattray's Mary Sandblast Complete Set" by **rarity-weighted word
+overlap**: shared words score by how rare they are across the catalog, so
+"rattray" (one title) counts far more than "vintage" (sixty-six). Every
+match reports the words that earned it.
 
-- **Video**: one photo makes a slow zoom. Three or four make a real reel.
-- **Etsy**: listings with several photographs convert materially better
-  than single-photo listings. This lifts the ads you are already paying
-  for — the same £19.50/day working harder.
-- **Trust**: on estate goods, more angles is the whole sales argument.
-  It is what "the photographs show the exact piece" means.
+**It proposes; you confirm.** The scan writes
+`marketing/photo_map.proposed.yaml` with weak matches commented out. The
+runner reads only `marketing/photo_map.yaml`, which you create by copying
+across the entries you agree with. Same rule as the QA gate: the machine
+never publishes its own guesses.
 
-Three extra photos per item costs you minutes with a phone and a window.
-It is worth more than any AI vendor you could buy this year.
+Confirmed mapping turns FH-TP-110 from a 2-second single-photo zoom into
+a **5-photo, 10-second reel** — verified end to end.
 
----
+For items with no vault folder, three extra photos with a phone and a
+window is still the best hour you can spend. It lifts the reel *and* the
+Etsy listing the ads are already paying for.
 
 ## 5. Your routine — the actual answer to "lowest time and effort"
 
@@ -193,50 +209,61 @@ MEDIA_BASE_URL=...        # public url serving marketing/out/
 Never in the repo, never shared with another business (LAW 06). With
 nothing set, `get_publisher()` returns `DryRunPublisher`.
 
-### Diagnosing the Facebook refusal
+### Diagnosing Meta
 
 ```bash
 python -m marketing.run meta-check
 ```
 
-This asks the Graph API what the token can actually do. The likely
-cause is structural, not a bug in your setup — **the two surfaces need
-different permissions**:
+It reads `faridunhill/config/meta.json` for the ids automatically, so
+nothing has to be retyped. **Never paste a token into a shell.** Point
+`META_TOKEN_COMMAND` at a command that prints the secret from the DPAPI
+vault and it is read directly:
 
-| Surface | Permissions |
-|---|---|
-| Instagram publishing | `instagram_basic`, `instagram_content_publish`, `pages_show_list` |
-| Facebook Page posting | **`pages_manage_posts`**, `pages_read_engagement`, `pages_show_list` |
+```
+META_TOKEN_COMMAND=<command that prints the token>
+```
 
-`pages_manage_posts` is the one Instagram never needed and Facebook
-cannot post without. A token can publish to Instagram perfectly and be
-refused by Facebook for exactly this reason. `meta-check` prints which
-scopes are actually granted, so this is confirmed or killed in seconds.
+### What the PC run established
 
-Two other causes it checks for:
+**Facebook is not a code problem.** `pages_manage_posts` is *not offered
+by the app's use case at all*, so there was never a runtime error to
+find — the permission was never grantable. Separately, `/me/accounts`
+returns **no pages** despite `pages_show_list`, which means no Page token
+can be minted, and a Page owned by a Business portfolio usually needs
+`business_management` to be visible.
 
-- **The token trap.** Facebook Page publishing must use the **Page**
-  access token (minted from `/me/accounts`), not the User token. Using
-  the User token fails in a way that reads like a permissions problem
-  but is not one. The publisher always exchanges for the Page token.
-- **Page role.** The token holder needs `CREATE_CONTENT` on the Page.
-  An Analyst role can read everything and post nothing.
+So there are two routes, and the cheap one is worth trying first:
 
-### The constraint that surprises people
+1. **Turn on the Instagram account's "Share to Facebook" setting.** Meta
+   then crossposts reels to the Page by itself — no API call, no app
+   review, no code. Try this before anything else.
+2. Change the app's use case and pass Meta review for
+   `pages_manage_posts` + `business_management`. Slow, and only worth it
+   if route 1 proves insufficient.
 
-**Instagram does not accept file uploads.** The Content Publishing API
-takes a `video_url` that *Meta's servers fetch themselves*. A video
-sitting on your PC cannot be posted to Instagram until it is reachable
-on the public internet.
+**⚠ The token expires around 2026-09-26.** It is a ~60-day user token
+connected 2026-07-29, and there is no never-expiring Page token behind
+it — when it lapses, **Instagram stops too**. `meta-check` now reports
+days remaining and fails below fourteen.
 
-Facebook can take a local upload, but this module uses `file_url` for
-both so there is one hosting story instead of two. That is what
-`MEDIA_BASE_URL` is: wherever `marketing/out/` is served from. Until it
-is set, `meta-check` reports Public media url as FAIL and live posting
-refuses with a clear message rather than a confusing Meta error.
+### Video hosting — already solved
 
-**This is worth deciding before anything else** — it is the difference
-between "the agent posts by itself" and "the agent prepares and I tap".
+Instagram does not accept file uploads; Meta fetches `video_url` itself.
+The host already exists and is proven in production: **Cloudflare R2**
+behind `https://photos.faridunhill.com`, bucket `pipe-archive`. The
+runner uploads there automatically when configured:
+
+```bash
+R2_ENDPOINT_URL=...      R2_ACCESS_KEY_ID=...
+R2_SECRET_ACCESS_KEY=... MEDIA_BASE_URL=https://photos.faridunhill.com/marketing
+```
+
+Keys mirror the local layout, so `out/2026-09-12/FH-TP-110-vertical.mp4`
+becomes `.../marketing/2026-09-12/FH-TP-110-vertical.mp4`. Don't stand up
+a new host.
+
+
 
 ---
 
@@ -245,11 +272,12 @@ between "the agent posts by itself" and "the agent prepares and I tap".
 ```bash
 python -m marketing.run doctor          # readiness: what is ready, what needs you
 python -m marketing.run meta-check      # what the Meta token can actually do
+python -m marketing.run vault-scan --vault <path>   # match items to photo folders
 python -m marketing.run daily           # today's content
 python -m marketing.run daily --items 5 # more items this run
 python -m marketing.run daily --date 2026-09-14
 python -m marketing.run daily --no-download   # offline: captions + plan only
-python -m pytest marketing/tests/ -q    # 142 tests
+python -m pytest marketing/tests/ -q    # 202 tests
 ```
 
 Outputs land in `marketing/out/`:
@@ -289,17 +317,25 @@ and asserted as a maker. Add a line, and every future caption uses it.
 
 ## 10. Honest limits
 
-- **ffmpeg is not installed here**, so this session could not render an
-  actual .mp4. The commands are generated, shell-quoted and written to
-  `render.sh`; install ffmpeg on the PC and they run. The video *logic*
-  is tested; the rendered output has not been watched by anyone yet.
-  **Watch the first one before scheduling the job.**
-- **Etsy's CDN is blocked from this sandbox**, so no real photo was
-  downloaded here. The cache is tested with an injected stub. It should
-  work on your machine — verify with one run before trusting the cron.
-- **Captions are template-built, not written.** They are honest and
-  consistent, which is the right default for 264 items. They are not
-  clever. Clever comes from `why_special`, which is what the voice-note
-  intake exists to capture — and which is empty for the whole catalog
-  today.
-- **Nothing here fixes the photo problem.** See §4.
+- **The render was broken and is now fixed.** A 2-second clip was
+  producing 100 seconds and 72 MB, because `zoompan` emits `d` frames for
+  every frame it is fed and the input was looped. Verified against real
+  ffmpeg: 100.00s before, 2.00s after, and 6.00s for a 3-photo reel.
+  **Nobody has watched a finished video with overlays yet** — this
+  sandbox has no `drawtext` filter. Watch one before scheduling the job.
+- **ffmpeg 7.1 is already on the PC** at `FaridOS/voice/bin`, just not on
+  PATH. The runner now finds it there; don't install a second copy.
+- **The overlay font is now explicit.** The PC has no DejaVu, so ffmpeg
+  was emitting a Fontconfig error and silently falling back. It now picks
+  a real serif file and escapes Windows drive colons. Verify the text
+  still looks right on the first render.
+- **Meta is untested against the live API from here.** Every Meta and R2
+  test uses an injected transport; this sandbox cannot reach either. The
+  logic is exercised, the wire is not.
+- **Vault matching is a guess and stays a proposal.** Four confident
+  matches, zero false positives against the real catalog in testing — but
+  read `photo_map.proposed.yaml` before copying anything across.
+- **Captions are template-built, not written.** Honest and consistent,
+  which is right for 264 items. Not clever. Clever comes from
+  `why_special`, which the voice-note intake exists to capture and which
+  is empty for the whole catalog today.

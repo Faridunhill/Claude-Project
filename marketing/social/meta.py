@@ -51,6 +51,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable, Optional
 
@@ -122,6 +123,65 @@ def http_transport(method: str, url: str, params: dict) -> dict:
 
 # ── configuration ────────────────────────────────────────────────────
 
+#: Where the existing Meta connection stores its ids. The working setup
+#: predates this module and already holds page_id, ig_user_id and the
+#: granted scopes; re-asking for them by hand invites typos.
+_META_JSON_CANDIDATES = (
+    "~/faridunhill/config/meta.json",
+    "~/FaridOS/faridunhill/config/meta.json",
+    "C:/Users/hadid/faridunhill/config/meta.json",
+    "./faridunhill/config/meta.json",
+)
+
+
+def find_meta_json(explicit: Optional[str] = None) -> Optional[Path]:
+    if explicit:
+        path = Path(explicit).expanduser()
+        return path if path.exists() else None
+    for candidate in _META_JSON_CANDIDATES:
+        path = Path(candidate).expanduser()
+        if path.exists():
+            return path
+    return None
+
+
+def load_meta_json(path: Optional[Path]) -> dict:
+    if path is None:
+        return {}
+    try:
+        return json.loads(Path(path).read_text(encoding="utf-8")) or {}
+    except (OSError, ValueError):
+        return {}
+
+
+def token_from_command(command: str) -> str:
+    """Run a command and take its stdout as the token.
+
+    This is the hook for a secret store. The working credentials live in
+    a DPAPI vault on Windows, and nothing should ever ask Farid to paste
+    a token into a shell — the existing path never let a secret touch
+    the screen and this must not be the thing that changes that. Point
+    META_TOKEN_COMMAND at a one-liner that prints the secret and it is
+    read directly, never echoed, never stored here.
+    """
+    import subprocess
+
+    try:
+        done = subprocess.run(command, shell=True, capture_output=True,
+                              text=True, timeout=30)
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise NotConfigured(f"META_TOKEN_COMMAND failed to run: {exc}") from exc
+    if done.returncode != 0:
+        raise NotConfigured(
+            f"META_TOKEN_COMMAND exited {done.returncode}: "
+            f"{(done.stderr or '').strip()[:200]}"
+        )
+    token = (done.stdout or "").strip()
+    if not token:
+        raise NotConfigured("META_TOKEN_COMMAND printed nothing.")
+    return token
+
+
 @dataclass(frozen=True)
 class MetaConfig:
     access_token: str
@@ -129,22 +189,47 @@ class MetaConfig:
     ig_user_id: Optional[str] = None
     media_base_url: Optional[str] = None
     api_version: str = DEFAULT_API_VERSION
+    source: str = "env"                 # where the ids came from, for the report
 
     @classmethod
     def from_env(cls, env: Optional[dict] = None) -> "MetaConfig":
+        """Config from meta.json first, environment second.
+
+        The ids already exist in meta.json on the machine that works;
+        the environment only needs to supply what is genuinely missing,
+        and overrides the file when it does.
+        """
         env = env if env is not None else os.environ
-        token = env.get("META_ACCESS_TOKEN", "").strip()
+
+        meta_path = find_meta_json(env.get("META_CONFIG_FILE"))
+        meta = load_meta_json(meta_path)
+        source = str(meta_path) if meta else "env"
+
+        token = (env.get("META_ACCESS_TOKEN") or "").strip()
+        if not token and env.get("META_TOKEN_COMMAND"):
+            token = token_from_command(env["META_TOKEN_COMMAND"])
+        if not token:
+            token = str(meta.get("access_token") or "").strip()
         if not token:
             raise NotConfigured(
-                "META_ACCESS_TOKEN is not set. Publishing stays in dry run "
-                "until it is. Set it in the environment, never in the repo."
+                "No Meta access token available. Publishing stays in dry run.\n"
+                "         Supply it WITHOUT pasting a secret into a shell:\n"
+                "           META_TOKEN_COMMAND=<command that prints the token>\n"
+                "         (point it at the DPAPI vault entry), or set\n"
+                "         META_ACCESS_TOKEN if you must. Never in the repo."
             )
+
+        def pick(env_key: str, json_key: str) -> Optional[str]:
+            return ((env.get(env_key) or "").strip()
+                    or str(meta.get(json_key) or "").strip() or None)
+
         return cls(
             access_token=token,
-            page_id=(env.get("META_PAGE_ID") or "").strip() or None,
-            ig_user_id=(env.get("META_IG_USER_ID") or "").strip() or None,
-            media_base_url=(env.get("MEDIA_BASE_URL") or "").strip().rstrip("/") or None,
+            page_id=pick("META_PAGE_ID", "page_id"),
+            ig_user_id=pick("META_IG_USER_ID", "ig_user_id"),
+            media_base_url=(pick("MEDIA_BASE_URL", "media_base_url") or "").rstrip("/") or None,
             api_version=(env.get("META_API_VERSION") or DEFAULT_API_VERSION).strip(),
+            source=source,
         )
 
     @classmethod
@@ -193,6 +278,20 @@ class MetaClient:
             row["permission"] for row in payload.get("data", [])
             if row.get("status") == "granted"
         }
+
+    def token_info(self) -> dict:
+        """/debug_token — expiry, scopes and app, straight from Meta.
+
+        A ~60-day user token with no never-expiring Page token behind it
+        is a scheduled outage, not a configuration detail. Nothing else
+        in the system can see it coming.
+        """
+        payload = self._transport(
+            "GET", self._config.url("debug_token"),
+            {"input_token": self._config.access_token,
+             "access_token": self._config.access_token},
+        )
+        return payload.get("data") or {}
 
     def accounts(self) -> list[dict]:
         """Pages this token can act for, each with its own Page token."""
@@ -359,10 +458,34 @@ def diagnose(config: MetaConfig, transport: Transport = http_transport
             checks.append(("FAIL", subject, str(exc)))
             return None
 
+    checks.append(("OK", "Config source", config.source))
+
     identity = check("Token", lambda: client.me())
     if identity:
         checks.append(("OK", "Token",
                        f"valid - {identity.get('name')} (id {identity.get('id')})"))
+
+    info = check("Token expiry", lambda: client.token_info())
+    if info is not None:
+        expires_at = info.get("expires_at")
+        if not expires_at:
+            checks.append(("OK", "Token expiry", "does not expire"))
+        else:
+            expiry = datetime.fromtimestamp(int(expires_at), tz=timezone.utc)
+            days = (expiry - datetime.now(timezone.utc)).days
+            if days <= 0:
+                status, note = "FAIL", "ALREADY EXPIRED - renew before anything can post."
+            elif days <= 14:
+                status = "FAIL"
+                note = (f"{days} days left. Renew now: there is no "
+                        "never-expiring Page token behind it, so when this "
+                        "lapses every channel stops at once.")
+            elif days <= 30:
+                status, note = "WARN", f"{days} days left - schedule the renewal."
+            else:
+                status, note = "OK", f"{days} days left."
+            checks.append((status, "Token expiry",
+                           f"expires {expiry.date().isoformat()} - {note}"))
 
     granted = check("Permissions", lambda: client.granted_permissions())
     if granted is not None:
@@ -381,7 +504,11 @@ def diagnose(config: MetaConfig, transport: Transport = http_transport
             else f"MISSING: {', '.join(missing_fb)}."
                  + (" `pages_manage_posts` is the permission Instagram never "
                     "needed and Facebook cannot post without — this alone "
-                    "explains IG working while Facebook refuses."
+                    "explains IG working while Facebook refuses. If the app's "
+                    "use case does not OFFER the permission, no code change "
+                    "helps: either change the app use case and pass review, "
+                    "or turn on the Instagram account's 'Share to Facebook' "
+                    "setting and let Meta crosspost."
                     if "pages_manage_posts" in missing_fb else ""),
         ))
         checks.append(("OK", "Granted scopes", ", ".join(sorted(granted)) or "none"))
@@ -391,8 +518,15 @@ def diagnose(config: MetaConfig, transport: Transport = http_transport
         if not accounts:
             checks.append((
                 "FAIL", "Pages",
-                "This token administers no Pages. Facebook publishing needs a "
-                "Page token, which is minted from /me/accounts.",
+                "/me/accounts returned NO pages, even with pages_show_list. "
+                "Facebook publishing needs a Page token minted from here, so "
+                "it cannot work at all in this state, and there is no "
+                "never-expiring token to fall back on. A Page owned by a "
+                "Business portfolio is usually invisible without "
+                "`business_management`. Cheaper route first: turn on the "
+                "Instagram account's 'Share to Facebook' setting, which makes "
+                "Meta crosspost reels to the Page with no API call and no app "
+                "review.",
             ))
         else:
             listed = ", ".join(f"{a.get('name')} ({a.get('id')})" for a in accounts)

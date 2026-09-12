@@ -7,6 +7,9 @@ names the cause instead of reporting a generic failure.
 
 from __future__ import annotations
 
+import json
+import time
+
 import pytest
 
 from marketing.social.meta import (
@@ -32,7 +35,8 @@ class StubTransport:
     """Scripted Graph API. Routes on the path tail so tests read as
     'this is what Meta said', not 'this is what urllib did'."""
 
-    def __init__(self, permissions=None, accounts=None, fail=None, ig_status="FINISHED"):
+    def __init__(self, permissions=None, accounts=None, fail=None, ig_status="FINISHED",
+                 expires_in_days=None):
         self.permissions = permissions if permissions is not None else \
             list(IG_PERMISSIONS) + list(FB_PERMISSIONS)
         self.accounts = accounts if accounts is not None else [
@@ -41,6 +45,7 @@ class StubTransport:
         ]
         self.fail = fail or {}
         self.ig_status = ig_status
+        self.expires_in_days = expires_in_days
         self.calls: list[tuple[str, str, dict]] = []
 
     def __call__(self, method: str, url: str, params: dict) -> dict:
@@ -48,6 +53,10 @@ class StubTransport:
         for needle, error in self.fail.items():
             if needle in url:
                 raise error
+        if "debug_token" in url:
+            if self.expires_in_days is None:
+                return {"data": {"expires_at": 0}}       # never expires
+            return {"data": {"expires_at": int(time.time() + self.expires_in_days * 86400)}}
         if url.endswith("/me"):
             return {"id": "9", "name": "Farid"}
         if url.endswith("/me/permissions"):
@@ -235,3 +244,104 @@ def test_publisher_routes_each_target(tmp_path):
         PostRequest(sku="S", target="page", video_path="https://v/x.mp4", caption="c"))
     assert "instagram.com" in publisher.post(
         PostRequest(sku="S", target="ig", video_path="https://v/x.mp4", caption="c"))
+
+
+# ── config precedence: never ask for a pasted secret ─────────────────
+
+def test_ids_come_from_meta_json(tmp_path):
+    """The working setup already stores these; re-asking invites typos."""
+    meta = tmp_path / "meta.json"
+    meta.write_text(json.dumps({
+        "page_id": "111774180543965", "ig_user_id": "17841426740134023",
+        "ig_username": "faridunhill",
+    }))
+    config = MetaConfig.from_env({
+        "META_ACCESS_TOKEN": "tok", "META_CONFIG_FILE": str(meta)})
+    assert config.page_id == "111774180543965"
+    assert config.ig_user_id == "17841426740134023"
+    assert config.source == str(meta)
+
+
+def test_environment_overrides_the_file(tmp_path):
+    meta = tmp_path / "meta.json"
+    meta.write_text(json.dumps({"page_id": "from-file"}))
+    config = MetaConfig.from_env({
+        "META_ACCESS_TOKEN": "tok", "META_CONFIG_FILE": str(meta),
+        "META_PAGE_ID": "from-env"})
+    assert config.page_id == "from-env"
+
+
+def test_token_command_keeps_the_secret_off_the_screen():
+    """The vault hook: a command prints the token, nobody pastes it."""
+    config = MetaConfig.from_env({"META_TOKEN_COMMAND": "printf secret-value"})
+    assert config.access_token == "secret-value"
+
+
+def test_failing_token_command_is_reported_not_swallowed():
+    with pytest.raises(NotConfigured, match="exited"):
+        MetaConfig.from_env({"META_TOKEN_COMMAND": "exit 3"})
+
+
+def test_empty_token_command_is_rejected():
+    with pytest.raises(NotConfigured, match="printed nothing"):
+        MetaConfig.from_env({"META_TOKEN_COMMAND": "true"})
+
+
+def test_missing_token_names_the_vault_route_first():
+    with pytest.raises(NotConfigured) as exc:
+        MetaConfig.from_env({"META_CONFIG_FILE": "/nonexistent.json"})
+    assert "META_TOKEN_COMMAND" in str(exc.value)
+
+
+def test_corrupt_meta_json_does_not_crash(tmp_path):
+    meta = tmp_path / "meta.json"
+    meta.write_text("{not json")
+    assert MetaConfig.from_env({
+        "META_ACCESS_TOKEN": "t", "META_CONFIG_FILE": str(meta)}).page_id is None
+
+
+# ── token expiry: the scheduled outage ───────────────────────────────
+
+def _expiring_in(days: float) -> StubTransport:
+    """Python resolves __call__ on the TYPE, so patching the instance
+    does nothing — the stub has to know about expiry itself."""
+    return StubTransport(expires_in_days=days)
+
+
+def test_token_expiring_inside_two_weeks_is_a_failure():
+    """A ~60-day token with no never-expiring Page token behind it is a
+    scheduled outage; 14 days out it stops being a warning."""
+    checks = diagnose(CONFIG, _expiring_in(14))
+    assert _statuses(checks)["Token expiry"] == "FAIL"
+    assert "never-expiring" in _detail(checks, "Token expiry")
+
+
+def test_token_expiring_next_month_only_warns():
+    assert _statuses(diagnose(CONFIG, _expiring_in(25)))["Token expiry"] == "WARN"
+
+
+def test_healthy_expiry_passes():
+    assert _statuses(diagnose(CONFIG, _expiring_in(90)))["Token expiry"] == "OK"
+
+
+def test_never_expiring_token_passes():
+    checks = diagnose(CONFIG, StubTransport())
+    assert _statuses(checks)["Token expiry"] == "OK"
+    assert "does not expire" in _detail(checks, "Token expiry")
+
+
+# ── the confirmed live symptom ───────────────────────────────────────
+
+def test_no_pages_names_business_management_and_the_crosspost_route():
+    """/me/accounts returns nothing despite pages_show_list. Confirmed
+    on the PC, and no amount of retrying fixes it."""
+    checks = diagnose(CONFIG, StubTransport(accounts=[]))
+    detail = _detail(checks, "Pages")
+    assert "business_management" in detail
+    assert "Share to Facebook" in detail
+
+
+def test_unofferable_permission_points_at_the_app_use_case():
+    transport = StubTransport(permissions=list(IG_PERMISSIONS) + ["pages_read_engagement"])
+    detail = _detail(diagnose(CONFIG, transport), "Facebook permissions")
+    assert "use case" in detail and "no code change" in detail
