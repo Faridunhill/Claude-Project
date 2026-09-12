@@ -378,3 +378,29 @@ def test_a_bulk_import_is_not_treated_as_new(tmp_path):
     ]
     # highest price wins, not an arbitrary same-day timestamp
     assert rotation.select(imported, today, 1) == ["I-19"]
+
+
+# ── scheduling ───────────────────────────────────────────────────────
+
+def test_schedule_rejects_an_impossible_time():
+    from marketing.run import _write_schedule
+
+    assert _write_schedule("25:00") == 1
+    assert _write_schedule("07:61") == 1
+    assert _write_schedule("morning") == 1
+
+
+def test_schedule_accepts_a_valid_time():
+    from marketing.run import _write_schedule
+
+    assert _write_schedule("07:00") == 0
+
+
+def test_windows_task_survives_a_pc_that_was_switched_off():
+    """StartWhenAvailable matters more than the time: without it a PC
+    that was off at 07:00 skips the day silently."""
+    from marketing.run import _TASK_XML
+
+    assert "<StartWhenAvailable>true</StartWhenAvailable>" in _TASK_XML
+    assert "<MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>" in _TASK_XML
+    assert "-m marketing.run daily" in _TASK_XML

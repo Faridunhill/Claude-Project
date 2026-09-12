@@ -53,6 +53,8 @@ class StubTransport:
         for needle, error in self.fail.items():
             if needle in url:
                 raise error
+        if "oauth/access_token" in url:
+            return {"access_token": "fresh-token", "expires_in": 5184000}
         if "debug_token" in url:
             if self.expires_in_days is None:
                 return {"data": {"expires_at": 0}}       # never expires
@@ -345,3 +347,23 @@ def test_unofferable_permission_points_at_the_app_use_case():
     transport = StubTransport(permissions=list(IG_PERMISSIONS) + ["pages_read_engagement"])
     detail = _detail(diagnose(CONFIG, transport), "Facebook permissions")
     assert "use case" in detail and "no code change" in detail
+
+
+# ── token renewal: the thing with a deadline ─────────────────────────
+
+def test_renewal_asks_meta_to_extend_the_current_token():
+    transport = StubTransport()
+    fresh = MetaClient(CONFIG, transport).exchange_for_long_lived("app", "secret")
+
+    assert fresh["access_token"] == "fresh-token"
+    call_params = [c for c in transport.calls if "oauth" in c[1]][0][2]
+    assert call_params["grant_type"] == "fb_exchange_token"
+    assert call_params["fb_exchange_token"] == "tok"   # the CURRENT token
+    assert call_params["client_secret"] == "secret"
+
+
+def test_renewal_surfaces_the_graph_error():
+    """An expired token cannot be extended; the caller must see why."""
+    transport = StubTransport(fail={"oauth": MetaError("Session expired", code=190)})
+    with pytest.raises(MetaError, match="190"):
+        MetaClient(CONFIG, transport).exchange_for_long_lived("app", "secret")

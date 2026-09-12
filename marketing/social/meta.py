@@ -293,6 +293,24 @@ class MetaClient:
         )
         return payload.get("data") or {}
 
+    def exchange_for_long_lived(self, app_id: str, app_secret: str) -> dict:
+        """Trade the current token for a fresh ~60-day one.
+
+        Meta extends a token that is still valid; it cannot resurrect an
+        expired one. That is why the expiry warning has to arrive early —
+        past the date, this call fails and the only route left is the
+        manual reconnect flow.
+
+        Returns the raw response; the caller stores the token. This
+        module never writes a secret to disk.
+        """
+        return self._transport(
+            "GET", self._config.url("oauth/access_token"),
+            {"grant_type": "fb_exchange_token",
+             "client_id": app_id, "client_secret": app_secret,
+             "fb_exchange_token": self._config.access_token},
+        )
+
     def accounts(self) -> list[dict]:
         """Pages this token can act for, each with its own Page token."""
         payload = self._transport("GET", self._config.url("me/accounts"),

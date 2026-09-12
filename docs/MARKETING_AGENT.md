@@ -139,17 +139,20 @@ Etsy listing the ads are already paying for.
 ## 5. Your routine — the actual answer to "lowest time and effort"
 
 ### Automated, 0 minutes
-One scheduled job:
+One command writes the scheduler entry for this machine:
 
 ```bash
-cd /path/to/Claude-Project && python -m marketing.run daily
+python -m marketing.run schedule --at 07:00
 ```
 
-Linux/Mac cron, 07:00 daily:
-```
-0 7 * * * cd /path/to/Claude-Project && /usr/bin/python3 -m marketing.run daily
-```
-Windows: Task Scheduler → daily 07:00 → same command.
+On Windows it writes a Task Scheduler XML and prints the single
+`schtasks` line that registers it; elsewhere it prints the crontab line.
+The task sets `StartWhenAvailable`, which matters more than the time
+does: a PC that was switched off at 07:00 runs the job when it next
+wakes instead of skipping the day silently.
+
+Safe to schedule now — it stays in dry run until credentials are
+configured, so you get a plan every morning and nothing posts.
 
 Each run: picks the day's items, downloads and caches photos, renders
 branded vertical videos, writes captions through the QA-gate lock,
@@ -158,6 +161,21 @@ auto-posts Tier 1, queues Tier 2, and writes the plan.
 ### You, ~2 minutes a day
 Open `marketing/out/<today>/plan.md` on your phone. For each item: the
 video path, and the caption in a copy block. Tap, paste, post. Done.
+
+### When something sells — 0 extra minutes
+Untick **In Stock** in the admin. That is the whole workflow. The next
+run notices the change and:
+
+- records the sale in the ledger (which is what makes "days to sale"
+  computable, and eventually wakes the deferred pricing layer)
+- writes a permanent `/archive/<slug>` page — the sold-price reference
+  that keeps earning search traffic after the item is gone
+- puts a "from the archive" post in your plan
+
+The asking price is **not** published as the sold price by default: an
+item that went for an accepted offer did not sell at it, and a sold-price
+database is only an asset while the numbers in it are true. Set
+`social.publish_sold_prices: true` in control.yaml if you want it.
 
 ### You, ~20 minutes a week
 Photograph new stock — **3–5 shots each**, not one. Voice-note what is
@@ -242,7 +260,15 @@ So there are two routes, and the cheap one is worth trying first:
    `pages_manage_posts` + `business_management`. Slow, and only worth it
    if route 1 proves insufficient.
 
-**⚠ The token expires around 2026-09-26.** It is a ~60-day user token
+**⚠ The token expires around 2026-09-26.** Renew it with one command:
+
+```bash
+python -m marketing.run meta-renew      # needs META_APP_SECRET for one call
+```
+
+Meta extends a token that is *still valid* — it cannot revive an expired
+one, which is why the warning has to arrive early.
+ It is a ~60-day user token
 connected 2026-07-29, and there is no never-expiring Page token behind
 it — when it lapses, **Instagram stops too**. `meta-check` now reports
 days remaining and fails below fourteen.
@@ -273,11 +299,13 @@ a new host.
 python -m marketing.run doctor          # readiness: what is ready, what needs you
 python -m marketing.run meta-check      # what the Meta token can actually do
 python -m marketing.run vault-scan --vault <path>   # match items to photo folders
+python -m marketing.run meta-renew      # extend the token ~60 more days
+python -m marketing.run schedule        # write the daily scheduler entry
 python -m marketing.run daily           # today's content
 python -m marketing.run daily --items 5 # more items this run
 python -m marketing.run daily --date 2026-09-14
 python -m marketing.run daily --no-download   # offline: captions + plan only
-python -m pytest marketing/tests/ -q    # 202 tests
+python -m pytest marketing/tests/ -q    # 227 tests
 ```
 
 Outputs land in `marketing/out/`:

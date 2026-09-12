@@ -27,6 +27,7 @@ system can be trusted before it is ever pointed at a live account.
 from __future__ import annotations
 
 import argparse
+import os
 
 import sys
 from datetime import date, datetime
@@ -37,8 +38,10 @@ import yaml
 
 from .catalog import load_catalog
 from .expression.copy import GENERATOR_VERSION, generate_title
+from .flywheel import record_listed, turn as flywheel_turn
 from .expression.store import ExpressionRecord, ExpressionStore, inputs_hash
 from .media import fetch_all
+from .social.meta import find_meta_json, load_meta_json
 from .photovault import load_photo_map, photos_for, propose, scan_vault, write_proposal
 from .rotation import Candidate, Rotation
 from .storage import get_uploader, key_for
@@ -110,6 +113,7 @@ class RunResult:
         self.items: list[dict] = []
         self.skipped: list[dict] = []
         self.warnings: list[str] = []
+        self.sold: list = []
         self.rendered = 0
 
     @property
@@ -162,6 +166,18 @@ def run_daily(
     if not catalog:
         result.warnings.append(f"No products found in {products_dir}")
         return result
+
+    # The flywheel turns first: an item marked sold in the admin becomes a
+    # permanent archive page and a "from the archive" post, and the SOLD
+    # event lands in the ledger. Running it before selection also means a
+    # just-sold item is never chosen to be advertised as available.
+    archive_dir = Path(products_dir).parent / "archive"
+    sold, sold_warnings = flywheel_turn(
+        catalog, out_root, archive_dir,
+        show_price=bool(social_cfg.get("publish_sold_prices", False)),
+    )
+    result.warnings.extend(sold_warnings)
+    result.sold = sold
 
     rotation = Rotation(out_root / "rotation.db", cooldown_days=cooldown)
     engine = SocialEngine(
@@ -297,6 +313,9 @@ def run_daily(
 
     if result.items:
         rotation.record([i["sku"] for i in result.items], run_date)
+        # Without this the ledger stays empty and days-to-sale can never
+        # be computed for anything.
+        record_listed(result.items, out_root)
 
     if render_commands:
         _write_render_script(day_dir / "render.sh", render_commands)
@@ -384,6 +403,18 @@ def _write_plan(result: RunResult, path: Path, rotation: Rotation, catalog_size:
             lines += ["Auto-posted: " + ", ".join(item["placements"]), ""]
         if item["queued"]:
             lines += ["Waiting for your tap: " + ", ".join(item["queued"]), ""]
+
+    if result.sold:
+        lines += ["---", "", "## Sold - archive pages created", ""]
+        for item in result.sold:
+            lines += [
+                f"### {item.name[:70]}",
+                "",
+                f"`{item.sku}` - permanent page: `{item.archive_path}`",
+                "",
+                "**Archive post - copy from here:**",
+                "", "```", item.caption, "```", "",
+            ]
 
     if result.skipped:
         lines += ["---", "", "## Skipped", ""]
@@ -513,6 +544,77 @@ def run_doctor(
     return checks
 
 
+# ── scheduling ───────────────────────────────────────────────────────
+
+_TASK_XML = """<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Description>Faridunhill marketing agent - daily videos, captions and post plan.</Description>
+  </RegistrationInfo>
+  <Triggers>
+    <CalendarTrigger>
+      <StartBoundary>2026-01-01T{time}:00</StartBoundary>
+      <Enabled>true</Enabled>
+      <ScheduleByDay><DaysInterval>1</DaysInterval></ScheduleByDay>
+    </CalendarTrigger>
+  </Triggers>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <StartWhenAvailable>true</StartWhenAvailable>
+    <ExecutionTimeLimit>PT1H</ExecutionTimeLimit>
+    <Enabled>true</Enabled>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>{python}</Command>
+      <Arguments>-m marketing.run daily</Arguments>
+      <WorkingDirectory>{cwd}</WorkingDirectory>
+    </Exec>
+  </Actions>
+</Task>
+"""
+
+
+def _write_schedule(at: str) -> int:
+    """Write the scheduler entry for this machine.
+
+    StartWhenAvailable matters more than the time does: a PC that was
+    off at 07:00 runs the job when it next wakes, instead of skipping
+    the day silently.
+    """
+    try:
+        hour, minute = (int(part) for part in at.split(":", 1))
+        assert 0 <= hour < 24 and 0 <= minute < 60
+    except (ValueError, AssertionError):
+        print(f"\n  --at must be HH:MM, not {at!r}\n")
+        return 1
+
+    time_str = f"{hour:02d}:{minute:02d}"
+    python = sys.executable
+    cwd = str(ROOT)
+
+    if os.name == "nt":
+        path = ROOT / "marketing" / "faridunhill-marketing.xml"
+        path.write_text(
+            _TASK_XML.format(time=time_str, python=python, cwd=cwd),
+            encoding="utf-16",
+        )
+        print(f"\n  Written: {path}\n")
+        print("  Register it (one command, in an admin terminal):\n")
+        print(f'    schtasks /Create /TN "Faridunhill Marketing" /XML "{path}" /F\n')
+        print("  Check it:   schtasks /Query /TN \"Faridunhill Marketing\"")
+        print("  Run it now: schtasks /Run /TN \"Faridunhill Marketing\"")
+        print("  Remove it:  schtasks /Delete /TN \"Faridunhill Marketing\" /F\n")
+    else:
+        line = f"{minute} {hour} * * * cd {cwd} && {python} -m marketing.run daily"
+        print("\n  Add this line to your crontab (`crontab -e`):\n")
+        print(f"    {line}\n")
+
+    print("  It runs in DRY RUN until credentials are configured, so scheduling")
+    print("  it now is safe - you get a plan every morning and nothing posts.\n")
+    return 0
+
+
 # ── cli ──────────────────────────────────────────────────────────────
 
 def main(argv: Optional[list[str]] = None) -> int:
@@ -526,6 +628,11 @@ def main(argv: Optional[list[str]] = None) -> int:
 
     sub.add_parser("doctor", help="report what is ready and what is missing")
     sub.add_parser("meta-check", help="ask the Graph API what the token can actually do")
+    sub.add_parser("meta-renew", help="exchange the current token for a fresh ~60-day one")
+
+    schedule = sub.add_parser(
+        "schedule", help="write the scheduler entry that runs this daily")
+    schedule.add_argument("--at", default="07:00", help="local time, HH:MM (default 07:00)")
 
     vault = sub.add_parser(
         "vault-scan",
@@ -576,6 +683,55 @@ def main(argv: Optional[list[str]] = None) -> int:
         print(f"\nWritten: {proposal}")
         print("Nothing is live yet. Review it, then copy the entries you agree")
         print(f"with into {DEFAULTS['photo_map']} - that is the file the runner reads.\n")
+        return 0
+
+    if command == "schedule":
+        return _write_schedule(args.at)
+
+    if command == "meta-renew":
+        import os
+
+        from .social.meta import MetaClient, MetaConfig, MetaError, NotConfigured
+
+        try:
+            config = MetaConfig.from_env()
+        except NotConfigured as exc:
+            print(f"\n  {exc}\n")
+            return 1
+
+        meta = load_meta_json(find_meta_json(os.environ.get("META_CONFIG_FILE")))
+        app_id = (os.environ.get("META_APP_ID") or meta.get("app_id") or "").strip()
+        app_secret = (os.environ.get("META_APP_SECRET") or "").strip()
+        if not app_id or not app_secret:
+            print("\n  Renewal needs the app id and secret.")
+            print(f"  app id:     {'found: ' + app_id if app_id else 'MISSING - set META_APP_ID'}")
+            print("  app secret: " + ("found" if app_secret else
+                                      "MISSING - set META_APP_SECRET"))
+            print("\n  The secret is in the Meta app dashboard under Settings > Basic.")
+            print("  Set it for one command only; it is never written to the repo.\n")
+            return 1
+
+        client = MetaClient(config)
+        try:
+            fresh = client.exchange_for_long_lived(app_id, app_secret)
+        except MetaError as exc:
+            print(f"\n  Renewal FAILED: {exc}")
+            print("  Meta extends a token that is still valid; it cannot revive an")
+            print("  expired one. If it has lapsed, reconnect the account instead.\n")
+            return 1
+
+        token = fresh.get("access_token", "")
+        expires_in = int(fresh.get("expires_in") or 0)
+        if not token:
+            print(f"\n  Meta returned no token: {fresh}\n")
+            return 1
+
+        print("\n  NEW TOKEN OBTAINED"
+              + (f" - valid about {expires_in // 86400} days.\n" if expires_in else ".\n"))
+        print("  It is NOT printed here and NOT written to the repo. Store it in")
+        print("  the vault the same way as the current one, then confirm with:")
+        print("    python -m marketing.run meta-check\n")
+        print(f"  Length {len(token)} chars, starts {token[:6]}... (to verify the store)\n")
         return 0
 
     if command == "meta-check":
