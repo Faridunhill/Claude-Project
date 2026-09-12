@@ -27,7 +27,7 @@ system can be trusted before it is ever pointed at a live account.
 from __future__ import annotations
 
 import argparse
-import shutil
+
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -396,13 +396,31 @@ def run_doctor(
             f"Add missing makers to {brands_path.name} to sharpen captions.",
         ))
 
+    from .social.video import resolve_ffmpeg, resolve_font
+
+    binary = resolve_ffmpeg()
     checks.append((
-        "OK" if shutil.which("ffmpeg") else "TODO",
+        "OK" if binary else "TODO",
         "ffmpeg",
-        "installed - videos render here" if shutil.which("ffmpeg")
-        else "not installed. Videos are written to render.sh instead. "
-             "Install ffmpeg on the PC to render automatically.",
+        f"found at {binary} - videos render here" if binary
+        else "not found on PATH or in the known install locations. Videos "
+             "are written to render.sh instead. Set FFMPEG_BINARY to point "
+             "at an existing copy rather than installing a second one.",
     ))
+
+    try:
+        font = resolve_font(load_style(DEFAULTS["style"]))
+        checks.append((
+            "OK" if font else "WARN",
+            "Overlay font",
+            f"{font}" if font
+            else "No font file found, so drawtext falls back to a system "
+                 "default. That emits a Fontconfig warning and can fail "
+                 "outright on another machine. Set overlay.font_file in "
+                 "style_faridunhill.yaml.",
+        ))
+    except OSError:
+        pass
 
     try:
         control = load_control(control_path)
