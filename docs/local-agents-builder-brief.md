@@ -67,6 +67,90 @@ Do not continue. Do not try a different model to make it pass.
 real Hermes seat names into the `shadows:` field. Each row carries
 `licence: L0`, `death_test:` and `l4_grants: []`.
 
+**B0.6** The exact `local/roster.yaml` skeleton. Eleven rows, four left null.
+
+```yaml
+# Farid-owned. No agent may edit this file. Same standing as marketing/control.yaml.
+version: 1
+agents:
+  - name: hamada
+    shadows: builder
+    kind: seat
+    job: triage
+    licence: L0
+    death_test: "invented_paths > 2 in 50 rows OR top1 < 0.40"
+    l4_grants: []
+  - name: hunter
+    shadows: null
+    kind: seat
+    job: brands
+    licence: L0
+    death_test: "invented > 5 in 50 rows"
+    l4_grants: []
+  - name: shadow-qc
+    shadows: "<Hermes QC seat name>"
+    kind: seat
+    job: qc
+    licence: L0
+    death_test: "agreement < 0.85 at 200 rows OR publish_when_review > 0.05"
+    l4_grants: []
+  - name: shadow-redteam
+    shadows: "<Hermes Red Team seat name>"
+    kind: seat
+    job: null
+    licence: L0
+    death_test: "false_flags > 3 in 50 rows"
+    l4_grants: []
+  - name: shadow-pm
+    shadows: "<Hermes PM seat name>"
+    kind: seat
+    job: null
+    licence: L0
+    death_test: "accuracy <= baseline at 100 settled rows"
+    l4_grants: []
+  - name: shadow-4
+    shadows: "<Hermes seat 4>"
+    kind: null
+    job: null          # stays null until a settleable question exists
+    licence: L0
+    death_test: null
+    l4_grants: []
+  - name: shadow-5
+    shadows: "<Hermes seat 5>"
+    kind: null
+    job: null
+    licence: L0
+    death_test: null
+    l4_grants: []
+  - name: shadow-6
+    shadows: "<Hermes seat 6>"
+    kind: null
+    job: null
+    licence: L0
+    death_test: null
+    l4_grants: []
+  - name: shadow-7
+    shadows: "<Hermes seat 7>"
+    kind: null
+    job: null
+    licence: L0
+    death_test: null
+    l4_grants: []
+  - name: academy
+    kind: script
+    job: licence_registrar
+  - name: cabinet
+    kind: script
+    job: report_surface
+allowlist_readonly:
+  - "Get-ChildItem"
+  - "Get-Content"
+  - "Get-Process"
+  - "Test-Path"
+  - "git status"
+  - "git log"
+```
+
 **Gate G0 prints:** the word `ready`, then `build-index.ps1` output showing
 `local/index.json` written with 0 datasets.
 
@@ -287,6 +371,67 @@ Four weeks of the daily runner holding with no gate reopened. Then, and only
 then, reconsider what is banned: an MCP server, a read-only local UI over the
 ledgers, a third seat, the next shadow. Each one gets a written proposal first,
 a death test set before the run, and facts-only reporting.
+
+## The exact seat prompts
+
+Use these strings. Do not improve them, do not add "be helpful", do not add
+examples. Every seat call sets `temperature: 0` and `stream: false`.
+
+**`seat-brands`**
+
+```
+You extract brand names from marketplace listing text.
+Rules:
+- Copy brand names exactly as they are written in the text.
+- Never output a brand that is not written in the text.
+- One brand per line. No numbering, no commentary, no blank lines.
+- If the text names no brand, output nothing at all.
+
+TEXT:
+<<<
+{INPUT}
+>>>
+```
+
+**`seat-triage`**
+
+```
+You name the single file most likely responsible for an error.
+Rules:
+- Output exactly one repo-relative file path, copied from the FILES list.
+- Never output a path that is not in the FILES list.
+- No explanation, no ranking, no second choice.
+- If no file in the list is a plausible cause, output nothing.
+
+ERROR:
+<<<
+{STDERR}
+>>>
+
+FILES:
+<<<
+{GIT_LS_FILES}
+>>>
+```
+
+**`seat-qc`**
+
+```
+You predict one routing decision for a product listing.
+Answer with exactly one word: REVIEW or PUBLISH.
+REVIEW means a Tier A field (brand, maker, era, restricted material) is
+uncertain, unsupported by the photos or OCR text, or missing.
+No explanation. No punctuation. One word.
+
+ITEM:
+<<<
+{ITEM_FIELDS}
+>>>
+```
+
+If a seat returns anything other than the shape above, that is a scored wrong
+answer. It is not a reason to edit the prompt mid-run. The prompt may only
+change before a run starts, and a changed prompt resets the row count to zero.
 
 ## Report back after every gate
 
