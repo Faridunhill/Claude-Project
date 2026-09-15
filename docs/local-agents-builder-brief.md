@@ -352,6 +352,36 @@ difference between a watcher and a seat.
 
 ---
 
+## B3.5 — `watch-claims.ps1`, the claim check
+
+Detail in `docs/pipe-intake-process.md` §6. Deterministic, no model, built with
+the other watchers. It cannot be skipped because a seat failed — it does not use
+a seat. **This is the highest-value script in the build for the business.**
+
+**B3.5.1** `local/reference/claim-terms.txt`, script-loaded: materials
+(meerschaum, briar, morta, ivory, bone, amber, horn, tortoiseshell, bakelite,
+vulcanite, ebonite, cherrywood, olivewood, silver, sterling, 9k, 14k, gold), era
+terms (antique, vintage, pre-war, wartime, Victorian, Edwardian, every decade
+form), and every name in the brand dictionary.
+
+**B3.5.2** `local/watchers/watch-claims.ps1` — scan generated title and
+description for those terms. For each hit, look up the backing genome field and
+its `assertable()` mode from `marketing/qagate/lock.py`:
+
+| Mode | Copy may contain | Otherwise |
+|---|---|---|
+| ASSERT | the term, plainly | — |
+| HEDGE | the term **only** inside "attributed to", "appears to be", "described as" | exit non-zero, block publication |
+| OMIT | nothing | exit non-zero, block publication |
+
+**Gate G3.5** — plant five listings claiming a material the genome does not
+support, one of them the title `Jima French Metal Pipe with Meerschaum Bowl
+Insert` verbatim, and run against twenty listings whose claims are all backed.
+Blocks all five, passes all twenty, **zero false blocks**. A watcher that cries
+wolf gets switched off by the person it protects.
+
+Not scored, not promoted, never retired. It is infrastructure, like a smoke alarm.
+
 ## B4 — Hamada, the triage seat
 
 **B4.1** `local/scripts/build-labeled-set.ps1 -Seat triage -Rows 50` builds its
@@ -425,9 +455,13 @@ applies the ladder in §4 of the plan, and appends promotions and demotions to
 It never issues L4 — L4 comes only from a `l4_grants:` entry Farid writes in
 `roster.yaml`. It demotes to L0 automatically on a breached death test.
 
-**B7.2** `local/scripts/cabinet.ps1` — prints every seat's five-line report, the
-current licence table, the last heartbeat, and the open collision count. Text
-only. No HTML, no server, no browser.
+**B7.2** `local/scripts/cabinet.ps1` — **four views, never one page.** Plan §6b:
+`now` (what needs a human today: open collisions, review queue, alerts, last
+heartbeat), `scores` (five-line reports, licences, death-test margins), `map`
+(roster, parts, versions, what shadows what), `archive/` (by date). Reference
+data and action data never share a surface, and `now` being empty is the correct
+output on a good day, not a broken one. Text only. No HTML, no server, no
+browser.
 
 **B7.3** First proposal round: hamada at L2 writes one
 `local/proposals/<ts>-hamada.json` per the contract in §1 of the plan. CODE
@@ -438,6 +472,38 @@ with no `rollback` field is rejected by the script before a human sees it.
 script, and the first proposal is marked accepted or rejected.
 
 ---
+
+## B8 — The intake rework (CODE-and-Farid track)
+
+Detail in `docs/pipe-intake-process.md`. This track may run during B5's fourteen
+day soak — it touches the marketing pipeline, not the local agents.
+
+**B8.1** In `marketing/expression/copy.py`, route `unique_physical.materials`
+through `assertable()` in **both** `generate_title` and `generate_description`,
+exactly as `brand` already is. Today that file calls `assertable()` twice and
+both calls are for `brand`, so a Tier A material claim reaches the copy
+unchecked. Add a named test: a listing whose material is unverified never emits
+the material word.
+
+**B8.2** In `marketing/intake/structure.py`, make `unknown` a first-class value.
+Any field the transcript and photos do not support is written `unknown`, and the
+structurer's prompt forbids inference. A guess with no evidence is the defect;
+a blank is not.
+
+**B8.3** Split the output: the **listing** carries what is known, short; the
+**encyclopedia page** is a separate document written only where sourced material
+exists, each claim carrying its source. Remove every minimum-length rule in the
+system — 4,000 characters around thin notes is surface area for invented claims,
+not value.
+
+**B8.4** `scripts/record-correction.ps1` — one command turning an external
+correction into a corrections-ledger row plus a labelled row in
+`local/data/labeled/corrections.jsonl`: claim asserted, claim corrected, field,
+source, date. Run it on the Jima ceramic-insert correction first, as row one.
+
+**Gate G8** — ten of the worst existing listings through the new path: every
+unsupported Tier A claim removed or hedged, zero evidenced facts lost, under
+four minutes of Farid's time per pipe.
 
 ## After G7
 

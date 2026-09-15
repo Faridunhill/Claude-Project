@@ -108,7 +108,7 @@ question is not built — the row stays empty until one is found.
 | **shadow-6** | (Hermes seat 6) | — | *Unfilled.* | — | — |
 | **shadow-7** | (Hermes seat 7) | — | *Unfilled.* | — | — |
 | **academy** | — | Script | Reads score files, issues and revokes licences, writes `local/data/licence.jsonl` | Arithmetic | n/a — it is tested, not scored |
-| **cabinet** | — | Script | Concatenates every seat's five-line report + the licence table into one text output | Arithmetic | n/a |
+| **cabinet** | — | Script | Four separate views, one question each (§6b) — never one page holding everything | Arithmetic | n/a |
 
 The four unfilled shadows are deliberate. Transcribe the real Hermes seat names
 into `local/roster.yaml`, then leave them empty until someone can write the
@@ -228,6 +228,27 @@ anything on the banned list is reconsidered.
 
 ---
 
+## 6b. One page per question — the cabinet rule
+
+A single page holding the councils, the agents, the shadows, the helper, the
+hunter, the projects and the website is a good collection and a bad instrument.
+It reads like a government form because reference material and today's actions
+are sharing one surface, and the reader has to sort them apart by eye every time.
+
+The cabinet script therefore prints **four views, never one**:
+
+| View | Answers | Refreshes |
+|---|---|---|
+| `now` | What needs a human today: open collisions, the review queue, live alerts, last heartbeat | Every 15 minutes |
+| `scores` | Which seats are working: five-line reports, licences, death-test margins | Weekly |
+| `map` | How the system is put together: roster, parts, versions, what shadows what | Rarely |
+| `archive/` | Everything else, by date | Never — it is the record |
+
+Two rules keep them apart. **Reference data and action data never share a
+surface.** And **if finding today's action needs scrolling, the view has
+failed** — `now` is empty on a good day, and an empty page is the correct
+output, not a broken one.
+
 ## 7. Switching Hermes off
 
 The goal is CODE plus locals. The switch-off condition is a number, set now.
@@ -246,6 +267,41 @@ comparison and the council cannot be retired on evidence — only on impatience.
 Seats are retired one at a time. Seven shadows do not graduate together.
 
 ---
+
+## 7b. What compounds, and what gets cheaper
+
+The build order above spends almost no money on purpose. This section says why,
+so the reasoning survives after the numbers are out of date.
+
+**What gets cheaper every year:** GPUs, and the models that run on them.
+Capability that needed datacentre hardware two years ago runs on a 12 GB card
+now, and open-weight models keep landing roughly where the frontier was a year
+or so earlier. The trend could stall, but nothing currently suggests it will.
+Buying a large GPU today to be ready for three years from now is buying the most
+expensive possible version of something that gets cheaper while it sits there.
+
+**What does not get cheaper, and cannot be bought later at any price:**
+
+- Which lots contained which brands.
+- Which listing sold in thirty days, at which price, into which market.
+- Which item the QA gate rejected, and which rejection turned out to be right.
+- Which collector correction arrived, on which claim, and what it changed.
+
+That table takes calendar time to accumulate and nobody else on earth has it.
+Every month it is not recorded is a month that cannot be recreated afterwards.
+That — not GPU ownership — is the entry cost that rises.
+
+**Which makes the seat contract the important design decision in this plan.**
+Because a seat reads stdin and writes stdout and nothing else, the model behind
+it is a configuration value. B1.5 demonstrates this: renting a 70B and scoring it
+changes two environment variables and no code. The same is true of a model that
+does not exist yet, and of Claude's API, which can back a seat today and be
+scored in the same ledger against the same known answers. Local where local is
+good enough, CODE where it is not, and the ledger says which is which per job.
+
+So the sequence is: record now on cheap hardware, buy silicon only when a scored
+job proves it is the bottleneck, and let the models arrive on their own schedule
+into a harness that is already holding three years of labelled rows.
 
 ## 8. What stays banned
 
