@@ -9,6 +9,11 @@ about claims, not safety of the money path.**
 
 Legend: **P0** blocks go-live · **P1** fix before advertising · **P2** hardening.
 
+**Status — 2026-09-15 (fifth pass):** Attempted to verify the three external
+links. This environment's egress policy refuses eBay, Etsy and Linktree at the
+proxy (403 on CONNECT), so none could be fetched. Search corroborated the Etsy
+shop and turned up two things worth recording — see **Link verification** below.
+
 **Status — 2026-09-15 (fourth pass):** Farid supplied the storefront and social
 links. The five-thousand-sale claim on `/about` is now a link to the eBay
 record, which converts the shop's strongest trust signal from an assertion into
@@ -404,6 +409,48 @@ aspirational.
 | P2-6 | Next.js 14.2.5 security advisory | Schedule an upgrade window; needs a checkout test after. |
 | — | Multi-currency | No code needed — see below. |
 | — | Checkout round trip never tested against Stripe | Run the test-key checkout locally. |
+
+## Link verification — partial
+
+The three links Farid supplied could not be fetched: this session's egress
+policy returns 403 at the proxy for `ebay.us`, `etsy.com` and `linktr.ee`. Per
+the proxy's own guidance, a policy denial is reported, not routed around. What
+search could establish:
+
+**Etsy — corroborated.** The shop exists at `etsy.com/shop/Faridunhill`,
+described as selling vintage estate briar pipes and shipping from Millstone
+Township, New Jersey — consistent with Farid's stated location. Its shop id
+`34479460` matches the `i.etsystatic.com/34479460/...` image host on **all 264
+products**, so the website catalogue is demonstrably sourced from this shop.
+The stored link was switched from the legacy `faridunhill.etsy.com` subdomain
+to the canonical `www.etsy.com/shop/Faridunhill`.
+
+**eBay and Linktree — unconfirmed.** Neither could be fetched or found by
+search. `ebay.us/m/aA3qNi` is a shortlink, and it now carries the shop's main
+trust claim on `/about`. A canonical `ebay.com/usr/<username>` or
+`ebay.com/str/<store>` URL is still wanted.
+
+### Two things this turned up
+
+**1. The Etsy inventory is larger than the website catalogue.** The Etsy shop is
+described as carrying Peterson, Dunhill, BBB, Georg Jensen and others. The
+website's 264 products contain no Peterson and no Dunhill pipe. So P0-5 was
+correct about *this site* but overstated as a statement about Farid's stock: he
+has those makers, they are simply not synced here. Selling a genuine estate
+Dunhill is entirely legitimate and naming it in that product's own listing is
+normal practice. The narrower caution stands — "Dunhill" as a headline brand in
+marketing copy, on a site called Faridunhill, invites a reading of association
+that the shop does not want.
+
+**2. `faridunhill.com` may not be running this repository.** Search returned a
+live page titled "Shop | Faridunhill Estate & Collectible Pipes" at
+`faridunhill.com/shop?category=Estate+Pipes`. This application routes shop
+pages as `/shop/estate-pipes`, not as a `?category=` query string — that
+pattern belongs to a hosted site builder. If the live domain is currently
+served by something other than this Next.js app, then none of the corrections
+in this audit are visible to customers yet, and the deployment question needs
+answering before anything else here matters. **Unverified — the domain could
+not be fetched either.**
 
 ## Multi-currency: do this in the Stripe Dashboard, not in this repo
 
