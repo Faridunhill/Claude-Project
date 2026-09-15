@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { externalLinks } from '@/lib/links'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -58,9 +59,18 @@ export default function AboutPage() {
               <p className="font-lora text-parchment/75 leading-[1.95] text-[1.02rem]">
                 Faridunhill opened as a public shop in 2015, because the knowledge had become too
                 good to keep private. More than five thousand pieces have gone out to collectors
-                through our eBay storefront since. The principle has not changed: every item is
-                photographed exactly as it is, and described the way we would want it described
-                to us.
+                through{' '}
+                <a
+                  href={externalLinks.ebay.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gold hover:text-gold/80 underline underline-offset-4 decoration-gold/40 transition-colors"
+                >
+                  our eBay storefront
+                </a>{' '}
+                since — the feedback is public, and we would rather you checked it than took our
+                word. The principle has not changed: every item is photographed exactly as it is,
+                and described the way we would want it described to us.
               </p>
             </div>
             <div className="relative aspect-[4/5] rounded-sm overflow-hidden gold-frame">

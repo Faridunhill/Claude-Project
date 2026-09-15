@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { externalLinks } from '@/lib/links'
 import Logo from '@/components/ui/Logo'
 
 const shopLinks = [
@@ -36,6 +37,28 @@ export default function Footer() {
               Estate pipes, vintage leather, and gentleman&apos;s smoking accessories. Rooted in
               thirty years of collecting. Est. 2015.
             </p>
+
+            {/* Real destinations only. Four dead href="#" icons used to sit
+                here, implying a social presence that went nowhere. */}
+            <div className="mt-6">
+              <p className="font-playfair text-parchment/70 text-xs uppercase tracking-widest mb-2.5">
+                Find Us Elsewhere
+              </p>
+              <ul className="space-y-1.5">
+                {Object.values(externalLinks).map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-lora text-parchment/55 text-sm hover:text-gold transition-colors nav-link-underline"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Shop links */}

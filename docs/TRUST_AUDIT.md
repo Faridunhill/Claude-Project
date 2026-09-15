@@ -9,6 +9,11 @@ about claims, not safety of the money path.**
 
 Legend: **P0** blocks go-live · **P1** fix before advertising · **P2** hardening.
 
+**Status — 2026-09-15 (fourth pass):** Farid supplied the storefront and social
+links. The five-thousand-sale claim on `/about` is now a link to the eBay
+record, which converts the shop's strongest trust signal from an assertion into
+something a customer checks in one click. See **P1-1b**.
+
 **Status — 2026-09-15 (third pass):** Farid reviewed the P0-4 findings and
 asked for every tobacco reference to come off the site, not just the ones
 listed. A full sweep followed — see **P0-4b**.
@@ -388,12 +393,14 @@ aspirational.
 | # | Item | What is needed |
 |---|---|---|
 | P0-2b | Catalogue prices were relabelled `£`→`$`, not converted | Were those numbers always dollars? Still unanswered. If they were pounds, every price is ~25% low. |
-| P1-1b | eBay storefront URL | The 5,000-sale record is now on `/about`. A link to the storefront turns it from a claim into something a customer can verify in one click — the single highest-value thing left. |
+| P1-1b | ~~eBay storefront URL~~ | **DONE.** `/about` now reads "more than five thousand pieces have gone out to collectors through [our eBay storefront] since — the feedback is public, and we would rather you checked it than took our word." Links live in `lib/links.ts`. **One caveat:** `ebay.us/m/aA3qNi` is a shortlink. Shortlinks can be rotated or expire, and this one now carries the shop's main trust claim. A canonical `ebay.com/usr/<username>` or `ebay.com/str/<store>` URL would be safer. |
+| P2-5b | Price parity across storefronts | Site, eBay and Etsy are now linked to each other, and product images already come from `i.etsystatic.com`, so the catalogue mirrors Etsy. If the same pipe shows a different price in two places, a customer who clicks will see it. Worth one pass to confirm they match. |
+| — | Selling through the links | The footer now sends visitors to eBay and Etsy. Those marketplaces charge roughly 13% and 6.5% against Stripe's ~2.9%, so a buyer who leaves costs more than one who stays. Kept because verifiability is worth more than the leak at this stage, but it is Farid's call. |
 | P1-3 | Legal entity name | Footer now shows "New Jersey, United States — online only". A registered name (sole proprietorship or LLC) still belongs in `/privacy`. |
 | P1-6 | Age policy is self-attested | The catalogue is accessories, not tobacco, so the PACT Act framing was heavier than warranted. The 21+ rule now reads as shop policy rather than a claimed legal control. Worth one conversation with someone who knows New Jersey retail. |
 | P2-3 | Webhook is a stub; a paying customer hears nothing | Needs `faridunhill.com` verified as a sending domain in Resend. |
 | P2-4 | Unsplash placeholders on About, gallery, department tiles | Real photography. |
-| P2-5 | Social links | Four dead `href="#"` icons removed from the footer. Send real Instagram/Facebook URLs and they go back. |
+| P2-5 | ~~Social links~~ | **DONE.** The footer now has a "Find Us Elsewhere" block linking eBay, Etsy and the Linktree, all real destinations with `target="_blank"` and `rel="noopener noreferrer"`. None could be reached from the build environment to verify, so if one 404s, `lib/links.ts` is the single file to correct. Individual social URLs would beat the Linktree hop if you want them broken out. |
 | P2-6 | Next.js 14.2.5 security advisory | Schedule an upgrade window; needs a checkout test after. |
 | — | Multi-currency | No code needed — see below. |
 | — | Checkout round trip never tested against Stripe | Run the test-key checkout locally. |
