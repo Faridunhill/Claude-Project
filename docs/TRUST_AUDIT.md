@@ -441,12 +441,12 @@ public Etsy record rather than the vaguer "New Jersey, United States".
 
 ### Still worth doing
 
-- **The eBay shortlink opened `ebay.de`**, the German site, in Farid's own
-  screenshot. eBay localises by visitor, so a US buyer will probably land on
-  `.com` — but it is unpredictable, and this link now carries the record above.
-  A canonical `ebay.com/usr/faridunhill` or `ebay.com/str/<store>` would be
-  stable. Not guessed here, because an unverified URL under a trust claim is
-  worse than a working shortlink.
+- ~~**The eBay shortlink opened `ebay.de`.**~~ **FIXED.** Farid regenerated a US
+  link and it replaced the old one everywhere: `ebay.us/m/Yjd1PZ`. Verified by
+  rendering — all three eBay links on `/about` and the footer link now carry the
+  new URL, and `aA3qNi` appears nowhere on the site. It is still a shortlink, so
+  it remains the most fragile element carrying a trust claim; a canonical
+  `ebay.com/usr/...` or `ebay.com/str/...` would be sturdier if one is available.
 - **The social accounts are reachable only through Linktree.** The eight
   platforms are real but their URLs were not visible in the screenshot. Send
   the handles and they can go in the footer directly, one hop shorter.

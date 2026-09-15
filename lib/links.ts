@@ -13,7 +13,10 @@
 export const externalLinks = {
   ebay: {
     label: 'eBay',
-    href: 'https://ebay.us/m/aA3qNi',
+    href: 'https://ebay.us/m/Yjd1PZ',
+    // Replaced 2026-09-15: the previous shortlink (aA3qNi) opened ebay.de, the
+    // German site. Farid regenerated this one for the US. Still a shortlink, so
+    // it remains the most fragile thing carrying a trust claim on this site.
     description: 'Our eBay storefront and feedback record',
   },
   etsy: {
