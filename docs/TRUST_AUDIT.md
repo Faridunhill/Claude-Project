@@ -444,7 +444,10 @@ public Etsy record rather than the vaguer "New Jersey, United States".
 - ~~**The eBay shortlink opened `ebay.de`.**~~ **FIXED.** Farid regenerated a US
   link and it replaced the old one everywhere: `ebay.us/m/Yjd1PZ`. Verified by
   rendering — all three eBay links on `/about` and the footer link now carry the
-  new URL, and `aA3qNi` appears nowhere on the site. It is still a shortlink, so
+  new URL, and `aA3qNi` appears nowhere on the site. **Confirmed live** by
+  screenshot: the new link opens `ebay.com`, the US site, showing 98.4% positive
+  feedback, 5.7K items sold, 1.2K followers, 310 listings. The "5,600+" figure on
+  `/about` remains true and conservative against that. It is still a shortlink, so
   it remains the most fragile element carrying a trust claim; a canonical
   `ebay.com/usr/...` or `ebay.com/str/...` would be sturdier if one is available.
 - **The social accounts are reachable only through Linktree.** The eight
