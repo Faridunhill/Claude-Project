@@ -20,9 +20,10 @@ export const externalLinks = {
   },
   etsy: {
     label: 'Etsy',
-    // Canonical shop URL. faridunhill.etsy.com is a legacy subdomain redirect
-    // to this same page; the /shop/ form is the one Etsy itself publishes.
-    href: 'https://www.etsy.com/shop/Faridunhill',
+    // Farid's own URL, given twice. The subdomain form redirects to
+    // www.etsy.com/shop/Faridunhill, which is the equivalent canonical if this
+    // one ever stops resolving.
+    href: 'https://faridunhill.etsy.com',
     description: 'Our Etsy shop',
   },
   linktree: {

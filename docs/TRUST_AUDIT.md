@@ -422,8 +422,9 @@ described as selling vintage estate briar pipes and shipping from Millstone
 Township, New Jersey — consistent with Farid's stated location. Its shop id
 `34479460` matches the `i.etsystatic.com/34479460/...` image host on **all 264
 products**, so the website catalogue is demonstrably sourced from this shop.
-The stored link was switched from the legacy `faridunhill.etsy.com` subdomain
-to the canonical `www.etsy.com/shop/Faridunhill`.
+The stored link is `faridunhill.etsy.com`, as Farid supplied it. That subdomain
+redirects to `www.etsy.com/shop/Faridunhill`, which is the equivalent canonical
+if the subdomain form ever stops resolving.
 
 **eBay and Linktree — unconfirmed.** Neither could be fetched or found by
 search. `ebay.us/m/aA3qNi` is a shortlink, and it now carries the shop's main
