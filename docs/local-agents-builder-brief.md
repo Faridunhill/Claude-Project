@@ -57,6 +57,12 @@ curl -s --max-time 120 "$OLLAMA_URL/api/generate" \
 **If it does not print `ready`, stop here and report exactly what it printed.**
 Do not continue. Do not try a different model to make it pass.
 
+**B0.4a** Record the machine, script-written, to
+`local/data/score/hardware.json`: `nvidia-smi --query-gpu=name,memory.total
+--format=csv`, total system RAM, free disk. The GPU's VRAM figure decides which
+models are even loadable — a 5070 is 12 GB, a 5070 **Ti** is 16 GB, and the
+difference changes what B1 can run. Do not assume which card is installed.
+
 **B0.4** Create the tree in §5 of the plan. Empty directories with a
 `.gitkeep`. Then write `local/scripts/build-index.ps1`: it walks
 `local/data/`, and writes `local/index.json` — one entry per dataset with
@@ -215,6 +221,74 @@ not work, and fall back to plain-text matching against the brand dictionary.
 invented ≤ 5 → the seat is usable; continue.
 
 ---
+
+## B1.5 — The rented benchmark (only if G1 failed)
+
+Full detail in `docs/local-agents-hardware-note.md` §4. **Skip this task
+entirely if G1 passed** — there is nothing to buy.
+
+This is a new seat with its own row count, in its own ledger. It is not a
+second attempt at the seat that died, and the threshold stays at 5. A rented
+GPU does not buy a softer bar.
+
+**B1.5.1** `local/scripts/export-benchmark-set.ps1` → `local/data/bench/bench-rows.jsonl`,
+carrying **only** `{"n", "input"}`. The `known_answer` lists stay on the PC and all
+scoring happens locally afterwards. Never upload `.env`, `.local-seat-env`,
+`roster.yaml`, the genome database, the corpus, or any file containing a SKU.
+
+**B1.5.2** Rent one pod on RunPod (Secure Cloud, image `ollama/ollama`, port
+11434 exposed, `OLLAMA_HOST=0.0.0.0`): a 24 GB card for the 30B run, a 48 GB card
+for the 70B run. Record the live hourly price at deploy time — not an estimate.
+
+**B1.5.3** Tunnel; do not expose:
+
+```powershell
+ssh -N -L 11435:localhost:11434 root@<pod-host> -p <pod-port> -i <key>
+$env:OLLAMA_URL  = "http://localhost:11435"
+$env:LOCAL_MODEL = "<exact tag as ollama list prints it on the pod>"
+```
+
+The seat script runs unchanged. That is what the stdin/stdout contract is for —
+the seat does not know which machine answered.
+
+**B1.5.4** Pull one 30B-class model (`qwen3:30b-a3b`, `qwen2.5:32b-instruct-q4_K_M`
+or `gpt-oss:20b`) and one 70B-class model (`llama3.3:70b-instruct-q4_K_M` or
+`qwen2.5:72b-instruct-q4_K_M`). If a tag does not resolve, pull the nearest and
+**record the tag actually used**.
+
+**B1.5.5** Add `-Ledger` and `-Runtime` parameters to the existing `run-seat.ps1`
+rather than writing a second runner. Run all three over the identical 50 rows:
+
+```powershell
+run-seat.ps1 -Seat brands -Ledger brands-bench -Runtime "local-14b"
+run-seat.ps1 -Seat brands -Ledger brands-bench -Runtime "rented-30b"
+run-seat.ps1 -Seat brands -Ledger brands-bench -Runtime "rented-70b"
+```
+
+Every bench row carries `runtime` and `model_tag`. Then print one block:
+
+```
+runtime         model                          rows  hits  missed  invented  s/row
+local-14b       <tag>                            50   118      36        12    6.2
+rented-30b      <tag>                            50   131      23         2    3.4
+rented-70b      <tag>                            50   139      15         1   11.8
+```
+
+**B1.5.6** **Terminate** the pod — a stopped pod still bills for its volume —
+then open the billing page and confirm the spend stopped. Write the real cost
+into `local/data/score/benchmark-rented.jsonl`. An estimated cost is a story.
+
+**The decision, set in advance. Buy what this table says and nothing else:**
+
+| Result | Buy |
+|---|---|
+| local-14b already ≤ 5 | Nothing. G1 passed and this task should not have run. |
+| local > 5, **rented-30b ≤ 5** | RAM to 64 GB, then a used 24 GB card. You now know the exact model tag to run on it. |
+| only **rented-70b ≤ 5** | **Nothing.** That is £3–4k of hardware for one reading job — use the brand dictionary, or send that job to CODE. |
+| all three > 5 | **Nothing.** G1's verdict stands: local brand extraction does not work. Fall back to dictionary matching. |
+
+Report the outcome in the six-line form with `gate: B1.5` and the chosen row of
+that table as `verdict:`.
 
 ## B2 — Harden the seat that passed
 
