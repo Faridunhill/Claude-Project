@@ -51,9 +51,6 @@ export default function ReturnsPage() {
           <div className="font-lora text-parchment/75 leading-[1.9] space-y-4">
             <p>For health, safety, and regulatory reasons, the following items are non-returnable under all circumstances:</p>
             <ul className="space-y-2 pl-4 border-l border-gold/20">
-              <li><span className="text-gold">All pipe tobacco:</span> Including opened and unopened tins. Tobacco products cannot be returned or exchanged once the transaction is complete.</li>
-              <li><span className="text-gold">All cigars:</span> Once cigars leave our humidity-controlled storage, we cannot guarantee their condition upon return. No exceptions.</li>
-              <li><span className="text-gold">All vaping products and e-liquids:</span> For health and safety reasons, these are non-returnable once shipped.</li>
               <li><span className="text-gold">Pipes that have been smoked:</span> Estate pipes and new pipes that show evidence of having been smoked cannot be returned. If you are uncertain whether a pipe is right for you, please contact us before purchasing — we are happy to advise.</li>
               <li><span className="text-gold">Personalised or custom items:</span> Including engraved items and made-to-order leather goods, unless they arrive defective or not as described.</li>
               <li><span className="text-gold">Sale & Clearance items:</span> All clearance sales are final.</li>

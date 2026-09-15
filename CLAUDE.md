@@ -27,11 +27,21 @@ This store sells age-restricted goods. Every claim on the site is a legal claim.
    actually does.
 4. **One currency.** The business is in New Jersey and the store is USD
    end to end: Stripe charges `usd`, every price renders as `$`, and
-   `priceCurrency` is `USD`. A `£` or a `GBP` anywhere is a bug. Multi-currency
-   display for European and Canadian customers is a future change, not a
-   reason to mix symbols now.
+   `priceCurrency` is `USD`. A `£` or a `GBP` anywhere is a bug. Local-currency
+   display for overseas customers is handled by Stripe Adaptive Pricing in the
+   Dashboard — never by converting prices in this codebase, which would show
+   one number and charge another.
 5. **Product copy describes the actual item.** Condition, provenance, and defects
    come from the intake record, not from inference.
+6. **The catalogue contains no consumable tobacco.** 264 products: estate pipes,
+   meerschaum, vintage leather, cigar accessories, lighters, pipe tools. No
+   tins, no cigars, no vaping products. Never write copy that sells tobacco,
+   and never reason about tobacco import or PACT Act rules as if they applied
+   to this catalogue. If tobacco is ever stocked, this line changes first.
+7. **Never name a maker the shop does not stock.** Verify against
+   `content/products/*.yaml` before a brand name goes on a page. Dunhill
+   especially: there are zero Dunhill pipes, the shop name already invites the
+   comparison, and a prior commit backed away from this exact trademark risk.
 
 ## Money rules
 
@@ -44,6 +54,14 @@ This store sells age-restricted goods. Every claim on the site is a legal claim.
 - Never log full customer PII or raw Stripe payloads.
 - Secrets live in `.env.local` / Vercel env vars. Never commit a key, never paste
   one into a file, never read `.env.local` into the conversation.
+
+## Shipping
+
+Shipping is **free on every order, no minimum, everywhere we ship** — US, EU-27,
+UK, Switzerland, Norway, Canada, Australia, New Zealand. The Stripe session has
+no `shipping_options` and no shipping line, which is correct. Never reintroduce
+a threshold, a flat rate, or an expedited tier into site copy unless the
+checkout actually charges it.
 
 ## Code conventions
 

@@ -9,6 +9,11 @@ about claims, not safety of the money path.**
 
 Legend: **P0** blocks go-live · **P1** fix before advertising · **P2** hardening.
 
+**Status — 2026-09-15 (second pass):** Farid confirmed the outstanding facts.
+Acting on them surfaced a larger finding than any single item in this audit —
+see **P0-4** — and closed P1-1, P2-2 and P2-7. See **Waiting on Farid** for
+what is left.
+
 **Status — 2026-09-15:** all three P0s resolved on
 `claude/website-trust-system-recommendations-b7isqd`. The store is US-based
 (New Jersey), so the whole site is now USD. Every P1 and P2 item that could be
@@ -120,9 +125,71 @@ work, now tracked as P1-6 rather than a false statement on the site.
 
 ---
 
+### P0-4 · The shop advertises an entire product category it does not stock — FIXED
+
+Found while verifying Farid's maker list against the catalogue. All 264
+products break down as:
+
+| Category | Count |
+|---|---|
+| Estate Pipes | 102 |
+| Leather Bags & Cases | 89 |
+| Cigar Accessories | 34 |
+| Pipe Tools & Stands | 16 |
+| Lighters & Matches | 15 |
+| Meerschaum | 7 |
+| Rare & Collectible | 1 |
+
+**There is no consumable tobacco in the catalogue. None.** No pipe tobacco, no
+cigars, no vaping products, no e-liquid.
+
+Yet the site sold all three. `README.md` called it "a premium online smoke shop
+specialising in tobacco pipes, pipe tobacco, cigars … vaping products." The
+homepage and site-wide metadata advertised "premium pipe tobacco, hand-rolled
+cigars". `/about` described a tobacco selection by blender — Samuel Gawith,
+G.L. Pease, Cornell & Diehl — and "a small but serious cigar selection".
+`/returns` listed return rules for tobacco, cigars and e-liquids. `/shipping`
+built its entire age-verification and international sections around tobacco
+import law.
+
+A customer arriving from that copy and finding no tobacco anywhere has been
+misled, whatever the intent. It also dragged in consequences that were never
+real: the EU was closed over tobacco import rules that do not apply to a
+leather pouch, and the PACT Act framing in this audit was heavier than the
+catalogue warranted.
+
+**Fixed.** Every page now describes pipes, meerschaum, vintage leather, cigar
+accessories, lighters and stands. `/about` states plainly: *"What we do not
+stock is tobacco — no tins, no cigars, no vaping products. This is a shop for
+the objects, not the leaf."* The tobacco return rules are gone, and the
+shipping policy no longer reasons about tobacco customs law.
+
+### P0-5 · Maker names on /about that are not in the catalogue — FIXED
+
+`/about` claimed the shop carries "Dunhill, Savinelli, Peterson, Stanwell,
+Chacom, and Missouri Meerschaum". Checked against all 264 products:
+
+| Named | Actually listed |
+|---|---|
+| Dunhill | **0** — the only match is a "Dunhill-**Style**" ashtray |
+| Peterson | **0** |
+| Missouri Meerschaum | **0** |
+| Chacom | 1 |
+| Savinelli | 2 |
+| Stanwell | 4 |
+
+Dunhill was the serious one. Zero Dunhill pipes, in a shop called
+*Fari-dunhill*, naming Dunhill as a carried brand, is not just an inaccurate
+claim — it invites exactly the trademark reading this repo already backed away
+from once in `8586876` ("remove F. Dunhill persona (trademark risk)").
+
+**Fixed.** `/about` now names only makers verified present in the catalogue:
+Stanwell, Vauen, Big Ben, Savinelli, Ser Jacopo, Charatan, Tsuge. Every one is
+checkable by clicking through to the shop.
+
 ## P1 — fix before you advertise
 
-### P1-1 · Heritage claims that nobody can check
+### P1-1 · Heritage claims nobody can check — FIXED
 "EST. 2015" (`components/layout/Navigation.tsx:100`, `app/blog/page.tsx:20`),
 "thirty years of collector knowledge" (`app/layout.tsx:40`, `app/page.tsx:13`,
 `components/layout/Footer.tsx:37`, `components/home/HeroSection.tsx:53`),
@@ -130,11 +197,25 @@ work, now tracked as P1-6 rather than a false statement on the site.
 "Head Tobacconist with over thirty years of experience"
 (`app/blog/[slug]/page.tsx:167`).
 
-If these are true of you, keep them and say so in the first person. If they were
-written to sound established, they are the same category of problem as the
-testimonials that were already removed — and they are the claims a customer can
-most easily test. This repo has already deleted fake ratings twice
-(`3aafc91`, `8586876`); finish the job.
+**Confirmed and corrected.** Farid verified: collecting since the early 1990s
+(thirty years, true), the collection did pass four hundred pipes over that
+period (true, historical), the shop opened in 2015 (true), and more than five
+thousand pieces have sold through eBay.
+
+The one claim that was wrong in the telling: "a collection of over four
+hundred" was written in the present tense, implying four hundred pipes in
+stock. Current live stock is around a hundred estate pipes — which matches the
+catalogue exactly (102). `/about` now separates the two: four hundred collected
+over three decades, around a hundred listed at any one time.
+
+The eBay record is now on the page, and it is the strongest trust signal the
+shop has — a five-thousand-sale history is independently checkable in a way
+that no amount of heritage prose is. **It would be stronger still as a link to
+the eBay storefront;** Farid has not supplied the URL yet.
+
+Also removed: "Head Tobacconist" in the blog author bio, which implied a staff
+structure that does not exist, and "our in-house restoration specialist". The
+thirty years stayed, because it is true.
 
 ### P1-2 · Fabricated testimonials in the tree — FIXED
 `components/home/CustomerReviews.tsx` held six invented five-star reviews with
@@ -208,9 +289,12 @@ storage to do safely.
   live response-header dump. A Content-Security-Policy is still **not** set: it
   needs testing against Stripe, Keystatic and Google Fonts on a real deploy,
   and a wrong CSP silently breaks checkout.
-- **Promised shipping is never charged.** The Stripe session has no
-  `shipping_options`, so the `$8.95` flat rate is never collected and the free
-  threshold is not enforced — every order ships free by accident.
+- ~~**Promised shipping is never charged.**~~ **FIXED, by making the policy
+  match the behaviour rather than the reverse.** Farid chose to keep shipping
+  free. Every `$75` threshold, the `$8.95` flat rate, the `$19.95`/`$39.95`
+  expedited tiers and the `$200` P.O. Box rule are gone from the site. The
+  policy now reads "Shipping is free on every order, with no minimum, anywhere
+  we ship" — which is exactly what the checkout has always done.
 - **The webhook is a stub.** `checkout.session.completed` only `console.log`s
   (`app/api/webhook/route.ts:31`). No order record, no confirmation email. A
   customer who pays hears nothing back.
@@ -231,12 +315,18 @@ storage to do safely.
 upgrade to a patched version."* On a store taking card traffic this should be
 scheduled deliberately, with the build and a checkout test after it.
 
-### P2-7 · Europe is advertised nowhere and blocked everywhere
-Farid reports customers in Europe and Canada. Stripe accepts shipping addresses
-for `US`, `CA`, `GB`, `AU` only (`app/api/checkout/route.ts`), and
-`app/shipping/page.tsx` states plainly that the EU is not served. Canada and the
-UK work today; the EU does not. Either open it or keep saying so — but the
-current state means European customers cannot buy.
+### P2-7 · Europe blocked everywhere — FIXED
+The EU was closed "due to the complexity of tobacco import regulations across
+member states" — regulations that do not apply to any of the 264 products in
+the catalogue (see P0-4). Farid chose to open the EU for the non-tobacco
+catalogue, which is the whole catalogue.
+
+`allowed_countries` now covers the EU-27 plus the UK, Switzerland, Norway,
+Canada, Australia and New Zealand. The shipping policy explains that no
+consumable tobacco is sold, so tobacco customs rules are not in play, and flags
+the two things that genuinely are: lighters ship empty and by surface where
+required, and customs duties or VAT on arrival are the customer's own
+government's charge.
 
 ### P2-8 · Repo hygiene fixed in passing
 `next lint` had never run (no ESLint config existed, so it fell through to an
@@ -249,21 +339,38 @@ aspirational.
 
 ## Waiting on Farid
 
-Everything below needs a fact only Farid has, or a decision only he can make.
-None of it is blocked on engineering.
-
 | # | Item | What is needed |
 |---|---|---|
-| P0-2b | Catalogue prices were relabelled `£`→`$`, not converted | Were those numbers always dollars? If they were pounds, every price is ~25% low and the YAML needs a conversion pass. |
-| P1-1 | "Est. 2015", "thirty years", "four hundred pipes", "Head Tobacconist" | Confirm each is true, or say what the real figure is so the copy can be rewritten. |
-| P1-3 | No legal entity, trading address, phone, or tax number on the site | Supply them for the footer and `/privacy`. |
-| P1-6 | Age verification is still self-attestation | Business decision: pick a provider (AgeChecked, Veratad, AgeID) or accept the PACT Act exposure knowingly. Worth an accountant or lawyer who knows US tobacco. |
-| P2-2 | Shipping is promised but never charged | Confirm the US flat rate and free threshold, and supply international rates, before `shipping_options` can be added to the Stripe session. |
-| P2-3 | Webhook is a stub; a paying customer hears nothing | Needs `faridunhill.com` verified as a sending domain in Resend before order-confirmation email can be wired. |
+| P0-2b | Catalogue prices were relabelled `£`→`$`, not converted | Were those numbers always dollars? Still unanswered. If they were pounds, every price is ~25% low. |
+| P1-1b | eBay storefront URL | The 5,000-sale record is now on `/about`. A link to the storefront turns it from a claim into something a customer can verify in one click — the single highest-value thing left. |
+| P1-3 | Legal entity name | Footer now shows "New Jersey, United States — online only". A registered name (sole proprietorship or LLC) still belongs in `/privacy`. |
+| P1-6 | Age policy is self-attested | The catalogue is accessories, not tobacco, so the PACT Act framing was heavier than warranted. The 21+ rule now reads as shop policy rather than a claimed legal control. Worth one conversation with someone who knows New Jersey retail. |
+| P2-3 | Webhook is a stub; a paying customer hears nothing | Needs `faridunhill.com` verified as a sending domain in Resend. |
 | P2-4 | Unsplash placeholders on About, gallery, department tiles | Real photography. |
+| P2-5 | Social links | Four dead `href="#"` icons removed from the footer. Send real Instagram/Facebook URLs and they go back. |
 | P2-6 | Next.js 14.2.5 security advisory | Schedule an upgrade window; needs a checkout test after. |
-| P2-7 | European customers cannot buy — EU blocked in Stripe and in policy | Open the EU or keep excluding it. Canada and the UK already work. |
-| — | Checkout round trip never tested against Stripe | Run the test-key checkout locally. The validation logic is proven; the Stripe round trip is not. |
+| — | Multi-currency | No code needed — see below. |
+| — | Checkout round trip never tested against Stripe | Run the test-key checkout locally. |
+
+## Multi-currency: do this in the Stripe Dashboard, not in this repo
+
+Farid asked for more currencies. The right answer is **Stripe Adaptive
+Pricing**, which is a Dashboard setting rather than a code change:
+
+- It presents prices in the customer's local currency across 150+ countries,
+  chosen automatically from session signals.
+- **You still receive USD.** Stripe handles the conversion.
+- The Stripe-provided rate includes a conversion fee (roughly 4%), so a €
+  customer sees a slightly higher number than a straight FX conversion — that
+  spread is disclosed to them at checkout, not hidden.
+- Enable it under payment settings, in sandbox first, then live.
+
+This is strictly better than building currency switching into the site. A
+hand-rolled converter would show a rate that goes stale, and — worse for a shop
+with this history — would display one number and charge another. Site prices
+stay USD; Stripe does the localisation at the moment of payment, accurately.
+
+Sources: [Adaptive Pricing docs](https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing) · [Stripe support](https://support.stripe.com/questions/adaptive-pricing)
 
 ## Verdict
 

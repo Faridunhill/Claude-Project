@@ -33,27 +33,9 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Logo size="sm" variant="light" />
             <p className="font-lora text-parchment/55 text-sm leading-relaxed mt-5">
-              Purveyors of fine pipes, tobaccos, and gentleman&apos;s accessories. Rooted in
-              thirty years of collector knowledge and old-world craftsmanship.
+              Estate pipes, vintage leather, and gentleman&apos;s smoking accessories. Rooted in
+              thirty years of collecting. Est. 2015.
             </p>
-            {/* Social links */}
-            <div className="flex items-center gap-3 mt-6">
-              {[
-                { label: 'Instagram', icon: 'IG' },
-                { label: 'Facebook', icon: 'FB' },
-                { label: 'X / Twitter', icon: 'X' },
-                { label: 'Reddit', icon: 'R' },
-              ].map((s) => (
-                <a
-                  key={s.label}
-                  href="#"
-                  aria-label={s.label}
-                  className="w-8 h-8 rounded-sm border border-gold/20 flex items-center justify-center text-gold/50 hover:border-gold/50 hover:text-gold transition-colors font-playfair text-xs font-bold"
-                >
-                  {s.icon}
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Shop links */}
@@ -107,9 +89,9 @@ export default function Footer() {
                 </a>
               </p>
               <p>
-                <span className="text-gold/70">Hours</span><br />
-                Mon–Fri: 9 AM – 6 PM EST<br />
-                Sat: 10 AM – 4 PM EST
+                <span className="text-gold/70">Location</span><br />
+                New Jersey, United States<br />
+                Online only — no walk-in premises
               </p>
             </div>
 
@@ -118,7 +100,7 @@ export default function Footer() {
               {[
                 '🔒 Secure Checkout via Stripe',
                 '✦ Age Verification Required',
-                '📦 Free Shipping Over $75',
+                '📦 Free Shipping, Every Order',
               ].map((badge) => (
                 <div key={badge} className="flex items-center gap-2 text-xs font-lora text-parchment/40">
                   <span>{badge}</span>

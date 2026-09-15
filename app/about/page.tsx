@@ -5,7 +5,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'About Us',
   description:
-    'Thirty years of collector knowledge, old-world craftsmanship, and an abiding love of the pipe. The story of Faridunhill.',
+    'Thirty years of collecting estate pipes, and the shop it became. Around a hundred estate pipes listed at any time, plus vintage leather and smoking accessories. Est. 2015, New Jersey.',
 }
 
 export default function AboutPage() {
@@ -50,16 +50,17 @@ export default function AboutPage() {
                 Charatan — the names became a private language, a catalogue of desire.
               </p>
               <p className="font-lora text-parchment/75 leading-[1.95] text-[1.02rem]">
-                Over three decades, that obsession became expertise. A collection of over four hundred
-                pipes. A tobacco cellar of particular depth — tins and jars cellared through the
-                years when the great blenders were still producing the blends that have since
-                become legendary. And a knowledge of the craft that can only come from decades of
-                patient, attentive smoking.
+                Over three decades that obsession became expertise, and the collection passed four
+                hundred pipes. Today around a hundred estate pipes are listed here at any one time
+                — Stanwell, Vauen, Savinelli, Charatan, Ser Jacopo, Tsuge among them — rotating as
+                pieces find new owners and new ones are acquired.
               </p>
               <p className="font-lora text-parchment/75 leading-[1.95] text-[1.02rem]">
                 Faridunhill opened as a public shop in 2015, because the knowledge had become too
-                good to keep private. We built it on a simple principle: every product we sell must
-                be something we would be proud to smoke ourselves. Nothing else makes the cut.
+                good to keep private. More than five thousand pieces have gone out to collectors
+                through our eBay storefront since. The principle has not changed: every item is
+                photographed exactly as it is, and described the way we would want it described
+                to us.
               </p>
             </div>
             <div className="relative aspect-[4/5] rounded-sm overflow-hidden gold-frame">
@@ -104,23 +105,23 @@ export default function AboutPage() {
         <section className="space-y-5">
           <h2 className="font-playfair font-bold text-parchment text-3xl">What We Stock, and Why</h2>
           <p className="font-lora text-parchment/75 leading-[1.95] text-[1.02rem]">
-            Our pipe selection spans the full range of the craft. We carry new production pipes from
-            the world&apos;s finest makers — Dunhill, Savinelli, Peterson, Stanwell, Chacom, and
-            Missouri Meerschaum — alongside our rotating estate collection, which is drawn from
-            private acquisitions, collection dispersals, and the work of our in-house restoration
-            specialist.
+            Estate pipes are the heart of it — around a hundred at any time, drawn from private
+            acquisitions and collection dispersals. The Danish and German workshops are well
+            represented: Stanwell, Vauen, Big Ben. Alongside them, Italian work from Savinelli and
+            Ser Jacopo, English Charatan, Japanese Tsuge, and hand-carved Turkish meerschaum.
+            Stock rotates constantly, so the shop is the catalogue — if it is listed, we have it.
           </p>
           <p className="font-lora text-parchment/75 leading-[1.95] text-[1.02rem]">
-            Our tobaccos are chosen with the same rigour. We prioritise classic English blenders —
-            Samuel Gawith, Gawith &amp; Hoggarth, Dunhill, G.L. Pease — alongside the finest
-            American blenders: Cornell &amp; Diehl, McClelland (from our estate tin stock), and
-            the Sutliff catalogue. We maintain a small but serious cigar selection drawn from the
-            premium Nicaraguan, Honduran, and Dominican producers.
+            Our leather is vintage and estate rather than new production: mid-century German
+            tobacco pouches and tin carriers, Offenbach cigar cases, Spanish Ubrique travel cases
+            — full-grain pieces made in the years when leather goods were built to outlast their
+            owner. Each is sold in the condition it reached us, with its flaws described rather
+            than photographed around.
           </p>
           <p className="font-lora text-parchment/75 leading-[1.95] text-[1.02rem]">
-            Our leather goods are made in house, in small batches, from vegetable-tanned full-grain
-            leather. Our gift sets are curated personally by our head tobacconist, who refuses to
-            put his name on anything he would not give to a friend.
+            Alongside these: Solingen cigar cutters and scissors, ashtrays, tampers, pipe stands,
+            and vintage lighters. What we do not stock is tobacco — no tins, no cigars, no vaping
+            products. This is a shop for the objects, not the leaf.
           </p>
         </section>
 

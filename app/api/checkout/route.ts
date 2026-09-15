@@ -112,7 +112,15 @@ export async function POST(request: NextRequest) {
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/?cart=open`,
       shipping_address_collection: {
-        allowed_countries: ['US', 'CA', 'GB', 'AU'],
+        // The catalogue is entirely non-tobacco — pipes, leather, cutters,
+        // lighters and stands — so the EU tobacco import rules that used to
+        // keep these countries closed do not apply to anything we ship.
+        allowed_countries: [
+          'US', 'CA', 'GB', 'AU', 'NZ', 'CH', 'NO',
+          'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE',
+          'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT',
+          'RO', 'SK', 'SI', 'ES', 'SE',
+        ],
       },
       phone_number_collection: {
         enabled: true,

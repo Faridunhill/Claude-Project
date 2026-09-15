@@ -164,9 +164,9 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="mt-10 p-6 bg-mahogany-light rounded-sm gold-frame">
           <p className="font-playfair font-bold text-parchment mb-1">{post.author}</p>
           <p className="font-lora text-parchment/60 text-sm leading-relaxed">
-            Head Tobacconist at Faridunhill with over thirty years of experience collecting and
-            smoking fine pipes. His particular passions are Virginia flakes, estate briars from
-            the Saint-Claude period, and the slow art of pipe restoration.
+            Founder of Faridunhill, with over thirty years of experience collecting and smoking
+            fine pipes. Particular passions: Virginia flakes, estate briars from the Saint-Claude
+            period, and the slow art of pipe restoration.
           </p>
         </div>
 

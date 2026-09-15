@@ -33,14 +33,13 @@ const imFell = IM_Fell_English({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://faridunhill.com'),
   title: {
-    default: 'Faridunhill — Fine Pipes, Tobaccos & Gentleman\'s Accessories',
+    default: 'Faridunhill — Estate Pipes, Vintage Leather & Smoking Accessories',
     template: '%s | Faridunhill',
   },
   description:
-    'Purveyors of fine estate pipes, hand-carved meerschaums, rare collectibles, leather goods, and gentleman\'s smoking accessories. Rooted in 30 years of collector knowledge and old-world craftsmanship.',
+    'Purveyors of fine estate pipes, hand-carved meerschaums, rare collectibles, vintage leather, and gentleman\'s smoking accessories. Rooted in 30 years of collecting.',
   keywords: [
     'tobacco pipes',
-    'pipe tobacco',
     'cigars',
     'briar pipe',
     'meerschaum pipe',
@@ -55,7 +54,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: '/',
     siteName: 'Faridunhill',
-    title: 'Faridunhill — Fine Pipes, Tobaccos & Gentleman\'s Accessories',
+    title: 'Faridunhill — Estate Pipes, Vintage Leather & Smoking Accessories',
     description:
       'Purveyors of fine estate pipes, meerschaums, rare collectibles, and gentleman\'s smoking accessories. Rooted in old-world craftsmanship.',
     images: [
@@ -69,8 +68,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Faridunhill — Fine Pipes & Tobaccos',
-    description: 'Purveyors of fine pipes, tobaccos, and gentleman\'s accessories.',
+    title: 'Faridunhill — Estate Pipes & Smoking Accessories',
+    description: 'Estate pipes, vintage leather, and smoking accessories. Est. 2015.',
     images: ['/images/og-default.jpg'],
   },
   robots: {

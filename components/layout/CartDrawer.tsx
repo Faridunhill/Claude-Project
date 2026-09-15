@@ -78,7 +78,7 @@ export default function CartDrawer() {
                 </svg>
               </div>
               <p className="font-playfair text-parchment/60 text-lg mb-2">Your cart is empty</p>
-              <p className="font-lora text-parchment/40 text-sm mb-6">Explore our collection of fine pipes and tobaccos</p>
+              <p className="font-lora text-parchment/40 text-sm mb-6">Explore our collection of estate pipes and fine leather</p>
               <button
                 onClick={closeCart}
                 className="btn-gold px-6 py-2.5 rounded-sm text-sm"

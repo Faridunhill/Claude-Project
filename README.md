@@ -1,6 +1,8 @@
 # Faridunhill Store
 
-Production-ready e-commerce website for **faridunhill.com** — a premium online smoke shop specialising in tobacco pipes, pipe tobacco, cigars, leather accessories, vaping products, and gentleman's accessories.
+Production-ready e-commerce website for **faridunhill.com** — an online shop specialising in estate pipes, hand-carved meerschaum, vintage leather cases and pouches, cigar accessories, lighters, and pipe tools.
+
+**The catalogue contains no consumable tobacco** — no pipe tobacco, no cigars, no vaping products. Copy that says otherwise is a bug.
 
 ## Tech Stack
 

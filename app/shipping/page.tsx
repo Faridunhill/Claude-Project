@@ -34,30 +34,25 @@ export default function ShippingPage() {
         </Section>
 
         <Section title="Domestic Shipping (United States)">
-          <p><strong className="text-parchment">Free shipping</strong> is provided on all orders of $75 or more shipped within the continental United States.</p>
-          <p>Orders below $75 are charged a flat shipping rate of $8.95 for standard shipping. Expedited options are available at checkout:</p>
-          <ul className="list-none space-y-2 pl-4 border-l border-gold/20">
-            <li><span className="text-gold">Standard (3–7 business days):</span> $8.95, free over $75</li>
-            <li><span className="text-gold">Expedited (2–3 business days):</span> $19.95</li>
-            <li><span className="text-gold">Overnight (next business day):</span> $39.95</li>
-          </ul>
+          <p><strong className="text-parchment">Shipping is free on every order</strong>, with no minimum, anywhere we ship. There is no shipping line at checkout because there is no shipping charge — the price you see on the product page is the price you pay.</p>
+          <p>Standard delivery within the United States is typically 3–7 business days.</p>
           <p>We ship via UPS, FedEx, and USPS depending on package size, destination, and service selected. A tracking number is emailed as soon as the label is created, typically the morning after your order is placed.</p>
-          <p>We do not ship to P.O. Boxes for orders over $200 or for tobacco products, due to carrier restrictions.</p>
+          <p>We can ship to P.O. Boxes where the carrier allows it. Larger or higher-value parcels may require a street address.</p>
         </Section>
 
         <Section title="Alaska, Hawaii & US Territories">
-          <p>We ship to Alaska, Hawaii, Puerto Rico, Guam, and other US territories via USPS Priority Mail. Rates are calculated at checkout based on weight and destination. Free shipping thresholds apply to orders over $100 to these destinations. Delivery times are typically 5–10 business days.</p>
+          <p>We ship to Alaska, Hawaii, Puerto Rico, Guam, and other US territories via USPS Priority Mail, free of charge like every other order. Delivery times are typically 5–10 business days.</p>
         </Section>
 
         <Section title="International Shipping">
-          <p>We currently ship to Canada, the United Kingdom, Australia, and select European countries. International shipping rates are calculated at checkout based on destination, weight, and declared value.</p>
-          <p><strong className="text-parchment">Important regarding tobacco products:</strong> Customs regulations for tobacco vary by country. The customer is responsible for ensuring that their order complies with their country&apos;s import laws and for paying any applicable customs duties, import taxes, or VAT. We are not responsible for packages held or seized by customs, and we cannot mark shipments as &ldquo;gift&rdquo; or misrepresent contents.</p>
-          <p>We do not currently ship to the European Union, due to the complexity of tobacco import regulations across member states. We apologise for this limitation and are working to resolve it.</p>
+          <p>We ship to Canada, the United Kingdom, Australia, and the European Union. International shipping is free, like every other order. You remain responsible for any customs duties, import taxes, or VAT your own country charges on arrival — those are levied by your government, not by us, and we cannot predict or prepay them.</p>
+          <p>We sell no consumable tobacco — no tins, no cigars, no vaping products — so the tobacco import restrictions that complicate cross-border orders do not apply to anything in our catalogue. What we ship is pipes, leather goods, and accessories.</p>
+          <p>Two practical notes. Lighters are shipped empty and by surface where regulations require it, which can add a few days. And we declare every parcel honestly: we cannot mark a shipment as a &ldquo;gift&rdquo; or understate its value, and we are not responsible for parcels held or seized by customs.</p>
           <p>International orders typically arrive within 10–21 business days, depending on the destination country and customs processing time.</p>
         </Section>
 
         <Section title="Age Verification for Tobacco Products">
-          <p>All orders containing tobacco products — pipes, pipe tobacco, cigars, vaping products, and related items — are subject to mandatory age verification under US federal and state law. You must be 21 years of age or older to purchase tobacco products.</p>
+          <p>We sell smoking accessories — pipes, leather goods, cutters, lighters and stands — and no consumable tobacco. Even so, several US states restrict the sale of smoking paraphernalia to adults, and we apply a single rule everywhere rather than guessing at your local one: <strong className="text-parchment">you must be 21 or older to buy from us.</strong></p>
           <p>You confirm your age twice: once when you enter the site, and again when you complete your order. Both are declarations you make yourself. We do not currently run an identity check against a third-party database, so the responsibility for answering honestly is yours.</p>
           <p>Age is checked again on delivery. Orders containing tobacco ship with an adult-signature requirement, and the carrier will ask for photo ID showing an age of 21 or over. If nobody eligible is available to sign, the carrier will attempt redelivery or hold the package at the nearest facility for pickup.</p>
           <p>Orders for tobacco products cannot be left at the door without a signature. Please ensure someone of legal age is available to receive the delivery.</p>

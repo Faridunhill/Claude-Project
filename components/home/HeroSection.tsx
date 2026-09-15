@@ -34,7 +34,7 @@ export default function HeroSection() {
             {/* Pre-headline ornament */}
             <div className="flex items-center gap-3 mb-8">
               <span className="h-px w-12 bg-gold/60" />
-              <span className="font-fell italic text-gold text-sm tracking-widest">Fine Pipes &amp; Tobaccos</span>
+              <span className="font-fell italic text-gold text-sm tracking-widest">Estate Pipes &amp; Fine Leather</span>
               <span className="h-px w-12 bg-gold/60" />
             </div>
 
@@ -48,7 +48,7 @@ export default function HeroSection() {
             {/* Subheading */}
             <p className="font-lora text-parchment/75 leading-relaxed mb-10"
               style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.2rem)' }}>
-              Purveyors of Fine Pipes, Tobaccos &amp; Gentleman&apos;s Accessories Since 2015.
+              Purveyors of Estate Pipes, Vintage Leather &amp; Gentleman&apos;s Accessories Since 2015.
               <br className="hidden sm:block" />
               Rooted in thirty years of collector knowledge and old-world craftsmanship.
             </p>
@@ -75,7 +75,7 @@ export default function HeroSection() {
               {[
                 { label: '30+ Years', sub: 'Collector Expertise' },
                 { label: '2,400+', sub: 'Products Curated' },
-                { label: 'Free Ship', sub: 'Orders over $75' },
+                { label: 'Free Ship', sub: 'Every order' },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
                   <p className="font-playfair font-bold text-gold text-lg">{stat.label}</p>

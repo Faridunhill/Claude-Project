@@ -8,9 +8,9 @@ import BlogPreview from '@/components/home/BlogPreview'
 import NewsletterSection from '@/components/home/NewsletterSection'
 
 export const metadata: Metadata = {
-  title: 'Faridunhill — Fine Pipes, Tobaccos & Gentleman\'s Accessories',
+  title: 'Faridunhill — Estate Pipes, Vintage Leather & Smoking Accessories',
   description:
-    'Purveyors of fine tobacco pipes, premium pipe tobacco, hand-rolled cigars, and gentleman\'s accessories. Rooted in 30 years of collector knowledge and old-world craftsmanship. Free shipping over $75.',
+    'Estate pipes, hand-carved meerschaum, vintage leather cases, and smoking accessories. Around a hundred estate pipes listed at any time. Rooted in 30 years of collecting. Free shipping on every order.',
 }
 
 export default function HomePage() {
