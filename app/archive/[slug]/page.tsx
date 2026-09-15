@@ -37,7 +37,7 @@ export default function ArchiveItemPage({ params }: Props) {
     offers: {
       '@type': 'Offer',
       availability: 'https://schema.org/SoldOut',
-      priceCurrency: 'GBP',
+      priceCurrency: 'USD',
       ...(item.soldPrice !== null && { price: item.soldPrice }),
     },
   }
@@ -96,7 +96,7 @@ export default function ArchiveItemPage({ params }: Props) {
             <div className="flex items-center gap-4 mb-8 font-lora text-sm">
               {item.soldPrice !== null && (
                 <span className="text-gold text-xl font-playfair font-bold">
-                  Realized £{item.soldPrice.toFixed(2)}
+                  Realized ${item.soldPrice.toFixed(2)}
                 </span>
               )}
               {soldDate && (

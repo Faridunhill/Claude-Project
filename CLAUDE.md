@@ -25,16 +25,20 @@ This store sells age-restricted goods. Every claim on the site is a legal claim.
 3. **Never claim a service that is not wired up.** Age verification, insurance,
    carbon-neutral shipping, authentication guarantees. Describe what the code
    actually does.
-4. **One currency.** Prices, structured data, policy pages, banners, and the
-   Stripe session must all agree. Today the code charges GBP — copy that says `$`
-   is a bug.
+4. **One currency.** The business is in New Jersey and the store is USD
+   end to end: Stripe charges `usd`, every price renders as `$`, and
+   `priceCurrency` is `USD`. A `£` or a `GBP` anywhere is a bug. Multi-currency
+   display for European and Canadian customers is a future change, not a
+   reason to mix symbols now.
 5. **Product copy describes the actual item.** Condition, provenance, and defects
    come from the intake record, not from inference.
 
 ## Money rules
 
 - Prices for a Stripe session are looked up **server-side** from the catalogue.
-  Never trust a price, SKU, or stock flag sent by the browser.
+  The browser sends `{ id, quantity }` and nothing else. Never read a price,
+  name, image, SKU, or stock flag from the request body — that is the exact bug
+  that was fixed in `app/api/checkout/route.ts`, do not reintroduce it.
 - Any change under `app/api/checkout/` or `app/api/webhook/` gets a manual test
   against Stripe test keys before it is pushed.
 - Never log full customer PII or raw Stripe payloads.

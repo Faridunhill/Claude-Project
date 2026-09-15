@@ -51,14 +51,15 @@ export default function ShippingPage() {
 
         <Section title="International Shipping">
           <p>We currently ship to Canada, the United Kingdom, Australia, and select European countries. International shipping rates are calculated at checkout based on destination, weight, and declared value.</p>
-          <p><strong className="text-parchment">Important regarding tobacco products:</strong> Customs regulations for tobacco vary by country. The customer is responsible for ensuring that their order complies with their country&apos;s import laws and for paying any applicable customs duties, import taxes, or VAT. We are not responsible for packages held or seized by customs, and we cannot mark shipments as "gift" or misrepresent contents.</p>
+          <p><strong className="text-parchment">Important regarding tobacco products:</strong> Customs regulations for tobacco vary by country. The customer is responsible for ensuring that their order complies with their country&apos;s import laws and for paying any applicable customs duties, import taxes, or VAT. We are not responsible for packages held or seized by customs, and we cannot mark shipments as &ldquo;gift&rdquo; or misrepresent contents.</p>
           <p>We do not currently ship to the European Union, due to the complexity of tobacco import regulations across member states. We apologise for this limitation and are working to resolve it.</p>
           <p>International orders typically arrive within 10–21 business days, depending on the destination country and customs processing time.</p>
         </Section>
 
         <Section title="Age Verification for Tobacco Products">
           <p>All orders containing tobacco products — pipes, pipe tobacco, cigars, vaping products, and related items — are subject to mandatory age verification under US federal and state law. You must be 21 years of age or older to purchase tobacco products.</p>
-          <p>By placing an order for tobacco products, you confirm that you are of legal age to purchase tobacco in your jurisdiction. We use a third-party age verification service at checkout. In some cases, your carrier may require an adult signature upon delivery. If you are not available to sign, the carrier will attempt redelivery or hold the package at the nearest facility for pickup.</p>
+          <p>You confirm your age twice: once when you enter the site, and again when you complete your order. Both are declarations you make yourself. We do not currently run an identity check against a third-party database, so the responsibility for answering honestly is yours.</p>
+          <p>Age is checked again on delivery. Orders containing tobacco ship with an adult-signature requirement, and the carrier will ask for photo ID showing an age of 21 or over. If nobody eligible is available to sign, the carrier will attempt redelivery or hold the package at the nearest facility for pickup.</p>
           <p>Orders for tobacco products cannot be left at the door without a signature. Please ensure someone of legal age is available to receive the delivery.</p>
         </Section>
 

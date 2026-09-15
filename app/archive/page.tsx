@@ -60,7 +60,7 @@ export default function ArchivePage() {
                   </h2>
                   {item.soldPrice !== null && (
                     <p className="font-lora text-parchment/40 text-xs mt-2">
-                      Realized £{item.soldPrice.toFixed(2)}
+                      Realized ${item.soldPrice.toFixed(2)}
                     </p>
                   )}
                 </div>

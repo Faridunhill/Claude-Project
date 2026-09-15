@@ -31,7 +31,7 @@ export default function StorySection() {
               estate pipes in the early 1990s, haunting antique shops, estate sales, and tobacco
               auctions with the particular fervour of a man who has found his calling. Each pipe
               told a story — of the hands that carved it, the workshops of Saint-Claude and
-              Pesaro, the tobacconists of London's Jermyn Street, the smokers who wore grooves
+              Pesaro, the tobacconists of London&apos;s Jermyn Street, the smokers who wore grooves
               into the stem with their teeth.
             </p>
             <p className="body-serif text-mahogany/85 text-[1.05rem] leading-[1.95]">
@@ -47,7 +47,7 @@ export default function StorySection() {
             <blockquote className="relative bg-mahogany px-8 py-10 rounded-sm gold-frame my-2">
               <span className="absolute top-4 left-6 font-playfair text-gold/25 text-6xl leading-none select-none">&ldquo;</span>
               <p className="font-fell italic text-parchment text-xl lg:text-2xl leading-relaxed relative z-10 mt-4">
-                A pipe is the philosopher's pen — it slows the mind and sharpens thought.
+                A pipe is the philosopher&apos;s pen — it slows the mind and sharpens thought.
               </p>
               <footer className="mt-5 text-gold/60 font-lora text-xs tracking-wider uppercase">
                 — The Faridunhill Creed
@@ -62,7 +62,7 @@ export default function StorySection() {
               with equal warmth, and the same depth of knowledge.
             </p>
             <p className="body-serif text-mahogany/85 text-[1.05rem] leading-[1.95]">
-              This is Faridunhill: a gentleman's tobacconist for the twenty-first century,
+              This is Faridunhill: a gentleman&apos;s tobacconist for the twenty-first century,
               built on the values of the nineteenth. We hope you will stay a while.
             </p>
           </div>

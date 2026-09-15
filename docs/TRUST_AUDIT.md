@@ -4,11 +4,15 @@ Scope: the whole Next.js storefront in this repository, reviewed as a customer,
 as a payment processor, and as a regulator would.
 Question asked: *this site was built end-to-end by an AI agent — can it be trusted?*
 
-Short answer: **the foundations are honest, but it is not yet safe to take live money.**
-The presentation layer is clean (no fake reviews, real policy pages, Stripe-hosted
-payments). The money path and several public claims are not.
+Short answer: **the three go-live blockers are now fixed. What remains is honesty
+about claims, not safety of the money path.**
 
 Legend: **P0** blocks go-live · **P1** fix before advertising · **P2** hardening.
+
+**Status — 2026-09-15:** all three P0s resolved on
+`claude/website-trust-system-recommendations-b7isqd`. The store is US-based
+(New Jersey), so the whole site is now USD. Verification for each is recorded
+below. P1 and P2 remain open.
 
 ---
 
@@ -28,9 +32,9 @@ are the ones that actually decide whether the site can be trusted.
 
 ---
 
-## P0 — blocks go-live
+## P0 — RESOLVED
 
-### P0-1 · The customer sets the price
+### P0-1 · The customer sets the price — FIXED
 
 `app/api/checkout/route.ts:31`
 
@@ -47,11 +51,22 @@ POST /api/checkout  {"items":[{"name":"Ser Jacopo S2","price":0.50,"quantity":1}
 and Stripe will happily collect 50p for a £400 estate pipe. The charge is real,
 the receipt is real, and the order looks legitimate on your side.
 
-**Fix:** send only `{ slug, quantity }` from the client. Look the product up
-server-side via `lib/products.ts` and build `unit_amount` from the catalogue
-price. Reject unknown slugs, non-integer quantities, and out-of-stock items.
+**Fixed.** `app/api/checkout/route.ts` now accepts only `{ id, quantity }`. It
+loads the catalogue via `getAllProducts()`, resolves each line by slug, and
+builds `unit_amount`, name, image and SKU from the catalogue record. `price` is
+never read from the request — the field does not appear in the route.
+Validation rejects unknown slugs, out-of-stock items, non-integer, zero,
+negative and over-cap quantities, more than 50 lines, and malformed bodies.
+Duplicate slugs are collapsed and re-checked against the per-item cap.
+`components/layout/CartDrawer.tsx` now posts `id` and `quantity` only.
 
-### P0-2 · The site quotes dollars and charges pounds
+**Verified** against the running dev server. A payload claiming
+`{"price": 0.50, "quantity": 2}` for a $22.00 pipe produced `unit_amount: 2200`
+— byte-identical to the honest payload. Tampered price, unknown slug, quantity
+`0`, `1.5`, `-5`, `99999`, empty cart and non-array `items` all rejected
+before Stripe is called.
+
+### P0-2 · The site quoted dollars and charged pounds — FIXED
 
 Prices render as `£` (`app/shop/[department]/[slug]/page.tsx:159`,
 `components/layout/CartDrawer.tsx:101`), structured data says `GBP`
@@ -66,11 +81,19 @@ rule (`app/shipping/page.tsx:38,45`), `$75` threshold on the product page
 The shipping policy is also written for a US operation (USPS Priority, Alaska /
 Hawaii / Guam, "US federal and state law") while billing in sterling.
 
-A customer reading "$75" and being charged in GBP has a valid chargeback and, in
-the UK/EU, a consumer-law complaint. **Pick one jurisdiction and currency and
-make every page agree.**
+**Fixed.** The business is in New Jersey, so USD is now the single currency.
+Stripe charges `usd`; every `£` in the cart, product pages, department grids,
+collections, archive and featured rails is now `$`; `priceCurrency` in both
+JSON-LD blocks is `USD`. No `£` or `GBP` remains anywhere in `app/`,
+`components/`, `lib/` or `context/`. The dollar-denominated shipping policy is
+now correct rather than contradictory.
 
-### P0-3 · You claim an age-verification service you do not have
+**Open decision:** the *numbers* were not converted, only relabelled. A pipe at
+`price: '22.00'` is now $22.00 rather than £22.00. If catalogue figures were
+entered as pounds, every price is now roughly 25% low and the YAML needs a
+real conversion pass. Farid to confirm.
+
+### P0-3 · Claimed an age-verification service that does not exist — FIXED
 
 `app/shipping/page.tsx:61` states: *"We use a third-party age verification service
 at checkout."*
@@ -81,9 +104,17 @@ incognito window. Stripe adds two confirmation sentences
 (`app/api/checkout/route.ts:48,52`); those are also self-attestation.
 
 For tobacco this is not a copy nit. US PACT Act sales require verified age and
-adult-signature delivery; UK Challenge 25 expects equivalent diligence. Either
-integrate a real provider (AgeChecked, Veratad, AgeID) or delete the sentence and
-describe what you truly do.
+adult-signature delivery.
+
+**Fixed** by describing what the site actually does: the policy now states that
+the customer declares their own age twice, that no third-party identity check is
+run, and that age is checked again by the carrier at delivery under the
+adult-signature requirement.
+
+**Still owed:** the honest text is legally safer than a false claim, but
+self-attestation alone is not PACT Act compliance for a US tobacco retailer.
+Integrating a real provider (AgeChecked, Veratad, AgeID) remains outstanding
+work, now tracked as P1-6 rather than a false statement on the site.
 
 ---
 
@@ -122,6 +153,11 @@ number, and (if applicable) VAT or EIN to the footer and `/privacy`.
 and `subject` raw into the email body, and passes `email` straight to `reply_to`.
 Escape all four and validate the address.
 
+### P1-6 · Age verification is still only self-attestation
+See P0-3. The site no longer lies about it, but a New Jersey tobacco retailer
+shipping interstate is subject to the PACT Act. Real verification is the
+compliance gap, and it is now the largest single item of trust debt.
+
 ### P1-5 · No rate limiting on any public POST
 `/api/contact`, `/api/newsletter`, and `/api/checkout` accept unlimited requests.
 That is free Resend spend, Mailchimp list poisoning, and Stripe session spam. Add
@@ -148,15 +184,41 @@ per-IP limiting (Vercel KV, Upstash, or `@vercel/firewall`).
 
 ---
 
+### P2-6 · Next.js 14.2.5 carries a published security advisory
+`npm install` reports: *"This version has a security vulnerability. Please
+upgrade to a patched version."* On a store taking card traffic this should be
+scheduled deliberately, with the build and a checkout test after it.
+
+### P2-7 · Europe is advertised nowhere and blocked everywhere
+Farid reports customers in Europe and Canada. Stripe accepts shipping addresses
+for `US`, `CA`, `GB`, `AU` only (`app/api/checkout/route.ts`), and
+`app/shipping/page.tsx` states plainly that the EU is not served. Canada and the
+UK work today; the EU does not. Either open it or keep saying so — but the
+current state means European customers cannot buy.
+
+### P2-8 · Repo hygiene fixed in passing
+`next lint` had never run (no ESLint config existed, so it fell through to an
+interactive prompt) and `tsc --noEmit` failed on a pre-existing `@types/react`
+18-vs-19 clash pulled in by Keystatic. Both are fixed: `.eslintrc.json` added,
+`tsconfig.json` pins `react`/`react-dom` types to the root copy, and eight
+pre-existing unescaped JSX entities were corrected. `lint`, `typecheck` and
+`build` now all pass clean, so the gate in `CLAUDE.md` is real rather than
+aspirational.
+
 ## Verdict
 
 Trustworthy *as an artefact*: yes — the code is coherent, the payment
 architecture is right, and the previously fabricated social proof was removed
 rather than hidden.
 
-Trustworthy *as a shop taking real money today*: no. P0-1 lets anyone set their
-own price, P0-2 quotes a currency you do not charge, and P0-3 claims a
-compliance control you do not run. Those three are the gate.
+Trustworthy *as a shop taking real money*: the money path now is. Nobody can set
+their own price, the currency is consistent end to end, and the site no longer
+claims a control it does not run.
+
+What stands between here and a shop that deserves a stranger's card details is
+no longer code. It is P1: heritage claims nobody can verify, no business
+identity anywhere on the site, and age verification that is still only a
+checkbox. Those need Farid to confirm what is true, not an agent to write more.
 
 The honest summary: an AI agent building from scratch produces a site that looks
 finished well before it is safe. Everything cosmetic is done. Everything with

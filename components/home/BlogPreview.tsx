@@ -16,7 +16,7 @@ export default async function BlogPreview() {
               The Faridunhill Journal
             </h2>
             <p className="font-lora text-parchment/55 mt-2 max-w-lg">
-              Pipe culture, tobacco reviews, collector's notes, and the literature of the slow smoke.
+              Pipe culture, tobacco reviews, collector&apos;s notes, and the literature of the slow smoke.
             </p>
           </div>
           <Link href="/blog" className="btn-ghost px-6 py-2.5 rounded-sm text-sm tracking-widest uppercase">

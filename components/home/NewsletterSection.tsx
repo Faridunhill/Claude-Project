@@ -50,13 +50,13 @@ export default function NewsletterSection() {
           <div className="text-center mb-10">
             <span className="font-fell italic text-leather text-sm tracking-widest">~ Join Us ~</span>
             <h2 className="font-playfair font-bold text-mahogany text-3xl lg:text-4xl mt-3 leading-tight">
-              Join the Gentleman's Circle
+              Join the Gentleman&apos;s Circle
             </h2>
             <div className="ornament-divider mt-5 mb-6">
               <span className="ornament-divider-symbol text-leather text-base">❧</span>
             </div>
             <p className="font-lora text-mahogany/70 text-base leading-relaxed max-w-md mx-auto">
-              Receive our weekly letter — new arrivals, tobacco reviews, collector's notes, and
+              Receive our weekly letter — new arrivals, tobacco reviews, collector&apos;s notes, and
               occasional exclusive offers available only to subscribers.
             </p>
           </div>
