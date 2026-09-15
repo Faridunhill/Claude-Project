@@ -20,6 +20,13 @@ This store sells age-restricted goods. Every claim on the site is a legal claim.
    counts, no "trusted by N customers", no press mentions. Ratings render only
    when `reviewCount > 0` and that count comes from real reviews. Fabricated
    testimonials have been removed from this repo twice — do not reintroduce them.
+   **The one exception is the marketplace record in `lib/links.ts`**: public
+   eBay and Etsy seller statistics, each rendered beside a link to the page it
+   came from, so any visitor can check it in one click. That is the test — a
+   number stays only while it is linked to its source, rounded down from what
+   the live page shows, and stamped with `verifiedOn`. Re-read the live pages
+   before touching a figure; a stale boast is the same problem as an invented
+   one. Never add a statistic here that has no public page behind it.
 2. **Never invent history or credentials.** Founding year, years of experience,
    collection size, staff titles. If it is not verified by Farid, it does not ship.
 3. **Never claim a service that is not wired up.** Age verification, insurance,

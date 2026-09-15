@@ -410,7 +410,50 @@ aspirational.
 | — | Multi-currency | No code needed — see below. |
 | — | Checkout round trip never tested against Stripe | Run the test-key checkout locally. |
 
-## Link verification — partial
+## Link verification — COMPLETE, and the record is now on the site
+
+Farid opened all three links and sent screenshots, which resolved everything the
+egress block had left hanging. The numbers are better than any copy this audit
+has been trimming toward.
+
+**eBay** (seller Faridunhill): **5,688 items sold**, **98.4% positive feedback**,
+1,162 followers, 310 active listings.
+
+**Etsy** (shop Faridunhill, Millstone Township NJ): **2,500 sales**,
+**4.8 / 5 from ~1,100 reviews**, **4 years on Etsy**, 1.3k favourites, 316 listings.
+
+**Linktree** exists, titled "FARIDUNHILL Vintage Pipes", carrying Instagram,
+Facebook, Threads, TikTok, WhatsApp, X, YouTube and Pinterest.
+
+That is **more than 8,100 completed sales across two platforms, with public
+feedback on both** — a far stronger signal than "thirty years of collector
+knowledge" ever was, and the opposite of the fabricated testimonials this repo
+has now deleted twice. It cannot be faked, because it lives on platforms Farid
+does not control.
+
+**Now on `/about`** under the heading "Don't Take Our Word": a two-card record
+showing eBay and Etsy figures, each card linking to the page it came from, each
+labelled "Check it yourself". Every figure is **rounded down** from what the
+screenshots showed — 5,600+, 2,500+, 1,100+ — so it stays true as the real
+numbers grow, and is stamped "as of September 2026" so going stale is visible.
+The footer location is now "Millstone Township, New Jersey", matching the
+public Etsy record rather than the vaguer "New Jersey, United States".
+
+### Still worth doing
+
+- **The eBay shortlink opened `ebay.de`**, the German site, in Farid's own
+  screenshot. eBay localises by visitor, so a US buyer will probably land on
+  `.com` — but it is unpredictable, and this link now carries the record above.
+  A canonical `ebay.com/usr/faridunhill` or `ebay.com/str/<store>` would be
+  stable. Not guessed here, because an unverified URL under a trust claim is
+  worse than a working shortlink.
+- **The social accounts are reachable only through Linktree.** The eight
+  platforms are real but their URLs were not visible in the screenshot. Send
+  the handles and they can go in the footer directly, one hop shorter.
+- **316 Etsy listings vs 264 products here.** Roughly fifty items, including
+  the Peterson and Dunhill pipes, are not synced to the site.
+
+## Link verification — partial (superseded by the section above)
 
 The three links Farid supplied could not be fetched: this session's egress
 policy returns 403 at the proxy for `ebay.us`, `etsy.com` and `linktr.ee`. Per

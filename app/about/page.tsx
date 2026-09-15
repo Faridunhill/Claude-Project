@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { externalLinks } from '@/lib/links'
+import { externalLinks, marketplaceRecord } from '@/lib/links'
+import MarketplaceRecord from '@/components/ui/MarketplaceRecord'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -58,19 +59,27 @@ export default function AboutPage() {
               </p>
               <p className="font-lora text-parchment/75 leading-[1.95] text-[1.02rem]">
                 Faridunhill opened as a public shop in 2015, because the knowledge had become too
-                good to keep private. More than five thousand pieces have gone out to collectors
-                through{' '}
+                good to keep private. More than eight thousand pieces have gone out to collectors
+                since, through{' '}
                 <a
                   href={externalLinks.ebay.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gold hover:text-gold/80 underline underline-offset-4 decoration-gold/40 transition-colors"
                 >
-                  our eBay storefront
+                  eBay
                 </a>{' '}
-                since — the feedback is public, and we would rather you checked it than took our
-                word. The principle has not changed: every item is photographed exactly as it is,
-                and described the way we would want it described to us.
+                and{' '}
+                <a
+                  href={externalLinks.etsy.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gold hover:text-gold/80 underline underline-offset-4 decoration-gold/40 transition-colors"
+                >
+                  Etsy
+                </a>
+                . The principle has not changed: every item is photographed exactly as it is, and
+                described the way we would want it described to us.
               </p>
             </div>
             <div className="relative aspect-[4/5] rounded-sm overflow-hidden gold-frame">
@@ -109,6 +118,22 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* The verifiable record */}
+        <section className="space-y-5">
+          <h2 className="font-playfair font-bold text-parchment text-3xl">Don&apos;t Take Our Word</h2>
+          <p className="font-lora text-parchment/75 leading-[1.95] text-[1.02rem]">
+            Anyone can write a good paragraph about themselves. What is harder to fake is a public
+            selling record, so here is ours — kept on platforms we do not control, where every
+            buyer can leave whatever they actually thought. Both figures below link to the page
+            they came from.
+          </p>
+          <MarketplaceRecord />
+          <p className="font-lora text-parchment/45 text-sm">
+            Figures as of {marketplaceRecord.verifiedOn}, rounded down. Selling as Faridunhill from
+            Millstone Township, New Jersey.
+          </p>
         </section>
 
         {/* The collection */}

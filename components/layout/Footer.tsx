@@ -113,8 +113,8 @@ export default function Footer() {
               </p>
               <p>
                 <span className="text-gold/70">Location</span><br />
-                New Jersey, United States<br />
-                Online only — no walk-in premises
+                Millstone Township, New Jersey<br />
+                United States — online only
               </p>
             </div>
 
