@@ -9,7 +9,7 @@ export default function StorySection() {
         <div className="text-center mb-14">
           <span className="font-fell italic text-leather text-sm tracking-widest">~ Our Philosophy ~</span>
           <h2 className="font-playfair font-bold text-mahogany text-4xl lg:text-5xl mt-3 leading-tight">
-            The Art of Slow Tobacco
+            The Art of the Slow Smoke
           </h2>
           <div className="ornament-divider mt-6 max-w-xs mx-auto">
             <span className="ornament-divider-symbol text-leather">❧</span>
@@ -36,9 +36,9 @@ export default function StorySection() {
             </p>
             <p className="body-serif text-mahogany/85 text-[1.05rem] leading-[1.95]">
               That knowledge — hard-won, lovingly accumulated — is the foundation of everything
-              we sell. When we curate a pipe for our shelves, we smoke it first. When we select
-              a tobacco blend, we taste it slowly, over weeks, in different conditions and different
-              moods. We stock nothing we would not be proud to smoke ourselves.
+              we sell. Every pipe is examined in the hand before it reaches the shelf: the grain,
+              the drilling, the fit of the stem, the honest condition of a piece that has already
+              lived one life. We list nothing we would not be glad to own ourselves.
             </p>
           </div>
 
@@ -77,7 +77,7 @@ export default function StorySection() {
             Farid
           </p>
           <p className="font-lora text-leather/70 text-sm mt-1 tracking-wide">
-            Founder &amp; Head Tobacconist
+            Founder
           </p>
         </div>
       </div>

@@ -43,7 +43,7 @@ export default function Logo({ size = 'md', variant = 'light' }: LogoProps) {
         <text x="7" y="90" fill={gold} fontSize="9" fontFamily="serif" opacity="0.7">✦</text>
         <text x="262" y="90" fill={gold} fontSize="9" fontFamily="serif" opacity="0.7">✦</text>
 
-        {/* ── TOBACCO PIPE ILLUSTRATION ── */}
+        {/* ── BRIAR PIPE ILLUSTRATION ── */}
         <g transform="translate(14, 8)">
           {/* Bowl outer shell */}
           <path
@@ -123,7 +123,7 @@ export default function Logo({ size = 'md', variant = 'light' }: LogoProps) {
           letterSpacing="4"
           fontStyle="italic"
         >
-          FINE TOBACCONISTS
+          FINE ESTATE PIPES
         </text>
 
         {/* Decorative rule below subtitle */}

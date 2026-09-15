@@ -9,6 +9,10 @@ about claims, not safety of the money path.**
 
 Legend: **P0** blocks go-live · **P1** fix before advertising · **P2** hardening.
 
+**Status — 2026-09-15 (third pass):** Farid reviewed the P0-4 findings and
+asked for every tobacco reference to come off the site, not just the ones
+listed. A full sweep followed — see **P0-4b**.
+
 **Status — 2026-09-15 (second pass):** Farid confirmed the outstanding facts.
 Acting on them surfaced a larger finding than any single item in this audit —
 see **P0-4** — and closed P1-1, P2-2 and P2-7. See **Waiting on Farid** for
@@ -163,6 +167,48 @@ accessories, lighters and stands. `/about` states plainly: *"What we do not
 stock is tobacco — no tins, no cigars, no vaping products. This is a shop for
 the objects, not the leaf."* The tobacco return rules are gone, and the
 shipping policy no longer reasons about tobacco customs law.
+
+### P0-4b · Full tobacco sweep — DONE
+
+The second pass fixed the tobacco claims this audit had named. Farid asked for
+the rest. A sweep of every `.tsx`, `.ts`, `.md` and `.mdx` file found 68
+remaining references; they sorted into three groups.
+
+**Removed — claims or framing implying tobacco is sold:**
+
+| Where | Was |
+|---|---|
+| `components/ui/Logo.tsx` | Tagline **"FINE TOBACCONISTS"** on every page. Replaced with "FINE ESTATE PIPES" — kept to the same 17 characters, because the SVG text is `textAnchor="middle"` and a longer string would overflow the viewBox. |
+| `components/ui/AgeGate.tsx` | "This website contains tobacco products" — the first sentence a visitor read. Now "This website sells smoking accessories." |
+| `components/home/StorySection.tsx` | Heading "The Art of Slow Tobacco"; "when we select a tobacco blend, we taste it slowly over weeks"; byline "Founder & Head Tobacconist". |
+| `app/about/page.tsx` | "Every member of our team is a smoker. We test every pipe, smoke every tobacco" — a team that does not exist, tasting stock that is not sold. |
+| `app/contact/page.tsx`, `app/returns/page.tsx` | "Our head tobacconist reads every message personally" / "reviews every return enquiry". |
+| `app/checkout/success/page.tsx` | "If you ordered tobacco products, remember that an adult signature will be required." |
+| `app/api/checkout/route.ts` | Stripe checkout `custom_text`: "You must be 21 or older to purchase tobacco products. Orders containing tobacco require an adult signature on delivery." This was the last false claim a customer saw before paying. |
+| `app/shipping/page.tsx` | Section titled "Age Verification for Tobacco Products"; two paragraphs of tobacco adult-signature rules. |
+| `app/returns/page.tsx` | "Tobacco products, opened tins … cannot be returned." |
+| `components/home/PhotoGallery.tsx` | Two of five homepage vignettes depicted pipe-tobacco tins, with captions naming Samuel Gawith, Dunhill and Cornell & Diehl. Removed; three remain. |
+| `components/layout/Navigation.tsx` | Search placeholder "Search pipes, tobacco, cigars…". |
+| `NewsletterSection`, `BlogPreview`, `app/blog/page.tsx` | "tobacco reviews" in the newsletter and journal descriptions. |
+| `app/layout.tsx` | SEO keywords `cigars`, `premium tobacco`, `tobacco pipes`. |
+| `keystatic.config.ts`, `lib/products.ts` | Cigar-only schema fields `vitola` and `wrapper` (used by zero products), and blog categories "Tobacco Reviews" and "Cigar Reviews" — the routes by which tobacco content could be re-added. |
+| `content/blog/virginia-tobacco-complete-guide.mdx` | **Deleted.** Category "Tobacco Reviews", entirely about a product not stocked. Recoverable from git if wanted back. |
+| `content/blog/the-art-of-pipe-smoking.mdx` | Section "Choosing Your First Tobacco" removed — 185 words recommending Cornell & Diehl, McClelland, Samuel Gawith and Orlik by name. The rest of the guide (packing, lighting, cadence) is about pipes and stayed. |
+
+**Kept — these describe real stock.** "Cigar" is not a false word on this site:
+34 products are cigar accessories. The `Cigar & Smoking Accessories`
+department, and the subcategories Cigar Cutters, Cigar Cases, Humidors and
+Tobacco Pouches, all resolve to products that exist. So do the leather tobacco
+pouches — a pouch is not tobacco.
+
+**Kept — accurate history.** `/about` and `StorySection` describe a collector
+visiting tobacco auctions and the tobacconists of Jermyn Street in the 1990s.
+That happened; it is not a claim about stock.
+
+One judgement call worth flagging: `estate-pipe-collecting-guide.mdx` explains
+that a used pipe keeps a "ghost" of what was smoked in it, mentioning Latakia.
+That is technical information about estate pipes — the actual product — so it
+stayed. Say the word and it goes.
 
 ### P0-5 · Maker names on /about that are not in the catalogue — FIXED
 

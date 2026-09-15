@@ -30,7 +30,7 @@ export default function AgeGate() {
   }
 
   function handleDeny() {
-    // Redirect away — standard practice for age-gated tobacco sites
+    // Redirect away — standard practice for age-gated sites
     window.location.href = 'https://www.google.com'
   }
 
@@ -79,13 +79,13 @@ export default function AgeGate() {
           </h1>
 
           <p className="font-fell italic text-gold/70 text-base mb-6">
-            This website contains tobacco products.
+            This website sells smoking accessories.
           </p>
 
           <p className="font-lora text-parchment/65 text-sm leading-relaxed mb-8">
             You must be <strong className="text-parchment">21 years of age or older</strong> to
             enter this site. By continuing, you confirm that you are of legal age to purchase
-            tobacco products in your jurisdiction.
+            smoking accessories in your jurisdiction.
           </p>
 
           {/* Buttons */}

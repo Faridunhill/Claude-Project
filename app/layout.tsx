@@ -39,14 +39,13 @@ export const metadata: Metadata = {
   description:
     'Purveyors of fine estate pipes, hand-carved meerschaums, rare collectibles, vintage leather, and gentleman\'s smoking accessories. Rooted in 30 years of collecting.',
   keywords: [
-    'tobacco pipes',
-    'cigars',
+    'briar pipes',
     'briar pipe',
     'meerschaum pipe',
     'estate pipes',
     'pipe accessories',
     'smoking accessories',
-    'premium tobacco',
+    'vintage leather',
     'pipe shop',
   ],
   openGraph: {

@@ -82,7 +82,7 @@ export default function AboutPage() {
             {[
               {
                 title: 'Knowledge First',
-                body: 'Every member of our team is a smoker. We test every pipe, smoke every tobacco, and stand behind every product with direct experience. We do not sell anything we cannot explain, and we cannot explain anything we have not smoked.',
+                body: 'Thirty years of collecting is the whole qualification. Every pipe is examined in the hand before it is listed — grain, drilling, stem fit, and the honest condition of a piece that has already lived one life. We do not list anything we cannot explain.',
               },
               {
                 title: 'Quality Without Compromise',

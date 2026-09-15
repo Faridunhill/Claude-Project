@@ -20,9 +20,7 @@ export interface Product {
   tags: string[]
   specs?: Record<string, string>
   size?: string
-  vitola?: string
   origin?: string
-  wrapper?: string
   contents?: string[]
 }
 
@@ -59,9 +57,7 @@ async function fetchFromKeystatic(): Promise<Product[] | null> {
           )
         : undefined,
       size: e.entry.size ?? undefined,
-      vitola: e.entry.vitola ?? undefined,
       origin: e.entry.origin ?? undefined,
-      wrapper: e.entry.wrapper ?? undefined,
       contents: (e.entry.contents as string[])?.length
         ? (e.entry.contents as string[])
         : undefined,

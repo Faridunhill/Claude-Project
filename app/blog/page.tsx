@@ -25,7 +25,7 @@ export default async function BlogIndexPage() {
           <span className="ornament-divider-symbol text-gold">❧</span>
         </div>
         <p className="font-lora text-parchment/55 max-w-xl mx-auto text-base">
-          Pipe culture, tobacco reviews, collector&apos;s notes, and the literature of the slow smoke.
+          Pipe culture, collector&apos;s notes, restoration technique, and the literature of the slow smoke.
           Published for the curious, the dedicated, and the unhurried.
         </p>
       </div>

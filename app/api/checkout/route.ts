@@ -128,7 +128,7 @@ export async function POST(request: NextRequest) {
       custom_text: {
         shipping_address: {
           message:
-            'You must be 21 or older to purchase tobacco products. Orders containing tobacco require an adult signature on delivery.',
+            'You must be 21 or older to purchase from Faridunhill. Shipping is free on every order, worldwide.',
         },
         submit: {
           message: 'By completing your purchase, you confirm you are 21 years of age or older.',

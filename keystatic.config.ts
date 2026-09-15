@@ -65,9 +65,7 @@ export default config({
           { label: 'Specifications', itemLabel: (props) => props.fields.key.value || 'Spec' }
         ),
         size: fields.text({ label: 'Size' }),
-        vitola: fields.text({ label: 'Vitola (cigars)' }),
         origin: fields.text({ label: 'Origin / Country' }),
-        wrapper: fields.text({ label: 'Wrapper (cigars)' }),
         contents: fields.array(
           fields.text({ label: 'Item' }),
           { label: 'Contents (gift sets)', itemLabel: (props) => props.value || 'Item' }
@@ -88,8 +86,6 @@ export default config({
           label: 'Category',
           options: [
             { label: 'Pipe Culture', value: 'Pipe Culture' },
-            { label: 'Tobacco Reviews', value: 'Tobacco Reviews' },
-            { label: 'Cigar Reviews', value: 'Cigar Reviews' },
             { label: "Buyer's Guides", value: "Buyer's Guides" },
             { label: 'History & Heritage', value: 'History & Heritage' },
             { label: 'How-To', value: 'How-To' },

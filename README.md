@@ -104,7 +104,7 @@ Edit the JSON files in `/data/products/`. Each file corresponds to a department.
   "name": "Product Name",
   "brand": "Brand Name",
   "slug": "url-friendly-slug",
-  "department": "tobacco-pipes",
+  "department": "estate-pipes",
   "category": "Briar Pipes",
   "price": 125.00,
   "originalPrice": null,
@@ -137,7 +137,7 @@ tags: ["tag1", "tag2"]
 Your post content here...
 ```
 
-Categories: `Pipe Culture`, `Tobacco Reviews`, `Cigar Corner`, `Collector's Guide`, `How-To & Technique`, `News & New Arrivals`
+Categories: `Pipe Culture`, `Collector's Guide`, `How-To & Technique`, `News & New Arrivals`
 
 ## Going Live Checklist
 

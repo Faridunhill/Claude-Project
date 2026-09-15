@@ -56,7 +56,7 @@ export default function NewsletterSection() {
               <span className="ornament-divider-symbol text-leather text-base">❧</span>
             </div>
             <p className="font-lora text-mahogany/70 text-base leading-relaxed max-w-md mx-auto">
-              Receive our weekly letter — new arrivals, tobacco reviews, collector&apos;s notes, and
+              Receive our weekly letter — new arrivals, collector&apos;s notes, restoration notes, and
               occasional exclusive offers available only to subscribers.
             </p>
           </div>

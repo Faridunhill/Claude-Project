@@ -24,7 +24,7 @@ export default function ReturnsPage() {
           <h2 className="font-playfair font-bold text-parchment text-xl mb-3">The Short Version</h2>
           <p className="font-lora text-parchment/75 leading-relaxed">
             We accept returns on most items within 30 days of delivery, provided they are unused and in original condition.
-            Tobacco products, opened tins, and pipes that have been smoked cannot be returned, for obvious reasons.
+            Pipes that have been smoked cannot be returned, for obvious reasons.
             If anything arrives damaged or not as described, we will make it right immediately, no questions asked.
           </p>
         </div>
@@ -96,7 +96,7 @@ export default function ReturnsPage() {
         <div className="bg-mahogany-light rounded-sm p-7 gold-frame text-center">
           <p className="font-playfair font-semibold text-parchment text-lg mb-2">Questions?</p>
           <p className="font-lora text-parchment/65 text-sm mb-4">
-            We are always happy to help. Our head tobacconist personally reviews every return enquiry.
+            We are always happy to help. Every return enquiry is read and answered personally.
           </p>
           <Link href="/contact" className="btn-gold inline-flex px-8 py-3 rounded-sm text-sm tracking-widest uppercase">
             Contact Us

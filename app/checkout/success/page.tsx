@@ -11,9 +11,6 @@ export default function CheckoutSuccessPage() {
           Thank you for your order. A confirmation email is on its way to you. We will process
           and ship your order within 1–2 business days.
         </p>
-        <p className="font-lora text-parchment/50 text-sm mb-8">
-          If you ordered tobacco products, remember that an adult signature will be required upon delivery.
-        </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/shop" className="btn-gold px-8 py-3.5 rounded-sm text-sm tracking-widest uppercase">
             Continue Shopping

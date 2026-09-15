@@ -49,10 +49,9 @@ export default function ContactPage() {
           <div>
             <h2 className="font-playfair font-bold text-parchment text-2xl mb-4">Get in Touch</h2>
             <p className="font-lora text-parchment/70 leading-relaxed text-base">
-              Whether you have a question about a product, need advice on choosing your first pipe,
-              want to enquire about a specific estate pipe, or simply wish to discuss tobacco —
-              we are here. Our head tobacconist reads every message personally and responds to
-              each one.
+              Whether you have a question about a product, need advice on choosing your first
+              pipe, or want to enquire about a specific estate piece — we are here. Every message
+              is read and answered personally.
             </p>
           </div>
 

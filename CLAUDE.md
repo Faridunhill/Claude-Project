@@ -38,6 +38,10 @@ This store sells age-restricted goods. Every claim on the site is a legal claim.
    tins, no cigars, no vaping products. Never write copy that sells tobacco,
    and never reason about tobacco import or PACT Act rules as if they applied
    to this catalogue. If tobacco is ever stocked, this line changes first.
+   The word "cigar" is fine where it names a real accessory — cigar cutters,
+   cigar cases, humidors — and so is "tobacco pouch", because a pouch is not
+   tobacco. What is never fine is copy that offers the leaf itself, a
+   "tobacconist" title, or a blend named as if it were for sale.
 7. **Never name a maker the shop does not stock.** Verify against
    `content/products/*.yaml` before a brand name goes on a page. Dunhill
    especially: there are zero Dunhill pipes, the shop name already invites the

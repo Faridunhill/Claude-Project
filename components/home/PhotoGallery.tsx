@@ -1,29 +1,15 @@
 import Image from 'next/image'
 
 /* Replace these Unsplash URLs with commissioned lifestyle photography.
-   Each image should depict atmospheric pipe/tobacco scenes in warm, Victorian-adjacent settings.
+   Each image should depict atmospheric pipe scenes in warm, Victorian-adjacent settings.
    Target aspect ratios: landscape for wide shots, portrait for intimate scenes. */
 const storyImages = [
-  {
-    src: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=900&q=85',
-    alt: 'Two gentlemen in a warmly lit private library examine a tobacco tin by candlelight',
-    caption:
-      'It was nearly nine o\'clock when Harrington produced the tin from his coat — a Samuel Gawith blend he\'d kept back from a journey to Kendal the previous autumn. The library was quiet save for the tick of the grandfather clock and the occasional settling of the fire. He pressed the flake into the bowl with a deliberateness that suggested the evening had been planned with some care.',
-    aspect: 'landscape',
-  },
   {
     src: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=700&q=85',
     alt: 'A meerschaum pipe resting on an open leather-bound volume, amber light falling across the bowl',
     caption:
       'The meerschaum had been his grandfather\'s — purchased in Vienna in the winter of 1923. It had coloured to a deep amber over the years, wearing its history in the gradations of its patina. He did not smoke it often. It was a pipe for important evenings, for decisions that deserved the weight of something older than himself.',
     aspect: 'portrait',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=900&q=85',
-    alt: 'A selection of pipe tobacco tins arranged on a mahogany shelf',
-    caption:
-      'The tins arrived from London on a Tuesday, wrapped in brown paper and tied with twine in the old manner. He laid them out on the desk one by one — Dunhill, Samuel Gawith, Cornell & Diehl — each one a small promise. Outside, November pressed its grey face against the window. Inside, the lamp burned steadily, and the evening arranged itself around the agreeable question of which tin to open first.',
-    aspect: 'landscape',
   },
   {
     src: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=700&q=85',

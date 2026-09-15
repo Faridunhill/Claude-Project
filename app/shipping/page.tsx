@@ -51,11 +51,10 @@ export default function ShippingPage() {
           <p>International orders typically arrive within 10–21 business days, depending on the destination country and customs processing time.</p>
         </Section>
 
-        <Section title="Age Verification for Tobacco Products">
+        <Section title="Age Verification">
           <p>We sell smoking accessories — pipes, leather goods, cutters, lighters and stands — and no consumable tobacco. Even so, several US states restrict the sale of smoking paraphernalia to adults, and we apply a single rule everywhere rather than guessing at your local one: <strong className="text-parchment">you must be 21 or older to buy from us.</strong></p>
           <p>You confirm your age twice: once when you enter the site, and again when you complete your order. Both are declarations you make yourself. We do not currently run an identity check against a third-party database, so the responsibility for answering honestly is yours.</p>
-          <p>Age is checked again on delivery. Orders containing tobacco ship with an adult-signature requirement, and the carrier will ask for photo ID showing an age of 21 or over. If nobody eligible is available to sign, the carrier will attempt redelivery or hold the package at the nearest facility for pickup.</p>
-          <p>Orders for tobacco products cannot be left at the door without a signature. Please ensure someone of legal age is available to receive the delivery.</p>
+          <p>Most orders ship without a signature requirement. Where a parcel is high in value we may add adult signature on delivery, in which case the carrier will ask for photo ID; if nobody is available to sign, they will attempt redelivery or hold the package at the nearest facility for pickup.</p>
         </Section>
 
         <Section title="Order Tracking">

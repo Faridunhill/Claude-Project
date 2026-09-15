@@ -179,7 +179,7 @@ export default function Navigation() {
                     <input
                       ref={searchRef}
                       type="text"
-                      placeholder="Search pipes, tobacco, cigars..."
+                      placeholder="Search pipes, leather, accessories…"
                       className="bg-transparent text-parchment text-sm font-lora placeholder-parchment/30 outline-none w-48"
                       onBlur={() => setSearchOpen(false)}
                     />
