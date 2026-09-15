@@ -108,38 +108,58 @@ and never leaves your PC. It is the thing that makes local Claude get better at
 ## Do this now
 
 ```bash
-# 1. Get the project config that already exists
 cd <your Claude-Project folder>
 git pull
-
-# 2. Install the two personal files
-#    macOS / Linux:
-mkdir -p ~/.claude
-cp docs/examples/user-CLAUDE.md   ~/.claude/CLAUDE.md
-cp docs/examples/user-settings.json ~/.claude/settings.json
-
-#    Windows PowerShell:
-#    mkdir $env:USERPROFILE\.claude -Force
-#    copy docs\examples\user-CLAUDE.md   $env:USERPROFILE\.claude\CLAUDE.md
-#    copy docs\examples\user-settings.json $env:USERPROFILE\.claude\settings.json
-
-# 3. EDIT ~/.claude/CLAUDE.md — fill in every <angle bracket> with your real
-#    paths, OS, and folders. An unedited template is worse than none.
-
-# 4. Make sure you are current
-claude update
+node scripts/setup-local-claude.mjs
 ```
 
-Then start Claude in the project and check three things:
+That is the whole setup. The script writes two files in your home folder:
+
+| File | What it does |
+|---|---|
+| `~/.claude/CLAUDE.md` | Your standing instructions — how to talk to you, how to work, the honesty rules, what never to do on this machine. Loads in **every** project. |
+| `~/.claude/settings.json` | Model and permissions. Pre-approves the safe commands so Claude stops asking, and hard-blocks `.env` files, keys, `rm -rf`, `sudo` and force-push. |
+
+It works on Windows, macOS and Linux — Node runs the same everywhere, and you
+already have Node for this project.
+
+**It is safe to run again.** It is not a file-clobbering installer:
+
+- **Your own writing is never lost.** In `CLAUDE.md` it only rewrites the block
+  between the `BEGIN`/`END` markers. Anything you add outside them stays.
+- **Your settings are merged, not replaced.** Keys you already set win, and
+  permission lists are combined without duplicates. If you had chosen a
+  different model or mode, it says so and leaves yours alone — re-run with
+  `--force` to take the recommended ones.
+- **Anything it changes is backed up first** to `~/.claude/backups/<timestamp>/`.
+- Run `--dry-run` first if you want to see the plan without writing anything.
+
+It also detects your OS, Node, npm and Git versions and writes them into the
+file, so Claude knows what machine it is on without you typing it.
+
+Then open `~/.claude/CLAUDE.md` and add anything about your own folders **below
+the END marker** — where your projects live, which folder is safe to experiment
+in, anything you find yourself explaining twice.
+
+### Confirm it worked
+
+Start Claude Code in a project:
 
 ```
 /status     # correct model?
-/context    # are CLAUDE.md and ~/.claude/CLAUDE.md both listed under Memory files?
+/context    # are BOTH CLAUDE.md files listed under "Memory files"?
 /doctor     # any configuration problems?
 ```
 
-If `/context` does not list your files, they are not loaded and nothing above is
-in effect. Fix that before anything else.
+If `/context` does not list them, nothing above is in effect. Fix that before
+anything else.
+
+### The project rules come with git
+
+`CLAUDE.md` at the repo root and `.claude/rules/storefront.md` are committed, so
+`git pull` is all it takes for your local Claude to have the same truth rules,
+money rules and `/trust-audit`, `/preflight`, `/add-product` commands as the
+cloud sessions.
 
 ---
 
