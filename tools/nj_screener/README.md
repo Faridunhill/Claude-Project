@@ -237,3 +237,46 @@ the whole point of evaluation skill v2.0.0.
 | `screen.py` | The four-stage screener |
 | `make_map.py` | Interactive Leaflet map |
 | `common.py` | Column resolution, region lookup, config loading |
+
+---
+
+## Backfill: get the 18 known parcels into the database
+
+`farmland_parcels`, `parcel_outcomes`, `greenhouse_projects`, `business_plans`, `permit_log` and
+`crop_market_data` were built in June 2026 and **every one holds 0 rows** (measured 2026-09-15).
+Until they hold data, nothing about this pipeline is proven end to end.
+
+```bat
+py backfill_known_parcels.py --inspect    # read the live schema, write nothing
+py backfill_known_parcels.py --dry-run    # show the plan
+py backfill_known_parcels.py              # write
+```
+
+The real schema lives on your PC and was never read from here, so the script does not assume it. It
+reads the actual columns with `PRAGMA table_info` and maps the seed fields onto whatever is there.
+A column it cannot match is **reported and left NULL**, never guessed. It sets
+`PRAGMA foreign_keys = ON`, which the `parcel_outcomes` foreign key needs and which
+`TRAINER_STATUS.md` flagged as an outstanding fix.
+
+Verified against two deliberately different mock schemas: `py test_backfill.py`.
+
+### What goes in, and what does not
+
+`seed/known_parcels.json` holds all 18 parcels, reconciled from two sources:
+
+- **11 parcels with GIS-measured geometry** — wetland acreage from real polygon intersection
+  against NJDEP Wetlands 2020 in EPSG:3424, plus price, tax class, assessed value, score.
+- **7 parcels with a disposition and reason but no measurements.** Their numeric fields are
+  **null on purpose.** A null is honest; a zero would be a lie that later reads as "no wetlands".
+
+**Only 11 can actually be written.** The other 7 have no PAMS PIN, and the PIN is the key. They are
+not dropped quietly and they are not given a fake key — they are written to
+`out/parcels_needing_pin.csv` with `pams_pin_TO_FILL`, `block_TO_FILL` and `lot_TO_FILL` columns.
+Look each one up in MOD-IV, paste the PINs back into `seed/known_parcels.json`, re-run, and all 18
+land.
+
+The seven: Cardinal Ln Voorhees · 180 Black Brook Bethlehem · 102 US Hwy 46 Independence ·
+44 Shongum Denville · 00-1 Clinton West Milford · 235/239 Rt 72 Barnegat · 22 Estell Dr Hardyston.
+
+**Prices and listing status in the seed are from June 2026 and are not current.** The script says so
+every time it runs.

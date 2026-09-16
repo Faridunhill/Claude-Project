@@ -1,0 +1,184 @@
+{
+  "_meta": {
+    "purpose": "The 18 parcels that survive in writing, recovered from two sources and reconciled.",
+    "sources": {
+      "dashboard": "parcel_comparison_dashboard.html — 11 parcels with GIS-verified geometry (NJDEP Wetlands 2020 polygon intersection, EPSG:3424)",
+      "skill": "nj-farmhouse-parcel-evaluation_SKILL.md — 18 parcels with a disposition and reason",
+      "audit": "GROUND-TRUTH_2026-09-15_builder-pc-audit.md — confirms 18 is the complete written record"
+    },
+    "rule": "Null means not measured. Nothing here is estimated, interpolated or inferred. Seven parcels carry a disposition but no geometry; their numeric fields are null on purpose.",
+    "as_of": "2026-06 (dashboard May 2026, skill June 2026). Prices and listing status are NOT current.",
+    "count": 18
+  },
+  "parcels": [
+    {
+      "pin": "2105_18_1_Q0059", "address": "0 Half Way House Rd", "municipality": "FRANKLIN TWP",
+      "county": "WARREN", "zoning": "C-1", "gross_acres_gdb": 6.67, "listed_acres": 6.42,
+      "wetland_acres": 0.0, "wetland_pct": 0.0, "net_buildable_acres": 6.67,
+      "asking_price": 100000, "price_per_gross_acre": 15576, "price_per_net_acre": 14994,
+      "tax_class": "3B (Farm)", "last_year_tax": 129.80, "net_assessed_value": 4000,
+      "score": 72, "decision": "PENDING", "commercial_status": "VIABLE-PENDING",
+      "reason": "C-1 permits retail by right. Zero wetlands GIS-confirmed. Nearest wetland edge 820+ ft.",
+      "open_items": "Highlands parcel-level check; FEMA flood panel; e-LOI confirmation",
+      "cea_status": "CLEARED", "geometry_source": "dashboard"
+    },
+    {
+      "pin": "1924_30_7_Q0144", "address": "0 CR 651", "municipality": "WANTAGE TWP",
+      "county": "SUSSEX", "zoning": "R-5", "gross_acres_gdb": 9.96, "listed_acres": 12.08,
+      "wetland_acres": 1.25, "wetland_pct": 12.6, "net_buildable_acres": 8.71,
+      "asking_price": 59000, "price_per_gross_acre": 4884, "price_per_net_acre": 6774,
+      "tax_class": "3B (Farm) Q0144", "last_year_tax": 41.34, "net_assessed_value": 1400,
+      "score": 65, "decision": "PENDING", "commercial_status": "CONDITIONAL",
+      "reason": "Cheapest buildable land in the set. Outside Highlands entirely. R-5 blocks a plaza without a use variance.",
+      "open_items": "RE-SCORE UNDER TRACK B (skill v2.0.0) — 9.96 ac clears the 5-acre line so the commercial-farm threshold is only $2,500/yr. Verify Wantage R-5 permits agriculture. Papakating Creek flood exposure. SSURGO hydric soil NJ037.",
+      "contact": "Andrew Coccio, Wantage Land Use, 973-875-7195 ext. 7", "geometry_source": "dashboard"
+    },
+    {
+      "pin": "1907_1602_3", "address": "500 Route 94", "municipality": "FREDON TWP",
+      "county": "SUSSEX", "zoning": "R-1", "gross_acres_gdb": 9.54, "listed_acres": 10.0,
+      "wetland_acres": 0.70, "wetland_pct": 7.4, "net_buildable_acres": 8.83,
+      "asking_price": null, "tax_class": "Class 2", "last_year_tax": 8463,
+      "net_assessed_value": 295500, "score": 60, "decision": "WATCH",
+      "commercial_status": "CONDITIONAL-LIFESTYLE",
+      "reason": "Lifestyle-only track. Has existing structure. R-1 blocks commercial.",
+      "open_items": "FSA farm loan strategy applicable. Prior price reduction — re-investigate why.",
+      "geometry_source": "dashboard"
+    },
+    {
+      "pin": "2114_22_16.01_Q0041", "address": "312 Mountain Lake Rd", "municipality": "LIBERTY TWP",
+      "county": "WARREN", "zoning": "AR", "gross_acres_gdb": 30.94, "listed_acres": 31.45,
+      "wetland_acres": 0.0, "wetland_pct": 0.0, "net_buildable_acres": 30.94,
+      "asking_price": null, "tax_class": "3B (Farm) Q0041", "last_year_tax": 500,
+      "net_assessed_value": 4400, "score": 55, "decision": "PASS",
+      "commercial_status": "DISQUALIFIED", "reason": "Highlands Preservation — plaza hard stop. AR agricultural-only zoning.",
+      "open_items": "RE-SCORE UNDER TRACK B — 31 acres, zero wetlands, agriculture IS the permitted use. HDC transfer path if Preservation confirmed.",
+      "geometry_source": "dashboard"
+    },
+    {
+      "pin": "1438_32_2.01", "address": "28 W Springtown Rd", "municipality": "LONG VALLEY",
+      "county": "MORRIS", "zoning": "R-5", "gross_acres_gdb": 2.60, "listed_acres": null,
+      "wetland_acres": 0.61, "wetland_pct": 23.5, "net_buildable_acres": 1.99,
+      "asking_price": null, "tax_class": "Class 2", "last_year_tax": null,
+      "net_assessed_value": 524600, "score": 93, "decision": "PASS",
+      "commercial_status": "DISQUALIFIED",
+      "reason": "Highlands Preservation — plaza hard stop. HIGHEST LIFESTYLE SCORE IN THE SET (93/100) — schools, privacy, Long Valley appreciation.",
+      "open_items": "WARNING: GDB matched a 2.6-ac sub-parcel only; the full listing is larger. Under 5 acres as captured, so Track B would face the $50,000/yr threshold. Not actively pursued.",
+      "geometry_source": "dashboard"
+    },
+    {
+      "pin": "2113_5_3", "address": "36 Countryside Rd", "municipality": "KNOWLTON TWP",
+      "county": "WARREN", "zoning": "FPD", "gross_acres_gdb": 5.04, "listed_acres": 10.04,
+      "wetland_acres": 0.53, "wetland_pct": 10.5, "net_buildable_acres": 4.50,
+      "asking_price": 150000, "price_per_gross_acre": 14940, "price_per_net_acre": 33299,
+      "tax_class": "Class 2", "last_year_tax": 15063, "net_assessed_value": 378300,
+      "score": 52, "decision": "PASS", "commercial_status": "DISQUALIFIED",
+      "reason": "FPD zoning = flood plain. Seller-disclosed wetlands and stream. $33,299/net buildable acre — worst in the set.",
+      "open_items": "GDB area 5.04 ac vs 10.04 listed — significant discrepancy, listing likely spans extra lots.",
+      "geometry_source": "dashboard"
+    },
+    {
+      "pin": "2115_90_10_Q0068", "address": "782 Uniontown Rd", "municipality": "LOPATCONG TWP",
+      "county": "WARREN", "zoning": "R-5/2", "gross_acres_gdb": 5.80, "listed_acres": 5.57,
+      "wetland_acres": 0.0, "wetland_pct": 0.0, "net_buildable_acres": 5.80,
+      "asking_price": null, "tax_class": "3B (Farm) Q0022", "last_year_tax": 100,
+      "net_assessed_value": 3300, "score": 45, "decision": "PASS",
+      "commercial_status": "DISQUALIFIED",
+      "reason": "Highlands Preservation. R-5/2 residential-only. Lifestyle score low — industrial areas along the Delaware River corridor.",
+      "open_items": "Re-check Track B — 5.8 ac just clears the 5-acre line. Verify agriculture permitted in R-5/2.",
+      "geometry_source": "dashboard"
+    },
+    {
+      "pin": "2113_44.01_46", "address": "143 Vail Rd", "municipality": "KNOWLTON TWP",
+      "county": "WARREN", "zoning": "A-R", "gross_acres_gdb": 6.80, "listed_acres": 5.9,
+      "wetland_acres": 3.94, "wetland_pct": 57.9, "net_buildable_acres": 2.86,
+      "asking_price": null, "tax_class": "Class 1", "net_assessed_value": 77500,
+      "score": 30, "decision": "PASS", "commercial_status": "DISQUALIFIED",
+      "reason": "TRIPLE DISQUALIFIER — Highlands Preservation + 57.9% wetlands (over the 40% hard stop) + A-R agricultural-only. Worst environmental profile in the set.",
+      "open_items": "None. Environmental hard stop — stays dead under skill v2.0.0.",
+      "geometry_source": "dashboard"
+    },
+    {
+      "pin": "2106_601_11.05_Q0017", "address": "1221 Route 94", "municipality": "FRELINGHUYSEN TWP",
+      "county": "WARREN", "zoning": "AR-6", "gross_acres_gdb": 6.80, "listed_acres": 6.01,
+      "wetland_acres": 2.32, "wetland_pct": 34.1, "net_buildable_acres": 4.48,
+      "asking_price": null, "tax_class": "3B (Farm) Q0017", "last_year_tax": 800,
+      "net_assessed_value": 800, "score": 40, "decision": "PASS",
+      "commercial_status": "DISQUALIFIED",
+      "reason": "AR-6 prohibits retail. 34% wetlands — approaching the hard stop. Stream bisects the parcel, C1 buffer applies.",
+      "open_items": "Track B re-check possible but wetlands and C1 buffer remain severe.",
+      "geometry_source": "dashboard"
+    },
+    {
+      "pin": "1002_36_16", "address": "328 Hackett Rd", "municipality": "BETHLEHEM TWP",
+      "county": "HUNTERDON", "zoning": "AG", "gross_acres_gdb": 14.03, "listed_acres": 15.55,
+      "wetland_acres": 0.0, "wetland_pct": 0.0, "net_buildable_acres": 14.03,
+      "asking_price": null, "tax_class": "Class 1", "net_assessed_value": 284200,
+      "score": 35, "decision": "PASS", "commercial_status": "DISQUALIFIED",
+      "reason": "Highlands Preservation — plaza hard stop. 167% tax increase noted at evaluation. The land itself is clean: 14 acres, zero wetlands.",
+      "open_items": "RE-SCORE UNDER TRACK B — 14 clean acres, AG zoning, agriculture is the permitted use.",
+      "geometry_source": "dashboard"
+    },
+    {
+      "pin": "0320_6602_8.03", "address": "Lot 8.03 Sunrise Ct", "municipality": "MEDFORD TWP",
+      "county": "BURLINGTON", "zoning": "Pinelands", "gross_acres_gdb": 9.90, "listed_acres": 10.0,
+      "wetland_acres": 3.44, "wetland_pct": 34.8, "net_buildable_acres": 6.46,
+      "asking_price": null, "tax_class": "Class 1 (vacant)", "last_year_tax": 0,
+      "net_assessed_value": 0, "score": 25, "decision": "PASS",
+      "commercial_status": "DISQUALIFIED",
+      "reason": "Pinelands Forest Area — retail prohibited. 34.8% wetlands. Lowest composite score in the set.",
+      "open_items": "Pinelands agriculture has its own Commission rules — Track B not assumed.",
+      "geometry_source": "dashboard"
+    },
+    {
+      "pin": null, "address": "Cardinal Ln", "municipality": "VOORHEES TWP", "county": "CAMDEN",
+      "zoning": null, "gross_acres_gdb": null, "wetland_pct": 45.0, "net_buildable_acres": null,
+      "asking_price": null, "score": null, "decision": "PASS", "commercial_status": "DISQUALIFIED",
+      "reason": "45% wetlands — over the 40% hard stop.",
+      "open_items": "None. Environmental hard stop.", "geometry_source": "skill file only"
+    },
+    {
+      "pin": null, "address": "180 Black Brook Rd", "municipality": "BETHLEHEM TWP",
+      "county": "HUNTERDON", "zoning": null, "gross_acres_gdb": null, "wetland_pct": null,
+      "asking_price": null, "score": null, "decision": "PASS", "commercial_status": "DISQUALIFIED",
+      "reason": "Under contract at time of evaluation.",
+      "open_items": "Status is from June 2026 — may have returned to market.",
+      "geometry_source": "skill file only"
+    },
+    {
+      "pin": null, "address": "102 US Hwy 46", "municipality": "INDEPENDENCE TWP", "county": "WARREN",
+      "zoning": null, "gross_acres_gdb": null, "wetland_pct": null, "asking_price": null,
+      "score": null, "decision": "PASS", "commercial_status": "DISQUALIFIED",
+      "reason": "Highlands Preservation.",
+      "open_items": "Highway frontage on US-46. Worth a Track B re-check if it returns to market.",
+      "geometry_source": "skill file only"
+    },
+    {
+      "pin": null, "address": "44 Shongum Rd", "municipality": "DENVILLE TWP", "county": "MORRIS",
+      "zoning": null, "gross_acres_gdb": null, "wetland_pct": null, "asking_price": null,
+      "score": null, "decision": "PASS", "commercial_status": "DISQUALIFIED",
+      "reason": "C1 stream buffer — 300 ft setback from top of bank.",
+      "open_items": "None.", "geometry_source": "skill file only"
+    },
+    {
+      "pin": null, "address": "00-1 Clinton Rd", "municipality": "WEST MILFORD TWP",
+      "county": "PASSAIC", "zoning": null, "gross_acres_gdb": null, "wetland_pct": null,
+      "asking_price": null, "score": null, "decision": "PASS", "commercial_status": "DISQUALIFIED",
+      "reason": "100% Highlands + 81% FEMA floodway.",
+      "open_items": "None. Floodway is an all-track hard stop.", "geometry_source": "skill file only"
+    },
+    {
+      "pin": null, "address": "235/239 Route 72", "municipality": "BARNEGAT TWP", "county": "OCEAN",
+      "zoning": null, "gross_acres_gdb": null, "wetland_pct": null, "asking_price": null,
+      "score": null, "decision": "PASS", "commercial_status": "DISQUALIFIED",
+      "reason": "Pinelands Forest Area — retail prohibited.",
+      "open_items": "None.", "geometry_source": "skill file only"
+    },
+    {
+      "pin": null, "address": "22 Estell Dr", "municipality": "HARDYSTON TWP", "county": "SUSSEX",
+      "zoning": null, "gross_acres_gdb": null, "wetland_pct": null, "asking_price": null,
+      "score": null, "decision": "PASS", "commercial_status": "DISQUALIFIED",
+      "reason": "Parcel centre point INSIDE a 19.09-acre herbaceous wetland; an 83.84-acre wooded wetland 61 ft away. Hard stop on all tracks.",
+      "open_items": "None. Worst possible wetland result.", "geometry_source": "skill file only"
+    }
+  ]
+}
