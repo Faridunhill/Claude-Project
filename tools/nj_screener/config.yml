@@ -1,0 +1,112 @@
+# NJ Statewide Land Screener — configuration
+# Edit this file, not the code. Every filter below is tunable.
+
+crs:
+  working: "EPSG:3424"   # NJ State Plane, US survey feet — all area/distance math
+  output:  "EPSG:4326"   # WGS84 — map + GeoJSON output
+
+paths:
+  # --- Statewide parcels ---
+  # NJ MOD-IV is ALREADY CONNECTED on the PC via this ArcGIS FeatureServer:
+  #   services2.arcgis.com/.../NJ_MOD4_Parcels/FeatureServer/0/query
+  # Only farm classes 3A + 3B were ever pulled (32,257 rows). fetch_data.py
+  # pulls the remaining classes (1 vacant, 2 residential, 4A commercial) so the
+  # screener can answer "R zoning that accepts commercial" statewide.
+  parcels:        "data/nj_parcels_modiv.gpkg"
+  parcels_layer:  "parcels"
+  # Farm-only extract already on the PC. Usable as a fast path before the full
+  # pull — but it holds classes 3A/3B only, so Track A (plaza) is blind to it.
+  farm_parcels_sqlite: "C:/Users/hadid/data/hub/parcels/nj_modiv/nj_farm_parcels.sqlite"
+
+  # --- Regulatory layers ALREADY ON THE PC (paths verified 2026-09-15) ---
+  wetlands:       "C:/Users/hadid/groundtruth/documents/gis_data/wetlands_NJ2020.zip"
+  cea:            "C:/Users/hadid/groundtruth/data/NJ_Groundwater_CEA.geojson"
+  fema:           "C:/Users/hadid/data/hub/flood/fema_nfhl/flood_zones.sqlite"
+  soils:          "C:/Users/hadid/data/hub/soils/ssurgo/nj_soils.sqlite"
+
+  # --- Layers fetch_data.py downloads ---
+  highlands:      "data/highlands.gpkg"
+  pinelands:      "data/pinelands.gpkg"
+  zoning:         "data/municipal_zoning.gpkg"
+
+  # --- Lookup tables you maintain (scaffold_lookups.py generates them) ---
+  school_ratings: "data/school_ratings.csv"
+  muni_flags:     "data/municipal_flags.csv"
+  zone_rules:     "data/zone_rules.csv"
+
+output:
+  dir:      "out"
+  csv:      "nj_candidates.csv"
+  geojson:  "nj_candidates.geojson"
+  map:      "nj_candidates_map.html"
+  rejects:  "nj_rejected.csv"        # every parcel dropped, with the reason
+
+# ---------------------------------------------------------------- STAGE 1
+# Cheap attribute filters. Run first — they cut ~1.9M parcels to tens of
+# thousands before any geometry work happens.
+attribute_filters:
+  property_classes: ["1", "3A", "3B"]   # 1 = vacant, 3A = farm, 3B = qualified farm
+  min_acres: 3.0
+  max_acres: 60.0
+  exclude_owner_patterns:
+    - "STATE OF NEW JERSEY"
+    - "COUNTY OF"
+    - "TOWNSHIP OF"
+    - "BOROUGH OF"
+    - "CITY OF"
+    - "TOWN OF"
+    - "BOARD OF EDUCATION"
+    - "UNITED STATES"
+    - "N J DEPT"
+    - "GREEN ACRES"
+    - "CONSERVANCY"
+    - "LAND TRUST"
+    - "CHURCH"
+    - "CEMETERY"
+
+# ---------------------------------------------------------------- STAGE 2
+# Hard stops. Environmental stops kill ALL tracks and are not negotiable.
+hard_stops:
+  wetland_pct_max: 40.0
+  drop_if_centroid_in_wetland: true
+  drop_if_in_cea: true
+  cea_proximity_flag_miles: 0.5
+  drop_if_fema_floodway: true
+  track_a_drop_highlands_preservation: true
+  track_a_drop_pinelands_forest_preservation: true
+  track_b_min_acres_for_cheap_threshold: 5.0   # >=5ac -> $2,500/yr; <5ac -> $50,000/yr
+
+# ---------------------------------------------------------------- STAGE 3
+# Your stated filters.
+requirements:
+  # 1 — schools
+  min_school_rating: 7.0
+  school_rating_is_hard_filter: true
+
+  # 2 — geography: statewide allowed, central/south a bonus not a gate
+  region_mode: "prefer"        # "prefer" | "require" | "off"
+  preferred_regions: ["Central", "South"]
+
+  # 3 — zoning: R and C both count. Greenhouse is flexible (can be a second parcel).
+  zoning_categories_wanted: ["C", "R"]
+  require_zoning_match: true
+
+  # 4 — cluster / subdivision potential
+  subdivision_mode: "prefer"   # "prefer" | "require" | "off"
+  min_estimated_lots: 2
+
+scoring:
+  weights:
+    location_access: 15
+    acreage_price: 15
+    commercial_path: 20        # best of Track A (plaza) or Track B (farm market)
+    environmental: 20
+    utilities: 10
+    schools: 10
+    privacy_setting: 5
+    permitting_runway: 5
+  bonuses:
+    preferred_region: 4
+    subdividable: 6
+    farmland_assessed: 3
+  report_threshold: 60

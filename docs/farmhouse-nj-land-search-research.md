@@ -1,6 +1,13 @@
 # Farmhouse / GroundTruth — NJ Land Search Capability Research
 
-**Date:** 2026-09-16
+**Date:** 2026-09-16 (revised same day after the Builder's PC audit)
+
+> **CORRECTION — 2026-09-16.** The agent-certification figures in §3.4 of the first version of this
+> memo were wrong. They came from `TRAINER_STATUS.md` v1.5.0 in Drive, dated **2026-06-26** — three
+> months stale. The Builder read the live `farid_os.db` on the PC at 2026-09-15T21:27 and the real
+> scores are far higher. §3.4 has been rewritten. The recommendation that followed from the stale
+> numbers ("don't put local models in the recommend seat") is withdrawn — see §3.4.
+
 **Branch:** claude/park-farm-house-research-6b1gxg
 **Question asked:** Who — which tool, which data source, which agent, which person — is actually
 best able to search *every current NJ land lot*, analyse it, and recommend? Filters that matter:
@@ -41,8 +48,15 @@ There is no 100-farm analysis. The 120-item list in memory is `LOT_LIST_20260825
 **PIPE** project (tobacco pipe auction lots, 120 links checked down to 67 keepers). Different
 project, same word "lot".
 
-The real farmhouse record is **11 parcels fully GIS-verified** plus **~18 addresses carrying a
+The real farmhouse record is **11 parcels fully GIS-verified** plus **18 addresses carrying a
 disposition** in the skill file. That is the honest count. It is good work — it is just not 100.
+
+**Independently confirmed on the PC, 2026-09-15.** The Builder searched Downloads, Documents,
+OneDrive, Desktop, FaridOS and the groundtruth folder by filename and by content. The 100+ analyses
+are not there. Worse, `farid_os.db` has the tables built for them — `farmland_parcels`,
+`parcel_outcomes`, `greenhouse_projects`, `business_plans`, `permit_log`, `crop_market_data` — and
+**every one has 0 rows.** So the analyses were done inside a claude.ai web chat and never came home.
+If that chat is still open on the phone, exporting it is the only way to recover it.
 
 ---
 
@@ -83,9 +97,15 @@ disqualified commercially by Highlands Preservation. That tension is the whole p
 | Zillow | ~1,787 |
 | LandSearch | ~2,721 |
 | Land.com (LandWatch / Lands of America) | ~3,105 |
+| LandWatch (counted 2026-09-15) | ~3,742 |
 
 Three sites, three different universes, ~75% spread between smallest and largest. No consumer site
-is complete, and each hides a different slice. Anyone who tells you "Zillow has all" is wrong.
+is complete, and each hides a different slice. Anyone who tells you "Zillow has all" is wrong —
+it is true about the **website** and false about any data feed we can buy.
+
+**And the prize is small.** The entire NJ land market is roughly **3,000–4,000 lots**. That is a
+number you can screen exhaustively. The regulation screen is cheap and we already own the data for
+it; the listing feed is the only thing missing.
 
 Worse for automation: **Zillow has no usable API.** The public Web Services API was retired
 30 Sep 2021. Bridge Interactive — the only official remaining door — is gated to MLS members and
@@ -123,8 +143,16 @@ owner) is exactly the profile you can only find in stock data.
    route to live listings, and it is also the route to Bridge Interactive if you ever want it.
    Treat it as a hire/partner decision, not a software decision — it is the single highest-leverage
    unlock in this whole list.
-4. Until then: **LandSearch** (best map-based land search, 10M+ acres), **Land.com** (largest NJ
-   land count), **Crexi/LoopNet** (commercial land). Query all three, dedupe on APN.
+4. **RentCast API** — self-serve, legal, all 50 states, Land is a supported property type. Free 50
+   requests/mo, $74 for 1,000, $199 for 5,000. **But its own docs admit weak coverage of larger
+   rural and commercial land parcels** — exactly what this project buys. Useful as a supplement,
+   not as the backbone.
+5. Until then: **LandSearch** (best map-based search), **LandWatch/Land.com** (largest NJ land
+   counts), **Crexi/LoopNet** (commercial land). Query them, dedupe on APN, feed the result to
+   `screen.py --listings`.
+6. **Scrapers for LandWatch/LandSearch/Land.com exist and are cheap (~$0.70/1,000 records) — and
+   they are against those sites' terms of use.** Named here so the decision is yours, not
+   recommended. Same class of problem as mirroring a copyrighted scan.
 
 **ZONING (the "will R accept commercial" question):**
 
@@ -145,41 +173,42 @@ owner) is exactly the profile you can only find in stock data.
 9. NJDEP Wetlands 2020 (159,056 polygons), NJ Groundwater CEA (6,763 zones), FEMA MSC, Highlands
    Council, Pinelands Commission GIS, SSURGO for Warren/Sussex/Morris.
 
-### 3.4 Naming the agent — the honest answer
+### 3.4 Naming the agent — live scores, read off the PC
 
-From the trained roster in `TRAINER_STATUS.md` v1.5.0:
+Read from `FaridOS\data\farid_os.db`, table `agent_certifications`, timestamp **2026-09-15T21:27**:
 
-| Agent | Model | Curriculum | Sessions | Score | Tier |
-|---|---|---|---|---|---|
-| **NJLandScout** | gemma2:latest (5.4GB) | `nj_land_scout.json` v1.0.0 — 17T/30Q ✅ | **0** | — | UNRANKED |
-| **FarmlandAdvisor** | llama3:8b (4.7GB) | `farmland_advisor.json` v1.1.0 — 24T/38Q ✅ | **0** | — | UNRANKED |
-| PipeEncyclopedia | pipe-encyclopedia:latest | v1.0.5 | 1 | 64/100 | UNRANKED |
+| Agent | Tier | 7-day average | Sessions | Model |
+|---|---|---|---|---|
+| **FarmlandAdvisor** | **CERTIFIED** | **83.6** | 189 | llama3:8b, curriculum v1.1.0, 20 topics |
+| PipeEncyclopedia | TRAINED | 77.4 | 390 | pipe-encyclopedia:latest |
+| **NJLandScout** | CADET | 69.5 | 1,014 | mistral-nemo, curriculum v1.2.2 |
 
-**NJLandScout is the designated searcher and FarmlandAdvisor is the designated recommender — and
-neither has ever been drilled.** Both curricula are complete and both sit at zero sessions. The only
-agent with any measured score at all is on the pipe project, at 64/100. FarmlandAdvisor additionally
-carries a **RED model-upgrade flag**: llama3:8b against a PhD-level curriculum (greenhouse CEA, NJ
-cannabis law, financial modelling, herb extraction), with mistral-nemo:latest already sitting in
-inventory as the upgrade target.
+**FarmlandAdvisor is the highest-scoring agent in the whole of FaridOS** — above the pipe brain,
+above the scout. Its curriculum names farmland data collection, greenhouse, agricultural business
+models and NJ permitting: the greenhouse and plaza questions are already trained.
 
-So the answer to "name somebody from our cold projects" is: **the right name exists, the trained
-person behind it does not exist yet.**
+For contrast, on 2026-07-03 the same scoreboard read FarmlandAdvisor 70.3 TRAINED and NJLandScout
+30.7 UNRANKED. Both climbed hard. The scout climbed the most, 30.7 → 69.5 over 1,014 sessions.
 
-**Recommended division of labour — and this is the important recommendation:**
+**The honest split between them:**
 
-- **Local models (gemma2 / llama3 / mistral-nemo) should not be in the recommend seat.** Put them
-  where they are unbeatable: deterministic geometry at volume. Point-in-polygon against 159K wetland
-  polygons, CEA proximity, parcel filtering over 1.9M records, overnight, free, on your own GPU.
-  That is a Python job with a model wrapper, not a judgement job.
-- **Judgement — score, rank, recommend, write the report — stays with Claude.** The 100-point model
-  in the skill file, the Highlands/Pinelands reading, the variance-path call: that is reasoning over
-  regulation, and a 5GB local model will hallucinate it.
-- **NJLandScout becomes the screener**: given the statewide parcel table, emit the ~200 parcels that
-  survive every hard stop. Then Claude scores those 200.
+- **NJLandScout decides YES or NO on regulation** — hard stops, wetlands, Highlands, Pinelands,
+  output format. It is the gate.
+- **FarmlandAdvisor decides whether the business works** — greenhouse economics, crop and herb
+  revenue, permitting cost, phasing. It is the recommender.
 
-That split also fixes the economics: the expensive model only ever sees parcels that already passed.
+They are not competitors and neither replaces the other.
 
----
+**But neither of them can SEARCH.** Neither has ever been connected to a list of lots for sale. The
+brains are trained; the search tool is the missing piece, and that is what `tools/nj_screener`
+is for.
+
+**Withdrawn recommendation.** The first version of this memo said local models should be kept out of
+the recommend seat and restricted to geometry, on the basis that they had zero drill sessions. That
+was based on a stale June file and it is wrong. FarmlandAdvisor at CERTIFIED 83.6 over 189 sessions
+has earned the recommend seat. The revised split is: **NJLandScout gates, FarmlandAdvisor
+recommends, Claude is the second opinion on anything that turns into an offer** — not the default
+first opinion.
 
 ## 4. The R-zoning / commercial / greenhouse question — there is a legal path
 

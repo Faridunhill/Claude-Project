@@ -1,0 +1,8 @@
+geopandas>=1.0
+pyogrio>=0.9
+shapely>=2.0
+pandas>=2.2
+pyproj>=3.6
+requests>=2.32
+PyYAML>=6.0
+folium>=0.17

@@ -1,0 +1,11 @@
+data/*.gpkg
+data/*.shp
+data/*.dbf
+data/*.shx
+data/*.prj
+data/*.cpg
+data/*.geojson
+data/*.zip
+out/
+__pycache__/
+*.pyc
